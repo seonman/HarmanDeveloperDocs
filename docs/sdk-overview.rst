@@ -8,14 +8,14 @@ What's Included
 
 - License Agreement. Located within the root directory of the zip file.
 - This Document. Located in the HKWirelessHDSDK.zip (HKWirelessHDSDK/doc folder). There are two more documents available for developers.
-  - HKWHD SDK Programming Guide (available in HKWirelessHDSDK/doc folder)
-  - HKWHD SDK Apple Watch App Programing Guide (coming soon)
+	- HKWHD SDK Programming Guide (available in HKWirelessHDSDK/doc folder)
+	- HKWHD SDK Apple Watch App Programing Guide (coming soon)
 - Sample Application source code Located within the Sample Apps page:
-  - Page App
-  - Wake App
-  - Timer App
-  - HKWPlayer App with Apple Watch app support
-  - HKWHub App
+	- Page App
+	- Wake App
+	- Timer App
+	- HKWPlayer App with Apple Watch app support
+	- HKWHub App
   
 Demo Applications
 -----------------
