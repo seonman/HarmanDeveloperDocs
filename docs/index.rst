@@ -8,20 +8,20 @@ Welcome to Harman Developer documentation!
 
 .. note::
 
-    This documentation is a work in progress. Bear with us as we fill in some of the gaps, add clarifications, and expand out the content. It may mean that bookmarks break as we iterate and continually improve our documentation.
+    This documentation is about Harman Kardon WirelessHD SDK. You can download the SDK at `Harman Developer web site<http://developer.harman.com>`__.
+	
+	This documentation is a work in progress. Bear with us as we fill in some of the gaps, add clarifications, and expand out the content. We appreciate your understanding and patience as we work to improve our developer experience!
 
-    We appreciate your understanding and patience as we work to improve our developer experience!
 
-
-Welcome to the SmartThings developer documentation. Here you will find information about creating for the SmartThings platform.
+Welcome to the Harman developer documentation. Here you will find information about creating your app using HKWirelessHD SDK.
 
 This documentation is organized into a few different sections:
 
 `SDK Overview`_
-    This chapter discusses some of the core SmartThings concepts, architecture, and includes a brief tour of the IDE. It also introduces the SmartThings programming language - Groovy.
+    This chatper is the overview of HKWirelessHD SDK and the SDK apps based on the SDK.
 	
 `Getting Started (iOS)`_
-    Get up and running quickly with the SmartThings platform. Start here if this is your first time developing for SmartThings.
+    This chatper describes how you can quickly get started with the HKWirelessHD SDK. Just follow the instruction to setup your Xcode project files, and learn about the APIs.
 
 
 .. _SDK Overview: sdk-overview.html
