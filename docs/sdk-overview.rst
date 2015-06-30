@@ -28,8 +28,32 @@ The Page app records user’s voice and broadcasts it to a set of selected speak
 The application also has a feature for changing the speaker information, like speaker name, group name, taking a note, and so on.
 
 .. figure:: img/sdk-overview/page-app-1.png
-	:scale: 50
+	:scale: 40
 .. figure:: img/sdk-overview/page-app-2.png
-	:scale: 50
+	:scale: 40
 .. figure:: img/sdk-overview/page-app-3.png
-	:scale: 50
+	:scale: 40
+	
+HK Wake app
+~~~~~~~~~~~
+
+Wake app is a kind of Alarm clock. Instead of playing an alarm sound on your phone, the app play a song over the Omni speakers in the network. User can select a set of individual speakers or room to play the alarm sound with.
+
+.. figure:: img/sdk-overview/wake-app-1.png
+	:scale: 40
+.. figure:: img/sdk-overview/wake-app-2.png
+	:scale: 40
+.. figure:: img/sdk-overview/wake-app-3.png
+	:scale: 40
+	
+HK Time app
+~~~~~~~~~~~
+
+Time (Timer) app is a kind of timer app. Instead of playing a beep sound on your phone, the app plays a predefined song over the Omni speakers in the network. User can select a set of individual speakers or room to play the alarm sound with.
+
+.. figure:: img/sdk-overview/time-app-1.png
+	:scale: 40
+.. figure:: img/sdk-overview/time-app-2.png
+	:scale: 40
+.. figure:: img/sdk-overview/time-app-3.png
+	:scale: 40
