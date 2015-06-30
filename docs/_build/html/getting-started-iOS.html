@@ -47,22 +47,43 @@
             
   <div class="section" id="getting-started-guide-ios">
 <h1>Getting Started Guide (iOS)<a class="headerlink" href="#getting-started-guide-ios" title="Permalink to this headline">¶</a></h1>
-<p>The Harman Kardon WirelessHD (HKWirelessHD) SDK is provided for iOS 3rd party developers to communicate with Harman/Kardon Omni Series audio/video devices. The intent of this SDK is to provide the tools and libraries necessary to build, test and deploy the latest audio applications on the iOS platform.</p>
-<div class="section" id="what-you-need">
-<h2>What You Need<a class="headerlink" href="#what-you-need" title="Permalink to this headline">¶</a></h2>
+<p>HKWirelessHD SDK supports both Objective-C and Swift. This document assumes that developer creates his/her app using the Swift language.</p>
+<p>In the section, we will use the HKPage app as an example.</p>
+<div class="section" id="project-setup-with-hkwireless-normal-version">
+<h2>Project Setup with HKWireless (normal version)<a class="headerlink" href="#project-setup-with-hkwireless-normal-version" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="include-hkwirelesshdsdk-into-your-project">
+<h3>Include HKWirelessHDSDK into your project<a class="headerlink" href="#include-hkwirelesshdsdk-into-your-project" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>A SmartThings hub that has been configured. Some devices would be good too, but not required.</li>
-<li>Experience with some form of programming. SmartThings uses the <a class="reference external" href="http://www.groovy-lang.org/">Groovy programming language</a>. You don&#8217;t need to be a Groovy Ninja, but some familiarity with programming is assumed.</li>
+<li>Add HKWirelessHDSDK to your project by dragging and dropping the HKWirelessHDSDK folder into the project navigator. Select “Create groups”, and click finish. By doing this, the include header path for HKWirelessHD SDK is added to your project. We need only the “include” folder, so you may remove the references to the other items in the folder. (Right click on any items you want to remove, select “Delete”, and then select “Remove References”.)</li>
 </ul>
 </div>
-<div class="section" id="what-we-will-build">
-<h2>What We Will Build<a class="headerlink" href="#what-we-will-build" title="Permalink to this headline">¶</a></h2>
-<p>We are going to build a SmartApp that turns on a light when a door opens.</p>
-<p>Here&#8217;s the recipe for our app: <em>When a door opens, turn on a light. When the door closes, turn the light off.</em></p>
-<p>Let&#8217;s build it!</p>
+<div class="section" id="add-libhkwirelesshd-a-as-link-binary">
+<h3>Add libHKWirelessHD.a as link binary<a class="headerlink" href="#add-libhkwirelesshd-a-as-link-binary" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Project Setting &gt; Your Targets &gt; Build Phases &gt; Link Binary With Libraries</dt>
+<dd><ul class="first last simple">
+<li>Click &#8216;+&#8217;, and then click &#8220;Add Other...&#8221;</li>
+<li>Find &#8216;libHKWirelessHD.a&#8217; in HKPage/HKWirelessHDSDK/lib, and add it.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="figure">
+<img alt="_images/project-setting-1.png" src="_images/project-setting-1.png" />
+</div>
+<p>After adding the HKWirelessHDSDK folder into your project and adding libHKWirelessHD.a, the project navigator will look like as below:</p>
+<div class="figure">
+<img alt="_images/project-setting-2.png" src="_images/project-setting-2.png" />
+</div>
+</div>
+<div class="section" id="add-swift-bridging-header">
+<h3>Add Swift Bridging Header<a class="headerlink" href="#add-swift-bridging-header" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The example app we&#8217;ll walk through here is discussed in greater detail in the <a class="reference external" href="introduction/introduction-to-the-ide/building-your-first-smartapp.html">Building Your First SmartApp</a> section of the <a class="reference external" href="introduction/index.html">Introduction</a>.</p>
+</div>
 </div>
 </div>
 <div class="section" id="walkthrough">
@@ -206,8 +227,12 @@ can use it from our smart phone, just like other SmartApps. Let&#8217;s walk thr
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Getting Started Guide (iOS)</a><ul>
-<li><a class="reference internal" href="#what-you-need">What You Need</a></li>
-<li><a class="reference internal" href="#what-we-will-build">What We Will Build</a></li>
+<li><a class="reference internal" href="#project-setup-with-hkwireless-normal-version">Project Setup with HKWireless (normal version)</a><ul>
+<li><a class="reference internal" href="#include-hkwirelesshdsdk-into-your-project">Include HKWirelessHDSDK into your project</a></li>
+<li><a class="reference internal" href="#add-libhkwirelesshd-a-as-link-binary">Add libHKWirelessHD.a as link binary</a></li>
+<li><a class="reference internal" href="#add-swift-bridging-header">Add Swift Bridging Header</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#walkthrough">Walkthrough</a><ul>
 <li><a class="reference internal" href="#step-1-register-a-developer-account">Step 1: Register a developer account</a></li>
 <li><a class="reference internal" href="#step-2-go-the-developer-environment-page">Step 2: Go the developer environment page</a></li>

@@ -1,23 +1,34 @@
 Getting Started Guide (iOS)
 ===========================
 
-The Harman Kardon WirelessHD (HKWirelessHD) SDK is provided for iOS 3rd party developers to communicate with Harman/Kardon Omni Series audio/video devices. The intent of this SDK is to provide the tools and libraries necessary to build, test and deploy the latest audio applications on the iOS platform. 
+HKWirelessHD SDK supports both Objective-C and Swift. This document assumes that developer creates his/her app using the Swift language.
+
+In the section, we will use the HKPage app as an example.
 
 
-What You Need
--------------
+Project Setup with HKWireless (normal version)
+----------------------------------------------
 
-- A SmartThings hub that has been configured. Some devices would be good too, but not required.
-- Experience with some form of programming. SmartThings uses the `Groovy programming language <http://www.groovy-lang.org/>`__. You don't need to be a Groovy Ninja, but some familiarity with programming is assumed.
+Include HKWirelessHDSDK into your project
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-What We Will Build
-------------------
+- Add HKWirelessHDSDK to your project by dragging and dropping the HKWirelessHDSDK folder into the project navigator. Select “Create groups”, and click finish. By doing this, the include header path for HKWirelessHD SDK is added to your project. We need only the “include” folder, so you may remove the references to the other items in the folder. (Right click on any items you want to remove, select “Delete”, and then select “Remove References”.)
 
-We are going to build a SmartApp that turns on a light when a door opens.
+Add libHKWirelessHD.a as link binary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Here's the recipe for our app: *When a door opens, turn on a light. When the door closes, turn the light off.*
+- Project Setting > Your Targets > Build Phases > Link Binary With Libraries 
+	- Click '+', and then click "Add Other..."
+	- Find 'libHKWirelessHD.a' in HKPage/HKWirelessHDSDK/lib, and add it.
 
-Let's build it!
+.. figure:: img/getting-started-iOS/project-setting-1.png
+
+After adding the HKWirelessHDSDK folder into your project and adding libHKWirelessHD.a, the project navigator will look like as below:
+
+.. figure:: img/getting-started-iOS/project-setting-2.png
+
+Add Swift Bridging Header
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note:: 
 

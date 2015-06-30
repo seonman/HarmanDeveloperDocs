@@ -6,6 +6,8 @@ The Harman Kardon WirelessHD (HKWirelessHD) SDK is provided for iOS 3rd party de
 What's Included
 ---------------
 
+- HKWirelessHD library and header files
+	- We provide two versions of SDKs. See below for the information.
 - License Agreement. Located within the root directory of the zip file.
 - This Document. Located in the HKWirelessHDSDK.zip (HKWirelessHDSDK/doc folder). There are two more documents available for developers.
 	- HKWHD SDK Programming Guide (available in HKWirelessHDSDK/doc folder)
@@ -18,7 +20,7 @@ What's Included
 	- HKWHub App
 
 Requirements
------------------
+------------
 
 The HKWirelessHD SDK requires iOS8 minimum for iPhone or iPad devices. We provide two verions of the SDKs.
 
