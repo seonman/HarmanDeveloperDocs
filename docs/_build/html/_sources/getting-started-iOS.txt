@@ -114,7 +114,8 @@ There are two ways to choose speakers to play on – one is to select a speaker 
 Selecting a speaker individually
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-***Select a speaker in the global list***
+Select a speaker in the global list
+""""""""""""""""""""""""""""""
 
 .. code-block:: swift
 
@@ -125,7 +126,7 @@ Selecting a speaker individually
 	var index = 0
 	let deviceInfo = g_HKWControlHandler.getDeviceInfoByIndex(index)
 
-***Retrieve DeviceInfo with deviceId***
+**Retrieve DeviceInfo with deviceId**
 
 If you know the deviceId of a speaker, then you can retrieve the device information using ``findDeviceFromList()``.
 
