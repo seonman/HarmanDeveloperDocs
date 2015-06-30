@@ -161,14 +161,27 @@ Retrieve the information of a device
 You can retrieve the information of a device (speaker) using DeviceInfo object. Please refer to DeviceInfo.h. The following is the list of information that DeviceInfo provides:
 
 
-===========  ==============  ========================================= ======================== ============
-Attribute    Type in Swift   Description                               Fixed/Variable           Set by API
-===========  ==============  ========================================= ======================== ============
-deviceId     CLongLong       the unique ID of the speaker              Fixed (in manufacturing) No
-deviceName   String          the name of the speaker                   Variable                 Yes
-groupId      CLongLong       the unique ID of the group that the\n     Variable (set when a     No
-                             speaker belongs to                        group is created)
-===========  ==============  ========================================= ======================== ============
+================== ==============  ======================================================= ====================================== ============
+Attribute          Type in Swift   Description                                             Fixed/Variable                         Set by API
+================== ==============  ======================================================= ====================================== ============
+deviceId           CLongLong       the unique ID of the speaker                            Fixed (in manufacturing)               No
+deviceName         String          the name of the speaker                                 Variable                               Yes
+groupId            CLongLong       the unique ID of the group that the speaker belongs to  Variable (set when a group is created) No
+groupName          String          the name of the group that the speaker belongs to       Variable (set when a group is created) Yes
+modelName          String          the name of the Model of the speaker                    Fixed (in manufacturing)               No
+ipAddress          String          the IP address as String                                Fixed (when network setup)             No
+port               String          the port number                                         Fixed (when network setup)             No
+macAddress         String          the mac address as String                               Fixed (in manufacturing)               No
+volume             Int             the volume level value (0 to 50)                        Variable                               Yes
+active             Bool            indicates if added to the current playback session      Variable                               Yes
+wifiSignalStrength Int             Wi-Fi strength in dBm scale, -100 (low) to 0 (high)     Variable                               No
+role               Int             the role definition (stereo or 5.1 channel)             Variable                               Yes
+version            String          the firmware version number as String                   Fixed (when firmware update)           No
+balance            Int             the balance value in stereo mode. -6 to 6, 0 is neutral Variable                               Yes
+isPlaying          Bool            indicates whether the speaker is playing or not         Variable                               No
+channelType        Int             the channel type: 1 is stereo.                          Variable                               Yes
+isMaster           Bool            indicates if it is the master in stereo or group mode   Variable                               Yes  
+================== ==============  ======================================================= ====================================== ============
 
 
 

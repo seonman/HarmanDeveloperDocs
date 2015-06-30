@@ -201,11 +201,11 @@ let deviceInfo = g_HKWControlHandler.findDeviceFromList(deviceId)
 <p>You can retrieve the information of a device (speaker) using DeviceInfo object. Please refer to DeviceInfo.h. The following is the list of information that DeviceInfo provides:</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="11%" />
-<col width="14%" />
+<col width="13%" />
+<col width="10%" />
 <col width="40%" />
-<col width="24%" />
-<col width="12%" />
+<col width="28%" />
+<col width="9%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Attribute</th>
@@ -230,11 +230,93 @@ let deviceInfo = g_HKWControlHandler.findDeviceFromList(deviceId)
 </tr>
 <tr class="row-even"><td>groupId</td>
 <td>CLongLong</td>
-<td>the unique ID of the group that then
-speaker belongs to</td>
-<td>Variable (set when a
-group is created)</td>
+<td>the unique ID of the group that the speaker belongs to</td>
+<td>Variable (set when a group is created)</td>
 <td>No</td>
+</tr>
+<tr class="row-odd"><td>groupName</td>
+<td>String</td>
+<td>the name of the group that the speaker belongs to</td>
+<td>Variable (set when a group is created)</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>modelName</td>
+<td>String</td>
+<td>the name of the Model of the speaker</td>
+<td>Fixed (in manufacturing)</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>ipAddress</td>
+<td>String</td>
+<td>the IP address as String</td>
+<td>Fixed (when network setup)</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>port</td>
+<td>String</td>
+<td>the port number</td>
+<td>Fixed (when network setup)</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>macAddress</td>
+<td>String</td>
+<td>the mac address as String</td>
+<td>Fixed (in manufacturing)</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>volume</td>
+<td>Int</td>
+<td>the volume level value (0 to 50)</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>active</td>
+<td>Bool</td>
+<td>indicates if added to the current playback session</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>wifiSignalStrength</td>
+<td>Int</td>
+<td>Wi-Fi strength in dBm scale, -100 (low) to 0 (high)</td>
+<td>Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>role</td>
+<td>Int</td>
+<td>the role definition (stereo or 5.1 channel)</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>String</td>
+<td>the firmware version number as String</td>
+<td>Fixed (when firmware update)</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>balance</td>
+<td>Int</td>
+<td>the balance value in stereo mode. -6 to 6, 0 is neutral</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>isPlaying</td>
+<td>Bool</td>
+<td>indicates whether the speaker is playing or not</td>
+<td>Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>channelType</td>
+<td>Int</td>
+<td>the channel type: 1 is stereo.</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>isMaster</td>
+<td>Bool</td>
+<td>indicates if it is the master in stereo or group mode</td>
+<td>Variable</td>
+<td>Yes</td>
 </tr>
 </tbody>
 </table>
