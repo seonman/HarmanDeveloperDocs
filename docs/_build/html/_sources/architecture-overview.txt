@@ -13,6 +13,7 @@ In case of multi-channel streaming, each speaker is assigned with a role to proc
 
 Source device can be iOS device, such as iPhone and iPad, and destination devices are Harman Kardon Omni speakers (Omni Adapt, Omni 10, Omni 20, Omni Bar, etc.) You can find more information on HK Omni speakers at http://www.harmankardon.com/content?ContentID=wireless.
 
+.. figure:: img/architecture-overview/architecture.png
 
 
 Use of HKWirelessHD API to stream audio to Omni Speakers
@@ -70,9 +71,14 @@ For example, as described in the figure below, let's assume that Speaker-A and S
 
 There is an API, called isPlaying(), in DeviceInfo.h to return a boolean value indicating if the speaker is being playing audio or not, regardless that which source audio stream comes from.
 
+.. figure:: img/architecture-overview/speaker-visibility.png
+
 
 Controlling Speakers and Handling the Events from Speakers
 -------------------------------------------------------------
+
+.. figure:: img/architecture-overview/control-handler.png
+
 
 Controlling speakers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

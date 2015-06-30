@@ -54,6 +54,9 @@
 <p>There are two types of entities in HKWirelessHD audio streaming - one is source device and the other is destination device. Source device sends audio stream to destination devices (speakers), and destination devices receive the audio stream from source and play it. In HKWirelessHD audio, audio streaming is in a one-to-many way. That is, there is one single source device sending an audio stream, and multiple destination devices receive the audio stream by synchronizing with other speakers.</p>
 <p>In case of multi-channel streaming, each speaker is assigned with a role to process a dedicated audio channel. For example, a speaker can play either left channel or right channel in stereo mode.</p>
 <p>Source device can be iOS device, such as iPhone and iPad, and destination devices are Harman Kardon Omni speakers (Omni Adapt, Omni 10, Omni 20, Omni Bar, etc.) You can find more information on HK Omni speakers at <a class="reference external" href="http://www.harmankardon.com/content?ContentID=wireless">http://www.harmankardon.com/content?ContentID=wireless</a>.</p>
+<div class="figure">
+<img alt="_images/architecture.png" src="_images/architecture.png" />
+</div>
 </div>
 <div class="section" id="use-of-hkwirelesshd-api-to-stream-audio-to-omni-speakers">
 <h3>Use of HKWirelessHD API to stream audio to Omni Speakers<a class="headerlink" href="#use-of-hkwirelesshd-api-to-stream-audio-to-omni-speakers" title="Permalink to this headline">¶</a></h3>
@@ -142,9 +145,15 @@
 <p>Any speakers in a network are visible to source devices (iOS devices) if a source device successfully initializes the HKWControlHandler when it starts up. Source device can be multiple. This means, even in the case that a speaker is being used by a source device, the status of each speaker is also visible to all other source devices in the network, once they are successfully initialized with HKWControlHandler.</p>
 <p>For example, as described in the figure below, let&#8217;s assume that Speaker-A and Speaker-B are being used by Source A, and Speaker-D and Speaker-E are being used by Source B. Once Source A and Source B initialize HKWControlHandler, then all the speakers from Speaker-A to Speaker-E are also visible both to Source A and Source B. Therefore, it is possible for Source A to add Speaker-D to its on-going playback session, even if it is being used by Source B. In this case, Speaker-D stops playing the audio stream from Source B, and join the on-going playback audio stream from Source A.</p>
 <p>There is an API, called isPlaying(), in DeviceInfo.h to return a boolean value indicating if the speaker is being playing audio or not, regardless that which source audio stream comes from.</p>
+<div class="figure">
+<img alt="_images/speaker-visibility.png" src="_images/speaker-visibility.png" />
+</div>
 </div>
 <div class="section" id="controlling-speakers-and-handling-the-events-from-speakers">
 <h2>Controlling Speakers and Handling the Events from Speakers<a class="headerlink" href="#controlling-speakers-and-handling-the-events-from-speakers" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="_images/control-handler.png" src="_images/control-handler.png" />
+</div>
 <div class="section" id="controlling-speakers">
 <h3>Controlling speakers<a class="headerlink" href="#controlling-speakers" title="Permalink to this headline">¶</a></h3>
 <p>Speaker controls, like start/pause/resume/stop audio streaming, change volume level, etc. are done by calling APIs provided by the HKWControlHandler singleton object. The app just needs to acquire the HKWControlHandler object, initialize it, and then use it to control the speakers. For example, as shown in the figure above, the app can call playCAF() with the HKWControlHandler to start to play a CAF audio file. The control APIs are described in HKWControlHandler.h.</p>
