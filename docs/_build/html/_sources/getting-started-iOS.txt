@@ -187,8 +187,8 @@ As shown in the table above, some of the attributes can be set by the APIs. And 
 
 The following is an example of retrieving some of attributes of a speaker information.
 
-	.. code-block:: swift
-
+.. code-block:: swift
+	
 	let deviceInfo: DeviceInfo = g_HKWControlHandelr.getDeviceInfoFromTable(groupIndex, deviceIndex:deviceIndex)
 	
 	println("deviceName: \(deviceInfo.deviceName")

@@ -322,19 +322,17 @@ let deviceInfo = g_HKWControlHandler.findDeviceFromList(deviceId)
 </table>
 <p>As shown in the table above, some of the attributes can be set by the APIs. And some attributes change during the runtime, so the app should keep the latest value of the attributes by calling corresponding APIs or by callback functions.</p>
 <p>The following is an example of retrieving some of attributes of a speaker information.</p>
-<blockquote>
-<div><div class="highlight-swift"><div class="highlight"><pre>
+<div class="highlight-swift"><div class="highlight"><pre>let deviceInfo: DeviceInfo = g_HKWControlHandelr.getDeviceInfoFromTable(groupIndex, deviceIndex:deviceIndex)
+
+println(&quot;deviceName: \(deviceInfo.deviceName&quot;)
+println(&quot;groupName: \(deviceInfo.groupName&quot;)
+println(&quot;volume: \(deviceInfo.volume&quot;)
+println(&quot;deviceId: \(deviceInfo.deviceId&quot;)
+println(&quot;deviceActive: \(deviceInfo.active&quot;)
+println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
+...
 </pre></div>
 </div>
-<p>let deviceInfo: DeviceInfo = g_HKWControlHandelr.getDeviceInfoFromTable(groupIndex, deviceIndex:deviceIndex)</p>
-<p>println(&#8220;deviceName: (deviceInfo.deviceName&#8221;)
-println(&#8220;groupName: (deviceInfo.groupName&#8221;)
-println(&#8220;volume: (deviceInfo.volume&#8221;)
-println(&#8220;deviceId: (deviceInfo.deviceId&#8221;)
-println(&#8220;deviceActive: (deviceInfo.active&#8221;)
-println(&#8220;deviceModel: (deviceInfo.modelName&#8221;)
-...</p>
-</div></blockquote>
 </div>
 <div class="section" id="change-speaker-name-and-group-name">
 <h4>Change speaker name and group name<a class="headerlink" href="#change-speaker-name-and-group-name" title="Permalink to this headline">¶</a></h4>
