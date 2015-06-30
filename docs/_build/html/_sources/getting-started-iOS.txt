@@ -77,12 +77,11 @@ Initialize HKWirelessHD Control Handler and start the Wireless Audio
 
 ``initializeHKWirelessController()`` takes a string of license key as parameter. Every developer who signs up for Harman developer community will receive a license key. If you have not received it yet, then just use the license key specified in the sample code for temporary use until your own license key is available.
 
-Note that initializeHKWirelessController() is a blocking call. It waits until the call successfully initializes the wireless audio network. If the phone device does not belong to a Wi-Fi network or if there is other app already using HKWirelessHD and running on the same device, then it will wait until the other app releases the HKWControlHandler. It would be nice to present a dialog to user before calling initializeHKWirelessController() to notice that the app will wait until HKWirelessHD network is available. 
-
-
 .. note:: 
+	``initializeHKWirelessController()`` is a blocking call. It waits until the call successfully initializes the wireless audio network. If the phone device does not belong to a Wi-Fi network or if there is other app already using HKWirelessHD and running on the same device, then it will wait until the other app releases the HKWControlHandler. It would be nice to present a dialog to user before calling ``initializeHKWirelessController()`` to notice that the app will wait until HKWirelessHD network is available. 
 
-    The example app we'll walk through here is discussed in greater detail in the `Building Your First SmartApp <introduction/introduction-to-the-ide/building-your-first-smartapp.html>`__ section of the `Introduction <introduction/index.html>`__.
+
+
 
 Walkthrough
 -----------
