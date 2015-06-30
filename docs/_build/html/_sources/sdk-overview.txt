@@ -27,7 +27,7 @@ The HKWirelessHD SDK requires iOS8 minimum for iPhone or iPad devices. We provid
 	- Do not support web streaming music playback (streaming music from HTTP server, etc.)
 	- No other library required
 - HKWirelessHD+ (extended version)
-	- Only support 32bit (armv7) architecture. armv7s and armv74 are not supported.
+	- Only support 32bit (armv7) architecture. armv7s and arm64 are not supported.
 	- Support webstreaming music playback.
 	- libz.dylib and libbz2.dylib are required when linking.
 	
