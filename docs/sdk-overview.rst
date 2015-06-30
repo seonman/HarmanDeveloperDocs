@@ -57,3 +57,28 @@ Time (Timer) app is a kind of timer app. Instead of playing a beep sound on your
 	:scale: 40
 .. figure:: img/sdk-overview/time-app-3.png
 	:scale: 40
+	
+HKWPlayer app with Apple Watch support
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+HKWPlayer is a sample music player app that plays MP3 audio files with Omni speakers wirelessly. You can create and manage a playlist of MP3 titles from iOS Music app library, and play songs over the Omni speakers in the network. The purpose of the app is to demonstrate the key features of the HKWirelessHD SDK.
+
+.. figure:: img/sdk-overview/hkwplayer-app-1.png
+	:scale: 40
+.. figure:: img/sdk-overview/hkwplayer-app-2.png
+	:scale: 40
+.. figure:: img/sdk-overview/hkwplayer-app-3.png
+	:scale: 40
+
+HKWPlayer app also support Apple Watch app. If user installs the HKWPlayer app on the iPhone and enable "Show App on Apple Watch" option in Apple Watch app, then the corresponding watch app will appear in the menu screen of Apple Watch.
+
+The companion watch app is provided as Watch App Extension within a single iOS App package. The Watch app extension communicates with the main iOS app (e.g. HKWPlayer app) for control command and response, and share the playlist and the device status for rendering the menu.
+
+The implementation note for Watch App support will be available at the developer community web site shortly.
+
+.. figure:: img/sdk-overview/hkwplayer-watch-1.png
+	:scale: 60
+.. figure:: img/sdk-overview/hkwplayer-watch-2.png
+	:scale: 60
+.. figure:: img/sdk-overview/hkwplayer-watch-3.png
+	:scale: 60
