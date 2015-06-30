@@ -12,7 +12,9 @@ Project Setup with HKWireless (normal version)
 Include HKWirelessHDSDK into your project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Add HKWirelessHDSDK to your project by dragging and dropping the HKWirelessHDSDK folder into the project navigator. Select “Create groups”, and click finish. By doing this, the include header path for HKWirelessHD SDK is added to your project. We need only the “include” folder, so you may remove the references to the other items in the folder. (Right click on any items you want to remove, select “Delete”, and then select “Remove References”.)
+- Add HKWirelessHDSDK to your project by dragging and dropping the HKWirelessHDSDK folder into the project navigator.
+- Select “Create groups”, and click finish. By doing this, the include header path for HKWirelessHD SDK is added to your project. 
+- We need only the “include” folder, so you may remove the references to the other items in the folder. (Right click on any items you want to remove, select “Delete”, and then select “Remove References”.)
 
 Add libHKWirelessHD.a as link binary
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
