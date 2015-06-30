@@ -85,9 +85,9 @@
 <li>Go to Project Setting &gt; Build Setting &gt; Swift Compiler - Code Generation &gt; Objective-C Bridging Header</li>
 </ol>
 <div class="figure">
-<img alt="_images/project-setting-2.png" src="_images/project-setting-2.png" />
+<img alt="_images/project-setting-3.png" src="_images/project-setting-3.png" />
 </div>
-<ol class="arabic">
+<ol class="arabic" start="2">
 <li><p class="first">Add [My-Project-Name]/[My-Project-Name]-Bridging-Header.h</p>
 <blockquote>
 <div><ul class="simple">
@@ -106,6 +106,36 @@
 </div>
 <div class="section" id="add-lstdc-as-linker-flag">
 <h3>Add -lstdc++ as linker flag<a class="headerlink" href="#add-lstdc-as-linker-flag" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Project Setting &gt; Your Targets &gt; Build Settings &gt; Linking &gt; Other Linder Flags</dt>
+<dd><ul class="first last simple">
+<li>Add “-lstdc++” in the text field</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="figure">
+<img alt="_images/project-setting-4.png" src="_images/project-setting-4.png" />
+</div>
+</div>
+</div>
+<div class="section" id="using-hkwirelesshd-api">
+<h2>Using HKWirelessHD API<a class="headerlink" href="#using-hkwirelesshd-api" title="Permalink to this headline">¶</a></h2>
+<p>All APIs can be accessed through a singleton object of HKWControlHandler. Only you have to do is obtain the singleton instance of HKWControlHandler and use it to invoke whatever API you want to call.</p>
+<p>The code examples in this document are in Swift. and the function definition is in Objective-C. The APIs are compatible both in Swift and Objective-C.</p>
+<div class="section" id="initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio">
+<h3>Initialize HKWirelessHD Control Handler and start the Wireless Audio<a class="headerlink" href="#initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-swift"><div class="highlight"><pre><span class="c1">// Obtain the HKWControlHandler singleton instance</span>
+<span class="kd">let</span> <span class="nv">g_HWControlHandler</span><span class="p">:</span> <span class="n">HKWControlHandler</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">()</span>
+
+<span class="c1">// Initialize the HKWControlHandler and start wireless audio</span>
+<span class="n">g_HWControlHandler</span><span class="p">.</span><span class="n">initializeHKWirelessController</span> <span class="p">(</span><span class="n">licenseKey</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">initializeHKWirelessController()</span></code> takes a string of license key as parameter. Every developer who signs up for Harman developer community will receive a license key. If you have not received it yet, then just use the license key specified in the sample code for temporary use until your own license key is available.</p>
+<p>Note that initializeHKWirelessController() is a blocking call. It waits until the call successfully initializes the wireless audio network. If the phone device does not belong to a Wi-Fi network or if there is other app already using HKWirelessHD and running on the same device, then it will wait until the other app releases the HKWControlHandler. It would be nice to present a dialog to user before calling initializeHKWirelessController() to notice that the app will wait until HKWirelessHD network is available.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The example app we&#8217;ll walk through here is discussed in greater detail in the <a class="reference external" href="introduction/introduction-to-the-ide/building-your-first-smartapp.html">Building Your First SmartApp</a> section of the <a class="reference external" href="introduction/index.html">Introduction</a>.</p>
@@ -258,6 +288,10 @@ can use it from our smart phone, just like other SmartApps. Let&#8217;s walk thr
 <li><a class="reference internal" href="#add-libhkwirelesshd-a-as-link-binary">Add libHKWirelessHD.a as link binary</a></li>
 <li><a class="reference internal" href="#add-swift-bridging-header">Add Swift Bridging Header</a></li>
 <li><a class="reference internal" href="#add-lstdc-as-linker-flag">Add -lstdc++ as linker flag</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-hkwirelesshd-api">Using HKWirelessHD API</a><ul>
+<li><a class="reference internal" href="#initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio">Initialize HKWirelessHD Control Handler and start the Wireless Audio</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#walkthrough">Walkthrough</a><ul>

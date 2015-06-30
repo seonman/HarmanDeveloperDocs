@@ -32,15 +32,15 @@ Add Swift Bridging Header
 
 HKWirelessHD SDK has been written in C++ and Objective-C. Therefore, when you use the SDK in Swift, you should include Swift Bridging Header in your project. To do this:
 
-#. Go to Project Setting > Build Setting > Swift Compiler - Code Generation > Objective-C Bridging Header
+1. Go to Project Setting > Build Setting > Swift Compiler - Code Generation > Objective-C Bridging Header
 
-.. figure:: img/getting-started-iOS/project-setting-2.png
+.. figure:: img/getting-started-iOS/project-setting-3.png
 
-#. Add [My-Project-Name]/[My-Project-Name]-Bridging-Header.h
+2. Add [My-Project-Name]/[My-Project-Name]-Bridging-Header.h
 
 	- In our example, it looks like : HKPage/HKPage-Bridging-Header.h
 
-#. Add the following lines in the header file.
+3. Add the following lines in the header file.
 
 .. code-block:: swift
 
@@ -50,6 +50,34 @@ HKWirelessHD SDK has been written in C++ and Objective-C. Therefore, when you us
 
 Add -lstdc++ as linker flag
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Project Setting > Your Targets > Build Settings > Linking > Other Linder Flags
+	- Add “-lstdc++” in the text field
+
+.. figure:: img/getting-started-iOS/project-setting-4.png
+
+
+Using HKWirelessHD API
+----------------------
+
+All APIs can be accessed through a singleton object of HKWControlHandler. Only you have to do is obtain the singleton instance of HKWControlHandler and use it to invoke whatever API you want to call.
+
+The code examples in this document are in Swift. and the function definition is in Objective-C. The APIs are compatible both in Swift and Objective-C.
+
+Initialize HKWirelessHD Control Handler and start the Wireless Audio
+~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: swift
+
+	// Obtain the HKWControlHandler singleton instance
+	let g_HWControlHandler: HKWControlHandler = HKWControlHandler.sharedInstance()
+
+	// Initialize the HKWControlHandler and start wireless audio
+	g_HWControlHandler.initializeHKWirelessController (licenseKey)
+
+``initializeHKWirelessController()`` takes a string of license key as parameter. Every developer who signs up for Harman developer community will receive a license key. If you have not received it yet, then just use the license key specified in the sample code for temporary use until your own license key is available.
+
+Note that initializeHKWirelessController() is a blocking call. It waits until the call successfully initializes the wireless audio network. If the phone device does not belong to a Wi-Fi network or if there is other app already using HKWirelessHD and running on the same device, then it will wait until the other app releases the HKWControlHandler. It would be nice to present a dialog to user before calling initializeHKWirelessController() to notice that the app will wait until HKWirelessHD network is available. 
 
 
 .. note:: 
