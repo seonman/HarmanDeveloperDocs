@@ -26,3 +26,10 @@ HK Page app
 The Page app records user’s voice and broadcasts it to a set of selected speakers in the network. User can select speakers individually or select rooms. The Page app also contain House Alert feature that broadcast an alarm sound like siren to all of the speakers in the network.
 
 The application also has a feature for changing the speaker information, like speaker name, group name, taking a note, and so on.
+
+.. figure:: ../img/sdk-overview/page-app-1.png
+	:scale: 50
+.. figure:: ../img/sdk-overview/page-app-2.png
+	:scale: 50
+.. figure:: ../img/sdk-overview/page-app-3.png
+	:scale: 50
