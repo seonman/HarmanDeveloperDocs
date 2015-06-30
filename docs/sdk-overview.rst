@@ -27,9 +27,9 @@ The Page app records user’s voice and broadcasts it to a set of selected speak
 
 The application also has a feature for changing the speaker information, like speaker name, group name, taking a note, and so on.
 
-.. figure:: ../img/sdk-overview/page-app-1.png
+.. figure:: img/sdk-overview/page-app-1.png
 	:scale: 50
-.. figure:: ../img/sdk-overview/page-app-2.png
+.. figure:: img/sdk-overview/page-app-2.png
 	:scale: 50
-.. figure:: ../img/sdk-overview/page-app-3.png
+.. figure:: img/sdk-overview/page-app-3.png
 	:scale: 50
