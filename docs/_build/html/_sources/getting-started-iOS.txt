@@ -166,7 +166,7 @@ Attribute    Type in Swift   Description                               Fixed/Var
 ===========  ==============  ========================================= ======================== ============
 deviceId     CLongLong       the unique ID of the speaker              Fixed (in manufacturing) No
 deviceName   String          the name of the speaker                   Variable                 Yes
-groupId      CLongLong       the unique ID of the group that the       Variable (set when a     No
+groupId      CLongLong       the unique ID of the group that the\n     Variable (set when a     No
                              speaker belongs to                        group is created)
 ===========  ==============  ========================================= ======================== ============
 
