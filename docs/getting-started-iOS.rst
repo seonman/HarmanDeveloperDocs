@@ -21,7 +21,7 @@ Add libHKWirelessHD.a as link binary
 	- Click '+', and then click "Add Other..."
 	- Find 'libHKWirelessHD.a' in HKPage/HKWirelessHDSDK/lib, and add it.
 
-.. figure:: img/getting-started-iOS/project-setting-1.png
+1.	Go to Project Setting > Build Setting > Swift Compiler - Code Generation > Objective-C Bridging Header
 
 After adding the HKWirelessHDSDK folder into your project and adding libHKWirelessHD.a, the project navigator will look like as below:
 
@@ -29,6 +29,24 @@ After adding the HKWirelessHDSDK folder into your project and adding libHKWirele
 
 Add Swift Bridging Header
 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+HKWirelessHD SDK has been written in C++ and Objective-C. Therefore, when you use the SDK in Swift, you should include Swift Bridging Header in your project. To do this:
+
+#. Go to Project Setting > Build Setting > Swift Compiler - Code Generation > Objective-C Bridging Header
+.. figure:: img/getting-started-iOS/project-setting-2.png
+#. Add [My-Project-Name]/[My-Project-Name]-Bridging-Header.h
+	- In our example, it looks like : HKPage/HKPage-Bridging-Header.h
+#. Add the following lines in the header file.
+
+.. code-block:: swift
+
+	#import "HKWControlHandler.h"
+	#import "HKWPlayerEventHandlerSingleton.h"
+	#import "HKWDeviceEventHandlerSingleton.h"
+
+Add -lstdc++ as linker flag
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 .. note:: 
 
