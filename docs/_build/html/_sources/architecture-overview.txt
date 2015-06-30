@@ -30,10 +30,10 @@ As shown in the figure above, there are two kind of communications between a sou
 
 - Channel for audio streaming - one way communication from a source to multiple destinations
 	- This channel is used for transmitting audio data to destination speakers
-
 - Channel for control commands and device status - bidirectional communication
 	- This channel is used to send commands from the source to the destinations to control the device, like volume control, etc.
-	- Destination device can also send commands to the source device in some cases. For example, a speaker which is not belonging to the current playback session can send a command to the source to add itself to the current playback session.
+	- Destination device can also send commands to the source device in some cases.
+		- For example, a speaker which is not belonging to the current playback session can send a command to the source to add itself to the current playback session.
 		- User can add Omni 10 or Omni 20 speaker to the current running playback session by long-pressing the Home button on the control panel. Please refer to Omni 10 or 20 User's Manual for more information.
 	- This channel is also used to send the device information and the status data of a destination speakers to the source device.
 		- Device information includes the speaker name, the group name, IP address and port number, firmware version, etc.
