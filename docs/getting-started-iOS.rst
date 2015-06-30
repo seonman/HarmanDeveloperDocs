@@ -164,7 +164,10 @@ You can retrieve the information of a device (speaker) using DeviceInfo object. 
 ===========  ==============  ========================================= ======================== ============
 Attribute    Type in Swift   Description                               Fixed/Variable           Set by API
 ===========  ==============  ========================================= ======================== ============
-deviceId     CLongLong       the unique ID of the speaker              Fixed (in manufacturing) No 
+deviceId     CLongLong       the unique ID of the speaker              Fixed (in manufacturing) No
+deviceName   String          the name of the speaker                   Variable                 Yes
+groupId      CLongLong       the unique ID of the group that the       Variable (set when a     No
+                             speaker belongs to                        group is created)
 ===========  ==============  ========================================= ======================== ============
 
 
