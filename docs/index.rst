@@ -10,7 +10,7 @@ Welcome to Harman Developer documentation!
 
 	This documentation is about Harman Kardon WirelessHD SDK. You can download the SDK at `Harman Developer web site <http://developer.harman.com>`__.
 	
-	This documentation is a work in progress. Bear with us as we fill in some of the gaps, add clarifications, and expand out the content. We appreciate your understanding and patience as we work to improve our developer experience!
+	This documentation is a work in progress.
 
 
 Welcome to the Harman developer documentation. Here you will find information about creating your app using HKWirelessHD SDK.
