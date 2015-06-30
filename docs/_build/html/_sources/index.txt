@@ -26,7 +26,7 @@ This documentation is organized into a few different sections:
 
 .. _SDK Overview: sdk-overview.html
 .. _Getting Started (iOS): getting-started-iOS.html
-
+.. _Architecture Overview: architecture-overview.html
 
 Contents
 --------
@@ -47,6 +47,14 @@ Getting Started Guide (iOS)
 
 	getting-started-iOS
 
+Architecture Overview
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	architecture-overview
+	
 Search
 ======
 

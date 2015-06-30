@@ -73,7 +73,7 @@ Initialize HKWirelessHD Control Handler and start the Wireless Audio
 	let g_HWControlHandler: HKWControlHandler = HKWControlHandler.sharedInstance()
 
 	// Initialize the HKWControlHandler and start wireless audio
-	g_HWControlHandler.initializeHKWirelessController (licenseKey)
+	HKWControlHandler.sharedInstance().initializeHKWirelessController (licenseKey)
 
 ``initializeHKWirelessController()`` takes a string of license key as parameter. Every developer who signs up for Harman developer community will receive a license key. If you have not received it yet, then just use the license key specified in the sample code for temporary use until your own license key is available.
 
@@ -95,10 +95,10 @@ To start checking the status of devices regularly, use ``startRefreshDeviceInfo(
 .. code-block:: swift
 
 	// start to refresh devices ... 
-	g_HKWControlHandler.startRefreshDeviceInfo()
+	HKWControlHandler.sharedInstance().startRefreshDeviceInfo()
 	
 	// stop to refresh devices
-	g_HKWControlHandler.stopRefreshDeviceInfo()  
+	HKWControlHandler.sharedInstance().stopRefreshDeviceInfo()  
 
 ``startRefreshDeviceInfo()`` will refresh and update every 2 seconds the status of the devices in the current Wi-Fi network.
 
@@ -119,11 +119,11 @@ Selecting a speaker individually
 .. code-block:: swift
 
 	// get the number of available speakers
-	let deviceCount = g_HKWControlHandler.getDeviceCount()
+	let deviceCount = HKWControlHandler.sharedInstance().getDeviceCount()
 	
 	// get the info of the first devices in the list
 	var index = 0
-	let deviceInfo = g_HKWControlHandler.getDeviceInfoByIndex(index)
+	let deviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByIndex(index)
 
 **Retrieve DeviceInfo with deviceId**
 
@@ -133,7 +133,7 @@ If you know the deviceId of a speaker, then you can retrieve the device informat
 
 	// get the number of available speakers
 	var deviceId : ClongLong = …
-	let deviceInfo = g_HKWControlHandler.findDeviceFromList(deviceId)
+	let deviceInfo = HKWControlHandler.sharedInstance().findDeviceFromList(deviceId)
 
 Selecting a speaker from a group
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,7 +145,7 @@ A **Group** is defined by the group information of each speaker. That is, if a s
 .. code-block:: swift
 
 	// get the number of groups
-	var groupCount = g_HWKControlHandler.getGroupCount()
+	var groupCount = HKWControlHandler.sharedInstance().getGroupCount()
 
 **Get the number of devices in a group**
 
@@ -153,7 +153,7 @@ A **Group** is defined by the group information of each speaker. That is, if a s
 
 	// get the number of devices in the first group 
 	var groupIndex = 0
-	var deviceCount = g_HWKControlHandler.getDeviceCountInGroupIndex(groupIndex)
+	var deviceCount = HKWControlHandler.sharedInstance().getDeviceCountInGroupIndex(groupIndex)
 
 Retrieve the information of a device
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -189,7 +189,7 @@ The following is an example of retrieving some of attributes of a speaker inform
 
 .. code-block:: swift
 	
-	let deviceInfo: DeviceInfo = g_HKWControlHandelr.getDeviceInfoFromTable(groupIndex, deviceIndex:deviceIndex)
+	let deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoFromTable(groupIndex, deviceIndex:deviceIndex)
 	
 	println("deviceName: \(deviceInfo.deviceName")
 	println("groupName: \(deviceInfo.groupName")

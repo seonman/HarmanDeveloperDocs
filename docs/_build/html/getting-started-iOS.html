@@ -24,6 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Harman Developer 1.0 documentation" href="index.html" />
+    <link rel="next" title="Architecture Overview" href="architecture-overview.html" />
     <link rel="prev" title="Overview of HKWirelessHD SDK (iOS)" href="sdk-overview.html" /> 
   </head>
   <body role="document">
@@ -33,6 +34,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="architecture-overview.html" title="Architecture Overview"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="sdk-overview.html" title="Overview of HKWirelessHD SDK (iOS)"
              accesskey="P">previous</a> |</li>
@@ -131,7 +135,7 @@
 <span class="kd">let</span> <span class="nv">g_HWControlHandler</span><span class="p">:</span> <span class="n">HKWControlHandler</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">()</span>
 
 <span class="c1">// Initialize the HKWControlHandler and start wireless audio</span>
-<span class="n">g_HWControlHandler</span><span class="p">.</span><span class="n">initializeHKWirelessController</span> <span class="p">(</span><span class="n">licenseKey</span><span class="p">)</span>
+<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">initializeHKWirelessController</span> <span class="p">(</span><span class="n">licenseKey</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">initializeHKWirelessController()</span></code> takes a string of license key as parameter. Every developer who signs up for Harman developer community will receive a license key. If you have not received it yet, then just use the license key specified in the sample code for temporary use until your own license key is available.</p>
@@ -147,10 +151,10 @@
 <p>To force to update the status of speakers regularly, the SDK provides a pair of convenient APIs to refresh device status. One of the use cases of these functions are to present a screen of speaker list to user and show the current speaker information in real-time manner.</p>
 <p>To start checking the status of devices regularly, use <code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code>. To stop checking the status regularly, use <code class="docutils literal"><span class="pre">stopRefreshDeviceInfo()</span></code>.</p>
 <div class="highlight-swift"><div class="highlight"><pre><span class="c1">// start to refresh devices ...</span>
-<span class="n">g_HKWControlHandler</span><span class="p">.</span><span class="n">startRefreshDeviceInfo</span><span class="p">()</span>
+<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">startRefreshDeviceInfo</span><span class="p">()</span>
 
 <span class="c1">// stop to refresh devices</span>
-<span class="n">g_HKWControlHandler</span><span class="p">.</span><span class="n">stopRefreshDeviceInfo</span><span class="p">()</span>
+<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">stopRefreshDeviceInfo</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code> will refresh and update every 2 seconds the status of the devices in the current Wi-Fi network.</p>
@@ -166,18 +170,18 @@
 <h4>Selecting a speaker individually<a class="headerlink" href="#selecting-a-speaker-individually" title="Permalink to this headline">¶</a></h4>
 <p><strong>Select a speaker in the global list</strong></p>
 <div class="highlight-swift"><div class="highlight"><pre><span class="c1">// get the number of available speakers</span>
-<span class="kd">let</span> <span class="nv">deviceCount</span> <span class="p">=</span> <span class="n">g_HKWControlHandler</span><span class="p">.</span><span class="n">getDeviceCount</span><span class="p">()</span>
+<span class="kd">let</span> <span class="nv">deviceCount</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getDeviceCount</span><span class="p">()</span>
 
 <span class="c1">// get the info of the first devices in the list</span>
 <span class="kd">var</span> <span class="nv">index</span> <span class="p">=</span> <span class="mi">0</span>
-<span class="kd">let</span> <span class="nv">deviceInfo</span> <span class="p">=</span> <span class="n">g_HKWControlHandler</span><span class="p">.</span><span class="n">getDeviceInfoByIndex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nv">deviceInfo</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getDeviceInfoByIndex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Retrieve DeviceInfo with deviceId</strong></p>
 <p>If you know the deviceId of a speaker, then you can retrieve the device information using <code class="docutils literal"><span class="pre">findDeviceFromList()</span></code>.</p>
 <div class="highlight-swift"><div class="highlight"><pre>// get the number of available speakers
 var deviceId : ClongLong = …
-let deviceInfo = g_HKWControlHandler.findDeviceFromList(deviceId)
+let deviceInfo = HKWControlHandler.sharedInstance().findDeviceFromList(deviceId)
 </pre></div>
 </div>
 </div>
@@ -186,13 +190,13 @@ let deviceInfo = g_HKWControlHandler.findDeviceFromList(deviceId)
 <p>A <strong>Group</strong> is defined by the group information of each speaker. That is, if a speaker has a group where it belongs to, then the group has the speaker as a member. So, as an example, if speaker A and speaker B have the same group of Group C, then Group C will have speaker A and speaker B as members. If speaker A changes the group as ‘Group D’, then Group C will have only speaker B, and Group D will have speaker A as a member.</p>
 <p><strong>Get the number of groups available in the network</strong></p>
 <div class="highlight-swift"><div class="highlight"><pre><span class="c1">// get the number of groups</span>
-<span class="kd">var</span> <span class="nv">groupCount</span> <span class="p">=</span> <span class="n">g_HWKControlHandler</span><span class="p">.</span><span class="n">getGroupCount</span><span class="p">()</span>
+<span class="kd">var</span> <span class="nv">groupCount</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getGroupCount</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><strong>Get the number of devices in a group</strong></p>
 <div class="highlight-swift"><div class="highlight"><pre><span class="c1">// get the number of devices in the first group</span>
 <span class="kd">var</span> <span class="nv">groupIndex</span> <span class="p">=</span> <span class="mi">0</span>
-<span class="kd">var</span> <span class="nv">deviceCount</span> <span class="p">=</span> <span class="n">g_HWKControlHandler</span><span class="p">.</span><span class="n">getDeviceCountInGroupIndex</span><span class="p">(</span><span class="n">groupIndex</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nv">deviceCount</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getDeviceCountInGroupIndex</span><span class="p">(</span><span class="n">groupIndex</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -322,7 +326,7 @@ let deviceInfo = g_HKWControlHandler.findDeviceFromList(deviceId)
 </table>
 <p>As shown in the table above, some of the attributes can be set by the APIs. And some attributes change during the runtime, so the app should keep the latest value of the attributes by calling corresponding APIs or by callback functions.</p>
 <p>The following is an example of retrieving some of attributes of a speaker information.</p>
-<div class="highlight-swift"><div class="highlight"><pre>let deviceInfo: DeviceInfo = g_HKWControlHandelr.getDeviceInfoFromTable(groupIndex, deviceIndex:deviceIndex)
+<div class="highlight-swift"><div class="highlight"><pre>let deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoFromTable(groupIndex, deviceIndex:deviceIndex)
 
 println(&quot;deviceName: \(deviceInfo.deviceName&quot;)
 println(&quot;groupName: \(deviceInfo.groupName&quot;)
@@ -378,6 +382,9 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
   <h4>Previous topic</h4>
   <p class="topless"><a href="sdk-overview.html"
                         title="previous chapter">Overview of HKWirelessHD SDK (iOS)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="architecture-overview.html"
+                        title="next chapter">Architecture Overview</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -408,6 +415,9 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="architecture-overview.html" title="Architecture Overview"
+             >next</a> |</li>
         <li class="right" >
           <a href="sdk-overview.html" title="Overview of HKWirelessHD SDK (iOS)"
              >previous</a> |</li>
