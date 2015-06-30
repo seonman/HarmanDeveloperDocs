@@ -65,7 +65,7 @@ All APIs can be accessed through a singleton object of HKWControlHandler. Only y
 The code examples in this document are in Swift. and the function definition is in Objective-C. The APIs are compatible both in Swift and Objective-C.
 
 Initialize HKWirelessHD Control Handler and start the Wireless Audio
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: swift
 
@@ -82,7 +82,7 @@ Initialize HKWirelessHD Control Handler and start the Wireless Audio
 
 
 Discovery and refreshing of available speakers in the Wi-Fi network
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The status of speakers can be changed dynamically over time. And, whenever a speaker is turned off or on, the list of speakers available in the network should be refreshed. Especially, when you select speakers for playback, the speaker list and the status of each speaker should be updated with the latest information.
 
@@ -136,7 +136,7 @@ If you know the deviceId of a speaker, then you can retrieve the device informat
 	let deviceInfo = g_HKWControlHandler.findDeviceFromList(deviceId)
 
 Selecting a speaker from a group
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A **Group** is defined by the group information of each speaker. That is, if a speaker has a group where it belongs to, then the group has the speaker as a member. So, as an example, if speaker A and speaker B have the same group of Group C, then Group C will have speaker A and speaker B as members. If speaker A changes the group as ‘Group D’, then Group C will have only speaker B, and Group D will have speaker A as a member.
 
