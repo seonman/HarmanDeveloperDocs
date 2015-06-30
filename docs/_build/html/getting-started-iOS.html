@@ -162,7 +162,8 @@
 <div class="section" id="speakers-and-groups">
 <h3>Speakers and Groups<a class="headerlink" href="#speakers-and-groups" title="Permalink to this headline">¶</a></h3>
 <p>There are two ways to choose speakers to play on – one is to select a speaker from the global list of speakers maintained by the internal data structure, and the other is to select a speaker with a group (or room) index and the index of the speaker within the group. Note that in this document, the term group and room are used as the same meaning, that is, a set of speakers.</p>
-<p><strong>Selecting a speaker individually</strong></p>
+<div class="section" id="selecting-a-speaker-individually">
+<h4>Selecting a speaker individually<a class="headerlink" href="#selecting-a-speaker-individually" title="Permalink to this headline">¶</a></h4>
 <p><strong>*Select a speaker in the global list*</strong></p>
 <div class="highlight-swift"><div class="highlight"><pre><span class="c1">// get the number of available speakers</span>
 <span class="kd">let</span> <span class="nv">deviceCount</span> <span class="p">=</span> <span class="n">g_HKWControlHandler</span><span class="p">.</span><span class="n">getDeviceCount</span><span class="p">()</span>
@@ -185,6 +186,7 @@ let deviceInfo = g_HKWControlHandler.findDeviceFromList(deviceId)
 <div class="highlight-swift"><div class="highlight"><pre><span class="c1">// get the number of groups</span>
 <span class="kd">var</span> <span class="nv">groupCount</span> <span class="p">=</span> <span class="n">g_HWKControlHandler</span><span class="p">.</span><span class="n">getGroupCount</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -339,7 +341,10 @@ can use it from our smart phone, just like other SmartApps. Let&#8217;s walk thr
 <li><a class="reference internal" href="#using-hkwirelesshd-api">Using HKWirelessHD API</a><ul>
 <li><a class="reference internal" href="#initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio">Initialize HKWirelessHD Control Handler and start the Wireless Audio</a></li>
 <li><a class="reference internal" href="#discovery-and-refreshing-of-available-speakers-in-the-wi-fi-network">Discovery and refreshing of available speakers in the Wi-Fi network</a></li>
-<li><a class="reference internal" href="#speakers-and-groups">Speakers and Groups</a></li>
+<li><a class="reference internal" href="#speakers-and-groups">Speakers and Groups</a><ul>
+<li><a class="reference internal" href="#selecting-a-speaker-individually">Selecting a speaker individually</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#walkthrough">Walkthrough</a><ul>

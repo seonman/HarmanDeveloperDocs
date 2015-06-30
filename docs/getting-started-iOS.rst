@@ -111,7 +111,8 @@ Speakers and Groups
 
 There are two ways to choose speakers to play on – one is to select a speaker from the global list of speakers maintained by the internal data structure, and the other is to select a speaker with a group (or room) index and the index of the speaker within the group. Note that in this document, the term group and room are used as the same meaning, that is, a set of speakers.
 
-**Selecting a speaker individually**
+Selecting a speaker individually
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ***Select a speaker in the global list***
 
