@@ -1,8 +1,11 @@
 Architecture Overview
 ===========================
 
+Overview
+---------
+
 Overall Configuration
------------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 There are two types of entities in HKWirelessHD audio streaming - one is source device and the other is destination device. Source device sends audio stream to destination devices (speakers), and destination devices receive the audio stream from source and play it. In HKWirelessHD audio, audio streaming is in a one-to-many way. That is, there is one single source device sending an audio stream, and multiple destination devices receive the audio stream by synchronizing with other speakers.
 
@@ -13,14 +16,14 @@ Source device can be iOS device, such as iPhone and iPad, and destination device
 
 
 Use of HKWirelessHD API to stream audio to Omni Speakers
----------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To send audio stream to destination devices, an App has to use HKWirelessHD API. HKWirelessHD SDK provides the library of the APIs for arm32/64bit architecture. 
 
 Note that as of date of writing, no x86 architecture is supported, so developer cannot use iOS Simulator for running the app with HKWirelessHD API.
 
 Communication channels between source and destinations
--------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As shown in the figure above, there are two kind of communications between a source device and (multiple) destination devices.
 
@@ -36,7 +39,7 @@ As shown in the figure above, there are two kind of communications between a sou
 		- Device status information includes the status about the device availability and changes of its attributes, whether or not it is playing music, Wi-Fi signal strength, volume change, etc.
 
 Asynchronous Communication
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The communication between the source device and the destination speakers are accomplished in asynchronous way. Asynchronous behavior is natural because all the commands and status updates are executed in a way like RPC (Remote Procedure Call). Even more, audio streaming always involves some amount of buffering of audio data packets, so the timing gap between the source and the destinations is inevitable.
 
@@ -52,14 +55,14 @@ Below are some examples of asynchronous communications.
 	- When the source changes the volume level of speakers, actual volume changes occur a few millisecond later.
 
 Speaker Management
--------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Whenever a speaker updates its status, the latest status information should be updated on the source device side as well. HKWirelessHD API manages the latest device status information inside DeviceInfo instances. HKWControlHandler instance maintains a list of DeviceInfo objects, each of which corresponds to a speaker found in the network.
 
 The detailed description on each attribute in the device are described in DeviceInfo.h.
 
 Visibility of Speakers
-=======================
+------------------------
 
 Any speakers in a network are visible to source devices (iOS devices) if a source device successfully initializes the HKWControlHandler when it starts up. Source device can be multiple. This means, even in the case that a speaker is being used by a source device, the status of each speaker is also visible to all other source devices in the network, once they are successfully initialized with HKWControlHandler.
 
@@ -69,10 +72,10 @@ There is an API, called isPlaying(), in DeviceInfo.h to return a boolean value i
 
 
 Controlling Speakers and Handling the Events from Speakers
-===========================================================
+-------------------------------------------------------------
 
 Controlling speakers
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Speaker controls, like start/pause/resume/stop audio streaming, change volume level, etc. are done by calling APIs provided by the HKWControlHandler singleton object. The app just needs to acquire the HKWControlHandler object, initialize it, and then use it to control the speakers. For example, as shown in the figure above, the app can call playCAF() with the HKWControlHandler to start to play a CAF audio file. The control APIs are described in HKWControlHandler.h.
 
@@ -83,7 +86,7 @@ HKWControlHandler is a singleton object, and it can be acquired by calling as be
 	HKWControlHandler.sharedInstance()
 
 Handling events from speakers
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 On the other hand, the events from speakers are sent to the app through Delegate protocol APIs. By implementing the event handler delegate functions (in ViewController class in most cases), you can receive and handle the events from speakers. Whenever an event occurs from speakers, the corresponding handler is called and the event information is passed to the handler as parameter. 
 

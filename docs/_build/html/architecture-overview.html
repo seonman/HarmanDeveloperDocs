@@ -47,19 +47,21 @@
             
   <div class="section" id="architecture-overview">
 <h1>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="overall-configuration">
-<h2>Overall Configuration<a class="headerlink" href="#overall-configuration" title="Permalink to this headline">¶</a></h2>
+<h3>Overall Configuration<a class="headerlink" href="#overall-configuration" title="Permalink to this headline">¶</a></h3>
 <p>There are two types of entities in HKWirelessHD audio streaming - one is source device and the other is destination device. Source device sends audio stream to destination devices (speakers), and destination devices receive the audio stream from source and play it. In HKWirelessHD audio, audio streaming is in a one-to-many way. That is, there is one single source device sending an audio stream, and multiple destination devices receive the audio stream by synchronizing with other speakers.</p>
 <p>In case of multi-channel streaming, each speaker is assigned with a role to process a dedicated audio channel. For example, a speaker can play either left channel or right channel in stereo mode.</p>
 <p>Source device can be iOS device, such as iPhone and iPad, and destination devices are Harman Kardon Omni speakers (Omni Adapt, Omni 10, Omni 20, Omni Bar, etc.) You can find more information on HK Omni speakers at <a class="reference external" href="http://www.harmankardon.com/content?ContentID=wireless">http://www.harmankardon.com/content?ContentID=wireless</a>.</p>
 </div>
 <div class="section" id="use-of-hkwirelesshd-api-to-stream-audio-to-omni-speakers">
-<h2>Use of HKWirelessHD API to stream audio to Omni Speakers<a class="headerlink" href="#use-of-hkwirelesshd-api-to-stream-audio-to-omni-speakers" title="Permalink to this headline">¶</a></h2>
+<h3>Use of HKWirelessHD API to stream audio to Omni Speakers<a class="headerlink" href="#use-of-hkwirelesshd-api-to-stream-audio-to-omni-speakers" title="Permalink to this headline">¶</a></h3>
 <p>To send audio stream to destination devices, an App has to use HKWirelessHD API. HKWirelessHD SDK provides the library of the APIs for arm32/64bit architecture.</p>
 <p>Note that as of date of writing, no x86 architecture is supported, so developer cannot use iOS Simulator for running the app with HKWirelessHD API.</p>
 </div>
 <div class="section" id="communication-channels-between-source-and-destinations">
-<h2>Communication channels between source and destinations<a class="headerlink" href="#communication-channels-between-source-and-destinations" title="Permalink to this headline">¶</a></h2>
+<h3>Communication channels between source and destinations<a class="headerlink" href="#communication-channels-between-source-and-destinations" title="Permalink to this headline">¶</a></h3>
 <p>As shown in the figure above, there are two kind of communications between a source device and (multiple) destination devices.</p>
 <ul>
 <li><dl class="first docutils">
@@ -99,7 +101,7 @@
 </ul>
 </div>
 <div class="section" id="asynchronous-communication">
-<h2>Asynchronous Communication<a class="headerlink" href="#asynchronous-communication" title="Permalink to this headline">¶</a></h2>
+<h3>Asynchronous Communication<a class="headerlink" href="#asynchronous-communication" title="Permalink to this headline">¶</a></h3>
 <p>The communication between the source device and the destination speakers are accomplished in asynchronous way. Asynchronous behavior is natural because all the commands and status updates are executed in a way like RPC (Remote Procedure Call). Even more, audio streaming always involves some amount of buffering of audio data packets, so the timing gap between the source and the destinations is inevitable.</p>
 <p>Below are some examples of asynchronous communications.</p>
 <ul>
@@ -130,21 +132,21 @@
 </ul>
 </div>
 <div class="section" id="speaker-management">
-<h2>Speaker Management<a class="headerlink" href="#speaker-management" title="Permalink to this headline">¶</a></h2>
+<h3>Speaker Management<a class="headerlink" href="#speaker-management" title="Permalink to this headline">¶</a></h3>
 <p>Whenever a speaker updates its status, the latest status information should be updated on the source device side as well. HKWirelessHD API manages the latest device status information inside DeviceInfo instances. HKWControlHandler instance maintains a list of DeviceInfo objects, each of which corresponds to a speaker found in the network.</p>
 <p>The detailed description on each attribute in the device are described in DeviceInfo.h.</p>
 </div>
 </div>
 <div class="section" id="visibility-of-speakers">
-<h1>Visibility of Speakers<a class="headerlink" href="#visibility-of-speakers" title="Permalink to this headline">¶</a></h1>
+<h2>Visibility of Speakers<a class="headerlink" href="#visibility-of-speakers" title="Permalink to this headline">¶</a></h2>
 <p>Any speakers in a network are visible to source devices (iOS devices) if a source device successfully initializes the HKWControlHandler when it starts up. Source device can be multiple. This means, even in the case that a speaker is being used by a source device, the status of each speaker is also visible to all other source devices in the network, once they are successfully initialized with HKWControlHandler.</p>
 <p>For example, as described in the figure below, let&#8217;s assume that Speaker-A and Speaker-B are being used by Source A, and Speaker-D and Speaker-E are being used by Source B. Once Source A and Source B initialize HKWControlHandler, then all the speakers from Speaker-A to Speaker-E are also visible both to Source A and Source B. Therefore, it is possible for Source A to add Speaker-D to its on-going playback session, even if it is being used by Source B. In this case, Speaker-D stops playing the audio stream from Source B, and join the on-going playback audio stream from Source A.</p>
 <p>There is an API, called isPlaying(), in DeviceInfo.h to return a boolean value indicating if the speaker is being playing audio or not, regardless that which source audio stream comes from.</p>
 </div>
 <div class="section" id="controlling-speakers-and-handling-the-events-from-speakers">
-<h1>Controlling Speakers and Handling the Events from Speakers<a class="headerlink" href="#controlling-speakers-and-handling-the-events-from-speakers" title="Permalink to this headline">¶</a></h1>
+<h2>Controlling Speakers and Handling the Events from Speakers<a class="headerlink" href="#controlling-speakers-and-handling-the-events-from-speakers" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="controlling-speakers">
-<h2>Controlling speakers<a class="headerlink" href="#controlling-speakers" title="Permalink to this headline">¶</a></h2>
+<h3>Controlling speakers<a class="headerlink" href="#controlling-speakers" title="Permalink to this headline">¶</a></h3>
 <p>Speaker controls, like start/pause/resume/stop audio streaming, change volume level, etc. are done by calling APIs provided by the HKWControlHandler singleton object. The app just needs to acquire the HKWControlHandler object, initialize it, and then use it to control the speakers. For example, as shown in the figure above, the app can call playCAF() with the HKWControlHandler to start to play a CAF audio file. The control APIs are described in HKWControlHandler.h.</p>
 <p>HKWControlHandler is a singleton object, and it can be acquired by calling as below. Note that there is no initializer API for the object. The sharedInstance() singleton API will create and initialize it if there is no instance in the runtime.</p>
 <div class="highlight-swift"><div class="highlight"><pre><span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">()</span>
@@ -152,7 +154,7 @@
 </div>
 </div>
 <div class="section" id="handling-events-from-speakers">
-<h2>Handling events from speakers<a class="headerlink" href="#handling-events-from-speakers" title="Permalink to this headline">¶</a></h2>
+<h3>Handling events from speakers<a class="headerlink" href="#handling-events-from-speakers" title="Permalink to this headline">¶</a></h3>
 <p>On the other hand, the events from speakers are sent to the app through Delegate protocol APIs. By implementing the event handler delegate functions (in ViewController class in most cases), you can receive and handle the events from speakers. Whenever an event occurs from speakers, the corresponding handler is called and the event information is passed to the handler as parameter.</p>
 <p>The SDK provides two delegate protocols:</p>
 <ul>
@@ -209,6 +211,7 @@
 </ul>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -219,6 +222,7 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Architecture Overview</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
 <li><a class="reference internal" href="#overall-configuration">Overall Configuration</a></li>
 <li><a class="reference internal" href="#use-of-hkwirelesshd-api-to-stream-audio-to-omni-speakers">Use of HKWirelessHD API to stream audio to Omni Speakers</a></li>
 <li><a class="reference internal" href="#communication-channels-between-source-and-destinations">Communication channels between source and destinations</a></li>
@@ -230,6 +234,8 @@
 <li><a class="reference internal" href="#controlling-speakers-and-handling-the-events-from-speakers">Controlling Speakers and Handling the Events from Speakers</a><ul>
 <li><a class="reference internal" href="#controlling-speakers">Controlling speakers</a></li>
 <li><a class="reference internal" href="#handling-events-from-speakers">Handling events from speakers</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
