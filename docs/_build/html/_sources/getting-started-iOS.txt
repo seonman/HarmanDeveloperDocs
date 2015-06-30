@@ -81,6 +81,69 @@ Initialize HKWirelessHD Control Handler and start the Wireless Audio
 	``initializeHKWirelessController()`` is a blocking call. It waits until the call successfully initializes the wireless audio network. If the phone device does not belong to a Wi-Fi network or if there is other app already using HKWirelessHD and running on the same device, then it will wait until the other app releases the HKWControlHandler. It would be nice to present a dialog to user before calling ``initializeHKWirelessController()`` to notice that the app will wait until HKWirelessHD network is available. 
 
 
+Discovery and refreshing of available speakers in the Wi-Fi network
+~~~~~~~~~~~~~~~~~~~~~~
+
+The status of speakers can be changed dynamically over time. And, whenever a speaker is turned off or on, the list of speakers available in the network should be refreshed. Especially, when you select speakers for playback, the speaker list and the status of each speaker should be updated with the latest information.
+
+Basically, whenever there is any change on the speaker side, the newest information of the speaker is available from the device list maintained by HKWControlHandler. But, the update is initiated by speakers, and there is some latency until the latest information is reflected to the HKWControlHandler. So, if you need the latest information without latency, you would better refresh the speaker status regularly.
+
+To force to update the status of speakers regularly, the SDK provides a pair of convenient APIs to refresh device status. One of the use cases of these functions are to present a screen of speaker list to user and show the current speaker information in real-time manner.
+
+To start checking the status of devices regularly, use ``startRefreshDeviceInfo()``. To stop checking the status regularly, use ``stopRefreshDeviceInfo()``.
+
+.. code-block:: swift
+
+	// start to refresh devices ... 
+	g_HKWControlHandler.startRefreshDeviceInfo()
+	
+	// stop to refresh devices
+	g_HKWControlHandler.stopRefreshDeviceInfo()  
+
+``startRefreshDeviceInfo()`` will refresh and update every 2 seconds the status of the devices in the current Wi-Fi network.
+
+.. note:: 
+	Even without calling ``startRefreshDeviceInfo()``, the speaker information will be updated whenever the information is updated on speaker side, but there is some latency until the newest information is reflected to HKWControlHandler.
+
+
+Speakers and Groups
+~~~~~~~~~~~~~~~~~~~
+
+There are two ways to choose speakers to play on – one is to select a speaker from the global list of speakers maintained by the internal data structure, and the other is to select a speaker with a group (or room) index and the index of the speaker within the group. Note that in this document, the term group and room are used as the same meaning, that is, a set of speakers.
+
+**Selecting a speaker individually**
+
+***Select a speaker in the global list***
+
+.. code-block:: swift
+
+	// get the number of available speakers
+	let deviceCount = g_HKWControlHandler.getDeviceCount()
+	
+	// get the info of the first devices in the list
+	var index = 0
+	let deviceInfo = g_HKWControlHandler.getDeviceInfoByIndex(index)
+
+***Retrieve DeviceInfo with deviceId***
+
+If you know the deviceId of a speaker, then you can retrieve the device information using ``findDeviceFromList()``.
+
+.. code-block:: swift
+
+	// get the number of available speakers
+	var deviceId : ClongLong = …
+	let deviceInfo = g_HKWControlHandler.findDeviceFromList(deviceId)
+
+**Selecting a speaker from a group**
+
+A **Group** is defined by the group information of each speaker. That is, if a speaker has a group where it belongs to, then the group has the speaker as a member. So, as an example, if speaker A and speaker B have the same group of Group C, then Group C will have speaker A and speaker B as members. If speaker A changes the group as ‘Group D’, then Group C will have only speaker B, and Group D will have speaker A as a member.
+
+***Get the number of groups available in the network***
+
+.. code-block:: swift
+
+	// get the number of groups
+	var groupCount = g_HWKControlHandler.getGroupCount()
 
 
 Walkthrough
