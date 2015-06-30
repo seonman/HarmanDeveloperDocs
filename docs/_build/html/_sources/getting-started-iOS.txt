@@ -33,9 +33,13 @@ Add Swift Bridging Header
 HKWirelessHD SDK has been written in C++ and Objective-C. Therefore, when you use the SDK in Swift, you should include Swift Bridging Header in your project. To do this:
 
 #. Go to Project Setting > Build Setting > Swift Compiler - Code Generation > Objective-C Bridging Header
+
 .. figure:: img/getting-started-iOS/project-setting-2.png
+
 #. Add [My-Project-Name]/[My-Project-Name]-Bridging-Header.h
+
 	- In our example, it looks like : HKPage/HKPage-Bridging-Header.h
+
 #. Add the following lines in the header file.
 
 .. code-block:: swift

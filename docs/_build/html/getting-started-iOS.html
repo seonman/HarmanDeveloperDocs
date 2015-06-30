@@ -81,16 +81,22 @@
 <div class="section" id="add-swift-bridging-header">
 <h3>Add Swift Bridging Header<a class="headerlink" href="#add-swift-bridging-header" title="Permalink to this headline">¶</a></h3>
 <p>HKWirelessHD SDK has been written in C++ and Objective-C. Therefore, when you use the SDK in Swift, you should include Swift Bridging Header in your project. To do this:</p>
-<p>#. Go to Project Setting &gt; Build Setting &gt; Swift Compiler - Code Generation &gt; Objective-C Bridging Header
-.. figure:: img/getting-started-iOS/project-setting-2.png
-#. Add [My-Project-Name]/[My-Project-Name]-Bridging-Header.h</p>
+<ol class="arabic simple">
+<li>Go to Project Setting &gt; Build Setting &gt; Swift Compiler - Code Generation &gt; Objective-C Bridging Header</li>
+</ol>
+<div class="figure">
+<img alt="_images/project-setting-2.png" src="_images/project-setting-2.png" />
+</div>
+<ol class="arabic">
+<li><p class="first">Add [My-Project-Name]/[My-Project-Name]-Bridging-Header.h</p>
 <blockquote>
 <div><ul class="simple">
 <li>In our example, it looks like : HKPage/HKPage-Bridging-Header.h</li>
 </ul>
 </div></blockquote>
-<ol class="arabic simple">
-<li>Add the following lines in the header file.</li>
+</li>
+<li><p class="first">Add the following lines in the header file.</p>
+</li>
 </ol>
 <div class="highlight-swift"><div class="highlight"><pre><span class="p">#</span><span class="kd">import</span> <span class="s">&quot;HKWControlHandler.h&quot;</span>
 <span class="p">#</span><span class="kd">import</span> <span class="s">&quot;HKWPlayerEventHandlerSingleton.h&quot;</span>
