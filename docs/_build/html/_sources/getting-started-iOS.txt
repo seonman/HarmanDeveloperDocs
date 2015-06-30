@@ -114,8 +114,7 @@ There are two ways to choose speakers to play on – one is to select a speaker 
 Selecting a speaker individually
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Select a speaker in the global list
-""""""""""""""""""""""""""""""
+**Select a speaker in the global list**
 
 .. code-block:: swift
 
@@ -136,16 +135,37 @@ If you know the deviceId of a speaker, then you can retrieve the device informat
 	var deviceId : ClongLong = …
 	let deviceInfo = g_HKWControlHandler.findDeviceFromList(deviceId)
 
-**Selecting a speaker from a group**
+Selecting a speaker from a group
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A **Group** is defined by the group information of each speaker. That is, if a speaker has a group where it belongs to, then the group has the speaker as a member. So, as an example, if speaker A and speaker B have the same group of Group C, then Group C will have speaker A and speaker B as members. If speaker A changes the group as ‘Group D’, then Group C will have only speaker B, and Group D will have speaker A as a member.
 
-***Get the number of groups available in the network***
+**Get the number of groups available in the network**
 
 .. code-block:: swift
 
 	// get the number of groups
 	var groupCount = g_HWKControlHandler.getGroupCount()
+
+**Get the number of devices in a group**
+
+.. code-block:: swift
+
+	// get the number of devices in the first group 
+	var groupIndex = 0
+	var deviceCount = g_HWKControlHandler.getDeviceCountInGroupIndex(groupIndex)
+
+Retrieve the information of a device
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can retrieve the information of a device (speaker) using DeviceInfo object. Please refer to DeviceInfo.h. The following is the list of information that DeviceInfo provides:
+
++------------------+---------------+----------------------------------+-------------------------+------------+
+| Attribute	       | Type in Swift | Description                      | Fixed/Variable          | Set by API |
++==================+===============+==================================+-------------------------+------------+
+| deviceId	       | CLongLong     | the unique ID of the speaker     | Fixed (in manufacturing)| No         |
++------------------+---------------+----------------------------------+-------------------------+------------+
+
 
 
 Walkthrough
