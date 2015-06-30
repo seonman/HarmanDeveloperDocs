@@ -16,6 +16,25 @@ What's Included
 	- Timer App
 	- HKWPlayer App with Apple Watch app support
 	- HKWHub App
+
+Requirements
+-----------------
+
+The HKWirelessHD SDK requires iOS8 minimum for iPhone or iPad devices. We provide two verions of the SDKs.
+
+- HKWirelessHD (normal)
+	- Supports both 32bit (armv7, armv7s) and 64bit architecture (arm64)
+	- Do not support web streaming music playback (streaming music from HTTP server, etc.)
+	- No other library required
+- HKWirelessHD+ (extended version)
+	- Only support 32bit (armv7) architecture. armv7s and armv74 are not supported.
+	- Support webstreaming music playback.
+	- libz.dylib and libbz2.dylib are required when linking.
+	
+So, if you do not need web streaming music playback for your app, you can use HKWirelessHD (normal) version. Otherwise, you should use HHWirelessHD+ version.
+
+Xcode 6.3 or later is required for building HKWirelessHD enabled iOS apps with Apple Watch app support.
+
   
 Demo Applications
 -----------------

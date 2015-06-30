@@ -80,6 +80,34 @@
 </li>
 </ul>
 </div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>The HKWirelessHD SDK requires iOS8 minimum for iPhone or iPad devices. We provide two verions of the SDKs.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>HKWirelessHD (normal)</dt>
+<dd><ul class="first last simple">
+<li>Supports both 32bit (armv7, armv7s) and 64bit architecture (arm64)</li>
+<li>Do not support web streaming music playback (streaming music from HTTP server, etc.)</li>
+<li>No other library required</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>HKWirelessHD+ (extended version)</dt>
+<dd><ul class="first last simple">
+<li>Only support 32bit (armv7) architecture. armv7s and armv74 are not supported.</li>
+<li>Support webstreaming music playback.</li>
+<li>libz.dylib and libbz2.dylib are required when linking.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>So, if you do not need web streaming music playback for your app, you can use HKWirelessHD (normal) version. Otherwise, you should use HHWirelessHD+ version.</p>
+<p>Xcode 6.3 or later is required for building HKWirelessHD enabled iOS apps with Apple Watch app support.</p>
+</div>
 <div class="section" id="demo-applications">
 <h2>Demo Applications<a class="headerlink" href="#demo-applications" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="hk-page-app">
@@ -144,7 +172,7 @@
 <a class="reference internal image-reference" href="_images/hkwplayer-watch-2.png"><img alt="_images/hkwplayer-watch-2.png" src="_images/hkwplayer-watch-2.png" /></a>
 </div>
 <div class="figure">
-<a class="reference internal image-reference" href="img/sdk-overview/hkwplayer-watch-3.png"><img alt="img/sdk-overview/hkwplayer-watch-3.png" src="img/sdk-overview/hkwplayer-watch-3.png" /></a>
+<a class="reference internal image-reference" href="_images/hkwplayer-watch-3.png"><img alt="_images/hkwplayer-watch-3.png" src="_images/hkwplayer-watch-3.png" /></a>
 </div>
 </div>
 </div>
@@ -160,6 +188,7 @@
   <ul>
 <li><a class="reference internal" href="#">Overview of HKWirelessHD SDK (iOS)</a><ul>
 <li><a class="reference internal" href="#what-s-included">What&#8217;s Included</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#demo-applications">Demo Applications</a><ul>
 <li><a class="reference internal" href="#hk-page-app">HK Page app</a></li>
 <li><a class="reference internal" href="#hk-wake-app">HK Wake app</a></li>
