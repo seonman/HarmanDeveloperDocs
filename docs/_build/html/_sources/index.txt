@@ -26,10 +26,13 @@ This documentation is organized into a few different sections:
 `Architecture Overview`_
     This chatper explains about the overall architecture of HKWirelessHD SDK.
 
+`HKWHub Specification`_
+    This chatper explains about the overall architecture of HKWirelessHD SDK.
 
 .. _SDK Overview: sdk-overview.html
 .. _Getting Started (iOS): getting-started-iOS.html
 .. _Architecture Overview: architecture-overview.html
+.. _HKWHub Specification: hkwhub-spec.html
 
 Contents
 --------
@@ -57,6 +60,14 @@ Architecture Overview
 	:maxdepth: 2
 
 	architecture-overview
+
+HKWHub Specification
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	hkwhub-spec
 	
 Search
 ======
