@@ -67,8 +67,36 @@ Get the list of Devices and their information
 .. code-block:: json
 
 	{"DeviceList":
-		[{"GroupName":"Bathroom", "Role":21, "MacAddress":"b0:38:29:1b:36:1f", "WifiSignalStrength":-47, "Port":44055, "Active":true, "DeviceName":"Adapt1", "Version":"0.1.6.2", "ModelName":"Omni Adapt", "IPAddress":"192.168.1.40", "GroupID":"3431724438", "Volume":47, "IsPlaying":false, "DeviceID":"34317244381360"},
-		{"GroupName":"Temp", "Role":21, "MacAddress":"b0:38:29:1b:9e:75", "WifiSignalStrength":-53, "Port":44055, "Active":true, "DeviceName":"Adapt", "Version":"0.1.6.2", "ModelName":"Omni Adapt", "IPAddress":"192.168.1.39", "GroupID":"1293219209", "Volume":47, "IsPlaying":false, "DeviceID":"129321920968880"}]
+		[{"GroupName":"Bathroom", 
+		"Role":21, 
+		"MacAddress":"b0:38:29:1b:36:1f", 
+		"WifiSignalStrength":-47, 
+		"Port":44055, 
+		"Active":true, 
+		"DeviceName":"Adapt1", 
+		"Version":"0.1.6.2", 
+		"ModelName":"Omni Adapt", 
+		"IPAddress":"192.168.1.40", 
+		"GroupID":"3431724438", 
+		"Volume":47, 
+		"IsPlaying":false, 
+		"DeviceID":"34317244381360"
+		},
+		{"GroupName":"Temp", 
+		"Role":21, 
+		"MacAddress":"b0:38:29:1b:9e:75", 
+		"WifiSignalStrength":-53, 
+		"Port":44055, 
+		"Active":true, 
+		"DeviceName":"Adapt", 
+		"Version":"0.1.6.2", 
+		"ModelName":"Omni Adapt", 
+		"IPAddress":"192.168.1.39", 
+		"GroupID":"1293219209", 
+		"Volume":47, 
+		"IsPlaying":false, 
+		"DeviceID":"129321920968880"
+		}]
 	}
 	
 Get the Device Information
@@ -83,4 +111,17 @@ Get the Device Information
 
 .. code-block:: json
 
-	{"GroupName":"Temp", "Role":21, "MacAddress":"b0:38:29:1b:9e:75", "WifiSignalStrength":-52, "Port":44055, "Active":true, "DeviceName":"Adapt", "Version":"0.1.6.2", "ModelName":"Omni Adapt", "IPAddress":"192.168.1.39", "GroupID":"1293219209", "Volume":47, "IsPlaying":true, "DeviceID":"129321920968880"}
+	{"GroupName":"Temp", 
+	"Role":21, 
+	"MacAddress":"b0:38:29:1b:9e:75", 
+	"WifiSignalStrength":-52, 
+	"Port":44055, "Active":true, 
+	"DeviceName":"Adapt", 
+	"Version":"0.1.6.2", 
+	"ModelName":"Omni Adapt", 
+	"IPAddress":"192.168.1.39", 
+	"GroupID":"1293219209", 
+	"Volume":47, 
+	"IsPlaying":true, 
+	"DeviceID":"129321920968880"}
+	
