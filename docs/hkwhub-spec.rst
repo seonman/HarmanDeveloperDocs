@@ -25,6 +25,11 @@ Web Hub handles all the requests from and response to the sensors or the clouds 
 
 .. figure:: img/hub/architecture.png
 
+.. youtube:: _ljpReAvk0g
+	:height: 800
+	:width: 480
+	:align: left
+
 
 Session Management
 -------------------
