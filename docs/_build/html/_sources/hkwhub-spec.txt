@@ -251,11 +251,11 @@ Get the Playback Status (Current Playback State and Elapsed Time)
 	- It returns the current state of the playback and also return the elapsed time (in second) of the playback.
 	- If it is not playing, then the elapsed time is (-1)
 	- The following is the value of each playback state:
-		- PlayerStateInitialized (-1) : Play is ready
-		- PlayerStatePlaying (1) : Now playing audio
+		- PlayerStateInitialized : Play is ready
+		- PlayerStatePlaying : Now playing audio
 		- PlayerStatePaused : Playing is paused. It can resume.
 		- PlayerStateStopped : Playing is stopped. It cannot resume.
-		- PlayerStateInterrupted: The current playback was interrupted by some reasons.
+		- PlayerStateInterrupted : The current playback was interrupted by some reasons.
 			- For example, if other client overrides the current playback by starting a new session and play, then the on-going playback is interrupted (stopped).
 
 	- Note that if the playback has stopped, then it cannot resume.
@@ -270,7 +270,7 @@ Get the Playback Status (Current Playback State and Elapsed Time)
 	 "TimeElapsed":"15"}
 
 
-Check if the Hub is playing audio now
+Check if the Hub is playing audio
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - API: GET /v1/is_playing?SessionID=<session id>
@@ -284,3 +284,63 @@ Check if the Hub is playing audio now
 
 	{"IsPlaying":"true"}
 
+Volume Control
+~~~~~~~~~~~~~~~~~
+
+Get Volume for all Devices
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- API: GET /v1/get_volume?SessionID=<session id>
+- Response
+	- Returns the average volume of all devices.
+	- The range of volume is 0 (muted) to 50 (max)
+- Example:
+	- Request: ``http://192.168.1.10/v1/get_volume?SessionID=1000``
+	- Response: 
+
+.. code-block:: json
+
+	{"Volume":"10"}
+
+Get Volume for a particular device
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- API: GET /v1/get_volume_device?SessionID=<session id>&DeviceID=<device id>
+- Response
+	- Returns the  volume of a particular device
+	- The range of volume is 0 (muted) to 50 (max)
+- Example:
+	- Request: ``http://192.168.1.10/v1/get_volume_device?SessionID=1000&DeviceID=1234567``
+	- Response: 
+
+.. code-block:: json
+
+	{"Volume":"10"}
+
+Set Volume for all devices
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- API: GET /v1/set_volume_device?SessionID=<session id>&DeviceID=<device id>
+- Response
+	- Returns true or false
+- Example:
+	- Request: ``http://192.168.1.10/v1/get_volume_device?SessionID=1000&Volume=10``
+	- Response: 
+
+.. code-block:: json
+
+	{"Result":"true"}
+	
+Set Volume for a particular device
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- API: GET /v1/set_volume_device?SessionID=<session id>&DeviceID=<device id>&Volume=<volume>
+- Response
+	- Returns true or false
+- Example:
+	- Request: ``http://192.168.1.10/v1/get_volume_device?SessionID=1000&DeviceID=1234567&Volume=10``
+	- Response: 
+
+.. code-block:: json
+
+	{"Result":"true"}
