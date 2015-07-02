@@ -23,7 +23,7 @@ import shlex
 
 sys.path.insert(0, os.path.abspath('.'))
 
-import rst.video
+import video
 
 # -- General configuration ------------------------------------------------
 
