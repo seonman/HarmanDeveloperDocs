@@ -208,3 +208,5 @@ Change speaker name and group name
 
 Use ``setDeviceName()`` to change the speaker name. Note that you cannot set the device name by setting “deviceName” property value directly. The property is read-only.
 
+
+[To be added]
