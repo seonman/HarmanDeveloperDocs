@@ -82,7 +82,7 @@
 <div class="section" id="close-session">
 <h4>Close Session<a class="headerlink" href="#close-session" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/close_session?SessionID=1000</p>
+<li><p class="first">API: GET /v1/close_session?SessionID=&lt;session id&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -112,7 +112,7 @@
 <div class="section" id="get-device-cound">
 <h4>Get device cound<a class="headerlink" href="#get-device-cound" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/device_count?SessionID=1000</p>
+<li><p class="first">API: GET /v1/device_count?SessionID=&lt;session id&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -210,7 +210,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/device_info?SessionID=1000&amp;DeviceID=&quot;129321920968880&quot;</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/device_info?SessionID=1000&amp;DeviceID=129321920968880</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -221,7 +221,8 @@
 <span class="nt">&quot;Role&quot;</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span>
 <span class="nt">&quot;MacAddress&quot;</span><span class="p">:</span><span class="s2">&quot;b0:38:29:1b:9e:75&quot;</span><span class="p">,</span>
 <span class="nt">&quot;WifiSignalStrength&quot;</span><span class="p">:</span><span class="mi">-52</span><span class="p">,</span>
-<span class="nt">&quot;Port&quot;</span><span class="p">:</span><span class="mi">44055</span><span class="p">,</span> <span class="nt">&quot;Active&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+<span class="nt">&quot;Port&quot;</span><span class="p">:</span><span class="mi">44055</span><span class="p">,</span>
+<span class="nt">&quot;Active&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
 <span class="nt">&quot;DeviceName&quot;</span><span class="p">:</span><span class="s2">&quot;Adapt&quot;</span><span class="p">,</span>
 <span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="s2">&quot;0.1.6.2&quot;</span><span class="p">,</span>
 <span class="nt">&quot;ModelName&quot;</span><span class="p">:</span><span class="s2">&quot;Omni Adapt&quot;</span><span class="p">,</span>
@@ -230,6 +231,330 @@
 <span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="mi">47</span><span class="p">,</span>
 <span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
 <span class="nt">&quot;DeviceID&quot;</span><span class="p">:</span><span class="s2">&quot;129321920968880&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-a-device-to-session">
+<h4>Add a Device to Session<a class="headerlink" href="#add-a-device-to-session" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/add_device_tosession?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns true or false</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/add_device_to_session?SessionID=1000&amp;DeviceID=129321920968880</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-a-device-from-session">
+<h4>Remove a Device from Session<a class="headerlink" href="#remove-a-device-from-session" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/remove_device_from_session?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns true or false</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/remove_device_from_session?SessionID=1000&amp;DeviceID=129321920968880</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="remote-hub-media-playback-management">
+<h3>Remote (Hub) Media Playback Management<a class="headerlink" href="#remote-hub-media-playback-management" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="get-the-list-of-stored-media">
+<h4>Get the list of stored media<a class="headerlink" href="#get-the-list-of-stored-media" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/media_list?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns JSON of the list of store media in the HKWHub app.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/media_list?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;MediaList&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;7387446959931482519&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Title&quot;</span><span class="p">:</span><span class="s2">&quot;I Will Run To You&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Artist&quot;</span><span class="p">:</span><span class="s2">&quot;Hillsong&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="mi">436</span><span class="p">,</span>
+        <span class="nt">&quot;AlbumTitle&quot;</span><span class="p">:</span><span class="s2">&quot;Simply Worship&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;5829171347867182746&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Title&quot;</span><span class="p">:</span><span class="s2">&quot;I&#39;m Yours [ORIGINAL DEMO]&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Artist&quot;</span><span class="p">:</span><span class="s2">&quot;Jason Mraz&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="mi">257</span><span class="p">,</span>
+        <span class="nt">&quot;AlbumTitle&quot;</span><span class="p">:</span><span class="s2">&quot;Wordplay [SINGLE EP]&quot;</span><span class="p">}</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="play-a-song-in-th-remote-hub">
+<h4>Play a Song in th Remote Hub<a class="headerlink" href="#play-a-song-in-th-remote-hub" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/play_hub_media?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Play a song stored in the hub, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/play_hub_media?SessionID=1000&amp;PersistentID=7387446959931482519</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pause-the-current-playback">
+<h4>Pause the Current Playback<a class="headerlink" href="#pause-the-current-playback" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/pause_play?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Pause the current playback, and then return true or false.</li>
+<li>It can resume the current playback by calling <code class="docutils literal"><span class="pre">resume_hub_media</span></code> if and only if the playback is playing hub media.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/pause_play?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="resume-the-current-playback-with-hub-media">
+<h4>Resume the Current Playback with Hub Media<a class="headerlink" href="#resume-the-current-playback-with-hub-media" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/resume_hub_media?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Resume the current playback with Hub Media, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/resume_hub_media?SessionID=1000&amp;PersistentID=7387446959931482519</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stop-the-current-playback">
+<h4>Stop the Current Playback<a class="headerlink" href="#stop-the-current-playback" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/stop_play?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Stop the current playback with Hub Media, and then return true or false.</li>
+<li>If the playback has stopped, then it cannot resume.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/stop_play?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-the-playback-status-current-playback-state-and-elapsed-time">
+<h4>Get the Playback Status (Current Playback State and Elapsed Time)<a class="headerlink" href="#get-the-playback-status-current-playback-state-and-elapsed-time" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/playback_status?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last">
+<li><p class="first">It returns the current state of the playback and also return the elapsed time (in second) of the playback.</p>
+</li>
+<li><p class="first">If it is not playing, then the elapsed time is (-1)</p>
+</li>
+<li><dl class="first docutils">
+<dt>The following is the value of each playback state:</dt>
+<dd><ul class="first last simple">
+<li>PlayerStateInitialized (-1) : Play is ready</li>
+<li>PlayerStatePlaying (1) : Now playing audio</li>
+<li>PlayerStatePaused : Playing is paused. It can resume.</li>
+<li>PlayerStateStopped : Playing is stopped. It cannot resume.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Note that if the playback has stopped, then it cannot resume.</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/playback_status?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;PlaybackState&quot;</span><span class="p">:</span><span class="s2">&quot;PlayerStatePlaying&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;TimeElapsed&quot;</span><span class="p">:</span><span class="s2">&quot;15&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="check-if-the-hub-is-playing-audio-now">
+<h4>Check if the Hub is playing audio now<a class="headerlink" href="#check-if-the-hub-is-playing-audio-now" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/playback_status?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last">
+<li><p class="first">It returns the current state of the playback and also return the elapsed time (in second) of the playback.</p>
+</li>
+<li><p class="first">If it is not playing, then the elapsed time is (-1)</p>
+</li>
+<li><dl class="first docutils">
+<dt>The following is the value of each playback state:</dt>
+<dd><ul class="first last simple">
+<li>PlayerStateInitialized (-1) : Play is ready</li>
+<li>PlayerStatePlaying (1) : Now playing audio</li>
+<li>PlayerStatePaused : Playing is paused. It can resume.</li>
+<li>PlayerStateStopped : Playing is stopped. It cannot resume.</li>
+<li>PlayerStateInterrupted: The current playback was interrupted by some reasons. For example, if other client overrides the current playback by starting a new session and play, then the on-going playback is interrupted (stopped).</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Note that if the playback has stopped, then it cannot resume.</p>
+</li>
+<li><p class="first">Developers need to check the playback status during the playback to handle any possible exceptional cases like interruption or errors. We recommedn to call this API every second.</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/resume_hub_media?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;PlaybackState&quot;</span><span class="p">:</span><span class="s2">&quot;PlayerStatePlaying&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;TimeElapsed&quot;</span><span class="p">:</span><span class="s2">&quot;15&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h4>Check if the Hub is playing audio now<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/is_playing?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns true (playing) or false (not playing)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/is_playing?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -256,6 +581,19 @@
 <li><a class="reference internal" href="#get-device-cound">Get device cound</a></li>
 <li><a class="reference internal" href="#get-the-list-of-devices-and-their-information">Get the list of Devices and their information</a></li>
 <li><a class="reference internal" href="#get-the-device-information">Get the Device Information</a></li>
+<li><a class="reference internal" href="#add-a-device-to-session">Add a Device to Session</a></li>
+<li><a class="reference internal" href="#remove-a-device-from-session">Remove a Device from Session</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#remote-hub-media-playback-management">Remote (Hub) Media Playback Management</a><ul>
+<li><a class="reference internal" href="#get-the-list-of-stored-media">Get the list of stored media</a></li>
+<li><a class="reference internal" href="#play-a-song-in-th-remote-hub">Play a Song in th Remote Hub</a></li>
+<li><a class="reference internal" href="#pause-the-current-playback">Pause the Current Playback</a></li>
+<li><a class="reference internal" href="#resume-the-current-playback-with-hub-media">Resume the Current Playback with Hub Media</a></li>
+<li><a class="reference internal" href="#stop-the-current-playback">Stop the Current Playback</a></li>
+<li><a class="reference internal" href="#get-the-playback-status-current-playback-state-and-elapsed-time">Get the Playback Status (Current Playback State and Elapsed Time)</a></li>
+<li><a class="reference internal" href="#check-if-the-hub-is-playing-audio-now">Check if the Hub is playing audio now</a></li>
+<li><a class="reference internal" href="#id1">Check if the Hub is playing audio now</a></li>
 </ul>
 </li>
 </ul>
