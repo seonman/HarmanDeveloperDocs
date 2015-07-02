@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>HKWHub Specification &mdash; Harman Developer 1.0 documentation</title>
+    <title>HKWHub App - Making your Omni speakers connected from any devices (sensors) or services &mdash; Harman Developer 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -45,8 +45,31 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="hkwhub-specification">
-<h1>HKWHub Specification<a class="headerlink" href="#hkwhub-specification" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="hkwhub-app-making-your-omni-speakers-connected-from-any-devices-sensors-or-services">
+<h1>HKWHub App - Making your Omni speakers connected from any devices (sensors) or services<a class="headerlink" href="#hkwhub-app-making-your-omni-speakers-connected-from-any-devices-sensors-or-services" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview-of-hwkhub">
+<h2>Overview of HWKHub<a class="headerlink" href="#overview-of-hwkhub" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="use-cases">
+<h3>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h3>
+<div class="figure">
+<img alt="_images/hub-use-cases.png" src="_images/hub-use-cases.png" />
+</div>
+</div>
+<div class="section" id="hkwhub-app">
+<h3>HKWHub App<a class="headerlink" href="#hkwhub-app" title="Permalink to this headline">¶</a></h3>
+<p>Web Hub handles all the requests from and response to the sensors or the clouds to control audio play with wireless speakers in the house.</p>
+<div class="figure">
+<img alt="_images/hub-app.png" src="_images/hub-app.png" />
+</div>
+</div>
+<div class="section" id="overall-architecture">
+<h3>Overall Architecture<a class="headerlink" href="#overall-architecture" title="Permalink to this headline">¶</a></h3>
+<p>Web Hub handles all the requests from and response to the sensors or the clouds to control audio play with wireless speakers in the house.</p>
+<div class="figure">
+<img alt="_images/architecture1.png" src="_images/architecture1.png" />
+</div>
+</div>
+</div>
 <div class="section" id="session-management">
 <h2>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h2>
 <p>Since the HKWHub app should be able to handle REST API requests from multiple clients, the HKWHub app manages the requests with session information associated with the priority when the session is initialized.</p>
@@ -55,15 +78,31 @@
 <h3>Session Creation<a class="headerlink" href="#session-creation" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>When a client wants to send requests to HKWHub app, it must create a session first. (Use <code class="docutils literal"><span class="pre">init_session</span></code> command.)</li>
+<li>When a client initializes session, it also sets the priority of the session (using Priority=&lt;priority value&gt; parameter).</li>
 </ul>
 </div>
 <div class="section" id="priority-of-session">
 <h3>Priority of Session<a class="headerlink" href="#priority-of-session" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Because the HKWHub app should handle multiple clients, each session is associated with a priority value which will be used to determine which request can override the current on-going session.</li>
-<li>A higher priority interrupts the current session if any.</li>
-<li>If a session is overridden by a higher priority, then the session is no longer valid. (the session is closed.)</li>
-<li>If an audio playback is running within a session, and if it is interrupted by other session, then the playback is interruped, and the playback status (see the related API in the next section) becomes <code class="docutils literal"><span class="pre">PlayerStateInterrupted</span></code>.</li>
+<ul>
+<li><p class="first">Because the HKWHub app should handle multiple clients, each session is associated with a priority value which will be used to determine which request can override the current on-going playback session.</p>
+</li>
+<li><dl class="first docutils">
+<dt>The priority value is specified as parameter (Priority) when the client calls <code class="docutils literal"><span class="pre">init_session</span></code>.</dt>
+<dd><ul class="first last simple">
+<li>If the command does not specify the Priority parameter, 100 is set as default value.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>If a new playback request (e.g. <code class="docutils literal"><span class="pre">play_hub_media</span></code>, and so on) comes in with higher priority session id, then it interrupts the current playback session.</dt>
+<dd><ul class="first last simple">
+<li>The playback status of the interrupted session becomes <code class="docutils literal"><span class="pre">PlayerStateInterrupted</span></code>. (see the related API in the next section)</li>
+<li>Once a session is overridden by a higher priority playback request, then the session is no longer valid. (the session is closed.)</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <div class="section" id="session-timeout">
@@ -76,12 +115,14 @@
 </div>
 <div class="section" id="rest-api-specification">
 <h2>REST API Specification<a class="headerlink" href="#rest-api-specification" title="Permalink to this headline">¶</a></h2>
+<p>This specification describes the REST API for controlling HKWHub app remotely to control HK Omni speakers and stream audio to the speakers.</p>
+<p>All the APIS are in REST API protocol.</p>
 <div class="section" id="id1">
 <h3>Session Management<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="start-session">
 <h4>Start Session<a class="headerlink" href="#start-session" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/init_session</p>
+<li><p class="first">API: GET /v1/init_session?Priority=&lt;priority value&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -95,7 +136,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/init_session</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/init_session?Priority=100</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -677,7 +718,13 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">HKWHub Specification</a><ul>
+<li><a class="reference internal" href="#">HKWHub App - Making your Omni speakers connected from any devices (sensors) or services</a><ul>
+<li><a class="reference internal" href="#overview-of-hwkhub">Overview of HWKHub</a><ul>
+<li><a class="reference internal" href="#use-cases">Use Cases</a></li>
+<li><a class="reference internal" href="#hkwhub-app">HKWHub App</a></li>
+<li><a class="reference internal" href="#overall-architecture">Overall Architecture</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#session-management">Session Management</a><ul>
 <li><a class="reference internal" href="#session-creation">Session Creation</a></li>
 <li><a class="reference internal" href="#priority-of-session">Priority of Session</a></li>

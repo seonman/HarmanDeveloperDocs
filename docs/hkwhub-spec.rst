@@ -1,5 +1,30 @@
-HKWHub Specification
-==================================
+HKWHub App - Making your Omni speakers connected from any devices (sensors) or services
+=========================================================================================
+
+Overview of HWKHub
+-------------------
+
+
+Use Cases
+~~~~~~~~~~~~
+
+.. figure:: img/hub/hub-use-cases.png
+
+
+HKWHub App 
+~~~~~~~~~~~~
+
+Web Hub handles all the requests from and response to the sensors or the clouds to control audio play with wireless speakers in the house.
+
+.. figure:: img/hub/hub-app.png
+
+Overall Architecture
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Web Hub handles all the requests from and response to the sensors or the clouds to control audio play with wireless speakers in the house.
+
+.. figure:: img/hub/architecture.png
+
 
 Session Management
 -------------------
@@ -11,13 +36,16 @@ Below are the policy of the session management:
 Session Creation
 ~~~~~~~~~~~~~~~~~
 - When a client wants to send requests to HKWHub app, it must create a session first. (Use ``init_session`` command.)
+- When a client initializes session, it also sets the priority of the session (using Priority=<priority value> parameter).
 
 Priority of Session
 ~~~~~~~~~~~~~~~~~~~~~
-- Because the HKWHub app should handle multiple clients, each session is associated with a priority value which will be used to determine which request can override the current on-going session.
-- A higher priority interrupts the current session if any.
-- If a session is overridden by a higher priority, then the session is no longer valid. (the session is closed.)
-- If an audio playback is running within a session, and if it is interrupted by other session, then the playback is interruped, and the playback status (see the related API in the next section) becomes ``PlayerStateInterrupted``.
+- Because the HKWHub app should handle multiple clients, each session is associated with a priority value which will be used to determine which request can override the current on-going playback session.
+- The priority value is specified as parameter (Priority) when the client calls ``init_session``.
+	- If the command does not specify the Priority parameter, 100 is set as default value.
+- If a new playback request (e.g. ``play_hub_media``, and so on) comes in with higher priority session id, then it interrupts the current playback session.
+	- The playback status of the interrupted session becomes ``PlayerStateInterrupted``. (see the related API in the next section)
+	- Once a session is overridden by a higher priority playback request, then the session is no longer valid. (the session is closed.)
 
 Session Timeout
 ~~~~~~~~~~~~~~~~~
@@ -28,18 +56,22 @@ Session Timeout
 REST API Specification
 -----------------------
 
+This specification describes the REST API for controlling HKWHub app remotely to control HK Omni speakers and stream audio to the speakers.
+
+All the APIS are in REST API protocol.
+
 Session Management
 ~~~~~~~~~~~~~~~~~~~~
 
 Start Session
 ^^^^^^^^^^^^^^
 
-- API: GET /v1/init_session
+- API: GET /v1/init_session?Priority=<priority value>
 - Response
 	- Returns a unique session id
 	- The session id will be used for upcoming requests.
 - Example:
-	- Request: ``http://192.168.1.10/v1/init_session``
+	- Request: ``http://192.168.1.10/v1/init_session?Priority=100``
 	- Response: 
 
 .. code-block:: json
