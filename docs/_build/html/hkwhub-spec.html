@@ -47,10 +47,37 @@
             
   <div class="section" id="hkwhub-specification">
 <h1>HKWHub Specification<a class="headerlink" href="#hkwhub-specification" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="session-management">
+<h2>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h2>
+<p>Since the HKWHub app should be able to handle REST API requests from multiple clients, the HKWHub app manages the requests with session information associated with the priority when the session is initialized.</p>
+<p>Below are the policy of the session management:</p>
+<div class="section" id="session-creation">
+<h3>Session Creation<a class="headerlink" href="#session-creation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>When a client wants to send requests to HKWHub app, it must create a session first. (Use <code class="docutils literal"><span class="pre">init_session</span></code> command.)</li>
+</ul>
+</div>
+<div class="section" id="priority-of-session">
+<h3>Priority of Session<a class="headerlink" href="#priority-of-session" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Because the HKWHub app should handle multiple clients, each session is associated with a priority value which will be used to determine which request can override the current on-going session.</li>
+<li>A higher priority interrupts the current session if any.</li>
+<li>If a session is overridden by a higher priority, then the session is no longer valid. (the session is closed.)</li>
+<li>If an audio playback is running within a session, and if it is interrupted by other session, then the playback is interruped, and the playback status (see the related API in the next section) becomes <code class="docutils literal"><span class="pre">PlayerStateInterrupted</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="session-timeout">
+<h3>Session Timeout<a class="headerlink" href="#session-timeout" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>A session becomes expired and invalid when about 60 minutes is passed since the last command was received.</li>
+<li>All requests with expired session will be denied and &#8220;SessionNotFound&#8221; error returns.</li>
+</ul>
+</div>
+</div>
 <div class="section" id="rest-api-specification">
 <h2>REST API Specification<a class="headerlink" href="#rest-api-specification" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="session-management">
-<h3>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Session Management<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="start-session">
 <h4>Start Session<a class="headerlink" href="#start-session" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -651,8 +678,14 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">HKWHub Specification</a><ul>
-<li><a class="reference internal" href="#rest-api-specification">REST API Specification</a><ul>
 <li><a class="reference internal" href="#session-management">Session Management</a><ul>
+<li><a class="reference internal" href="#session-creation">Session Creation</a></li>
+<li><a class="reference internal" href="#priority-of-session">Priority of Session</a></li>
+<li><a class="reference internal" href="#session-timeout">Session Timeout</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rest-api-specification">REST API Specification</a><ul>
+<li><a class="reference internal" href="#id1">Session Management</a><ul>
 <li><a class="reference internal" href="#start-session">Start Session</a></li>
 <li><a class="reference internal" href="#close-session">Close Session</a></li>
 </ul>

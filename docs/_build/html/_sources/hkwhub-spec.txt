@@ -1,6 +1,30 @@
 HKWHub Specification
 ==================================
 
+Session Management
+-------------------
+
+Since the HKWHub app should be able to handle REST API requests from multiple clients, the HKWHub app manages the requests with session information associated with the priority when the session is initialized.
+
+Below are the policy of the session management:
+
+Session Creation
+~~~~~~~~~~~~~~~~~
+- When a client wants to send requests to HKWHub app, it must create a session first. (Use ``init_session`` command.)
+
+Priority of Session
+~~~~~~~~~~~~~~~~~~~~~
+- Because the HKWHub app should handle multiple clients, each session is associated with a priority value which will be used to determine which request can override the current on-going session.
+- A higher priority interrupts the current session if any.
+- If a session is overridden by a higher priority, then the session is no longer valid. (the session is closed.)
+- If an audio playback is running within a session, and if it is interrupted by other session, then the playback is interruped, and the playback status (see the related API in the next section) becomes ``PlayerStateInterrupted``.
+
+Session Timeout
+~~~~~~~~~~~~~~~~~
+- A session becomes expired and invalid when about 60 minutes is passed since the last command was received.
+- All requests with expired session will be denied and "SessionNotFound" error returns.
+
+
 REST API Specification
 -----------------------
 
