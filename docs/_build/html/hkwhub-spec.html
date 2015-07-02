@@ -454,16 +454,30 @@
 </li>
 <li><dl class="first docutils">
 <dt>The following is the value of each playback state:</dt>
+<dd><ul class="first last">
+<li><p class="first">PlayerStateInitialized (-1) : Play is ready</p>
+</li>
+<li><p class="first">PlayerStatePlaying (1) : Now playing audio</p>
+</li>
+<li><p class="first">PlayerStatePaused : Playing is paused. It can resume.</p>
+</li>
+<li><p class="first">PlayerStateStopped : Playing is stopped. It cannot resume.</p>
+</li>
+<li><dl class="first docutils">
+<dt>PlayerStateInterrupted: The current playback was interrupted by some reasons.</dt>
 <dd><ul class="first last simple">
-<li>PlayerStateInitialized (-1) : Play is ready</li>
-<li>PlayerStatePlaying (1) : Now playing audio</li>
-<li>PlayerStatePaused : Playing is paused. It can resume.</li>
-<li>PlayerStateStopped : Playing is stopped. It cannot resume.</li>
+<li>For example, if other client overrides the current playback by starting a new session and play, then the on-going playback is interrupted (stopped).</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><p class="first">Note that if the playback has stopped, then it cannot resume.</p>
+</li>
+<li><p class="first">Developers need to check the playback status during the playback to handle any possible exceptional cases like interruption or errors. We recommedn to call this API every second.</p>
 </li>
 </ul>
 </dd>
@@ -486,53 +500,6 @@
 </div>
 <div class="section" id="check-if-the-hub-is-playing-audio-now">
 <h4>Check if the Hub is playing audio now<a class="headerlink" href="#check-if-the-hub-is-playing-audio-now" title="Permalink to this headline">¶</a></h4>
-<ul>
-<li><p class="first">API: GET /v1/playback_status?SessionID=&lt;session id&gt;</p>
-</li>
-<li><dl class="first docutils">
-<dt>Response</dt>
-<dd><ul class="first last">
-<li><p class="first">It returns the current state of the playback and also return the elapsed time (in second) of the playback.</p>
-</li>
-<li><p class="first">If it is not playing, then the elapsed time is (-1)</p>
-</li>
-<li><dl class="first docutils">
-<dt>The following is the value of each playback state:</dt>
-<dd><ul class="first last simple">
-<li>PlayerStateInitialized (-1) : Play is ready</li>
-<li>PlayerStatePlaying (1) : Now playing audio</li>
-<li>PlayerStatePaused : Playing is paused. It can resume.</li>
-<li>PlayerStateStopped : Playing is stopped. It cannot resume.</li>
-<li>PlayerStateInterrupted: The current playback was interrupted by some reasons. For example, if other client overrides the current playback by starting a new session and play, then the on-going playback is interrupted (stopped).</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><p class="first">Note that if the playback has stopped, then it cannot resume.</p>
-</li>
-<li><p class="first">Developers need to check the playback status during the playback to handle any possible exceptional cases like interruption or errors. We recommedn to call this API every second.</p>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/resume_hub_media?SessionID=1000</span></code></li>
-<li>Response:</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;PlaybackState&quot;</span><span class="p">:</span><span class="s2">&quot;PlayerStatePlaying&quot;</span><span class="p">,</span>
- <span class="nt">&quot;TimeElapsed&quot;</span><span class="p">:</span><span class="s2">&quot;15&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="id1">
-<h4>Check if the Hub is playing audio now<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p class="first">API: GET /v1/is_playing?SessionID=&lt;session id&gt;</p>
 </li>
@@ -593,7 +560,6 @@
 <li><a class="reference internal" href="#stop-the-current-playback">Stop the Current Playback</a></li>
 <li><a class="reference internal" href="#get-the-playback-status-current-playback-state-and-elapsed-time">Get the Playback Status (Current Playback State and Elapsed Time)</a></li>
 <li><a class="reference internal" href="#check-if-the-hub-is-playing-audio-now">Check if the Hub is playing audio now</a></li>
-<li><a class="reference internal" href="#id1">Check if the Hub is playing audio now</a></li>
 </ul>
 </li>
 </ul>
