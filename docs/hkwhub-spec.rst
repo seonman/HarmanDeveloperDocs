@@ -2,8 +2,9 @@ HKWHub App - Making your Omni speakers connected from any devices (sensors) or s
 =========================================================================================
 
 Overview of HWKHub
--------------------
+---------------------
 
+HKWHub app is an iOS that that uses HKWirelessHD SDK and acts as a Web Hub that handles HTTP requests to control speakers and stream music. It enables any type of "connected" devices (like sensors or smart devices) and cloud-based service to connect HK Omni speakers and stream music.
 
 Use Cases
 ~~~~~~~~~~~~
@@ -15,6 +16,21 @@ HKWHub App
 ~~~~~~~~~~~~
 
 Web Hub handles all the requests from and response to the sensors or the clouds to control audio play with wireless speakers in the house.
+
+Features
+^^^^^^^^^
+- Supports integration with clouds and sensors as well as smartphones
+	- Receives the requests from clouds (web service) outside or sensors in the house
+	- Translates the requests into HKWirelessHD commands and controls the speakers based on the requests.
+	- Sends response with status of speakers to the cloud if necessary 
+- Central Music Playlist manager
+	- Maintain user’s playlist from the iOS local music library and streaming services, like MixRadio, etc.
+	- Maintain a collection of sound files used for IoT use cases, like door bell, etc.
+
+Usage
+^^^^^^^^
+- User puts an iOS device on the cradle and run WebHub app. Then the app acts as Web Hub. (AppleTV can be a nice iOS device for WebHub.)
+
 
 .. figure:: img/hub/hub-app.png
 
