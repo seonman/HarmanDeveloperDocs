@@ -284,6 +284,25 @@ If you just want to check if the player is playing audio now, then use isPlaying
 
 	- (bool) isPlaying;
 	
+Play Web Streaming Music
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+	This API is ``NOT`` supported by HKWirelessHDSDKlw (lightweight version of HKWirelessHDSDK). 
+	
+Use ``playStreamingMedia()`` to playt a streaming media. It uses a parameter of ``streamingMediaUrl`` to specify the URL of the media file in the streaming service. It starts with a protocol name, such as "http://" or "rtps://". Currently, http, rtps, and mms are supported. The supported file format is mp3, m4a, wav.
+
+
+``completedCallback`` is a callback that returns the result of the call, that is, if the call is successful or not. If it cannot find the media file on the server or some other errors occur, then it return false.
+
+.. code-block:: swift
+
+	- (void)playStreamingMedia:(NSString *)streamingMediaUrl withCallback:(void (^)(bool result))completedCallback;
+
+.. note::
+	When you stop playing the streaming music, you must use stop(), not pause().
+	
+	
 Playback controls
 ^^^^^^^^^^^^^^^^^^
 
