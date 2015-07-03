@@ -204,9 +204,38 @@ The following is an example of retrieving some of attributes of a speaker inform
 Change speaker name and group name
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Change speaker name**
+**Change speaker name and group name**
 
 Use ``setDeviceName()`` to change the speaker name. Note that you cannot set the device name by setting “deviceName” property value directly. The property is read-only.
+
+.. code-block:: swift
+	HKWControlHandler.sharedInstance().setDeviceName(deviceId, deviceName:”My Omni10”)
+
+**Change speaker’s group (room) name**
+
+Use setDeviceGroupName() to change the group (or room) name of a speaker. Note that you cannot set the group name by setting “groupName” property value directly. The property is read-only.
+
+.. code-block:: swift
+	HKWControlHandler.sharedInstance().setDeviceGroupName(deviceId, groupName:”Living Room”)
+	
+.. note:: 
+	If you change the group name of a speaker, then the list of devices of the groups automatically changes.
+
+**Remove a speaker from a group (room)**
+
+Use removeDeviceFromGroup() to remove the speaker from the currently belonging group. After being removed from a group, the name of group of the speaker is set to “harman”, which is a default group name implying that the speaker does not belong to any group.
+
+.. code-block:: swift
+	HKWControlHandler.sharedInstance().removeDeviceFromGroup(deviceId)
+
+Add or remove a speaker to/from a playback session
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To play a music on a specific speaker, the speaker should be added to the playback session.
+
+Add a speaker to a session (to play on)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 
 [To be added]

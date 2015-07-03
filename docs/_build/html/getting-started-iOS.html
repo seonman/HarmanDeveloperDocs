@@ -342,8 +342,23 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
 </div>
 <div class="section" id="change-speaker-name-and-group-name">
 <h4>Change speaker name and group name<a class="headerlink" href="#change-speaker-name-and-group-name" title="Permalink to this headline">¶</a></h4>
-<p><strong>Change speaker name</strong></p>
+<p><strong>Change speaker name and group name</strong></p>
 <p>Use <code class="docutils literal"><span class="pre">setDeviceName()</span></code> to change the speaker name. Note that you cannot set the device name by setting “deviceName” property value directly. The property is read-only.</p>
+<p><strong>Change speaker’s group (room) name</strong></p>
+<p>Use setDeviceGroupName() to change the group (or room) name of a speaker. Note that you cannot set the group name by setting “groupName” property value directly. The property is read-only.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you change the group name of a speaker, then the list of devices of the groups automatically changes.</p>
+</div>
+<p><strong>Remove a speaker from a group (room)</strong></p>
+<p>Use removeDeviceFromGroup() to remove the speaker from the currently belonging group. After being removed from a group, the name of group of the speaker is set to “harman”, which is a default group name implying that the speaker does not belong to any group.</p>
+</div>
+</div>
+<div class="section" id="add-or-remove-a-speaker-to-from-a-playback-session">
+<h3>Add or remove a speaker to/from a playback session<a class="headerlink" href="#add-or-remove-a-speaker-to-from-a-playback-session" title="Permalink to this headline">¶</a></h3>
+<p>To play a music on a specific speaker, the speaker should be added to the playback session.</p>
+<div class="section" id="add-a-speaker-to-a-session-to-play-on">
+<h4>Add a speaker to a session (to play on)<a class="headerlink" href="#add-a-speaker-to-a-session-to-play-on" title="Permalink to this headline">¶</a></h4>
 <p>[To be added]</p>
 </div>
 </div>
@@ -377,6 +392,10 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
 <li><a class="reference internal" href="#selecting-a-speaker-from-a-group">Selecting a speaker from a group</a></li>
 <li><a class="reference internal" href="#retrieve-the-information-of-a-device">Retrieve the information of a device</a></li>
 <li><a class="reference internal" href="#change-speaker-name-and-group-name">Change speaker name and group name</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#add-or-remove-a-speaker-to-from-a-playback-session">Add or remove a speaker to/from a playback session</a><ul>
+<li><a class="reference internal" href="#add-a-speaker-to-a-session-to-play-on">Add a speaker to a session (to play on)</a></li>
 </ul>
 </li>
 </ul>
