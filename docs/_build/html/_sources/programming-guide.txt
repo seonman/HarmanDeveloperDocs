@@ -1,5 +1,5 @@
-Programming Guide
-====================
+Programming Guide (iOS)
+========================
 
 In this chapter, we explain how to use HKWirelessHD APIs to create an app controlling HK Omni speakers. The sample codes explained in this section are copied from HKWPlayer app.
 
@@ -593,6 +593,7 @@ Note that during the runtime, only one instance of the event handler for HKWCont
 	
 	override func viewDidAppear(animated: Bool) {
 		HKWDeviceEventHandlerSingleton.sharedInstance().delegate = self
+		HKWPlayerEventHandlerSingleton.sharedInstance().delegate = self
 		
 		...        
 		

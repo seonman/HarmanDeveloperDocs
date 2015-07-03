@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Programming Guide &mdash; Harman Developer 1.0 documentation</title>
+    <title>Programming Guide (iOS) &mdash; Harman Developer 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -49,8 +49,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="programming-guide">
-<h1>Programming Guide<a class="headerlink" href="#programming-guide" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="programming-guide-ios">
+<h1>Programming Guide (iOS)<a class="headerlink" href="#programming-guide-ios" title="Permalink to this headline">¶</a></h1>
 <p>In this chapter, we explain how to use HKWirelessHD APIs to create an app controlling HK Omni speakers. The sample codes explained in this section are copied from HKWPlayer app.</p>
 <p>All APIs can be accessed through the singleton object pointer of HKWControlHandler. The first thing you have to do is create an instance of HKWControlHandler and use it to invoke the APIs you want to use.</p>
 <p>In HKWirelessHD SDK, all the APIs are defined in Objective-C. However, the examples in this document are written in Swift. In case you use Swift for app development, you need to create a Swift bridging header file to make Objective-C APIs visible to Swift code.</p>
@@ -608,6 +608,7 @@ This function is invoked when playback state is changed during the playback. The
 </div>
 <div class="highlight-swift"><div class="highlight"><pre><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidAppear</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="nb">Bool</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">HKWDeviceEventHandlerSingleton</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+        <span class="n">HKWPlayerEventHandlerSingleton</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
 
         <span class="p">...</span>
 
@@ -630,7 +631,7 @@ This function is invoked when playback state is changed during the playback. The
             </a></p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Programming Guide</a><ul>
+<li><a class="reference internal" href="#">Programming Guide (iOS)</a><ul>
 <li><a class="reference internal" href="#initialization">Initialization</a><ul>
 <li><a class="reference internal" href="#initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio">Initialize HKWirelessHD Control Handler and start the Wireless Audio</a></li>
 </ul>
