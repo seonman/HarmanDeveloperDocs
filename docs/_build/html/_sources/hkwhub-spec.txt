@@ -63,14 +63,18 @@ Priority of Session
 - If the priority of the session of a new playback request (e.g. ``play_hub_media``, and so on) is greater than or equal to the priority of the current session, then it interrupts the current playback session.
 	- The playback status of the interrupted session becomes ``PlayerStateInterrupted``. (see the related API in the next section)
 	- Once a session is overridden by a higher priority playback request, then the session is no longer valid. (the session is closed.)
+	
+The following diagrams show how HKWHub app handles incoming playback request based on the session priorities.
+
+.. figure:: img/hub/session-management.png
+	:alt: Session management flow diagram
 
 Session Timeout
 ~~~~~~~~~~~~~~~~~
 - A session becomes expired and invalid when about 60 minutes is passed since the last command was received.
 - All requests with expired session will be denied and "SessionNotFound" error returns.
 
-.. figure:: img/hub/session-management.png
-	:alt: Session management flow diagram
+
 
 ----
 

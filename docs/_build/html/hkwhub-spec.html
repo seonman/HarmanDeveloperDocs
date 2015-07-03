@@ -136,6 +136,10 @@
 </dl>
 </li>
 </ul>
+<p>The following diagrams show how HKWHub app handles incoming playback request based on the session priorities.</p>
+<div class="figure">
+<img alt="Session management flow diagram" src="_images/session-management.png" />
+</div>
 </div>
 <div class="section" id="session-timeout">
 <h3>Session Timeout<a class="headerlink" href="#session-timeout" title="Permalink to this headline">¶</a></h3>
@@ -143,9 +147,6 @@
 <li>A session becomes expired and invalid when about 60 minutes is passed since the last command was received.</li>
 <li>All requests with expired session will be denied and &#8220;SessionNotFound&#8221; error returns.</li>
 </ul>
-<div class="figure">
-<img alt="Session management flow diagram" src="_images/session-management.png" />
-</div>
 </div>
 </div>
 <hr class="docutils" />
