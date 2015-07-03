@@ -232,24 +232,10 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
 <p>HKWControlHandler maintains the list of speaker internally. Each speaker information can be retrieved either by specifying the index in the table, or by specifying the index of group and the index of member inside of the group.</p>
 <p><strong>Get the speaker information from the table</strong></p>
 <p>You can retrieve a speaker information (as <code class="docutils literal"><span class="pre">DeviceInfo</span></code> object) by specifying the index in the table.</p>
-<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">DeviceInfo</span> <span class="o">*</span><span class="p">)</span> <span class="n">getDeviceInfoByIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">deviceIndex</span><span class="p">;</span>
-</pre></div>
-</div>
 <p>Here, the range of deviceIndex is 0 to the number of speakers (deviceCount) minus 1.</p>
 <p>This function is useful when you need to show all the speakers in ordered list in <code class="docutils literal"><span class="pre">TableViewCell</span></code>.</p>
 <p><strong>Get a speaker information from the group list</strong></p>
 <p>You can retrieve a speaker information by specifying a group index and the index of the speaker in the group.</p>
-<div class="highlight-swift"><div class="highlight"><pre>
-</pre></div>
-</div>
-<ul>
-<li><dl class="first docutils">
-<dt>(DeviceInfo <a href="#id1"><span class="problematic" id="id2">*</span></a>) getDeviceInfoFromTable:(NSInteger) groupIndex</dt>
-<dd><p class="first last">deviceIndex:(NSInteger)deviceIndex;</p>
-</dd>
-</dl>
-</li>
-</ul>
 <p>Here, <code class="docutils literal"><span class="pre">groupIndex</span></code> represents the index of the group where the device belong to. <code class="docutils literal"><span class="pre">deviceIndex</span></code> means the index of the device in the group.</p>
 <p>This function is useful to find the device information (<code class="docutils literal"><span class="pre">DeviceInfo</span></code> object) that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the <code class="docutils literal"><span class="pre">groupIndex</span></code> can correspond to the section number, and <code class="docutils literal"><span class="pre">deviceIndex</span></code> can correspond to the row number.</p>
 </div>
