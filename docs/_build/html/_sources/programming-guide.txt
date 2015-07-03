@@ -110,6 +110,7 @@ HKWControlHandler maintains the list of speaker internally. Each speaker informa
 You can retrieve a speaker information (as ``DeviceInfo`` object) by specifying the index in the table.
 
 .. code-block:: swift
+
 	- (DeviceInfo *) getDeviceInfoByIndex:(NSInteger)deviceIndex;
 
 Here, the range of deviceIndex is 0 to the number of speakers (deviceCount) minus 1.
@@ -121,7 +122,8 @@ This function is useful when you need to show all the speakers in ordered list i
 You can retrieve a speaker information by specifying a group index and the index of the speaker in the group.
 
 .. code-block:: swift
-	- (DeviceInfo *) getDeviceInfoFromTable:(NSInteger) groupIndex 
+
+- (DeviceInfo *) getDeviceInfoFromTable:(NSInteger) groupIndex 
                                 deviceIndex:(NSInteger)deviceIndex;
 
 Here, ``groupIndex`` represents the index of the group where the device belong to. ``deviceIndex`` means the index of the device in the group.
