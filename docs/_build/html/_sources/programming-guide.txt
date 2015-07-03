@@ -43,6 +43,7 @@ Once you acquire the HKWControlHandler object, you need to initialize it by call
 .. note:: 
 	Note that even after a successful call to initializeHKWirelessController(), it takes a little time (a few hundreds milliseconds) to get the information of all the speakers available for streaming audio.
 
+----
 
 Getting the information of speakers available in the network
 --------------------------------------------------------------
@@ -130,125 +131,456 @@ Here, ``groupIndex`` represents the index of the group where the device belong t
 
 This function is useful to find the device information (``DeviceInfo`` object) that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the ``groupIndex`` can correspond to the section number, and ``deviceIndex`` can correspond to the row number.
 
+**Get a speaker information with deviceId**
+
+If you already knows the deviceId (device unique identifier) of a speaker, then you can retrieve the deviceInfo object with the following function.
+
+.. code-block:: swift
+
+	- (DeviceInfo *) findDeviceFromList:(long long) deviceId;
 
 
+Refreshing device status information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+If any change happens on a speaker, the speaker sends an event with updated information to HKWControlHandler and then the speaker information stored in HKWControlHandler is updated. Then, HKWControlHandler calls corresponding delegate protocol functions registered by the app to make it processed by the event handler.
 
+However, in our current implementation, the event dispatching initiated by speaker takes a little more time than the app polling to check if there is any update on speakers. To reduce the time of status update, we provide a pair of functions to refresh device status, which is a kind of polling speakers to check the update. Especially, if you need to show a list of speakers with the latest information, you'd better force to refresh the speaker information, not just waiting updates from speakers.
 
-
-Discovery and refreshing of available speakers in the Wi-Fi network
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The status of speakers can be changed dynamically over time. And, whenever a speaker is turned off or on, the list of speakers available in the network should be refreshed. Especially, when you select speakers for playback, the speaker list and the status of each speaker should be updated with the latest information.
-
-Basically, whenever there is any change on the speaker side, the newest information of the speaker is available from the device list maintained by HKWControlHandler. But, the update is initiated by speakers, and there is some latency until the latest information is reflected to the HKWControlHandler. So, if you need the latest information without latency, you would better refresh the speaker status regularly.
-
-To force to update the status of speakers regularly, the SDK provides a pair of convenient APIs to refresh device status. One of the use cases of these functions are to present a screen of speaker list to user and show the current speaker information in real-time manner.
-
-To start checking the status of devices regularly, use ``startRefreshDeviceInfo()``. To stop checking the status regularly, use ``stopRefreshDeviceInfo()``.
+To discover and update the status of speakers immediately, you can use the following functions:
 
 .. code-block:: swift
 
 	// start to refresh devices ... 
-	HKWControlHandler.sharedInstance().startRefreshDeviceInfo()
+	g_HKWControlHandler.startRefreshDeviceInfo()
+	
+	... ...
 	
 	// stop to refresh devices
-	HKWControlHandler.sharedInstance().stopRefreshDeviceInfo()  
+	g_HKWControlHandler.stopRefreshDeviceInfo()  
 
 ``startRefreshDeviceInfo()`` will refresh and update every 2 seconds the status of the devices in the current Wi-Fi network.
-
-.. note:: 
-	Even without calling ``startRefreshDeviceInfo()``, the speaker information will be updated whenever the information is updated on speaker side, but there is some latency until the newest information is reflected to HKWControlHandler.
-
-
-Speakers and Groups
-~~~~~~~~~~~~~~~~~~~
-
-There are two ways to choose speakers to play on – one is to select a speaker from the global list of speakers maintained by the internal data structure, and the other is to select a speaker with a group (or room) index and the index of the speaker within the group. Note that in this document, the term group and room are used as the same meaning, that is, a set of speakers.
-
-Selecting a speaker individually
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**Select a speaker in the global list**
-
-.. code-block:: swift
-
-	// get the number of available speakers
-	let deviceCount = HKWControlHandler.sharedInstance().getDeviceCount()
-	
-	// get the info of the first devices in the list
-	var index = 0
-	let deviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByIndex(index)
-
-**Retrieve DeviceInfo with deviceId**
-
-If you know the deviceId of a speaker, then you can retrieve the device information using ``findDeviceFromList()``.
-
-.. code-block:: swift
-
-	// get the number of available speakers
-	var deviceId : ClongLong = …
-	let deviceInfo = HKWControlHandler.sharedInstance().findDeviceFromList(deviceId)
-
-Selecting a speaker from a group
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-A **Group** is defined by the group information of each speaker. That is, if a speaker has a group where it belongs to, then the group has the speaker as a member. So, as an example, if speaker A and speaker B have the same group of Group C, then Group C will have speaker A and speaker B as members. If speaker A changes the group as ‘Group D’, then Group C will have only speaker B, and Group D will have speaker A as a member.
-
-**Get the number of groups available in the network**
-
-.. code-block:: swift
-
-	// get the number of groups
-	var groupCount = HKWControlHandler.sharedInstance().getGroupCount()
-
-**Get the number of devices in a group**
-
-.. code-block:: swift
-
-	// get the number of devices in the first group 
-	var groupIndex = 0
-	var deviceCount = HKWControlHandler.sharedInstance().getDeviceCountInGroupIndex(groupIndex)
-
-Retrieve the information of a device
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-Change speaker name and group name
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**Change speaker name and group name**
-
-Use ``setDeviceName()`` to change the speaker name. Note that you cannot set the device name by setting “deviceName” property value directly. The property is read-only.
-
-.. code-block:: swift
-	HKWControlHandler.sharedInstance().setDeviceName(deviceId, deviceName:”My Omni10”)
-
-**Change speaker’s group (room) name**
-
-Use setDeviceGroupName() to change the group (or room) name of a speaker. Note that you cannot set the group name by setting “groupName” property value directly. The property is read-only.
-
-.. code-block:: swift
-	HKWControlHandler.sharedInstance().setDeviceGroupName(deviceId, groupName:”Living Room”)
-	
-.. note:: 
-	If you change the group name of a speaker, then the list of devices of the groups automatically changes.
-
-**Remove a speaker from a group (room)**
-
-Use removeDeviceFromGroup() to remove the speaker from the currently belonging group. After being removed from a group, the name of group of the speaker is set to “harman”, which is a default group name implying that the speaker does not belong to any group.
-
-.. code-block:: swift
-	HKWControlHandler.sharedInstance().removeDeviceFromGroup(deviceId)
 
 Add or remove a speaker to/from a playback session
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To play a music on a specific speaker, the speaker should be added to the playback session.
+To play a music on a specific speaker, the speaker should be added to the current playback session.
+
+You can check whether or not a speaker is currently added to the current playback session by check the "active" attribute of DeviceInfo object (in DeviceInfo.h).
+
+.. code-block:: swift
+
+	/*! Indicates if the speaker is active (added to the current playback session) */
+	@property (nonatomic, readonly) BOOL active;
+
 
 Add a speaker to a session (to play on)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Use ``addDeviceToSession()`` to add a speaker to the current playback session.
+
+.. code-block:: swift
+
+	- (BOOL) addDeviceToSession:(long long) deviceid;
+
+For example,
+
+.. code-block:: swift
+
+	// add the speaker to the current playback session
+	g_HKWControlHandler.addDeviceToSession(deviceId)
+
+If the execution is successful, then the attribute "active" of the speaker is set to "true".
+
+.. note::
+	A speaker can be added to the current on-going playback session anytime, even the playbach is started already. It usually takes a couple of seconds for the added speaker to start to play audio.
+
+Remove a speaker from a session
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use ``removeDeviceFromSession()`` to remove a speaker from current playback session. The removed speaker will stop playing audio immediately.
+
+.. code-block:: swift
+
+	- (BOOL) removeDeviceFromSession:(long long) deviceid;
+
+For example,
+
+.. code-block:: swift
+
+	// remove a speaker from the current playback session
+	g_HKWControlHandler.removeDeviceFromSession(deviceId)
+	
+If the execution is successful, then the attribute "active" of the speaker is set to "false".
+
+.. note::
+	A speaker can be removed from the current on-going playback session anytime.
+
+.. note::
+	After a speaker was removed from the session and there is no speaker remaining in the session, then the current playback stops automatically.
+
+----
+
+Play song
+----------
+
+Play MP3 and WAV file
+~~~~~~~~~~~~~~~~~~~~~~
+
+If one or more speakers are added to the session, you can start to play a song. Currently, MP3 and WAV formats are supported. Use ``playCAF()`` to play MP3 or WAV file, and ``playWAV()`` only for WAV file.
+
+.. code-block:: swift
+
+	- (BOOL) playCAF:(NSURL *)assetURL songName:(NSString*)songName resumeFlag:(BOOL)resumeFlag;
+
+To play a song, you should prepare a ``AssetURL`` using ``NSURL`` first. Here is an example:
+
+.. code-block:: swift
+
+	let assetUrl = NSURL(fileURKWithPath: nsPath)
+	
+	HKWControlHandler.sharedInstance().playCAF(assetUrl, songName: songTitle, resumeFlag: false)
+
+Here, ``resumeFlag`` is false, if you start the song from the beginning. If you want to resume to play the current song, then ``resumeFlag`` should be true. ``songTitle`` is a string, representing the song name. (This is only internally used as a file name to store converted PCM data in the memory temporarily.)
+
+If you want to specify a starting point of the audio stream, then you can use ``playCAFFromCertainTime()`` to start the playback from a specified time.
+
+.. code-block:: swift
+
+	- (bool) playCAFFromCertainTime:(NSURL *)assetURL
+							songName:(NSString*)songName
+							startTime:(NSInteger)startTime;
+
+Here, ``startTime`` is in second.
+
+``playCAF()`` and ``playCAFFromCertainTime()`` can play both WAV and MP3 audio file. In case of WAV, it is played without conversion. In case of MP3, it is converted to PCM format first, and then played.
+
+To play WAF audio file, use ``playWAV()``.
+
+.. code-block:: swift
+
+	- (bool) playWAV:(NSString*)wavPath;
+
+The following example shows how to play a WAV file stored in the application bundle.
+
+.. code-block:: swift
+
+	nsWavPath = NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent(songTitle)
+	
+	HKWControlHandler.sharedInstance().playWAV(nsWavPath)
+
+.. note::
+	``playCAF()`` and ``playCAFFromCertainTime()`` cannot play an audio file in Apple’s iTunes Match service. Songs should reside locally on the device for playback. So, it would be nice to check if the song resides on the device when your app gets the MPMediaItem of a song from MediaPicker.
+
+You can check the playback status anytime, that is, before and after as well as in the middle of the playback. You can get the player status by calling ``getPlayerState()``. (``HKPlayerState`` is defined in HKWControlHandler.h)
+
+.. code-block:: swift
+
+	- (HKPlayerState)getPlayerState;
+
+If you just want to check if the player is playing audio now, then use isPlaying().
+
+.. code-block:: swift
+
+	- (bool) isPlaying;
+	
+Playback controls
+^^^^^^^^^^^^^^^^^^
+
+**Stop playback**
+
+To stop the current playback, use ``stop()``. As a result. the playback status is changed to ``EPlayerState_Stop``, and ``hkwPlaybackStateChanged()`` delegate protocol is called if implemented. 
+
+.. code-block:: swift
+
+	- (void) stop;
+
+For example,
+
+.. code-block:: swift
+
+	HKWControlHandler.sharedInstance().stop()
+
+It is safe to call ``stop()`` even if there is no on-going playback. Actually, we recommand to call ``stop()`` before you start to play a new audio stream.
+
+.. note::
+	If the current playback is stopped by calling ``stop()``, the playback cannot be resumed. Resuming is only possible when the playback is paused by calling ``pause()``.
+	
+**Pause playback**
+
+To pause the current play, use ``pause()``. As a result, the playback status is changed to ``EPlayerState_Pause``, and ``hkwPlaybackStateChanged()`` delegate protocol is called if implemented.
+
+The playback paused by calling ``pause()`` can be resumed.
+
+.. code-block:: swift
+
+	- (void) pause;
+
+For example,
+
+.. code-block:: swift
+
+	HKWControlHandler.sharedInstance().pause()
+
+**Resume playback**
+
+To resume the paused playback, use ``playCAF()`` with the parameter ``resumeFlag`` set to ``true``. The API is described earlier in this section. 
+
+Volume Control
+~~~~~~~~~~~~~~~
+
+You can set volumes in two ways – one is set volume for an individual speaker, and the other is set volume for all speakers with the same volume level. The volume level ranges from 0 (mute) to 50 (max).
+
+.. note::
+	Volume change funcions are all asynchronous call. That is, it takes a little time (a few milli second) for a volue change to take effect on the speakers.
+
+.. note::
+	When ``setVolumeDevice()`` is called, the average volume can be also changed. So, it is safe to retrieve the speaker volumes using VolumeLevelChanged callback (explained later) when your app calls volume control APIs.
+
+Set volume to all speakers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use ``setVolumeAll()`` to set the same volume level to all speakers.
+
+.. code-block:: swift
+
+	- (void) setVolumeAll:(NSInteger)volume;
+
+For example,
+
+.. code-block:: swift
+
+	// set volume level to 25 to all speakers
+	var volume  = 25
+	HKWControlHandler.sharedInstance().setVolumeAll(volume)
+
+Set volume to a particular speaker 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use ``setVolumeDevice()`` to set volume to a particular speaker. You need to specify the deviceId for the speaker.
+
+.. code-block:: swift
+
+	- (void) setVolumeDevice:(long long)deviceId volume:(NSInteger)volume;
+
+For example,
+
+.. code-block:: swift
+
+	// set volume level to 25 to a speaker
+	var volume  = 25
+	HKWControlHandler.sharedInstance().setVolumeDevice(deviceId volume:volume)
+
+Get volume of all speakers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use ``getVolume()`` to get the average volume level fro all speakers.
+
+.. code-block:: swift
+
+	- (NSInteger) getVolume;
+
+For example,
+
+.. code-block:: swift
+
+	var averageVolume = HKWControlHandler.sharedInstance().getVolume()
+
+Get volume of a particular speaker
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use ``getDeviceVolume()`` to get the volume level of a particular speaker. 
+
+For example,
+
+	var volume = HKWControlHandler.sharedInstance().getDeviceVolume(deviceId)
+
+----
+
+Speakers and Groups
+---------------------
+
+In HKWirelessHD SDK, a group is a collection of speakers. A group is defined as below:
+
+- The group of a speaker is defined by specifying a group name in the speaker information as attribute.
+- A speaker can join only one group at a time. The meaning of "joining a group" is to have the group name in its attribute.
+- All the speakers with the same group name belong to the same group associated with the group name.
+- The group ID is determined by following the device ID of the initial member of a group. For example, there is no group with the name "Group-A", and Speaker-A sets the group as "Group-A", then the GroupID is created with the deviceID of Speaker-A. After that, if Speaker-B joins Group-A, then the group name and the group ID are set by the ones that Speaker-A has.
+
+Change speaker name
+~~~~~~~~~~~~~~~~~~~~~
+
+Use ``setDeviceName()`` to change the speaker name. 
+
+.. note::
+	You cannot set the device name by setting ``deviceName`` property value directly. The property is read-only.
+
+.. code-block:: swift
+
+	- (void) setDeviceName:(long long)deviceId deviceName:(NSString *)deviceName;
+
+For example,
+
+.. code-block:: swift
+
+	HKWControlHandler.sharedInstance().setDeviceName(deviceId, deviceName:”My Omni10”)
+
+.. note::
+	While a speaker is playing audio, if the name of the speaker is changed, then the current playback is interrupted (stopped) with error. The error code and message are returned by ``hkwErrorOccurred()`` delegate defined in ``HKWDeviceEventHandlerDelegate`` protocol.
 
 
-[To be added]
+Set the group for a speaker
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To set a group for a speaker (in other words, to join a speaker to a group), use ``setDeviceGroupName()`` as below:
+
+.. code-block:: swift
+
+	- (void) setDeviceGroupName:(long long)deviceId groupName:(NSString *)groupName;
+
+For example,
+
+.. code-block:: swift
+
+	HKWControlHandler.sharedInstance().setDeviceGroupName(deviceId, groupName:”Living Room”)
+
+.. note::
+	If you change the group name of a speaker, then the list of speakers of the group automatically changes.
+
+Remove a speaker from a group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use ``removeDeviceFromGroup()`` to remove the speaker from the currently belonged group. After being removed from a group, the name of group of the speaker is set to ``harman``, which is a default group name implying that the speaker does not belong to any group.
+
+.. code-block:: swift
+
+	- (void)removeDeviceFromGroup:(long long)deviceId;
+
+For example,
+
+.. code-block:: swift
+
+	HKWControlHandler.sharedInstance().removeDeviceFromGroup(deviceId)
+
+----
+
+Delegate APIs for events handling
+----------------------------------
+
+In HKWirelessHD, the communication between user’s phone and speakers are done in asynchronous way. Therefore, some API calls from HKWControlHandler can take a little time to take effects on the speaker side. Similarly, any change of status on the speaker side are reported to the phone a little time later. For example, the status of availability of a speaker can be updated a few seconds later after a speaker turns on or off. 
+
+All the status update from the speaker side are reported to the phone via **delegate protocols**. So, your app needs to implement the delegate protocols accordingly to receive and handle the events from HKWControlHandler.
+
+There are two kinds of delegate protocols for event handling.
+
+- HKWDeviceEventHandlerDelegate (defined in HKWDeviceEventHandlerSingleton.h)
+	- This delegate protocol defines several APIs for receiving events about status changes or error from speakers.
+- HKWPlayerEventHandlerDelegate (defined in HKWPlayerEventHandlerSingleton.h)
+	- This delegate protocol defines several APIs for receiving events about playback status and volume control.
+
+HKWDeviceEventHandlerDelegate
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**hkwDeviceStateUpdated (required)**
+
+This function is invoked when some of device information have been changed on a particular speaker. The information being monitored incudes device status (active or inactive), model name, group name, and wifi signal strengths, etc. The parameter ``reason`` specifies what the update is about. The reason code is defined in HKWControlHandler.h.
+
+Note that volume level change does not trigger this call. The volume update is reported by ``hkwVolumeLevelChanged()`` callback.
+
+.. code-block:: swift
+
+	-(void) hkwDeviceStateUpdated:(long long)deviceId withReason:(NSInteger) reason;
+
+This callback is essential to retrieve and update the speaker information in timely manner. If your app has a screen that shows a list of speakers available in the network with latest information, you can receive the event via this function and update the list.
+
+A most common usage for this function is to invole ``tableView.reloadData()`` to update the list of speakers in a table view controller, as shown below.
+
+.. code-block:: swift
+
+	func hkwDeviceStateUpdated(deviceId: CLongLong, withReason reason:Int) {
+		self.tableView.reloadData()
+	}
+
+**hkwErrorOccured (required)**
+
+This function is invoked when an error occurs during the execution. The callback returns the error code, and also corresponding error message for detailed description. The error codes are defined in HKWCOntrolHandler.h.
+
+.. code-block:: swift
+
+	-(void) hkwErrorOccurred:(NSInteger)errorCode withErrorMessage:(NSString*)errorMesg;
+
+A most common usage of this function is to show an alert dialog to notice the user of the error.
+
+HKWPlayerEventHandlerDelegate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**hkwPlayEnded (required)**
+
+This function is invoked when the current playback has ended.
+
+.. code-block:: swift
+
+	-(void)hkwPlayEnded;
+
+This function is useful to take any actioin when the current playback has ended.
+
+**hkwDeviceVolumeChanged (optional)**
+
+This function is invoked when volume level is changed for any speakers. It is called asynchronously right after any of SetVolume APIs are called by apps.
+
+The function delivers the device ID of the speaker with volume changed, a new device volume level, and average volume level value, as below:
+
+.. code-block:: swift
+
+	-(void)hkwDeviceVolumeChanged:(long long)deviceId deviceVolume:(NSInteger)deviceVolume withAverageVolume:(NSInteger)avgVolume;
+
+.. note::
+	When speaker volume is changed by a call to ``setVolumeAll()``, then all the speakers are set to a new volume level, and this function can be used to get the new volume level value.
+	
+**hkwPlaybackStateChanged (optional)**
+This function is invoked when playback state is changed during the playback. The callback delivers the playState value as parameter.
+
+.. code-block:: swift
+
+	-(void)hkwPlaybackStateChanged:(NSInteger)playState;
+
+**hkwPlaybackTimeChanged (optional)**
+
+This function is invoked when the current playback time is changed. It is called every one second. The function parameter timeElapsed returns the time (in second) elapsed since the start of the playback. This function is useful when your app update the progress bar of the current playback.
+
+.. code-block:: swift
+
+	-(void)hkwPlaybackTimeChanged:(NSInteger)timeElapsed;
+
+How to implement the delegate protocols
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To make your ViewController as delegate, that is, to receive the events from HKWControlHandler in your ViewController, your ViewController class has to implement the protocol by specifying the delegate protocol name in the class definition as below:
+
+.. code-block:: swift
+
+	class SpeakerListViewController: UIViewController, UITableViewDataSource,   
+		SpeakerTableCellDelegate, HKWDeviceEventHandlerDelegate  {
+		... ...
+	}
+	
+And then, the ViewController class should set itself to ``delegate`` attribute of the handler singleton class as below:
+
+.. code-block:: swift
+
+	HKDeviceEventHandlerSingleton.sharedInstance().delegate = self
+
+
+Note that during the runtime, only one instance of the event handler for HKWControlHandler is instantiated, so it is designed as a singleton. It can be retrieved by calling ``sharedInstance()`` to the class.
+
+**For device event handler**
+
+.. code-block:: swift
+
+	HKWDeviceEventHandlerSingleton.sharedInstance().delegate
+
+**For player event handler**
+
+.. code-block:: swift
+
+	HKWPlayerEventHandlerSingleton.sharedInstance().delegate
