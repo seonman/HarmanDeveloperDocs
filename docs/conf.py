@@ -23,7 +23,6 @@ import shlex
 
 
 # -- General configuration ------------------------------------------------
-harman_log = img/harmanLogo.png
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
