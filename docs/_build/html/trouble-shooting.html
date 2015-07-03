@@ -43,6 +43,18 @@
             
   <div class="section" id="trouble-shooting">
 <h1>Trouble Shooting<a class="headerlink" href="#trouble-shooting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="handling-of-link-error-undefined-symbols-for-architecture-armv7">
+<h2>Handling of link error “undefined symbols for architecture armv7”<a class="headerlink" href="#handling-of-link-error-undefined-symbols-for-architecture-armv7" title="Permalink to this headline">¶</a></h2>
+<p>HKWirelessHD SDK uses C++ codes, so the linker should include std c++ library. To prevent this kinf od link error, your project setting should include “-lstdc++” in Targets &gt; Build Settings &gt; Linking &gt; Other Linker Flags field.</p>
+</div>
+<div class="section" id="unspecified-linking-parameter-is-added-in-link-command">
+<h2>Unspecified linking parameter is added in link command<a class="headerlink" href="#unspecified-linking-parameter-is-added-in-link-command" title="Permalink to this headline">¶</a></h2>
+<p>If you encounter unspecified linking parameter such as library names, etc., there is possibility that Xcode is using cached build parameters that were used before. In this case, just delete “Xcode/DerivedData” folder in your ~/Library/Developer folder. That is,</p>
+<div class="highlight-swift"><div class="highlight"><pre>$ cd ~/Library/Developer/Xcode/DerivedData/
+$ rm -rf [your-project-name]*
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -54,6 +66,15 @@
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/harmanLogo.png" alt="Logo"/>
             </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Trouble Shooting</a><ul>
+<li><a class="reference internal" href="#handling-of-link-error-undefined-symbols-for-architecture-armv7">Handling of link error “undefined symbols for architecture armv7”</a></li>
+<li><a class="reference internal" href="#unspecified-linking-parameter-is-added-in-link-command">Unspecified linking parameter is added in link command</a></li>
+</ul>
+</li>
+</ul>
+
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
