@@ -21,8 +21,11 @@ This documentation is organized into a few different sections:
     This chatper is the overview of HKWirelessHD SDK and the SDK apps based on the SDK.
 	
 `Getting Started (iOS)`_
-    This chatper describes how you can quickly get started with the HKWirelessHD SDK. Just follow the instruction to setup your Xcode project files, and learn about the APIs.
+    This chatper describes how you can quickly get started with the HKWirelessHD SDK. Just follow the instruction to setup your Xcode project files, and learn how to create a HKWirelessHD App.
 
+`Programming Guide`_
+    This chatper explains the APIs of HKWirelessHD SDK.
+	
 `Architecture Overview`_
     This chatper explains about the overall architecture of HKWirelessHD SDK.
 
@@ -31,6 +34,7 @@ This documentation is organized into a few different sections:
 
 .. _SDK Overview: sdk-overview.html
 .. _Getting Started (iOS): getting-started-iOS.html
+.. _Programming Guide: programming-guide.html
 .. _Architecture Overview: architecture-overview.html
 .. _HKWHub Specification: hkwhub-spec.html
 
@@ -52,6 +56,14 @@ Getting Started Guide (iOS)
 	:maxdepth: 2
 
 	getting-started-iOS
+
+Programming Guide (iOS)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	programming-guide
 
 Architecture Overview
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Harman Developer 1.0 documentation" href="index.html" />
-    <link rel="next" title="Architecture Overview" href="architecture-overview.html" />
+    <link rel="next" title="Programming Guide" href="programming-guide.html" />
     <link rel="prev" title="Overview of HKWirelessHD SDK (iOS)" href="sdk-overview.html" /> 
   </head>
   <body role="document">
@@ -35,7 +35,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="architecture-overview.html" title="Architecture Overview"
+          <a href="programming-guide.html" title="Programming Guide"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="sdk-overview.html" title="Overview of HKWirelessHD SDK (iOS)"
@@ -127,241 +127,8 @@
 </div>
 </div>
 </div>
-<div class="section" id="using-hkwirelesshd-api">
-<h2>Using HKWirelessHD API<a class="headerlink" href="#using-hkwirelesshd-api" title="Permalink to this headline">¶</a></h2>
-<p>All APIs can be accessed through a singleton object of HKWControlHandler. Only you have to do is obtain the singleton instance of HKWControlHandler and use it to invoke whatever API you want to call.</p>
-<p>The code examples in this document are in Swift. and the function definition is in Objective-C. The APIs are compatible both in Swift and Objective-C.</p>
-<div class="section" id="initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio">
-<h3>Initialize HKWirelessHD Control Handler and start the Wireless Audio<a class="headerlink" href="#initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-swift"><div class="highlight"><pre><span class="c1">// Obtain the HKWControlHandler singleton instance</span>
-<span class="kd">let</span> <span class="nv">g_HWControlHandler</span><span class="p">:</span> <span class="n">HKWControlHandler</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">()</span>
-
-<span class="c1">// Initialize the HKWControlHandler and start wireless audio</span>
-<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">initializeHKWirelessController</span> <span class="p">(</span><span class="n">licenseKey</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">initializeHKWirelessController()</span></code> takes a string of license key as parameter. Every developer who signs up for Harman developer community will receive a license key. If you have not received it yet, then just use the license key specified in the sample code for temporary use until your own license key is available.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal"><span class="pre">initializeHKWirelessController()</span></code> is a blocking call. It waits until the call successfully initializes the wireless audio network. If the phone device does not belong to a Wi-Fi network or if there is other app already using HKWirelessHD and running on the same device, then it will wait until the other app releases the HKWControlHandler. It would be nice to present a dialog to user before calling <code class="docutils literal"><span class="pre">initializeHKWirelessController()</span></code> to notice that the app will wait until HKWirelessHD network is available.</p>
-</div>
-</div>
-<div class="section" id="discovery-and-refreshing-of-available-speakers-in-the-wi-fi-network">
-<h3>Discovery and refreshing of available speakers in the Wi-Fi network<a class="headerlink" href="#discovery-and-refreshing-of-available-speakers-in-the-wi-fi-network" title="Permalink to this headline">¶</a></h3>
-<p>The status of speakers can be changed dynamically over time. And, whenever a speaker is turned off or on, the list of speakers available in the network should be refreshed. Especially, when you select speakers for playback, the speaker list and the status of each speaker should be updated with the latest information.</p>
-<p>Basically, whenever there is any change on the speaker side, the newest information of the speaker is available from the device list maintained by HKWControlHandler. But, the update is initiated by speakers, and there is some latency until the latest information is reflected to the HKWControlHandler. So, if you need the latest information without latency, you would better refresh the speaker status regularly.</p>
-<p>To force to update the status of speakers regularly, the SDK provides a pair of convenient APIs to refresh device status. One of the use cases of these functions are to present a screen of speaker list to user and show the current speaker information in real-time manner.</p>
-<p>To start checking the status of devices regularly, use <code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code>. To stop checking the status regularly, use <code class="docutils literal"><span class="pre">stopRefreshDeviceInfo()</span></code>.</p>
-<div class="highlight-swift"><div class="highlight"><pre><span class="c1">// start to refresh devices ...</span>
-<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">startRefreshDeviceInfo</span><span class="p">()</span>
-
-<span class="c1">// stop to refresh devices</span>
-<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">stopRefreshDeviceInfo</span><span class="p">()</span>
-</pre></div>
-</div>
-<p><code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code> will refresh and update every 2 seconds the status of the devices in the current Wi-Fi network.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Even without calling <code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code>, the speaker information will be updated whenever the information is updated on speaker side, but there is some latency until the newest information is reflected to HKWControlHandler.</p>
-</div>
-</div>
-<div class="section" id="speakers-and-groups">
-<h3>Speakers and Groups<a class="headerlink" href="#speakers-and-groups" title="Permalink to this headline">¶</a></h3>
-<p>There are two ways to choose speakers to play on – one is to select a speaker from the global list of speakers maintained by the internal data structure, and the other is to select a speaker with a group (or room) index and the index of the speaker within the group. Note that in this document, the term group and room are used as the same meaning, that is, a set of speakers.</p>
-<div class="section" id="selecting-a-speaker-individually">
-<h4>Selecting a speaker individually<a class="headerlink" href="#selecting-a-speaker-individually" title="Permalink to this headline">¶</a></h4>
-<p><strong>Select a speaker in the global list</strong></p>
-<div class="highlight-swift"><div class="highlight"><pre><span class="c1">// get the number of available speakers</span>
-<span class="kd">let</span> <span class="nv">deviceCount</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getDeviceCount</span><span class="p">()</span>
-
-<span class="c1">// get the info of the first devices in the list</span>
-<span class="kd">var</span> <span class="nv">index</span> <span class="p">=</span> <span class="mi">0</span>
-<span class="kd">let</span> <span class="nv">deviceInfo</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getDeviceInfoByIndex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Retrieve DeviceInfo with deviceId</strong></p>
-<p>If you know the deviceId of a speaker, then you can retrieve the device information using <code class="docutils literal"><span class="pre">findDeviceFromList()</span></code>.</p>
-<div class="highlight-swift"><div class="highlight"><pre>// get the number of available speakers
-var deviceId : ClongLong = …
-let deviceInfo = HKWControlHandler.sharedInstance().findDeviceFromList(deviceId)
-</pre></div>
-</div>
-</div>
-<div class="section" id="selecting-a-speaker-from-a-group">
-<h4>Selecting a speaker from a group<a class="headerlink" href="#selecting-a-speaker-from-a-group" title="Permalink to this headline">¶</a></h4>
-<p>A <strong>Group</strong> is defined by the group information of each speaker. That is, if a speaker has a group where it belongs to, then the group has the speaker as a member. So, as an example, if speaker A and speaker B have the same group of Group C, then Group C will have speaker A and speaker B as members. If speaker A changes the group as ‘Group D’, then Group C will have only speaker B, and Group D will have speaker A as a member.</p>
-<p><strong>Get the number of groups available in the network</strong></p>
-<div class="highlight-swift"><div class="highlight"><pre><span class="c1">// get the number of groups</span>
-<span class="kd">var</span> <span class="nv">groupCount</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getGroupCount</span><span class="p">()</span>
-</pre></div>
-</div>
-<p><strong>Get the number of devices in a group</strong></p>
-<div class="highlight-swift"><div class="highlight"><pre><span class="c1">// get the number of devices in the first group</span>
-<span class="kd">var</span> <span class="nv">groupIndex</span> <span class="p">=</span> <span class="mi">0</span>
-<span class="kd">var</span> <span class="nv">deviceCount</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getDeviceCountInGroupIndex</span><span class="p">(</span><span class="n">groupIndex</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="retrieve-the-information-of-a-device">
-<h4>Retrieve the information of a device<a class="headerlink" href="#retrieve-the-information-of-a-device" title="Permalink to this headline">¶</a></h4>
-<p>You can retrieve the information of a device (speaker) using DeviceInfo object. Please refer to DeviceInfo.h. The following is the list of information that DeviceInfo provides:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="13%" />
-<col width="10%" />
-<col width="40%" />
-<col width="28%" />
-<col width="9%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Attribute</th>
-<th class="head">Type in Swift</th>
-<th class="head">Description</th>
-<th class="head">Fixed/Variable</th>
-<th class="head">Set by API</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>deviceId</td>
-<td>CLongLong</td>
-<td>the unique ID of the speaker</td>
-<td>Fixed (in manufacturing)</td>
-<td>No</td>
-</tr>
-<tr class="row-odd"><td>deviceName</td>
-<td>String</td>
-<td>the name of the speaker</td>
-<td>Variable</td>
-<td>Yes</td>
-</tr>
-<tr class="row-even"><td>groupId</td>
-<td>CLongLong</td>
-<td>the unique ID of the group that the speaker belongs to</td>
-<td>Variable (set when a group is created)</td>
-<td>No</td>
-</tr>
-<tr class="row-odd"><td>groupName</td>
-<td>String</td>
-<td>the name of the group that the speaker belongs to</td>
-<td>Variable (set when a group is created)</td>
-<td>Yes</td>
-</tr>
-<tr class="row-even"><td>modelName</td>
-<td>String</td>
-<td>the name of the Model of the speaker</td>
-<td>Fixed (in manufacturing)</td>
-<td>No</td>
-</tr>
-<tr class="row-odd"><td>ipAddress</td>
-<td>String</td>
-<td>the IP address as String</td>
-<td>Fixed (when network setup)</td>
-<td>No</td>
-</tr>
-<tr class="row-even"><td>port</td>
-<td>String</td>
-<td>the port number</td>
-<td>Fixed (when network setup)</td>
-<td>No</td>
-</tr>
-<tr class="row-odd"><td>macAddress</td>
-<td>String</td>
-<td>the mac address as String</td>
-<td>Fixed (in manufacturing)</td>
-<td>No</td>
-</tr>
-<tr class="row-even"><td>volume</td>
-<td>Int</td>
-<td>the volume level value (0 to 50)</td>
-<td>Variable</td>
-<td>Yes</td>
-</tr>
-<tr class="row-odd"><td>active</td>
-<td>Bool</td>
-<td>indicates if added to the current playback session</td>
-<td>Variable</td>
-<td>Yes</td>
-</tr>
-<tr class="row-even"><td>wifiSignalStrength</td>
-<td>Int</td>
-<td>Wi-Fi strength in dBm scale, -100 (low) to 0 (high)</td>
-<td>Variable</td>
-<td>No</td>
-</tr>
-<tr class="row-odd"><td>role</td>
-<td>Int</td>
-<td>the role definition (stereo or 5.1 channel)</td>
-<td>Variable</td>
-<td>Yes</td>
-</tr>
-<tr class="row-even"><td>version</td>
-<td>String</td>
-<td>the firmware version number as String</td>
-<td>Fixed (when firmware update)</td>
-<td>No</td>
-</tr>
-<tr class="row-odd"><td>balance</td>
-<td>Int</td>
-<td>the balance value in stereo mode. -6 to 6, 0 is neutral</td>
-<td>Variable</td>
-<td>Yes</td>
-</tr>
-<tr class="row-even"><td>isPlaying</td>
-<td>Bool</td>
-<td>indicates whether the speaker is playing or not</td>
-<td>Variable</td>
-<td>No</td>
-</tr>
-<tr class="row-odd"><td>channelType</td>
-<td>Int</td>
-<td>the channel type: 1 is stereo.</td>
-<td>Variable</td>
-<td>Yes</td>
-</tr>
-<tr class="row-even"><td>isMaster</td>
-<td>Bool</td>
-<td>indicates if it is the master in stereo or group mode</td>
-<td>Variable</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
-<p>As shown in the table above, some of the attributes can be set by the APIs. And some attributes change during the runtime, so the app should keep the latest value of the attributes by calling corresponding APIs or by callback functions.</p>
-<p>The following is an example of retrieving some of attributes of a speaker information.</p>
-<div class="highlight-swift"><div class="highlight"><pre>let deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoFromTable(groupIndex, deviceIndex:deviceIndex)
-
-println(&quot;deviceName: \(deviceInfo.deviceName&quot;)
-println(&quot;groupName: \(deviceInfo.groupName&quot;)
-println(&quot;volume: \(deviceInfo.volume&quot;)
-println(&quot;deviceId: \(deviceInfo.deviceId&quot;)
-println(&quot;deviceActive: \(deviceInfo.active&quot;)
-println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
-...
-</pre></div>
-</div>
-</div>
-<div class="section" id="change-speaker-name-and-group-name">
-<h4>Change speaker name and group name<a class="headerlink" href="#change-speaker-name-and-group-name" title="Permalink to this headline">¶</a></h4>
-<p><strong>Change speaker name and group name</strong></p>
-<p>Use <code class="docutils literal"><span class="pre">setDeviceName()</span></code> to change the speaker name. Note that you cannot set the device name by setting “deviceName” property value directly. The property is read-only.</p>
-<p><strong>Change speaker’s group (room) name</strong></p>
-<p>Use setDeviceGroupName() to change the group (or room) name of a speaker. Note that you cannot set the group name by setting “groupName” property value directly. The property is read-only.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you change the group name of a speaker, then the list of devices of the groups automatically changes.</p>
-</div>
-<p><strong>Remove a speaker from a group (room)</strong></p>
-<p>Use removeDeviceFromGroup() to remove the speaker from the currently belonging group. After being removed from a group, the name of group of the speaker is set to “harman”, which is a default group name implying that the speaker does not belong to any group.</p>
-</div>
-</div>
-<div class="section" id="add-or-remove-a-speaker-to-from-a-playback-session">
-<h3>Add or remove a speaker to/from a playback session<a class="headerlink" href="#add-or-remove-a-speaker-to-from-a-playback-session" title="Permalink to this headline">¶</a></h3>
-<p>To play a music on a specific speaker, the speaker should be added to the playback session.</p>
-<div class="section" id="add-a-speaker-to-a-session-to-play-on">
-<h4>Add a speaker to a session (to play on)<a class="headerlink" href="#add-a-speaker-to-a-session-to-play-on" title="Permalink to this headline">¶</a></h4>
-<p>[To be added]</p>
-</div>
-</div>
+<div class="section" id="sample-application-hkwsimple">
+<h2>Sample Application (HKWSimple)<a class="headerlink" href="#sample-application-hkwsimple" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -384,22 +151,7 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
 <li><a class="reference internal" href="#add-lstdc-as-linker-flag">Add -lstdc++ as linker flag</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#using-hkwirelesshd-api">Using HKWirelessHD API</a><ul>
-<li><a class="reference internal" href="#initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio">Initialize HKWirelessHD Control Handler and start the Wireless Audio</a></li>
-<li><a class="reference internal" href="#discovery-and-refreshing-of-available-speakers-in-the-wi-fi-network">Discovery and refreshing of available speakers in the Wi-Fi network</a></li>
-<li><a class="reference internal" href="#speakers-and-groups">Speakers and Groups</a><ul>
-<li><a class="reference internal" href="#selecting-a-speaker-individually">Selecting a speaker individually</a></li>
-<li><a class="reference internal" href="#selecting-a-speaker-from-a-group">Selecting a speaker from a group</a></li>
-<li><a class="reference internal" href="#retrieve-the-information-of-a-device">Retrieve the information of a device</a></li>
-<li><a class="reference internal" href="#change-speaker-name-and-group-name">Change speaker name and group name</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#add-or-remove-a-speaker-to-from-a-playback-session">Add or remove a speaker to/from a playback session</a><ul>
-<li><a class="reference internal" href="#add-a-speaker-to-a-session-to-play-on">Add a speaker to a session (to play on)</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="reference internal" href="#sample-application-hkwsimple">Sample Application (HKWSimple)</a></li>
 </ul>
 </li>
 </ul>
@@ -408,8 +160,8 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
   <p class="topless"><a href="sdk-overview.html"
                         title="previous chapter">Overview of HKWirelessHD SDK (iOS)</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="architecture-overview.html"
-                        title="next chapter">Architecture Overview</a></p>
+  <p class="topless"><a href="programming-guide.html"
+                        title="next chapter">Programming Guide</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -441,7 +193,7 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="architecture-overview.html" title="Architecture Overview"
+          <a href="programming-guide.html" title="Programming Guide"
              >next</a> |</li>
         <li class="right" >
           <a href="sdk-overview.html" title="Overview of HKWirelessHD SDK (iOS)"
