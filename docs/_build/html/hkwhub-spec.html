@@ -101,21 +101,22 @@
 </div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="session-management">
 <h2>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h2>
-<p>Since the HKWHub app should be able to handle REST API requests from multiple clients, the HKWHub app manages the requests with session information associated with the priority when the session is initialized.</p>
-<p>Below are the policy of the session management:</p>
+<p>Since the HKWHub app should be able to handle REST HTTP requests from more than on clients at the same time, the HKWHub app manages the requests with session information associated with the priority when the session is initialized.</p>
+<p>The following is the policy of the session management:</p>
 <div class="section" id="session-creation">
 <h3>Session Creation<a class="headerlink" href="#session-creation" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>When a client wants to send requests to HKWHub app, it must create a session first. (Use <code class="docutils literal"><span class="pre">init_session</span></code> command.)</li>
+<li>When a client wants to access speakers through the HKWHub app, it must create a session first. (Use <code class="docutils literal"><span class="pre">init_session</span></code> command.)</li>
 <li>When a client initializes session, it also sets the priority of the session (using Priority=&lt;priority value&gt; parameter).</li>
 </ul>
 </div>
 <div class="section" id="priority-of-session">
 <h3>Priority of Session<a class="headerlink" href="#priority-of-session" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">Because the HKWHub app should handle multiple clients, each session is associated with a priority value which will be used to determine which request can override the current on-going playback session.</p>
+<li><p class="first">Each session is associated with a priority value which will be used to determine which request can override the current on-going playback session.</p>
 </li>
 <li><dl class="first docutils">
 <dt>The priority value is specified as parameter (Priority) when the client calls <code class="docutils literal"><span class="pre">init_session</span></code>.</dt>
@@ -126,7 +127,7 @@
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>If a new playback request (e.g. <code class="docutils literal"><span class="pre">play_hub_media</span></code>, and so on) comes in with higher priority session id, then it interrupts the current playback session.</dt>
+<dt>If the priority of the session of a new playback request (e.g. <code class="docutils literal"><span class="pre">play_hub_media</span></code>, and so on) is greater than or equal to the priority of the current session, then it interrupts the current playback session.</dt>
 <dd><ul class="first last simple">
 <li>The playback status of the interrupted session becomes <code class="docutils literal"><span class="pre">PlayerStateInterrupted</span></code>. (see the related API in the next section)</li>
 <li>Once a session is overridden by a higher priority playback request, then the session is no longer valid. (the session is closed.)</li>
@@ -144,6 +145,7 @@
 </ul>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="rest-api-specification">
 <h2>REST API Specification<a class="headerlink" href="#rest-api-specification" title="Permalink to this headline">¶</a></h2>
 <p>This specification describes the REST API for controlling HKWHub app remotely to control HK Omni speakers and stream audio to the speakers.</p>
