@@ -70,7 +70,7 @@ Session Timeout
 - All requests with expired session will be denied and "SessionNotFound" error returns.
 
 .. figure:: img/hub/session-management.png
-	:caption: Session management flow diagram
+	:alt: Session management flow diagram
 
 ----
 
