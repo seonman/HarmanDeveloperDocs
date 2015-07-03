@@ -45,7 +45,7 @@ Once you acquire the HKWControlHandler object, you need to initialize it by call
 
 ----
 
-Getting the information of speakers available in the network
+Getting the information of speakers
 --------------------------------------------------------------
 
 HKWControlHandler maintains the list of speakers available in the network. The list changes every time a speaker is added to the network or removed from the network. Whenever a speaker is added to or removed from the network, the **hkwDeviceStateUpdated()** delegate function is called. So developer needs to check which speaker has been added or removed, and handle the case accordingly, such as update the UI of speaker list, and so on.
@@ -584,3 +584,18 @@ Note that during the runtime, only one instance of the event handler for HKWCont
 .. code-block:: swift
 
 	HKWPlayerEventHandlerSingleton.sharedInstance().delegate
+
+.. note::
+
+	Since there is only one instance of delegator for each delegate, if you set delegate in several different places of your app, then the latest setting will override the delegate value, and the previous setting will be overridden. So, you need to set the delegate every time you show a ViewController, and one right place to set the delegate is inside ``viewDidAppear()`` in ViewController class as shown below.
+	
+.. code-block:: swift
+	
+	override func viewDidAppear(animated: Bool) {
+		HKWDeviceEventHandlerSingleton.sharedInstance().delegate = self
+		
+		...        
+		
+	}
+	
+	

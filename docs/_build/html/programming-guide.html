@@ -85,8 +85,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div class="section" id="getting-the-information-of-speakers-available-in-the-network">
-<h2>Getting the information of speakers available in the network<a class="headerlink" href="#getting-the-information-of-speakers-available-in-the-network" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getting-the-information-of-speakers">
+<h2>Getting the information of speakers<a class="headerlink" href="#getting-the-information-of-speakers" title="Permalink to this headline">¶</a></h2>
 <p>HKWControlHandler maintains the list of speakers available in the network. The list changes every time a speaker is added to the network or removed from the network. Whenever a speaker is added to or removed from the network, the <strong>hkwDeviceStateUpdated()</strong> delegate function is called. So developer needs to check which speaker has been added or removed, and handle the case accordingly, such as update the UI of speaker list, and so on.</p>
 <div class="section" id="device-information">
 <h3>Device Information<a class="headerlink" href="#device-information" title="Permalink to this headline">¶</a></h3>
@@ -602,6 +602,18 @@ This function is invoked when playback state is changed during the playback. The
 <div class="highlight-swift"><div class="highlight"><pre><span class="n">HKWPlayerEventHandlerSingleton</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">delegate</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since there is only one instance of delegator for each delegate, if you set delegate in several different places of your app, then the latest setting will override the delegate value, and the previous setting will be overridden. So, you need to set the delegate every time you show a ViewController, and one right place to set the delegate is inside <code class="docutils literal"><span class="pre">viewDidAppear()</span></code> in ViewController class as shown below.</p>
+</div>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidAppear</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="nb">Bool</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">HKWDeviceEventHandlerSingleton</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+
+        <span class="p">...</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -623,7 +635,7 @@ This function is invoked when playback state is changed during the playback. The
 <li><a class="reference internal" href="#initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio">Initialize HKWirelessHD Control Handler and start the Wireless Audio</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#getting-the-information-of-speakers-available-in-the-network">Getting the information of speakers available in the network</a><ul>
+<li><a class="reference internal" href="#getting-the-information-of-speakers">Getting the information of speakers</a><ul>
 <li><a class="reference internal" href="#device-information">Device Information</a><ul>
 <li><a class="reference internal" href="#getting-a-speaker-device-information">Getting a speaker (device) information</a></li>
 </ul>
