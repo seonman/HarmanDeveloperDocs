@@ -32,11 +32,16 @@ This documentation is organized into a few different sections:
 `HKWHub Specification`_
     This chatper explains about the overall architecture of HKWirelessHD SDK.
 
+`Trouble Shooting`_
+    This chatper describes several common problems that developers can experience at the beginning of using HKWirelessHD SDK, and provides known solutions.
+	
+	
 .. _SDK Overview: sdk-overview.html
 .. _Getting Started (iOS): getting-started-iOS.html
 .. _Programming Guide: programming-guide.html
 .. _Architecture Overview: architecture-overview.html
 .. _HKWHub Specification: hkwhub-spec.html
+.. _Trouble Shooting: trouble-shooting.html
 
 Contents
 --------
@@ -80,6 +85,14 @@ HKWHub Specification
 	:maxdepth: 2
 
 	hkwhub-spec
+	
+Problem Shooting
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	problem-shooting
 	
 Search
 ======
