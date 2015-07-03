@@ -124,7 +124,7 @@ You can retrieve a speaker information by specifying a group index and the index
 .. code-block:: swift
 
 - (DeviceInfo *) getDeviceInfoFromTable:(NSInteger) groupIndex 
-                                deviceIndex:(NSInteger)deviceIndex;
+							deviceIndex:(NSInteger)deviceIndex;
 
 Here, ``groupIndex`` represents the index of the group where the device belong to. ``deviceIndex`` means the index of the device in the group.
 
