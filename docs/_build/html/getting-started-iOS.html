@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Harman Developer 1.0 documentation" href="index.html" />
-    <link rel="next" title="Programming Guide" href="programming-guide.html" />
+    <link rel="next" title="Programming Guide (iOS)" href="programming-guide.html" />
     <link rel="prev" title="Overview of HKWirelessHD SDK (iOS)" href="sdk-overview.html" /> 
   </head>
   <body role="document">
@@ -35,7 +35,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="programming-guide.html" title="Programming Guide"
+          <a href="programming-guide.html" title="Programming Guide (iOS)"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="sdk-overview.html" title="Overview of HKWirelessHD SDK (iOS)"
@@ -52,7 +52,33 @@
   <div class="section" id="getting-started-guide-ios">
 <h1>Getting Started Guide (iOS)<a class="headerlink" href="#getting-started-guide-ios" title="Permalink to this headline">¶</a></h1>
 <p>HKWirelessHD SDK supports both Objective-C and Swift. This document assumes that developer creates his/her app using the Swift language.</p>
-<p>In the section, we will use the HKPage app as an example.</p>
+<p>There are two versions of SDK - a normal version (HKWirelessHDSDK) and a lightweight version (HKWirelessHDSDKlw). Most of the features are common in the two version. The only difference is that the normal version includes an API for playing web streaming audio, while the lightweight version does not.</p>
+<p>The reason we support the SDK as two separate version is that we know that many developers want a feature of web streaming. To support this feature, we need to include a version of FFMPEG library inside of the SDK library. But, some developers may want to use their own version of MMPEG to handle audio stream for some particular reasons.</p>
+<p>Please see the descriptions of each version below and make a proper choice for your app.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>HKWirelessHD (normal version) <span class="classifier-delimiter">:</span> <span class="classifier">support web streaming audio</span></dt>
+<dd><ul class="first last simple">
+<li>Only support 32bit (armv7) architecture. armv7s and arm64 are not supported.</li>
+<li>Support webstreaming music playback.</li>
+<li>libz.dylib and libbz2.dylib are required when linking.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>HKWirelessHDlw (lightweight version) <span class="classifier-delimiter">:</span> <span class="classifier">do not support web streaming audio</span></dt>
+<dd><ul class="first last simple">
+<li>Supports both 32bit (armv7, armv7s) and 64bit architecture (arm64)</li>
+<li>Do not support web streaming music playback (streaming music from HTTP server, etc.)</li>
+<li>No other library required</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>So, if you do not need web streaming music playback for your app, you may use HKWirelessHDlw (lightweight) version. Otherwise, you should use HHWirelessHD version.</p>
+<p>In the section, we will use HKWSimple app as an example of normal version and HKPage app as an example of lightweight version.</p>
 <div class="section" id="project-setup-with-hkwireless-normal-version">
 <h2>Project Setup with HKWireless (normal version)<a class="headerlink" href="#project-setup-with-hkwireless-normal-version" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="include-hkwirelesshdsdk-into-your-project">
@@ -161,7 +187,7 @@
                         title="previous chapter">Overview of HKWirelessHD SDK (iOS)</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="programming-guide.html"
-                        title="next chapter">Programming Guide</a></p>
+                        title="next chapter">Programming Guide (iOS)</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -193,7 +219,7 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="programming-guide.html" title="Programming Guide"
+          <a href="programming-guide.html" title="Programming Guide (iOS)"
              >next</a> |</li>
         <li class="right" >
           <a href="sdk-overview.html" title="Overview of HKWirelessHD SDK (iOS)"

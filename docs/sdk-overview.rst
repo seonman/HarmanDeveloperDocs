@@ -7,8 +7,9 @@ What's Included
 ---------------
 
 - HKWirelessHD library and header files
-	- We provide two versions of SDK - normal version vs. lightweight version. See below for the information.
-	- The reason we support the SDK as two separate version is that we know that many developers want a feature of web streaming. To support this feature, we need to include a version of FFMPEG library inside of the SDK library. But, some developers may want to use their own version of MMPEG to handle audio stream for some particular reasons.
+	- We provide two versions of SDK - a normal version and a lightweight version. See below for the information.
+	- The reason we support the SDK as two separate version is that we know that many developers want a feature of web streaming. To support this feature, we need to include a version of FFMPEG library inside of the SDK library. But, some developers may want to use their own version of MMPEG to handle audio stream for some particular reasons. We describe more about these two versions in the `Getting Started (iOS)`_.
+
 - License Agreement. Located within the root directory of the zip file.
 - This Document. Located in the HKWirelessHDSDK.zip (HKWirelessHDSDK/doc folder). There are two more documents available for developers.
 	- HKWHD SDK Programming Guide (available in HKWirelessHDSDK/doc folder)
@@ -20,24 +21,12 @@ What's Included
 	- HKWPlayer App with Apple Watch app support
 	- HKWHub App
 
+.. _Getting Started (iOS): getting-started-iOS.html
+
 Requirements
 ------------
 
-The HKWirelessHD SDK requires the lastest iOS (8.4 as of writing this) for iPhone or iPad devices. We provide two verions of the SDKs.
-
-
-- HKWirelessHD (normal version)
-	- Only support 32bit (armv7) architecture. armv7s and arm64 are not supported.
-	- Support webstreaming music playback.
-	- libz.dylib and libbz2.dylib are required when linking.
-	
-- HKWirelessHDlw (lightweight version)
-	- Supports both 32bit (armv7, armv7s) and 64bit architecture (arm64)
-	- Do not support web streaming music playback (streaming music from HTTP server, etc.)
-	- No other library required
-		
-So, if you do not need web streaming music playback for your app, you can use HKWirelessHDlw (lightweight) version. Otherwise, you can use HHWirelessHD version.
-
+The HKWirelessHD SDK requires the lastest iOS (8.4 as of writing this) for iPhone or iPad devices.
 Xcode 6.4 (supporting iOS8.4) or later is required for building HKWirelessHD enabled iOS apps with Apple Watch app support.
 
   

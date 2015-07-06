@@ -368,9 +368,9 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
 <h3>Play Web Streaming Music<a class="headerlink" href="#play-web-streaming-music" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This API is <code class="docutils literal"><span class="pre">NOT</span></code> supported by HKWirelessHDSDKlw (lightweight version of HKWirelessHDSDK).</p>
+<p class="last">This API is <strong>NOT</strong> supported by HKWirelessHDSDKlw (lightweight version of HKWirelessHDSDK). It is only supported by HKWirelessHD SDK.</p>
 </div>
-<p>Use <code class="docutils literal"><span class="pre">playStreamingMedia()</span></code> to playt a streaming media. It uses a parameter of <code class="docutils literal"><span class="pre">streamingMediaUrl</span></code> to specify the URL of the media file in the streaming service. It starts with a protocol name, such as &#8220;<a class="reference external" href="http://">http://</a>&#8221; or &#8220;rtps://&#8221;. Currently, http, rtps, and mms are supported. The supported file format is mp3, m4a, wav.</p>
+<p>Use <code class="docutils literal"><span class="pre">playStreamingMedia()</span></code> to playt a streaming media. It uses a parameter of <code class="docutils literal"><span class="pre">streamingMediaUrl</span></code> to specify the URL of the media file in the streaming service. It starts with a protocol name, such as &#8220;<a class="reference external" href="http://">http://</a>&#8221; or &#8220;rtps://&#8221;. Currently, http:, rtps:, and mms: are supported. The supported file format is mp3, m4a, wav.</p>
 <p><code class="docutils literal"><span class="pre">completedCallback</span></code> is a callback that returns the result of the call, that is, if the call is successful or not. If it cannot find the media file on the server or some other errors occur, then it return false.</p>
 <div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">playStreamingMedia</span><span class="p">:(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">streamingMediaUrl</span> <span class="n">withCallback</span><span class="p">:(</span><span class="n">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">bool</span> <span class="n">result</span><span class="p">))</span><span class="n">completedCallback</span><span class="p">;</span>
 </pre></div>
@@ -463,6 +463,12 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
 <p>For example,</p>
 <blockquote>
 <div>var volume = HKWControlHandler.sharedInstance().getDeviceVolume(deviceId)</div></blockquote>
+</div>
+<div class="section" id="mute-and-unmute">
+<h4>Mute and Unmute<a class="headerlink" href="#mute-and-unmute" title="Permalink to this headline">¶</a></h4>
+<p>Use <code class="docutils literal"><span class="pre">mute()</span></code> to mute the current playback. The volume level turns to 0.</p>
+<p>Use <code class="docutils literal"><span class="pre">unmute()</span></code> to unmute the current muted playback. After <code class="docutils literal"><span class="pre">unmute()</span></code>, the volume level returns to the original volume level before <code class="docutils literal"><span class="pre">mute()</span></code> is called.</p>
+<p>Use <code class="docutils literal"><span class="pre">isMuted()</span></code> to check if the current playback is muted or not.</p>
 </div>
 </div>
 </div>
@@ -676,6 +682,7 @@ This function is invoked when playback state is changed during the playback. The
 <li><a class="reference internal" href="#set-volume-to-a-particular-speaker">Set volume to a particular speaker</a></li>
 <li><a class="reference internal" href="#get-volume-of-all-speakers">Get volume of all speakers</a></li>
 <li><a class="reference internal" href="#get-volume-of-a-particular-speaker">Get volume of a particular speaker</a></li>
+<li><a class="reference internal" href="#mute-and-unmute">Mute and Unmute</a></li>
 </ul>
 </li>
 </ul>

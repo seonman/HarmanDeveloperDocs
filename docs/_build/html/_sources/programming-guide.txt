@@ -288,9 +288,9 @@ Play Web Streaming Music
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
-	This API is ``NOT`` supported by HKWirelessHDSDKlw (lightweight version of HKWirelessHDSDK). 
+	This API is **NOT** supported by HKWirelessHDSDKlw (lightweight version of HKWirelessHDSDK). It is only supported by HKWirelessHD SDK.
 	
-Use ``playStreamingMedia()`` to playt a streaming media. It uses a parameter of ``streamingMediaUrl`` to specify the URL of the media file in the streaming service. It starts with a protocol name, such as "http://" or "rtps://". Currently, http, rtps, and mms are supported. The supported file format is mp3, m4a, wav.
+Use ``playStreamingMedia()`` to playt a streaming media. It uses a parameter of ``streamingMediaUrl`` to specify the URL of the media file in the streaming service. It starts with a protocol name, such as "http://" or "rtps://". Currently, http:, rtps:, and mms: are supported. The supported file format is mp3, m4a, wav.
 
 
 ``completedCallback`` is a callback that returns the result of the call, that is, if the call is successful or not. If it cannot find the media file on the server or some other errors occur, then it return false.
@@ -413,6 +413,17 @@ Use ``getDeviceVolume()`` to get the volume level of a particular speaker.
 For example,
 
 	var volume = HKWControlHandler.sharedInstance().getDeviceVolume(deviceId)
+
+
+Mute and Unmute
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Use ``mute()`` to mute the current playback. The volume level turns to 0. 
+
+Use ``unmute()`` to unmute the current muted playback. After ``unmute()``, the volume level returns to the original volume level before ``mute()`` is called.
+
+Use ``isMuted()`` to check if the current playback is muted or not.
+
 
 ----
 

@@ -3,7 +3,28 @@ Getting Started Guide (iOS)
 
 HKWirelessHD SDK supports both Objective-C and Swift. This document assumes that developer creates his/her app using the Swift language.
 
-In the section, we will use the HKPage app as an example.
+There are two versions of SDK - a normal version (HKWirelessHDSDK) and a lightweight version (HKWirelessHDSDKlw). Most of the features are common in the two version. The only difference is that the normal version includes an API for playing web streaming audio, while the lightweight version does not.
+
+The reason we support the SDK as two separate version is that we know that many developers want a feature of web streaming. To support this feature, we need to include a version of FFMPEG library inside of the SDK library. But, some developers may want to use their own version of MMPEG to handle audio stream for some particular reasons.
+
+Please see the descriptions of each version below and make a proper choice for your app.
+
+- HKWirelessHD (normal version) : support web streaming audio
+	- Only support 32bit (armv7) architecture. armv7s and arm64 are not supported.
+	- Support webstreaming music playback.
+	- libz.dylib and libbz2.dylib are required when linking.
+	
+- HKWirelessHDlw (lightweight version) : do not support web streaming audio
+	- Supports both 32bit (armv7, armv7s) and 64bit architecture (arm64)
+	- Do not support web streaming music playback (streaming music from HTTP server, etc.)
+	- No other library required
+		
+So, if you do not need web streaming music playback for your app, you may use HKWirelessHDlw (lightweight) version. Otherwise, you should use HHWirelessHD version.
+
+
+
+
+In the section, we will use HKWSimple app as an example of normal version and HKPage app as an example of lightweight version.
 
 
 Project Setup with HKWireless (normal version)
