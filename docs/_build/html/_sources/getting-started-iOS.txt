@@ -118,13 +118,55 @@ Follow the instruction for adding Swift bridging header and -lstdc++ linker flag
 Creating a Sample Application (HKWSimple)
 -------------------------------------------
 
-In this section, we explain how to create a HKWirelessHD iOS App. We will create a simple iOS app called **HKWSImple** that can play WAV or MP3 file, and also play Web-based streaming music with HTTP protocol.
+In this section, we explain how to create a HKWirelessHD iOS App. We will create a simple iOS app called **HKWSimple** that can play WAV or MP3 file, and also play Web-based streaming music with HTTP protocol.
 
 As shown in the figure, the app is composed of a sequence of UIViewController starting from a TableViewController showing a list of available speakers, and then a TableViewController showing a list of songs to play, and then finally a ViewController that shows a playback control panel with Play/Stop buttons and Volume control buttons.
 
 .. figure:: img/getting-started-iOS/hkwsimple-1.png
 
-Project Setup
+1. Project Setup
 ~~~~~~~~~~~~~~~~~
 
 For the project setup, please refer to the previous session of **Project Setup with HKWirelessHDSDK (normal version)**.
+
+2. Initialize HKWirelessHD Controller
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In HKWSimple app, the initialization of HKWirelessHD Controller is done in the first ViewController called MainVC.
+
+.. code-block:: swift
+
+	class MainVC: UIViewController {
+    	var g_alert: UIAlertController!
+		
+		override func viewDidLoad() {
+			super.viewDidLoad()
+			
+			if !HKWControlHandler.sharedInstance().isInitialized() {
+				// show the network initialization dialog
+				println("show dialog")
+				g_alert = UIAlertController(title: "Initializing", message: "If this dialog does not disappear, please check if any other HK WirelessHD App is running on the phone and kill it. Or, your phone is not in a Wifi network.", preferredStyle: .Alert)
+				
+				self.presentViewController(g_alert, animated: true, completion: nil)
+			}
+		}
+
+		override func viewDidAppear(animated: Bool) {
+			if !HKWControlHandler.sharedInstance().initializing() && !HKWControlHandler.sharedInstance().isInitialized() {
+				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+					if HKWControlHandler.sharedInstance().initializeHKWirelessController(kLicenseKeyGlobal) != 0 {
+                    	println("initializeHKWirelessControl failed : invalid license key")
+                    	return
+                	}
+                	println("initializeHKWirelessControl - OK");
+                
+                	// dismiss the network initialization dialog
+                	if self.g_alert != nil {
+                    	self.g_alert.dismissViewControllerAnimated(true, completion: nil)
+                	}
+                		
+            	})
+        	}
+    	}
+	}
+

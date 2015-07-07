@@ -221,14 +221,53 @@
 </div>
 <div class="section" id="creating-a-sample-application-hkwsimple">
 <h2>Creating a Sample Application (HKWSimple)<a class="headerlink" href="#creating-a-sample-application-hkwsimple" title="Permalink to this headline">¶</a></h2>
-<p>In this section, we explain how to create a HKWirelessHD iOS App. We will create a simple iOS app called <strong>HKWSImple</strong> that can play WAV or MP3 file, and also play Web-based streaming music with HTTP protocol.</p>
+<p>In this section, we explain how to create a HKWirelessHD iOS App. We will create a simple iOS app called <strong>HKWSimple</strong> that can play WAV or MP3 file, and also play Web-based streaming music with HTTP protocol.</p>
 <p>As shown in the figure, the app is composed of a sequence of UIViewController starting from a TableViewController showing a list of available speakers, and then a TableViewController showing a list of songs to play, and then finally a ViewController that shows a playback control panel with Play/Stop buttons and Volume control buttons.</p>
 <div class="figure">
 <img alt="_images/hkwsimple-1.png" src="_images/hkwsimple-1.png" />
 </div>
 <div class="section" id="project-setup">
-<h3>Project Setup<a class="headerlink" href="#project-setup" title="Permalink to this headline">¶</a></h3>
+<h3>1. Project Setup<a class="headerlink" href="#project-setup" title="Permalink to this headline">¶</a></h3>
 <p>For the project setup, please refer to the previous session of <strong>Project Setup with HKWirelessHDSDK (normal version)</strong>.</p>
+</div>
+<div class="section" id="initialize-hkwirelesshd-controller">
+<h3>2. Initialize HKWirelessHD Controller<a class="headerlink" href="#initialize-hkwirelesshd-controller" title="Permalink to this headline">¶</a></h3>
+<p>In HKWSimple app, the initialization of HKWirelessHD Controller is done in the first ViewController called MainVC.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">MainVC</span><span class="p">:</span> <span class="bp">UIViewController</span> <span class="p">{</span>
+<span class="kd">var</span> <span class="nv">g_alert</span><span class="p">:</span> <span class="bp">UIAlertController</span><span class="p">!</span>
+
+        <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+                <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="o">!</span><span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">isInitialized</span><span class="p">()</span> <span class="p">{</span>
+                        <span class="c1">// show the network initialization dialog</span>
+                        <span class="bp">println</span><span class="p">(</span><span class="s">&quot;show dialog&quot;</span><span class="p">)</span>
+                        <span class="n">g_alert</span> <span class="p">=</span> <span class="bp">UIAlertController</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&quot;Initializing&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="s">&quot;If this dialog does not disappear, please check if any other HK WirelessHD App is running on the phone and kill it. Or, your phone is not in a Wifi network.&quot;</span><span class="p">,</span> <span class="n">preferredStyle</span><span class="p">:</span> <span class="p">.</span><span class="n">Alert</span><span class="p">)</span>
+
+                        <span class="kc">self</span><span class="p">.</span><span class="n">presentViewController</span><span class="p">(</span><span class="n">g_alert</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidAppear</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="nb">Bool</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="o">!</span><span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">initializing</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">isInitialized</span><span class="p">()</span> <span class="p">{</span>
+                        <span class="n">dispatch_async</span><span class="p">(</span><span class="n">dispatch_get_global_queue</span><span class="p">(</span><span class="n">DISPATCH_QUEUE_PRIORITY_DEFAULT</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">{</span>
+                                <span class="k">if</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">initializeHKWirelessController</span><span class="p">(</span><span class="n">kLicenseKeyGlobal</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">{</span>
+                <span class="bp">println</span><span class="p">(</span><span class="s">&quot;initializeHKWirelessControl failed : invalid license key&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+                <span class="p">}</span>
+                <span class="bp">println</span><span class="p">(</span><span class="s">&quot;initializeHKWirelessControl - OK&quot;</span><span class="p">);</span>
+
+                <span class="c1">// dismiss the network initialization dialog</span>
+                <span class="k">if</span> <span class="kc">self</span><span class="p">.</span><span class="n">g_alert</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+                <span class="kc">self</span><span class="p">.</span><span class="n">g_alert</span><span class="p">.</span><span class="n">dismissViewControllerAnimated</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+                <span class="p">}</span>
+
+        <span class="p">})</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -260,7 +299,8 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#creating-a-sample-application-hkwsimple">Creating a Sample Application (HKWSimple)</a><ul>
-<li><a class="reference internal" href="#project-setup">Project Setup</a></li>
+<li><a class="reference internal" href="#project-setup">1. Project Setup</a></li>
+<li><a class="reference internal" href="#initialize-hkwirelesshd-controller">2. Initialize HKWirelessHD Controller</a></li>
 </ul>
 </li>
 </ul>
