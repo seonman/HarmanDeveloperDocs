@@ -137,7 +137,7 @@ In HKWSimple app, the initialization of HKWirelessHD Controller is done in the f
 .. code-block:: swift
 
 	class MainVC: UIViewController {
-    	var g_alert: UIAlertController!
+		var g_alert: UIAlertController!
 		
 		override func viewDidLoad() {
 			super.viewDidLoad()
@@ -146,7 +146,6 @@ In HKWSimple app, the initialization of HKWirelessHD Controller is done in the f
 				// show the network initialization dialog
 				println("show dialog")
 				g_alert = UIAlertController(title: "Initializing", message: "If this dialog does not disappear, please check if any other HK WirelessHD App is running on the phone and kill it. Or, your phone is not in a Wifi network.", preferredStyle: .Alert)
-				
 				self.presentViewController(g_alert, animated: true, completion: nil)
 			}
 		}
@@ -155,18 +154,17 @@ In HKWSimple app, the initialization of HKWirelessHD Controller is done in the f
 			if !HKWControlHandler.sharedInstance().initializing() && !HKWControlHandler.sharedInstance().isInitialized() {
 				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 					if HKWControlHandler.sharedInstance().initializeHKWirelessController(kLicenseKeyGlobal) != 0 {
-                    	println("initializeHKWirelessControl failed : invalid license key")
+						println("initializeHKWirelessControl failed : invalid license key")
                     	return
                 	}
                 	println("initializeHKWirelessControl - OK");
                 
                 	// dismiss the network initialization dialog
                 	if self.g_alert != nil {
-                    	self.g_alert.dismissViewControllerAnimated(true, completion: nil)
+						self.g_alert.dismissViewControllerAnimated(true, completion: nil)
                 	}
-                		
-            	})
-        	}
-    	}
+				})
+			}
+		}
 	}
 
