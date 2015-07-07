@@ -257,8 +257,15 @@ The follow codes are for handling events from Device Handler. In this example, i
 		}
 	}
 
+The following figure shows a screen of the speaker list.
+
+.. figure:: img/getting-started-iOS/speaker-list.png
+
+
 4. Create the playlist to play
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+``SongSelectionTVC`` shows the list of songs availabe for playback. It searches for the songs included in the app as bundle, and show the list of the songs. And also it adds the songs for web-based streaming.
 
 .. code-block:: swift
 
@@ -267,11 +274,8 @@ The follow codes are for handling events from Device Handler. In this example, i
 	    var g_mp3Files = [String]()
 	    var curSection = 0
 	    var curRow = 0
-    
 	    let serverUrlPrefix = "http://seonman.github.io/music/";
-    
 	    var songList = ["ec-faith.wav", "hyolyn.mp3"]
-
 	    @IBOutlet var bbiNowPlaying: UIBarButtonItem!
     
 	    override func viewDidLoad() {
@@ -296,8 +300,6 @@ The follow codes are for handling events from Device Handler. In this example, i
 	        bbiNowPlaying.enabled = HKWControlHandler.sharedInstance().isPlaying()
 	    }
 
-	    // MARK: - Table view data source
-
 	    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 	        return 3
 	    }
@@ -316,7 +318,6 @@ The follow codes are for handling events from Device Handler. In this example, i
 
 	    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 	        let cell = tableView.dequeueReusableCellWithIdentifier("SongTitle_Cell", forIndexPath: indexPath) as! UITableViewCell
-        
 	        if indexPath.section == 0 {
 	            cell.textLabel?.text = g_wavFiles[indexPath.row]
 	        } else if indexPath.section == 1 {
@@ -324,25 +325,19 @@ The follow codes are for handling events from Device Handler. In this example, i
 	        } else {
 	            cell.textLabel?.text = songList[indexPath.row]
 	        }
-        
 	        return cell
 	    }
     
 	    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
 	        if section == 0 {
 	            return "WAV file"
 	        } else if section == 1 {
 	            return "MP3 file"
-
 	        }else {
 	            return "Web Streaming"
 	        }
 	    }
-    
-	    // MARK: - Navigation
 
-	    // In a storyboard-based application, you will often want to do a little preparation before navigation
 	    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 	        if segue.identifier == "Song_Cell" {
 	            let section = self.tableView.indexPathForSelectedRow()?.section
@@ -366,12 +361,9 @@ The follow codes are for handling events from Device Handler. In this example, i
 	            destTVC.viewLoadByCellSelection = true
 	            destTVC.nsWavPath = NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent(destTVC.songTitle)
 	            destTVC.songSelectionTVC = self
-
 	        }
-
 	        else if segue.identifier == "NowPlaying_BBI" {
 	            let destTVC:NowPlayingVC = segue.destinationViewController as! NowPlayingVC
-            
 	            if curSection == 0 {
 	                destTVC.songTitle = g_wavFiles[curRow]
 	            } else if curSection == 1 {
@@ -393,6 +385,8 @@ The follow codes are for handling events from Device Handler. In this example, i
 5. Playback and Volume Control
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+``NowPlayingVC`` controls the playback and volume level. To receive the events about playback, it must implement ``HKWPlayerEventHandlerDelegate``, and set the delegate value as itself.
+
 .. code-block:: swift
 
 	class NowPlayingVC: UIViewController, HKWPlayerEventHandlerDelegate {
@@ -405,9 +399,7 @@ The follow codes are for handling events from Device Handler. In this example, i
 	    var curVolume:Int = 50
 	    var songUrl = ""
 	    var serverUrl = ""
-
 	    var g_alert: UIAlertController!
-
 	    @IBOutlet var labelSongTitle: UILabel!
 	    @IBOutlet var btnPlayStop: UIButton!
 	    @IBOutlet var labelAverageVolume: UILabel!
@@ -415,55 +407,18 @@ The follow codes are for handling events from Device Handler. In this example, i
 	    @IBOutlet var btnVolumeUp: UIButton!
 	    @IBOutlet var labelStatus: UILabel!
     
-	    @IBAction func playOrStop(sender: UIButton) {
-	        if HKWControlHandler.sharedInstance().isPlaying() {
-	            HKWControlHandler.sharedInstance().pause()
-	            labelStatus.text = "Play Stopped"
-
-	            btnPlayStop.setTitle("Play", forState: UIControlState.Normal)
-
-	        }
-	        else {
-	            playCurrentTitle()
-	            labelStatus.text = "Now Playing"
-	        }
-	    }
-    
-	    @IBAction func volumeUp(sender: UIButton) {
-	        curVolume += 5
-        
-	        if curVolume > 50 {
-	            curVolume = 50
-	        }
-	        HKWControlHandler.sharedInstance().setVolumeAll(curVolume)
-
-	        labelAverageVolume.text = "Volume: \(curVolume)"
-
-	    }
-	    @IBAction func volumeDown(sender: UIButton) {
-	        curVolume -= 5
-        
-	        if curVolume < 0 {
-	            curVolume = 0
-	        }
-
-	        HKWControlHandler.sharedInstance().setVolumeAll(curVolume)
-	        labelAverageVolume.text = "Volume: \(curVolume)"
-
-	    }
-    
 	    override func viewDidLoad() {
 	        super.viewDidLoad()
-        
+    
 	        HKWPlayerEventHandlerSingleton.sharedInstance().delegate = self
 
 	        labelSongTitle.text = songTitle
 	        curVolume = HKWControlHandler.sharedInstance().getVolume()
 	        labelAverageVolume.text = "Volume: \(curVolume)"
-        
+    
 	        if viewLoadByCellSelection {
 	            playCurrentTitle()
-            
+        
 	        } else {
 	            if HKWControlHandler.sharedInstance().isPlaying() {
 	                btnPlayStop.setTitle("Stop", forState: UIControlState.Normal)
@@ -474,16 +429,39 @@ The follow codes are for handling events from Device Handler. In this example, i
 	                labelStatus.text = "Play Stopped"
 	            }
 	        }
-        
+	    }
+		
+	    @IBAction func playOrStop(sender: UIButton) {
+	        if HKWControlHandler.sharedInstance().isPlaying() {
+	            HKWControlHandler.sharedInstance().pause()
+	            labelStatus.text = "Play Stopped"
+	            btnPlayStop.setTitle("Play", forState: UIControlState.Normal)
+	        }
+	        else {
+	            playCurrentTitle()
+	            labelStatus.text = "Now Playing"
+	        }
+	    }
+    
+	    @IBAction func volumeUp(sender: UIButton) {
+	        curVolume += 5
+	        if curVolume > 50 {
+	            curVolume = 50
+	        }
+	        HKWControlHandler.sharedInstance().setVolumeAll(curVolume)
+	        labelAverageVolume.text = "Volume: \(curVolume)"
 	    }
 
-	    override func didReceiveMemoryWarning() {
-	        super.didReceiveMemoryWarning()
-	        // Dispose of any resources that can be recreated.
+	    @IBAction func volumeDown(sender: UIButton) {
+	        curVolume -= 5
+	        if curVolume < 0 {
+	            curVolume = 0
+	        }
+	        HKWControlHandler.sharedInstance().setVolumeAll(curVolume)
+	        labelAverageVolume.text = "Volume: \(curVolume)"
 	    }
     
 	    func playCurrentTitle() {
-        
 	        // just to be sure that there is no running playback
 	        HKWControlHandler.sharedInstance().stop()
         
@@ -495,7 +473,6 @@ The follow codes are for handling events from Device Handler. In this example, i
 	            }
 	        } else if section == 1 {
 	            let assetUrl = NSURL(fileURLWithPath: nsWavPath)
-            
 	            if HKWControlHandler.sharedInstance().playCAF(assetUrl, songName: songTitle, resumeFlag: false) {
 	                // now playing, so change the icon to "STOP"
 	                btnPlayStop.setTitle("Stop", forState: UIControlState.Normal)
@@ -511,7 +488,6 @@ The follow codes are for handling events from Device Handler. In this example, i
 	            if result == false {
 	                println("playStreamingMedia: failed")
 	                self.btnPlayStop.selected = false
-                
 	                self.g_alert = UIAlertController(title: "Warning", message: "Playing streaming media failed. Please check the Internet connection or check if the meida URL is correct.", preferredStyle: .Alert)
 	                self.g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
 	                self.presentViewController(self.g_alert, animated: true, completion: nil)
