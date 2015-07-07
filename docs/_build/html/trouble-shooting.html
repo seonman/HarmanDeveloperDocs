@@ -72,6 +72,13 @@ $ rm -rf [your-project-name]*
 <img alt="_images/background-execution.png" src="_images/background-execution.png" />
 </div>
 <p>Then, just initialize and start DeepSleepPreventer in <code class="docutils literal"><span class="pre">AppDeleget.application:didFinishedLaunchingWithOption()</span></code> as follows:</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">:</span> <span class="bp">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="bp">NSObject</span><span class="p">:</span> <span class="nb">AnyObject</span><span class="p">]?)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
+
+        <span class="c1">// prevent from turning into background</span>
+        <span class="n">sleepPreventer</span> <span class="p">=</span> <span class="n">MMPDeepSleepPreventer</span><span class="p">()</span>
+        <span class="n">sleepPreventer</span><span class="p">.</span><span class="n">startPreventSleep</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 </div>
 

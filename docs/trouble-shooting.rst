@@ -36,11 +36,12 @@ To enable iOS Audio background mode, you need to enable it in Project setting.
 
 Then, just initialize and start DeepSleepPreventer in ``AppDeleget.application:didFinishedLaunchingWithOption()`` as follows:
 
-.. code-block: swift
+.. code-block:: swift
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-	        // prevent from turning into background
-	        sleepPreventer = MMPDeepSleepPreventer()
-	        sleepPreventer.startPreventSleep()
-			
+		// prevent from turning into background
+		sleepPreventer = MMPDeepSleepPreventer()
+		sleepPreventer.startPreventSleep()
+
+	
