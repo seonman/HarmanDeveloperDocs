@@ -132,7 +132,7 @@ For the project setup, please refer to the previous session of **Project Setup w
 2. Initialize HKWirelessHD Controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In HKWSimple app, the initialization of HKWirelessHD Controller is done in the first ViewController called MainVC.
+In HKWSimple app, the initialization of HKWirelessHD Controller is done in the first ViewController called MainVC. When the app is launched, if HKWControlHandler is not initialized, then the app shows a dialog saying it is about to initialize the HKWControlHandler. This is done in ``viewDidLoad()``. After that, in ``viewDidAppear()``, the app actually tries to initialize HKWControlHandler. And it is successful, it dismisses the dialog. If not, it keeps showing the dialog so that the user can take an action.
 
 .. code-block:: swift
 
@@ -172,20 +172,36 @@ In HKWSimple app, the initialization of HKWirelessHD Controller is done in the f
 3. Get the list of available speakers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+The list of speakers are presented in ``SpeakerSelectionTVC`` TableViewController. It should receive the event about the device status, so it should implement the functions of ``HKWDeviceEventHandelrDelegate``. First, the ``SpeakerSelectionTVC`` class should have ``HKWDeviceEventHandlerDelegate`` in its class declaration.
+
 .. code-block:: swift
 
 	class SpeakerSelectionTVC: UITableViewController, HKWDeviceEventHandlerDelegate {
+
+In ``viewDidLoad()``, the class will set the ``delegate`` of HKWDeviceEventHandler instance as itself. And then, it starts to refresh the device information, by calling ``startRefreshDeviceInfo()``.
+
+.. code-block:: swift
+
 		override func viewDidLoad() {
 			super.viewDidLoad()
 			HKWDeviceEventHandlerSingleton.sharedInstance().delegate = self
 			HKWControlHandler.sharedInstance().startRefreshDeviceInfo()
 		}
+
+If the SpeakerSelectionTVC disappears, for example, by clicking **Back** button of Navigation Controller, it should stop refreshing the device info, so it calls ``stopRefreshDeviceInfo()`` in ``viewDidDisappear()``.
+
+.. code-block:: swift
     
 		override func viewDidDisappear(animated: Bool) {
 			super.viewDidDisappear(animated)
 			HKWControlHandler.sharedInstance().stopRefreshDeviceInfo()
 		}
-			
+
+The follow codes are all about listing the speakers with their detailed information in the TableView. If a speaker is active, that is, the speaker belongs to the current session, then it checks the checkmark of the cell.
+
+.. code-block:: swift
+    
+
 		override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 			return HKWControlHandler.sharedInstance().getGroupCount()
 		}
@@ -227,6 +243,10 @@ In HKWSimple app, the initialization of HKWirelessHD Controller is done in the f
 				cell.accessoryType = UITableViewCellAccessoryType.None
 			}
 		}
+
+The follow codes are for handling events from Device Handler. In this example, it just redraw the table when it receives any device update events from the HKWControlHandler.
+
+.. code-block:: swift
 					
 		func hkwDeviceStateUpdated(deviceId: Int64, withReason reason: Int) {
 			self.tableView.reloadData()
