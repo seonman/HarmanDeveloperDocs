@@ -33,7 +33,7 @@ Project Setup with HKWirelessHDSDKlw (lightweight version)
 -----------------------------------------------------------
 
 Include HKWirelessHDSDKlw into your project
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Add *HKWirelessHDSDKlw* to your project by dragging and dropping the HKWirelessHDSDKlw folder into the project navigator.
 - When you get a dialog saying *Choose options for adding these files* :,
@@ -41,8 +41,8 @@ Include HKWirelessHDSDKlw into your project
 	- Select *Create groups*, and click finish.
 - By doing this, the include headers and libraries for HKWirelessHDSDKlw are added to your project. 
 
-Make sure if libHKWirelessHDlw.a was added to your "Link Binary With Libraries"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Make sure if libHKWirelessHDlw.a was added to your *Link Binary With Libraries*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Project Setting > Your Targets > Build Phases > Link Binary With Libraries 
 	- Check if *libHKWirelessHDlw.a* was added to the list.
@@ -53,7 +53,7 @@ After adding the HKWirelessHDSDKlw folder into your project and adding libHKWire
 .. figure:: img/getting-started-iOS/project-setting-lw-1.png
 
 Add Swift Bridging Header
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 HKWirelessHD SDK has been written in C++ and Objective-C. Therefore, when you use the SDK in Swift, you should include Swift Bridging Header in your project. To do this:
 
@@ -80,6 +80,35 @@ Add -lstdc++ as linker flag
 	- Add “-lstdc++” in the text field
 
 .. figure:: img/getting-started-iOS/project-setting-4.png
+
+Project Setup with HKWirelessHDSDK (normal version)
+-----------------------------------------------------------
+
+Include HKWirelessHDSDK into your project
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Add *HKWirelessHDSDK* to your project by dragging and dropping the HKWirelessHDSDK folder into the project navigator.
+- When you get a dialog saying *Choose options for adding these files* :,
+	- Check the checkmark of *Copy items if needed*
+	- Select *Create groups*, and click finish.
+- By doing this, the include headers and libraries for HKWirelessHDSDK are added to your project. 
+
+Make sure if libHKWirelessHD.a was added to your *Link Binary With Libraries*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Project Setting > Your Targets > Build Phases > Link Binary With Libraries 
+	- Check if *libHKWirelessHDlw.a* was added to the list.
+	- If it was not added, add it by clicking *+* and *Add Other...*.
+
+Add libz.dylib and libbz.dylib to your *Link Binary With Libraries*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Project Setting > Your Targets > Build Phases > Link Binary With Libraries 
+	- Click *+* and find and add libz.dylib and libbz2.lib to the list
+
+After adding the HKWirelessHDSDKw folder into your project and adding libHKWirelessHD.a, libz.dylib and libbz2.dylib, the project navigator will look like as below:
+
+.. figure:: img/getting-started-iOS/project-setting-normal.png
 
 
 Sample Application (HKWSimple)

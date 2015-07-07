@@ -103,7 +103,7 @@
 </ul>
 </div>
 <div class="section" id="make-sure-if-libhkwirelesshdlw-a-was-added-to-your-link-binary-with-libraries">
-<h3>Make sure if libHKWirelessHDlw.a was added to your &#8220;Link Binary With Libraries&#8221;<a class="headerlink" href="#make-sure-if-libhkwirelesshdlw-a-was-added-to-your-link-binary-with-libraries" title="Permalink to this headline">¶</a></h3>
+<h3>Make sure if libHKWirelessHDlw.a was added to your <em>Link Binary With Libraries</em><a class="headerlink" href="#make-sure-if-libhkwirelesshdlw-a-was-added-to-your-link-binary-with-libraries" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><dl class="first docutils">
 <dt>Project Setting &gt; Your Targets &gt; Build Phases &gt; Link Binary With Libraries</dt>
@@ -163,6 +163,58 @@
 </div>
 </div>
 </div>
+<div class="section" id="project-setup-with-hkwirelesshdsdk-normal-version">
+<h2>Project Setup with HKWirelessHDSDK (normal version)<a class="headerlink" href="#project-setup-with-hkwirelesshdsdk-normal-version" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="include-hkwirelesshdsdk-into-your-project">
+<h3>Include HKWirelessHDSDK into your project<a class="headerlink" href="#include-hkwirelesshdsdk-into-your-project" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Add <em>HKWirelessHDSDK</em> to your project by dragging and dropping the HKWirelessHDSDK folder into the project navigator.</p>
+</li>
+<li><dl class="first docutils">
+<dt>When you get a dialog saying <em>Choose options for adding these files</em> :,</dt>
+<dd><ul class="first last simple">
+<li>Check the checkmark of <em>Copy items if needed</em></li>
+<li>Select <em>Create groups</em>, and click finish.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">By doing this, the include headers and libraries for HKWirelessHDSDK are added to your project.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="make-sure-if-libhkwirelesshd-a-was-added-to-your-link-binary-with-libraries">
+<h3>Make sure if libHKWirelessHD.a was added to your <em>Link Binary With Libraries</em><a class="headerlink" href="#make-sure-if-libhkwirelesshd-a-was-added-to-your-link-binary-with-libraries" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Project Setting &gt; Your Targets &gt; Build Phases &gt; Link Binary With Libraries</dt>
+<dd><ul class="first last simple">
+<li>Check if <em>libHKWirelessHDlw.a</em> was added to the list.</li>
+<li>If it was not added, add it by clicking <em>+</em> and <em>Add Other...</em>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="add-libz-dylib-and-libbz-dylib-to-your-link-binary-with-libraries">
+<h3>Add libz.dylib and libbz.dylib to your <em>Link Binary With Libraries</em><a class="headerlink" href="#add-libz-dylib-and-libbz-dylib-to-your-link-binary-with-libraries" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Project Setting &gt; Your Targets &gt; Build Phases &gt; Link Binary With Libraries</dt>
+<dd><ul class="first last simple">
+<li>Click <em>+</em> and find and add libz.dylib and libbz2.lib to the list</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>After adding the HKWirelessHDSDKw folder into your project and adding libHKWirelessHD.a, libz.dylib and libbz2.dylib, the project navigator will look like as below:</p>
+<div class="figure">
+<img alt="_images/project-setting-normal.png" src="_images/project-setting-normal.png" />
+</div>
+</div>
+</div>
 <div class="section" id="sample-application-hkwsimple">
 <h2>Sample Application (HKWSimple)<a class="headerlink" href="#sample-application-hkwsimple" title="Permalink to this headline">¶</a></h2>
 </div>
@@ -182,9 +234,15 @@
 <li><a class="reference internal" href="#">Getting Started Guide (iOS)</a><ul>
 <li><a class="reference internal" href="#project-setup-with-hkwirelesshdsdklw-lightweight-version">Project Setup with HKWirelessHDSDKlw (lightweight version)</a><ul>
 <li><a class="reference internal" href="#include-hkwirelesshdsdklw-into-your-project">Include HKWirelessHDSDKlw into your project</a></li>
-<li><a class="reference internal" href="#make-sure-if-libhkwirelesshdlw-a-was-added-to-your-link-binary-with-libraries">Make sure if libHKWirelessHDlw.a was added to your &#8220;Link Binary With Libraries&#8221;</a></li>
+<li><a class="reference internal" href="#make-sure-if-libhkwirelesshdlw-a-was-added-to-your-link-binary-with-libraries">Make sure if libHKWirelessHDlw.a was added to your <em>Link Binary With Libraries</em></a></li>
 <li><a class="reference internal" href="#add-swift-bridging-header">Add Swift Bridging Header</a></li>
 <li><a class="reference internal" href="#add-lstdc-as-linker-flag">Add -lstdc++ as linker flag</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#project-setup-with-hkwirelesshdsdk-normal-version">Project Setup with HKWirelessHDSDK (normal version)</a><ul>
+<li><a class="reference internal" href="#include-hkwirelesshdsdk-into-your-project">Include HKWirelessHDSDK into your project</a></li>
+<li><a class="reference internal" href="#make-sure-if-libhkwirelesshd-a-was-added-to-your-link-binary-with-libraries">Make sure if libHKWirelessHD.a was added to your <em>Link Binary With Libraries</em></a></li>
+<li><a class="reference internal" href="#add-libz-dylib-and-libbz-dylib-to-your-link-binary-with-libraries">Add libz.dylib and libbz.dylib to your <em>Link Binary With Libraries</em></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#sample-application-hkwsimple">Sample Application (HKWSimple)</a></li>
