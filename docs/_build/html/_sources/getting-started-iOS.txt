@@ -382,6 +382,12 @@ The following figure shows a screen of the speaker list.
 	    }
 	}
 
+The following figure shows an example of the SongSelectionTVC screen.
+
+.. figure:: img/getting-started-iOS/song-list.png
+	:scale: 40
+
+
 5. Playback and Volume Control
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
