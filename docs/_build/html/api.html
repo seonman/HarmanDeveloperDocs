@@ -147,10 +147,12 @@
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">playCAF:(NSURL</span> <span class="pre">*)assetURL</span> <span class="pre">songName:(NSString*)songName</span> <span class="pre">resumeFlag:(BOOL)resumeFlag;</span></code></dd>
 </dl>
-<p><strong>Parameters:</strong>
-- <code class="docutils literal"><span class="pre">(NSURL*)</span> <span class="pre">assetURL</span></code> - NSURL to the audio file
-- <code class="docutils literal"><span class="pre">(NSString*)</span> <span class="pre">songName</span></code> -  the song name to be played. The soneName is used internally to save a temporary PCM file convered from the original audio file
-- <code class="docutils literal"><span class="pre">(BOOL)</span> <span class="pre">resumeFlag</span></code> -  a boolean that specifies if the play resume from the point that paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSURL*)</span> <span class="pre">assetURL</span></code> - NSURL to the audio file</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)</span> <span class="pre">songName</span></code> -  the song name to be played. The soneName is used internally to save a temporary PCM file convered from the original audio file</li>
+<li><code class="docutils literal"><span class="pre">(BOOL)</span> <span class="pre">resumeFlag</span></code> -  a boolean that specifies if the play resume from the point that paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.</li>
+</ul>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating success or failure</dd>
