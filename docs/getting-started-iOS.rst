@@ -35,18 +35,18 @@ Project Setup with HKWirelessHDSDKlw (lightweight version)
 Include HKWirelessHDSDKlw into your project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Add **HKWirelessHDSDKlw ** to your project by dragging and dropping the HKWirelessHDSDKlw folder into the project navigator.
-- When you get a dialog saying "Choose options for adding these files:",
-	- Check the checkmark of "Copy items if needed"
-	- Select “Create groups”, and click finish.
+- Add **HKWirelessHDSDKlw** to your project by dragging and dropping the HKWirelessHDSDKlw folder into the project navigator.
+- When you get a dialog saying **Choose options for adding these files** :,
+	- Check the checkmark of **Copy items if needed**
+	- Select **Create groups**, and click finish.
 - By doing this, the include headers and libraries for HKWirelessHDSDKlw are added to your project. 
 
 Make sure if libHKWirelessHDlw.a was added to your "Link Binary With Libraries"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Project Setting > Your Targets > Build Phases > Link Binary With Libraries 
-	- Check if 'libHKWirelessHDlw.a' was added to the list.
-	- If it was not added, add it by clicking '+' and 'Add Other...'.
+	- Check if **libHKWirelessHDlw.a** was added to the list.
+	- If it was not added, add it by clicking **+** and **Add Other...**.
 
 After adding the HKWirelessHDSDKlw folder into your project and adding libHKWirelessHD.a, the project navigator will look like as below:
 
