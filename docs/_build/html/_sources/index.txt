@@ -42,8 +42,8 @@ This documentation is organized into a few different sections:
 .. _SDK Overview: sdk-overview.html
 .. _Getting Started (iOS): getting-started-iOS.html
 .. _Programming Guide: programming-guide.html
-.. _API Documentation: api.html
 .. _Architecture Overview: architecture-overview.html
+.. _API Documentation: api.html
 .. _HKWHub Specification: hkwhub-spec.html
 .. _Troubleshooting: trouble-shooting.html
 
@@ -82,6 +82,14 @@ Architecture Overview
 
 	architecture-overview
 
+API Documentation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	api
+	
 HKWHub Specification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
