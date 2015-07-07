@@ -98,18 +98,22 @@ Make sure if libHKWirelessHD.a was added to your *Link Binary With Libraries*
 
 - Project Setting > Your Targets > Build Phases > Link Binary With Libraries 
 	- Check if *libHKWirelessHDlw.a* was added to the list.
-	- If it was not added, add it by clicking *+* and *Add Other...*.
+	- If it was not added, add it by clicking '+' and *Add Other...*.
 
 Add libz.dylib and libbz.dylib to your *Link Binary With Libraries*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Project Setting > Your Targets > Build Phases > Link Binary With Libraries 
-	- Click *+* and find and add libz.dylib and libbz2.lib to the list
+	- Click '+' and find and add *libz.dylib* and *libbz2.lib* to the list
 
 After adding the HKWirelessHDSDKw folder into your project and adding libHKWirelessHD.a, libz.dylib and libbz2.dylib, the project navigator will look like as below:
 
 .. figure:: img/getting-started-iOS/project-setting-normal.png
 
+Add Swift Bridging Header and -lstdc++ as linker flag
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Follow the instruction for adding Swift bridging header and -lstdc++ linker flag as described in the previous section.
 
 Sample Application (HKWSimple)
 -------------------------------
