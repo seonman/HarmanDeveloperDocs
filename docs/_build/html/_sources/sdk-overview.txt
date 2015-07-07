@@ -90,11 +90,11 @@ The companion watch app is provided as Watch App Extension within a single iOS A
 The implementation note for Watch App support will be available at the developer community web site shortly.
 
 .. figure:: img/sdk-overview/hkwplayer-watch-1.png
-	:scale: 60
+	:scale: 40
 .. figure:: img/sdk-overview/hkwplayer-watch-2.png
-	:scale: 60
+	:scale: 40
 .. figure:: img/sdk-overview/hkwplayer-watch-3.png
-	:scale: 60
+	:scale: 40
 	
 HKWHub App (Hub for IoT Integration)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -106,9 +106,9 @@ User can add any songs or sound file from iOS Music app to the media list, so th
 The following images are the screen captures of HKWHub app.
 
 .. figure:: img/sdk-overview/hkwhub-1.png
-	:scale: 60
+	:scale: 40
 .. figure:: img/sdk-overview/hkwhub-2.png
-	:scale: 60
+	:scale: 40
 
 We also created a sample HTML5 app working as a client of the HKWHub app. The HTML5 app uses AJAX to send REST API request to the HKWHub app to control speakers and stream music. The UI of the HTML5 app is based on Google's Polymer v0.5 (https://www.polymer-project.org/0.5/).
 
@@ -116,7 +116,7 @@ The following images are the screen captures of the HTML5 app.
 
 .. figure:: img/sdk-overview/webhub-1.png
 .. figure:: img/sdk-overview/webhub-2.png
-
+.. figure:: img/sdk-overview/webhub-3.png
 
 HKWSimple (a very simple music player for getting started with HKWirelessHDSDK)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -125,4 +125,9 @@ HKWSimple app is a simple music player that is created to explain to developer h
 
 Just get started with HKWSimple app to quickly build your own HKWirelessHD app!
 
-
+.. figure:: img/sdk-overview/hkwsimple-1.png
+	:scale: 40
+.. figure:: img/sdk-overview/hkwsimple-2.png
+	:scale: 40
+.. figure:: img/sdk-overview/hkwsimple-3.png
+	:scale: 40
