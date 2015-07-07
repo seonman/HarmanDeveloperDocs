@@ -70,14 +70,6 @@
 <dt><strong>Returns:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - an integer indicating success (0 or HKW_INIT_SUCCESS) or failure (-1 or HKW_INIT_FAILURE_LICENSE_INVALID)</dd>
 </dl>
-<p><strong>Example:</strong></p>
-<div class="highlight-groovy"><div class="highlight"><pre><span class="kt">def</span> <span class="nf">installed</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">log</span><span class="o">.</span><span class="na">debug</span> <span class="s2">&quot;installed with settings: $settings&quot;</span>
-
-    <span class="c1">// subscribe to events, create scheduled jobs.</span>
-<span class="o">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="isinitialized">
@@ -158,6 +150,98 @@
 <dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating success or failure</dd>
 </dl>
 </div>
+<hr class="docutils" />
+<div class="section" id="playcaffromcertaintime">
+<h3>playCAFFromCertainTime()<a class="headerlink" href="#playcaffromcertaintime" title="Permalink to this headline">¶</a></h3>
+<p>Plays a CAF audio file from a certain time. CAF includes mp3, wav, and m4a. Differently from <code class="docutils literal"><span class="pre">playCAF()</span></code>, this function allows to play a song from a certain time, specifyed by startTime (second). PlaybackStateChanged callback will return the status, EPlayerState_Play.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">playCAFFromCertainTime:(NSURL</span> <span class="pre">*)assetURL</span> <span class="pre">songName:(NSString*)songName</span> <span class="pre">startTime:(NSInteger)startTime;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSURL</span> <span class="pre">*)assetURL</span></code> - NSURL to the audio file.</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)songName</span></code> - the song name to be played. This information is used internally to save a temporary PCM file converted from the original audio file.</li>
+<li><a href="#id1"><span class="problematic" id="id2">``</span></a>(NSInteger)startTime - time in second that specifies the start time.</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating success or failure</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="playwav">
+<h3>playWAV()<a class="headerlink" href="#playwav" title="Permalink to this headline">¶</a></h3>
+<p>Plays a WAV file. PlaybackStateChanged callback will return the status, EPlayerState_Play.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">playWAV:(NSString*)wavPath;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating success or failure</dd>
+</dl>
+</div>
+<div class="section" id="playstreamingmedia">
+<h3>playStreamingMedia()<a class="headerlink" href="#playstreamingmedia" title="Permalink to this headline">¶</a></h3>
+<p>Plays a streaming media. Note that when you stop playing the streaming music, you must use stop(), not pause().</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)playStreamingMedia:(NSString</span> <span class="pre">*)streamingMediaUrl</span> <span class="pre">withCallback:(void</span> <span class="pre">(^)(bool</span> <span class="pre">result))completedCallback;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSString*)streamingMediaUrl</span></code> - a string that specifies the URL of the streaming media source. It starts with a protocol name, such as &#8220;<a class="reference external" href="http://">http://</a>&#8221; or &#8220;rtps://&#8221;. Currently, http, rtps, and mms are supported. The supported file format is mp3, m4a, wav.</li>
+<li><code class="docutils literal"><span class="pre">(void</span> <span class="pre">(^)(bool</span> <span class="pre">result))completedCallback</span></code> - a callback that returns the result of the playback</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="pause">
+<h3>pause()<a class="headerlink" href="#pause" title="Permalink to this headline">¶</a></h3>
+<p>Pauses the current playback. PlaybackStateChanged callback will return the status, EPlayerState_Pause.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">pause;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="stop">
+<h3>stop()<a class="headerlink" href="#stop" title="Permalink to this headline">¶</a></h3>
+<p>Stops the current playback. PlaybackStateChanged callback will return the status, EPlayerState_Stop.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">stop;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="isplaying">
+<h3>isPlaying()<a class="headerlink" href="#isplaying" title="Permalink to this headline">¶</a></h3>
+<p>Inquires whether an audio file is being played or not.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(bool)</span> <span class="pre">isPlaying;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating if the audio is being played or now.</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getplayerstate">
+<h3>getPlayerState()<a class="headerlink" href="#getplayerstate" title="Permalink to this headline">¶</a></h3>
+<p>Inquires the current state of playback.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(HKPlayerState)getPlayerState;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">HKPlayState</span></code> - indicates the current player state.</dd>
+</dl>
+<hr class="docutils" />
+</div>
 </div>
 </div>
 
@@ -187,6 +271,13 @@
 </li>
 <li><a class="reference internal" href="#playback-control">Playback Control</a><ul>
 <li><a class="reference internal" href="#playcaf">playCAF()</a></li>
+<li><a class="reference internal" href="#playcaffromcertaintime">playCAFFromCertainTime()</a></li>
+<li><a class="reference internal" href="#playwav">playWAV()</a></li>
+<li><a class="reference internal" href="#playstreamingmedia">playStreamingMedia()</a></li>
+<li><a class="reference internal" href="#pause">pause()</a></li>
+<li><a class="reference internal" href="#stop">stop()</a></li>
+<li><a class="reference internal" href="#isplaying">isPlaying()</a></li>
+<li><a class="reference internal" href="#getplayerstate">getPlayerState()</a></li>
 </ul>
 </li>
 </ul>

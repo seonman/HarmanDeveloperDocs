@@ -29,16 +29,6 @@ Initializes and starts HKWirelessHD controller. This API requires a license key 
 **Returns:**
     ``NSInteger`` - an integer indicating success (0 or HKW_INIT_SUCCESS) or failure (-1 or HKW_INIT_FAILURE_LICENSE_INVALID)
 
-**Example:**
-
-.. code-block:: groovy
-
-    def installed() {
-        log.debug "installed with settings: $settings"
-
-        // subscribe to events, create scheduled jobs.
-    }
-
 ----
 
 isInitialized()
@@ -126,3 +116,108 @@ Plays a CAF audio file. CAF includes MP3 and WAV. PlaybackStateChanged callback 
 
 **Returns:**
 	``BOOL`` - boolean value indicating success or failure
+
+----
+
+playCAFFromCertainTime()
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Plays a CAF audio file from a certain time. CAF includes mp3, wav, and m4a. Differently from ``playCAF()``, this function allows to play a song from a certain time, specifyed by startTime (second). PlaybackStateChanged callback will return the status, EPlayerState_Play.
+
+**Signature:**
+	``- (BOOL) playCAFFromCertainTime:(NSURL *)assetURL songName:(NSString*)songName startTime:(NSInteger)startTime;``
+
+**Parameters:**
+
+- ``(NSURL *)assetURL`` - NSURL to the audio file.
+- ``(NSString*)songName`` - the song name to be played. This information is used internally to save a temporary PCM file converted from the original audio file.
+- ``(NSInteger)startTime - time in second that specifies the start time.
+
+**Returns:**
+	``BOOL`` - boolean value indicating success or failure
+
+----
+
+playWAV()
+~~~~~~~~~~~~
+
+Plays a WAV file. PlaybackStateChanged callback will return the status, EPlayerState_Play.
+
+**Signature:**
+	``- (BOOL) playWAV:(NSString*)wavPath;``
+
+**Returns:**
+	``BOOL`` - boolean value indicating success or failure
+	
+playStreamingMedia()
+~~~~~~~~~~~~~~~~~~~~~~
+
+Plays a streaming media. Note that when you stop playing the streaming music, you must use stop(), not pause().
+
+**Signature:**
+	``- (void)playStreamingMedia:(NSString *)streamingMediaUrl withCallback:(void (^)(bool result))completedCallback;``
+
+**Parameters:**
+
+- ``(NSString*)streamingMediaUrl`` - a string that specifies the URL of the streaming media source. It starts with a protocol name, such as "http://" or "rtps://". Currently, http, rtps, and mms are supported. The supported file format is mp3, m4a, wav.
+- ``(void (^)(bool result))completedCallback`` - a callback that returns the result of the playback
+
+**Returns:**
+	``void``
+	
+----
+
+pause()
+~~~~~~~~~~
+
+Pauses the current playback. PlaybackStateChanged callback will return the status, EPlayerState_Pause.
+
+**Signature:**
+	``- (void) pause;``
+
+**Returns:**
+	``void``
+
+----
+
+stop()
+~~~~~~~~~
+
+Stops the current playback. PlaybackStateChanged callback will return the status, EPlayerState_Stop.
+
+**Signature:**
+	``- (void) stop;``
+
+**Returns:**
+	``void``
+
+----
+
+isPlaying()
+~~~~~~~~~~~~
+
+Inquires whether an audio file is being played or not.
+
+**Signature:**
+	``- (bool) isPlaying;``
+
+**Returns:**
+	``BOOL`` - boolean value indicating if the audio is being played or now.
+
+----
+	
+getPlayerState()
+~~~~~~~~~~~~~~~~~~~
+
+Inquires the current state of playback.
+
+**Signature:**
+	``- (HKPlayerState)getPlayerState;``
+	
+**Returns:**
+	``HKPlayState`` - indicates the current player state.
+	
+----
+
+
+
