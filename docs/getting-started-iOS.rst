@@ -260,7 +260,7 @@ The follow codes are for handling events from Device Handler. In this example, i
 The following figure shows a screen of the speaker list.
 
 .. figure:: img/getting-started-iOS/speaker-list.png
-
+	:scale: 40
 
 4. Create the playlist to play
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
