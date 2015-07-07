@@ -334,6 +334,151 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="create-the-playlist-to-play">
+<h3>4. Create the playlist to play<a class="headerlink" href="#create-the-playlist-to-play" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-swift"><div class="highlight"><pre>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>class SongSelectionTVC: UITableViewController {</dt>
+<dd><p class="first">var g_wavFiles = [String]()
+var g_mp3Files = [String]()
+var curSection = 0
+var curRow = 0</p>
+<p>let serverUrlPrefix = &#8220;<a class="reference external" href="http://seonman.github.io/music/">http://seonman.github.io/music/</a>&#8221;;</p>
+<p>var songList = [&#8220;ec-faith.wav&#8221;, &#8220;hyolyn.mp3&#8221;]</p>
+<p>&#64;IBOutlet var bbiNowPlaying: UIBarButtonItem!</p>
+<dl class="docutils">
+<dt>override func viewDidLoad() {</dt>
+<dd><p class="first">super.viewDidLoad()</p>
+<p>var bundleRoot = NSBundle.mainBundle().bundlePath
+var dirContents: NSArray = NSFileManager.defaultManager().contentsOfDirectoryAtPath(bundleRoot, error: nil)!
+var fltr: NSPredicate = NSPredicate(format: &#8220;self ENDSWITH &#8216;.wav&#8217;&#8221;)
+g_wavFiles = dirContents.filteredArrayUsingPredicate(fltr) as! [String]</p>
+<dl class="docutils">
+<dt>for var i = 0; i &lt; g_wavFiles.count; i++ {</dt>
+<dd>println(&#8220;wav file: (g_wavFiles[i])&#8221;)</dd>
+</dl>
+<p>}</p>
+<p>var fltr2: NSPredicate = NSPredicate(format: &#8220;self ENDSWITH &#8216;.mp3&#8217;&#8221;)
+g_mp3Files = dirContents.filteredArrayUsingPredicate(fltr2) as! [String]</p>
+<dl class="docutils">
+<dt>for var i = 0; i &lt; g_mp3Files.count; i++ {</dt>
+<dd>println(&#8220;mp3 file: (g_mp3Files[i])&#8221;)</dd>
+</dl>
+<p>}</p>
+<p class="last">bbiNowPlaying.enabled = HKWControlHandler.sharedInstance().isPlaying()</p>
+</dd>
+</dl>
+<p>}</p>
+<p>// MARK: - Table view data source</p>
+<dl class="docutils">
+<dt>override func numberOfSectionsInTableView(tableView: UITableView) -&gt; Int {</dt>
+<dd>return 3</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int {</dt>
+<dd><dl class="first docutils">
+<dt>if section == 0 {</dt>
+<dd>return g_wavFiles.count</dd>
+<dt>} else if section == 1 {</dt>
+<dd>return g_mp3Files.count</dd>
+<dt>} else if section == 2 {</dt>
+<dd>return songList.count</dd>
+<dt>}else {</dt>
+<dd>return 0</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -&gt; UITableViewCell {</dt>
+<dd><p class="first">let cell = tableView.dequeueReusableCellWithIdentifier(&#8220;SongTitle_Cell&#8221;, forIndexPath: indexPath) as! UITableViewCell</p>
+<dl class="docutils">
+<dt>if indexPath.section == 0 {</dt>
+<dd>cell.textLabel?.text = g_wavFiles[indexPath.row]</dd>
+<dt>} else if indexPath.section == 1 {</dt>
+<dd>cell.textLabel?.text = g_mp3Files[indexPath.row]</dd>
+<dt>} else {</dt>
+<dd>cell.textLabel?.text = songList[indexPath.row]</dd>
+</dl>
+<p>}</p>
+<p class="last">return cell</p>
+</dd>
+</dl>
+<p>}</p>
+<p>override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -&gt; String? {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>if section == 0 {</dt>
+<dd>return &#8220;WAV file&#8221;</dd>
+<dt>} else if section == 1 {</dt>
+<dd>return &#8220;MP3 file&#8221;</dd>
+<dt>}else {</dt>
+<dd>return &#8220;Web Streaming&#8221;</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+<p>// MARK: - Navigation</p>
+<p>// In a storyboard-based application, you will often want to do a little preparation before navigation
+override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>if segue.identifier == &#8220;Song_Cell&#8221; {</dt>
+<dd><p class="first">let section = self.tableView.indexPathForSelectedRow()?.section
+curSection = section!
+let row = self.tableView.indexPathForSelectedRow()?.row
+curRow = row!</p>
+<p>let destTVC:NowPlayingVC = segue.destinationViewController as! NowPlayingVC
+destTVC.section = curSection
+destTVC.row = curRow
+if curSection == 0 {</p>
+<blockquote>
+<div>destTVC.songTitle = g_wavFiles[curRow]</div></blockquote>
+<dl class="docutils">
+<dt>} else if curSection == 1 {</dt>
+<dd>destTVC.songTitle = g_mp3Files[curRow]</dd>
+<dt>} else {</dt>
+<dd>destTVC.songTitle = songList[curRow]
+destTVC.songUrl = serverUrlPrefix + songList[curRow]
+destTVC.serverUrl = serverUrlPrefix</dd>
+</dl>
+<p>}</p>
+<p class="last">destTVC.viewLoadByCellSelection = true
+destTVC.nsWavPath = NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent(destTVC.songTitle)
+destTVC.songSelectionTVC = self</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>else if segue.identifier == &#8220;NowPlaying_BBI&#8221; {</dt>
+<dd><p class="first">let destTVC:NowPlayingVC = segue.destinationViewController as! NowPlayingVC</p>
+<dl class="docutils">
+<dt>if curSection == 0 {</dt>
+<dd>destTVC.songTitle = g_wavFiles[curRow]</dd>
+<dt>} else if curSection == 1 {</dt>
+<dd>destTVC.songTitle = g_mp3Files[curRow]</dd>
+<dt>} else {</dt>
+<dd>destTVC.songTitle = songList[curRow]
+destTVC.songUrl = serverUrlPrefix + songList[curRow]
+destTVC.serverUrl = serverUrlPrefix</dd>
+</dl>
+<p>}</p>
+<p class="last">destTVC.viewLoadByCellSelection = false
+destTVC.nsWavPath = NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent(destTVC.songTitle)
+destTVC.songSelectionTVC = self</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+</div>
 </div>
 </div>
 
@@ -367,6 +512,7 @@
 <li><a class="reference internal" href="#project-setup">1. Project Setup</a></li>
 <li><a class="reference internal" href="#initialize-hkwirelesshd-controller">2. Initialize HKWirelessHD Controller</a></li>
 <li><a class="reference internal" href="#get-the-list-of-available-speakers">3. Get the list of available speakers</a></li>
+<li><a class="reference internal" href="#create-the-playlist-to-play">4. Create the playlist to play</a></li>
 </ul>
 </li>
 </ul>
