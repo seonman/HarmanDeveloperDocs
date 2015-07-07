@@ -52,7 +52,10 @@
   <div class="section" id="getting-started-guide-ios">
 <h1>Getting Started Guide (iOS)<a class="headerlink" href="#getting-started-guide-ios" title="Permalink to this headline">¶</a></h1>
 <p>HKWirelessHD SDK supports both Objective-C and Swift. This document assumes that developer creates his/her app using the Swift language.</p>
-<p>There are two versions of SDK - a normal version (HKWirelessHDSDK) and a lightweight version (HKWirelessHDSDKlw). Most of the features are common in the two version. The only difference is that the normal version includes an API for playing web streaming audio, while the lightweight version does not.</p>
+<p>There are two versions of SDK
+- a normal version: HKWirelessHDSDK
+- a lightweight version: HKWirelessHDSDKlw</p>
+<p>Most of the features are common in the two version. The only difference is that the normal version includes an API for playing web streaming audio, while the lightweight version does not.</p>
 <p>The reason we support the SDK as two separate version is that we know that many developers want a feature of web streaming. To support this feature, we need to include a version of FFMPEG library inside of the SDK library. But, some developers may want to use their own version of MMPEG to handle audio stream for some particular reasons.</p>
 <p>Please see the descriptions of each version below and make a proper choice for your app.</p>
 <ul>
@@ -78,36 +81,43 @@
 </li>
 </ul>
 <p>So, if you do not need web streaming music playback for your app, you may use HKWirelessHDlw (lightweight) version. Otherwise, you should use HHWirelessHD version.</p>
-<p>In the section, we will use HKWSimple app as an example of normal version and HKPage app as an example of lightweight version.</p>
-<div class="section" id="project-setup-with-hkwireless-normal-version">
-<h2>Project Setup with HKWireless (normal version)<a class="headerlink" href="#project-setup-with-hkwireless-normal-version" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="include-hkwirelesshdsdk-into-your-project">
-<h3>Include HKWirelessHDSDK into your project<a class="headerlink" href="#include-hkwirelesshdsdk-into-your-project" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Add HKWirelessHDSDK to your project by dragging and dropping the HKWirelessHDSDK folder into the project navigator.</li>
-<li>Select “Create groups”, and click finish. By doing this, the include header path for HKWirelessHD SDK is added to your project.</li>
-<li>We need only the “include” folder, so you may remove the references to the other items in the folder. (Right click on any items you want to remove, select “Delete”, and then select “Remove References”.)</li>
+<p>In the section, we will use HKWSimple app as an example of using the normal version and HKPage app as an example of using the lightweight version.</p>
+<div class="section" id="project-setup-with-hkwirelesshdsdklw-lightweight-version">
+<h2>Project Setup with HKWirelessHDSDKlw (lightweight version)<a class="headerlink" href="#project-setup-with-hkwirelesshdsdklw-lightweight-version" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="include-hkwirelesshdsdklw-into-your-project">
+<h3>Include HKWirelessHDSDKlw into your project<a class="headerlink" href="#include-hkwirelesshdsdklw-into-your-project" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Add <a href="#id1"><span class="problematic" id="id2">**</span></a>HKWirelessHDSDKlw ** to your project by dragging and dropping the HKWirelessHDSDKlw folder into the project navigator.</p>
+</li>
+<li><dl class="first docutils">
+<dt>When you get a dialog saying &#8220;Choose options for adding these files:&#8221;,</dt>
+<dd><ul class="first last simple">
+<li>Check the checkmark of &#8220;Copy items if needed&#8221;</li>
+<li>Select “Create groups”, and click finish.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">By doing this, the include headers and libraries for HKWirelessHDSDKlw are added to your project.</p>
+</li>
 </ul>
 </div>
-<div class="section" id="add-libhkwirelesshd-a-as-link-binary">
-<h3>Add libHKWirelessHD.a as link binary<a class="headerlink" href="#add-libhkwirelesshd-a-as-link-binary" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="make-sure-if-libhkwirelesshdlw-a-was-added-to-your-link-binary-with-libraries">
+<h3>Make sure if libHKWirelessHDlw.a was added to your &#8220;Link Binary With Libraries&#8221;<a class="headerlink" href="#make-sure-if-libhkwirelesshdlw-a-was-added-to-your-link-binary-with-libraries" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><dl class="first docutils">
 <dt>Project Setting &gt; Your Targets &gt; Build Phases &gt; Link Binary With Libraries</dt>
 <dd><ul class="first last simple">
-<li>Click &#8216;+&#8217;, and then click &#8220;Add Other...&#8221;</li>
-<li>Find &#8216;libHKWirelessHD.a&#8217; in HKPage/HKWirelessHDSDK/lib, and add it.</li>
+<li>Check if &#8216;libHKWirelessHDlw.a&#8217; was added to the list.</li>
+<li>If it was not added, add it by clicking &#8216;+&#8217; and &#8216;Add Other...&#8217;.</li>
 </ul>
 </dd>
 </dl>
 </li>
 </ul>
+<p>After adding the HKWirelessHDSDKlw folder into your project and adding libHKWirelessHD.a, the project navigator will look like as below:</p>
 <div class="figure">
-<img alt="_images/project-setting-1.png" src="_images/project-setting-1.png" />
-</div>
-<p>After adding the HKWirelessHDSDK folder into your project and adding libHKWirelessHD.a, the project navigator will look like as below:</p>
-<div class="figure">
-<img alt="_images/project-setting-2.png" src="_images/project-setting-2.png" />
+<img alt="_images/project-setting-lw-1.png" src="_images/project-setting-lw-1.png" />
 </div>
 </div>
 <div class="section" id="add-swift-bridging-header">
@@ -170,9 +180,9 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Getting Started Guide (iOS)</a><ul>
-<li><a class="reference internal" href="#project-setup-with-hkwireless-normal-version">Project Setup with HKWireless (normal version)</a><ul>
-<li><a class="reference internal" href="#include-hkwirelesshdsdk-into-your-project">Include HKWirelessHDSDK into your project</a></li>
-<li><a class="reference internal" href="#add-libhkwirelesshd-a-as-link-binary">Add libHKWirelessHD.a as link binary</a></li>
+<li><a class="reference internal" href="#project-setup-with-hkwirelesshdsdklw-lightweight-version">Project Setup with HKWirelessHDSDKlw (lightweight version)</a><ul>
+<li><a class="reference internal" href="#include-hkwirelesshdsdklw-into-your-project">Include HKWirelessHDSDKlw into your project</a></li>
+<li><a class="reference internal" href="#make-sure-if-libhkwirelesshdlw-a-was-added-to-your-link-binary-with-libraries">Make sure if libHKWirelessHDlw.a was added to your &#8220;Link Binary With Libraries&#8221;</a></li>
 <li><a class="reference internal" href="#add-swift-bridging-header">Add Swift Bridging Header</a></li>
 <li><a class="reference internal" href="#add-lstdc-as-linker-flag">Add -lstdc++ as linker flag</a></li>
 </ul>
