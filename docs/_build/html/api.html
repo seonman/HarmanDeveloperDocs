@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>SmartApp &mdash; Harman Developer 1.0 documentation</title>
+    <title>API Documentation &mdash; Harman Developer 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -23,7 +23,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Harman Developer 1.0 documentation" href="index.html" /> 
+    <link rel="top" title="Harman Developer 1.0 documentation" href="index.html" />
+    <link rel="next" title="HKWHub App - Making your Omni speakers connected from any devices (sensors) or services" href="hkwhub-spec.html" />
+    <link rel="prev" title="Architecture Overview" href="architecture-overview.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -32,6 +34,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="hkwhub-spec.html" title="HKWHub App - Making your Omni speakers connected from any devices (sensors) or services"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="architecture-overview.html" title="Architecture Overview"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -41,15 +49,17 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="smartapp">
-<span id="smartapp-ref"></span><h1>SmartApp<a class="headerlink" href="#smartapp" title="Permalink to this headline">¶</a></h1>
-<p>A SmartApp is a Groovy-based program that allows developers to create automations for users to tap into the capabilities of their devices.</p>
-<p>They are created through the &#8220;New SmartApp&#8221; action in the IDE. There is no &#8220;class&#8221; for a SmartApp per se, but there are various methods and properties available to SmartApps that are documented below.</p>
-<p>When a SmartApp executes, it executes in the context of a certain installation instance. That is, a user installs a SmartApp on their mobile application, and configures it with devices or rules unique to them. A SmartApp is not continuously running; it is executed in response to various schedules or subscribed-to events.</p>
-<hr class="docutils" />
+  <div class="section" id="api-documentation">
+<span id="smartapp-ref"></span><h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following methods should be defined by all SmartApps. They are called by the SmartThings platform at various points in the SmartApp lifecycle.</p>
-<div class="section" id="installed">
-<h2>installed()<a class="headerlink" href="#installed" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>initializeHKWirelessController</li>
+</ul>
+<hr class="docutils" />
+<p>Initializes and starts HKWirelessHD controller. This API requires a license key as string. If the input license key fails in key validation, then the API returns -1 as result. If it is successful, return 0. &lt;p&gt;This is a blocking call, and it will not return until the caller successfully initializes HKWireless controller. If the phone is not connected to a Wi-Fi network, or any other app on the same phone is using the HKWireless controller, it waits until the app releases the controller.</p>
+<p>If you needs non-blocking behavior, you should call this API asynchronously using other thread.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This method is expected to be defined by SmartApps.</p>
@@ -57,9 +67,9 @@
 <p>Called when an instance of the app is installed. Typically subscribes to events from the configured devices and creates any scheduled jobs.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">void</span> <span class="pre">installed()</span></code></dd>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">initializeHKWirelessController:(NSString*)licenseKey;</span></code></dd>
 <dt><strong>Returns:</strong></dt>
-<dd>void</dd>
+<dd>NSInteger</dd>
 </dl>
 <p><strong>Example:</strong></p>
 <div class="highlight-groovy"><div class="highlight"><pre><span class="kt">def</span> <span class="nf">installed</span><span class="o">()</span> <span class="o">{</span>
@@ -84,12 +94,18 @@
             </a></p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">SmartApp</a><ul>
-<li><a class="reference internal" href="#installed">installed()</a></li>
+<li><a class="reference internal" href="#">API Documentation</a><ul>
+<li><a class="reference internal" href="#initialization">Initialization</a></li>
 </ul>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="architecture-overview.html"
+                        title="previous chapter">Architecture Overview</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hkwhub-spec.html"
+                        title="next chapter">HKWHub App - Making your Omni speakers connected from any devices (sensors) or services</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -120,6 +136,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="hkwhub-spec.html" title="HKWHub App - Making your Omni speakers connected from any devices (sensors) or services"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="architecture-overview.html" title="Architecture Overview"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>

@@ -1,20 +1,20 @@
 .. _smartapp_ref:
 
-SmartApp
-========
+API Documentation
+===================
 
-A SmartApp is a Groovy-based program that allows developers to create automations for users to tap into the capabilities of their devices.
 
-They are created through the "New SmartApp" action in the IDE. There is no "class" for a SmartApp per se, but there are various methods and properties available to SmartApps that are documented below.
-
-When a SmartApp executes, it executes in the context of a certain installation instance. That is, a user installs a SmartApp on their mobile application, and configures it with devices or rules unique to them. A SmartApp is not continuously running; it is executed in response to various schedules or subscribed-to events.
-
-----
+Initialization
+------------------
 
 The following methods should be defined by all SmartApps. They are called by the SmartThings platform at various points in the SmartApp lifecycle.
 
-installed()
-~~~~~~~~~~~
+- initializeHKWirelessController
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Initializes and starts HKWirelessHD controller. This API requires a license key as string. If the input license key fails in key validation, then the API returns -1 as result. If it is successful, return 0. <p>This is a blocking call, and it will not return until the caller successfully initializes HKWireless controller. If the phone is not connected to a Wi-Fi network, or any other app on the same phone is using the HKWireless controller, it waits until the app releases the controller.
+
+If you needs non-blocking behavior, you should call this API asynchronously using other thread.
 
 .. note::
 
@@ -23,10 +23,10 @@ installed()
 Called when an instance of the app is installed. Typically subscribes to events from the configured devices and creates any scheduled jobs.
 
 **Signature:**
-    ``void installed()``
+    ``- (NSInteger) initializeHKWirelessController:(NSString*)licenseKey;``
 
 **Returns:**
-    void
+    NSInteger
 
 **Example:**
 
