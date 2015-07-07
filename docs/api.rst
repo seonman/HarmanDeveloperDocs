@@ -50,8 +50,10 @@ Checks if HKWirelessHD controller is already initialied.
 	``- (BOOL) isInitialized;``
 	
 **Returns:**
-	``Bool`` - boolean value indicating if HKWirelessController has been initialized or not.
-	
+	``BOOL`` - boolean value indicating if HKWirelessController has been initialized or not.
+
+----
+
 initializing()
 ~~~~~~~~~~~~~~~~
 
@@ -61,5 +63,67 @@ Checks if HKWirelessHD controller is being initialied.
 	``- (BOOL) initializing;``
 	
 **Returns:**
-	``Bool`` - boolean value indicating if HKWirelessController is being initialized
+	``BOOL`` - boolean value indicating if HKWirelessController is being initialized
 
+Refreshing Speaker Information
+-------------------------------
+
+refreshDeviceInfoOnce()
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Refreshes the device status only one time. The device information will be refreshed and updated in DeviceInfo objects. If there is any updates on DeviceInfo objects, then DeviceStateUpdated callback defined by registerCallbackDeviceStateUpdated will be called.
+
+**Signature:**
+	``- (void) refreshDeviceInfoOnce;``
+
+**Returns:**
+	``void``
+	
+----
+
+startRefreshDeviceInfo()
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Starts to refresh devices every two seconds. It continues until stopRefreshDeviceInfo(). The result of refreshing device info is the same as described in refreshDeviceInfoOnce().
+
+**Signature:**
+	``- (void) startRefreshDeviceInfo;``
+	
+**Returns:**
+	``void``
+	
+----
+
+stopRefreshDeviceInfo()
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Stops refreshing devices, which was initiated by startRefreshDeviceInfo().
+
+**Signature:**
+	``- (void) stopRefreshDeviceInfo;``
+	
+**Returns:**
+	``void``
+
+----
+
+Playback Control
+------------------
+
+playCAF()
+~~~~~~~~~
+
+Plays a CAF audio file. CAF includes MP3 and WAV. PlaybackStateChanged callback will return the status, EPlayerState_Play.
+
+**Signature:**
+	``- (BOOL) playCAF:(NSURL *)assetURL songName:(NSString*)songName resumeFlag:(BOOL)resumeFlag;``
+
+**Parameters:**
+    ``(NSURL*) assetURL`` - NSURL to the audio file
+	
+	``(NSString*) songName`` -  the song name to be played. The soneName is used internally to save a temporary PCM file convered from the original audio file
+	
+	``(BOOL) resumeFlag`` -  a boolean that specifies if the play resume from the point that paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.
+
+**Returns:**
+	``BOOL`` - boolean value indicating success or failure

@@ -87,9 +87,10 @@
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">isInitialized;</span></code></dd>
 <dt><strong>Returns:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">Bool</span></code> - boolean value indicating if HKWirelessController has been initialized or not.</dd>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating if HKWirelessController has been initialized or not.</dd>
 </dl>
 </div>
+<hr class="docutils" />
 <div class="section" id="initializing">
 <h3>initializing()<a class="headerlink" href="#initializing" title="Permalink to this headline">¶</a></h3>
 <p>Checks if HKWirelessHD controller is being initialied.</p>
@@ -97,7 +98,63 @@
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">initializing;</span></code></dd>
 <dt><strong>Returns:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">Bool</span></code> - boolean value indicating if HKWirelessController is being initialized</dd>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating if HKWirelessController is being initialized</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="refreshing-speaker-information">
+<h2>Refreshing Speaker Information<a class="headerlink" href="#refreshing-speaker-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="refreshdeviceinfoonce">
+<h3>refreshDeviceInfoOnce()<a class="headerlink" href="#refreshdeviceinfoonce" title="Permalink to this headline">¶</a></h3>
+<p>Refreshes the device status only one time. The device information will be refreshed and updated in DeviceInfo objects. If there is any updates on DeviceInfo objects, then DeviceStateUpdated callback defined by registerCallbackDeviceStateUpdated will be called.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">refreshDeviceInfoOnce;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="startrefreshdeviceinfo">
+<h3>startRefreshDeviceInfo()<a class="headerlink" href="#startrefreshdeviceinfo" title="Permalink to this headline">¶</a></h3>
+<p>Starts to refresh devices every two seconds. It continues until stopRefreshDeviceInfo(). The result of refreshing device info is the same as described in refreshDeviceInfoOnce().</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">startRefreshDeviceInfo;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="stoprefreshdeviceinfo">
+<h3>stopRefreshDeviceInfo()<a class="headerlink" href="#stoprefreshdeviceinfo" title="Permalink to this headline">¶</a></h3>
+<p>Stops refreshing devices, which was initiated by startRefreshDeviceInfo().</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">stopRefreshDeviceInfo;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="playback-control">
+<h2>Playback Control<a class="headerlink" href="#playback-control" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="playcaf">
+<h3>playCAF()<a class="headerlink" href="#playcaf" title="Permalink to this headline">¶</a></h3>
+<p>Plays a CAF audio file. CAF includes MP3 and WAV. PlaybackStateChanged callback will return the status, EPlayerState_Play.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">playCAF:(NSURL</span> <span class="pre">*)assetURL</span> <span class="pre">songName:(NSString*)songName</span> <span class="pre">resumeFlag:(BOOL)resumeFlag;</span></code></dd>
+<dt><strong>Parameters:</strong></dt>
+<dd><p class="first"><code class="docutils literal"><span class="pre">(NSURL*)</span> <span class="pre">assetURL</span></code> - NSURL to the audio file</p>
+<blockquote class="last">
+<div><p><code class="docutils literal"><span class="pre">(NSString*)</span> <span class="pre">songName</span></code> -  the song name to be played. The soneName is used internally to save a temporary PCM file convered from the original audio file</p>
+<p><code class="docutils literal"><span class="pre">(BOOL)</span> <span class="pre">resumeFlag</span></code> -  a boolean that specifies if the play resume from the point that paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.</p>
+</div></blockquote>
+</dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating success or failure</dd>
 </dl>
 </div>
 </div>
@@ -119,6 +176,16 @@
 <li><a class="reference internal" href="#initializehkwirelesscontroller">initializeHKWirelessController()</a></li>
 <li><a class="reference internal" href="#isinitialized">isInitialized()</a></li>
 <li><a class="reference internal" href="#initializing">initializing()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#refreshing-speaker-information">Refreshing Speaker Information</a><ul>
+<li><a class="reference internal" href="#refreshdeviceinfoonce">refreshDeviceInfoOnce()</a></li>
+<li><a class="reference internal" href="#startrefreshdeviceinfo">startRefreshDeviceInfo()</a></li>
+<li><a class="reference internal" href="#stoprefreshdeviceinfo">stopRefreshDeviceInfo()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#playback-control">Playback Control</a><ul>
+<li><a class="reference internal" href="#playcaf">playCAF()</a></li>
 </ul>
 </li>
 </ul>
