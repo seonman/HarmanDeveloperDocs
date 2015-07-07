@@ -44,4 +44,6 @@ Then, just initialize and start DeepSleepPreventer in ``AppDeleget.application:d
 		sleepPreventer = MMPDeepSleepPreventer()
 		sleepPreventer.startPreventSleep()
 
+You can stop the sleep preventer when the app becomes foreground (``applicationWillEnterForeground()``), and start it again just before the app becomes background (``applicationWillResignActive()``).
+
 	
