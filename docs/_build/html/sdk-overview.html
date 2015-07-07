@@ -161,6 +161,31 @@ Xcode 6.4 (supporting iOS8.4) or later is required for building HKWirelessHD ena
 <a class="reference internal image-reference" href="_images/hkwplayer-watch-3.png"><img alt="_images/hkwplayer-watch-3.png" src="_images/hkwplayer-watch-3.png" /></a>
 </div>
 </div>
+<div class="section" id="hkwhub-app-hub-for-iot-integration">
+<h3>HKWHub App (Hub for IoT Integration)<a class="headerlink" href="#hkwhub-app-hub-for-iot-integration" title="Permalink to this headline">¶</a></h3>
+<p>HKWHub app is an iOS app that uses HKWirelessHD SDK and acts as a Web Hub that handles HTTP requests to control speakers and stream music. It enables any type of connected devices (like sensors or smart devices) and cloud-based service to connect Harman Kardon Omni speakers and stream music. HKWHub runs a web server inside that handles HTTP request of REST API.</p>
+<p>User can add any songs or sound file from iOS Music app to the media list, so that client devices can access the list and play audio remotely by sending REST API request to the Hub app. For example, a door open/close sensor can send REST API request to play &#8216;dog-barking&#8217; sound in the media list of the HKWHub app.</p>
+<p>The following images are the screen captures of HKWHub app.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/hkwhub-1.png"><img alt="_images/hkwhub-1.png" src="_images/hkwhub-1.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/hkwhub-2.png"><img alt="_images/hkwhub-2.png" src="_images/hkwhub-2.png" /></a>
+</div>
+<p>We also created a sample HTML5 app working as a client of the HKWHub app. The HTML5 app uses AJAX to send REST API request to the HKWHub app to control speakers and stream music. The UI of the HTML5 app is based on Google&#8217;s Polymer v0.5 (<a class="reference external" href="https://www.polymer-project.org/0.5/">https://www.polymer-project.org/0.5/</a>).</p>
+<p>The following images are the screen captures of the HTML5 app.</p>
+<div class="figure">
+<img alt="_images/webhub-1.png" src="_images/webhub-1.png" />
+</div>
+<div class="figure">
+<img alt="_images/webhub-2.png" src="_images/webhub-2.png" />
+</div>
+</div>
+<div class="section" id="hkwsimple-a-very-simple-music-player-for-getting-started-with-hkwirelesshdsdk">
+<h3>HKWSimple (a very simple music player for getting started with HKWirelessHDSDK)<a class="headerlink" href="#hkwsimple-a-very-simple-music-player-for-getting-started-with-hkwirelesshdsdk" title="Permalink to this headline">¶</a></h3>
+<p>HKWSimple app is a simple music player that is created to explain to developer how to create an app with HKWirelessHD SDK. This app is very simple, but contains key features of HKWirelessHDSDK, such as, manage speakers, control playback of song and volume, play local media file and also web streaming audio, and so on.</p>
+<p>Just get started with HKWSimple app to quickly build your own HKWirelessHD app!</p>
+</div>
 </div>
 </div>
 
@@ -183,6 +208,8 @@ Xcode 6.4 (supporting iOS8.4) or later is required for building HKWirelessHD ena
 <li><a class="reference internal" href="#hk-wake-app">HK Wake app</a></li>
 <li><a class="reference internal" href="#hk-time-app">HK Time app</a></li>
 <li><a class="reference internal" href="#hkwplayer-app-with-apple-watch-support">HKWPlayer app with Apple Watch support</a></li>
+<li><a class="reference internal" href="#hkwhub-app-hub-for-iot-integration">HKWHub App (Hub for IoT Integration)</a></li>
+<li><a class="reference internal" href="#hkwsimple-a-very-simple-music-player-for-getting-started-with-hkwirelesshdsdk">HKWSimple (a very simple music player for getting started with HKWirelessHDSDK)</a></li>
 </ul>
 </li>
 </ul>
