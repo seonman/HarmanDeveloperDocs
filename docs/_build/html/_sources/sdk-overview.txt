@@ -99,9 +99,9 @@ The implementation note for Watch App support will be available at the developer
 HKWHub App (Hub for IoT Integration)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-HKWHub app is an iOS app that uses HKWirelessHD SDK and acts as a Web Hub that handles HTTP requests to control speakers and stream music. It enables any type of connected devices (like sensors or smart devices) and cloud-based service to connect Harman Kardon Omni speakers and stream music. HKWHub runs a web server inside that handles HTTP request of REST API. 
+HKWHub app is an iOS app that uses HKWirelessHD SDK and acts as a Web Hub that handles HTTP requests to control speakers and stream music. It enables any types of connected devices (e.g. sensors or smart devices like tablet, smart TV, etc.) and cloud-based services (e.g. SmartThings) to connect HK Omni speakers and stream music. HKWHub runs a web server inside that handles HTTP requests of REST API. 
 
-User can add any songs or sound file from iOS Music app to the media list, so that client devices can access the list and play audio remotely by sending REST API request to the Hub app. For example, a door open/close sensor can send REST API request to play 'dog-barking' sound in the media list of the HKWHub app.
+User can add songs or sound file from iOS Music app to the media list, so that client devices can access the list and play media in the list remotely by sending REST API request to the Hub app. For example, a door open/close sensor can send REST API request to play 'dog-barking' sound in the media list of the HKWHub app.
 
 The following images are the screen captures of HKWHub app.
 
@@ -110,7 +110,7 @@ The following images are the screen captures of HKWHub app.
 .. figure:: img/sdk-overview/hkwhub-2.png
 	:scale: 40
 
-We also created a sample HTML5 app working as a client of the HKWHub app. The HTML5 app uses AJAX to send REST API request to the HKWHub app to control speakers and stream music. The UI of the HTML5 app is based on Google's Polymer v0.5 (https://www.polymer-project.org/0.5/).
+We also created a sample HTML5 app working as a client of the HKWHub app. The HTML5 app uses AJAX to send REST API requests to the HKWHub app to control speakers and stream music. The UI of the HTML5 app is based on Google's Polymer v0.5 (https://www.polymer-project.org/0.5/).
 
 The following images are the screen captures of the HTML5 app.
 
@@ -121,9 +121,9 @@ The following images are the screen captures of the HTML5 app.
 HKWSimple (a very simple music player for getting started with HKWirelessHDSDK)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-HKWSimple app is a simple music player that is created to explain to developer how to create an app with HKWirelessHD SDK. This app is very simple, but contains key features of HKWirelessHDSDK, such as, manage speakers, control playback of song and volume, play local media file and also web streaming audio, and so on. 
+HKWSimple app is a simple music player that was created to explain how to create an app with HKWirelessHD SDK. This app is very simple, but contains key features of HKWirelessHDSDK, such as, manage speakers, control audio playback and volume, play local media files and also web streaming audio, and so on. 
 
-Just get started with HKWSimple app to quickly build your own HKWirelessHD app!
+Just get started with the HKWSimple app to quickly build your own HKWirelessHD app!
 
 .. figure:: img/sdk-overview/hkwsimple-1.png
 	:scale: 40
