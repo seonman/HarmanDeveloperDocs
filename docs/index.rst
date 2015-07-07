@@ -29,6 +29,9 @@ This documentation is organized into a few different sections:
 `Architecture Overview`_
     This chatper explains about the overall architecture of HKWirelessHD SDK.
 
+`API Documentation`_
+    This chatper describes the API Specification of HKWirelessHD SDK.
+	
 `HKWHub Specification`_
     This chatper explains about the overall architecture of HKWirelessHD SDK.
 
@@ -39,6 +42,7 @@ This documentation is organized into a few different sections:
 .. _SDK Overview: sdk-overview.html
 .. _Getting Started (iOS): getting-started-iOS.html
 .. _Programming Guide: programming-guide.html
+.. _API Documentation: api.html
 .. _Architecture Overview: architecture-overview.html
 .. _HKWHub Specification: hkwhub-spec.html
 .. _Troubleshooting: trouble-shooting.html
