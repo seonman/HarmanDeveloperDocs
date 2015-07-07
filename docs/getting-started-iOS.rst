@@ -9,7 +9,7 @@ There are two versions of SDK
 
 Most of the features are common in the two version. The only difference is that the normal version includes an API for playing web streaming audio, while the lightweight version does not.
 
-The reason we support the SDK as two separate version is that we know that many developers want a feature of web streaming. To support this feature, we need to include a version of FFMPEG library inside of the SDK library. But, some developers may want to use their own version of MMPEG to handle audio stream for some particular reasons.
+The reason we support the SDK as two separate versions is that we know that many developers want APIs for web streaming. To support this feature, we had to include a version of FFMPEG library inside of the SDK library. But, some developers may want to use their own version of MMPEG to handle audio stream for their own particular purpose. We don't want to discourage developers to use any open source libraries along with our SDK.
 
 Please see the descriptions of each version below and make a proper choice for your app.
 
