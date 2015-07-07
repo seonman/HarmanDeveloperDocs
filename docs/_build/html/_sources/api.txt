@@ -119,11 +119,9 @@ Plays a CAF audio file. CAF includes MP3 and WAV. PlaybackStateChanged callback 
 	``- (BOOL) playCAF:(NSURL *)assetURL songName:(NSString*)songName resumeFlag:(BOOL)resumeFlag;``
 
 **Parameters:**
-    ``(NSURL*) assetURL`` - NSURL to the audio file
-		
-	``(NSString*) songName`` -  the song name to be played. The soneName is used internally to save a temporary PCM file convered from the original audio file
-	
-	``(BOOL) resumeFlag`` -  a boolean that specifies if the play resume from the point that paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.
+- ``(NSURL*) assetURL`` - NSURL to the audio file
+- ``(NSString*) songName`` -  the song name to be played. The soneName is used internally to save a temporary PCM file convered from the original audio file
+- ``(BOOL) resumeFlag`` -  a boolean that specifies if the play resume from the point that paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.
 
 **Returns:**
 	``BOOL`` - boolean value indicating success or failure
