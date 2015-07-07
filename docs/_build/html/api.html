@@ -55,15 +55,13 @@
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
 <p>The following methods should be defined by all SmartApps. They are called by the SmartThings platform at various points in the SmartApp lifecycle.</p>
 <div class="section" id="initializehkwirelesscontroller">
-<h3>initializeHKWirelessController<a class="headerlink" href="#initializehkwirelesscontroller" title="Permalink to this headline">¶</a></h3>
+<h3>initializeHKWirelessController()<a class="headerlink" href="#initializehkwirelesscontroller" title="Permalink to this headline">¶</a></h3>
 <p>Initializes and starts HKWirelessHD controller. This API requires a license key as string. If the input license key fails in key validation, then the API returns -1 as result. If it is successful, return 0.</p>
-<p>This is a blocking call, and it will not return until the caller successfully initializes HKWireless controller. If the phone is not connected to a Wi-Fi network, or any other app on the same phone is using the HKWireless controller, it waits until the app releases the controller.</p>
-<p>If you needs non-blocking behavior, you should call this API asynchronously using other thread.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This method is expected to be defined by SmartApps.</p>
+<p>This is a blocking call, and it will not return until the caller successfully initializes HKWireless controller. If the phone is not connected to a Wi-Fi network, or any other app on the same phone is using the HKWireless controller, it waits until the app releases the controller.</p>
+<p class="last">If you needs non-blocking behavior, you should call this API asynchronously using other thread.</p>
 </div>
-<p>Called when an instance of the app is installed. Typically subscribes to events from the configured devices and creates any scheduled jobs.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">initializeHKWirelessController:(NSString*)licenseKey;</span></code></dd>
@@ -80,7 +78,27 @@
 <span class="o">}</span>
 </pre></div>
 </div>
+</div>
 <hr class="docutils" />
+<div class="section" id="isinitialized">
+<h3>isInitialized()<a class="headerlink" href="#isinitialized" title="Permalink to this headline">¶</a></h3>
+<p>Checks if HKWirelessHD controller is already initialied.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">isInitialized;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">Bool</span></code> - boolean value indicating if HKWirelessController has been initialized or not.</dd>
+</dl>
+</div>
+<div class="section" id="initializing">
+<h3>initializing()<a class="headerlink" href="#initializing" title="Permalink to this headline">¶</a></h3>
+<p>Checks if HKWirelessHD controller is being initialied.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">initializing;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">Bool</span></code> - boolean value indicating if HKWirelessController is being initialized</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -98,7 +116,9 @@
   <ul>
 <li><a class="reference internal" href="#">API Documentation</a><ul>
 <li><a class="reference internal" href="#initialization">Initialization</a><ul>
-<li><a class="reference internal" href="#initializehkwirelesscontroller">initializeHKWirelessController</a></li>
+<li><a class="reference internal" href="#initializehkwirelesscontroller">initializeHKWirelessController()</a></li>
+<li><a class="reference internal" href="#isinitialized">isInitialized()</a></li>
+<li><a class="reference internal" href="#initializing">initializing()</a></li>
 </ul>
 </li>
 </ul>
