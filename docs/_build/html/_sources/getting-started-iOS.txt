@@ -124,4 +124,7 @@ As shown in the figure, the app is composed of a sequence of UIViewController st
 
 .. figure:: img/getting-started-iOS/hkwsimple-1.png
 
+Project Setup
+~~~~~~~~~~~~~~~~~
 
+For the project setup, please refer to the previous session of **Project Setup with HKWirelessHDSDK (normal version)**.
