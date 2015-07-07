@@ -61,7 +61,17 @@ $ rm -rf [your-project-name]*
 </div>
 <div class="section" id="playback-stops-when-the-app-goes-to-background-mode">
 <h2>Playback stops when the app goes to background mode<a class="headerlink" href="#playback-stops-when-the-app-goes-to-background-mode" title="Permalink to this headline">¶</a></h2>
-<p>When an app playing music using HKWirelessHDSDK may stop playing when the app becomes background. It is because iOS stops all on-going network communication when the app is backgrounded. There are several expcetional cases that iOS allows even in background mode. Please refer to <a class="reference external" href="https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html">iOS Developer Library</a> for more information</p>
+<p>When an app playing music using HKWirelessHDSDK may stop playing when the app becomes background. It is because iOS stops all on-going network communication when the app is backgrounded. There are several expcetional cases that iOS allows even in background mode. Please refer to <a class="reference external" href="https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html">iOS Developer Library</a> for more information on background execution.</p>
+<p>To prevent our HKWirelessHD apps from stopping in background mode, we can do a trick based on iOS Audio background mode. For our sample apps not to be stopped during the background mode, we use <a class="reference external" href="https://github.com/marcop/MMPDeepSleepPreventer">MMPDeepSleepPreventer</a>. The idea of MMPDeepSleepPreventer is to play zero length of silent audio every 5 seconds by enabling iOS Audio background mode.</p>
+<p>To enable iOS Audio background mode, you need to enable it in Project setting.</p>
+<ul class="simple">
+<li>Go to Project &gt; Targets &gt; Capabilities &gt; Background Modes</li>
+<li>Turn on the option of  <strong>Audio and AirPlay</strong></li>
+</ul>
+<div class="figure">
+<img alt="_images/background-execution.png" src="_images/background-execution.png" />
+</div>
+<p>Then, just initialize and start DeepSleepPreventer in <code class="docutils literal"><span class="pre">AppDeleget.application:didFinishedLaunchingWithOption()</span></code> as follows:</p>
 </div>
 </div>
 
