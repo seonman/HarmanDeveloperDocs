@@ -38,8 +38,9 @@ Then, just initialize and start DeepSleepPreventer in ``AppDeleget.application:d
 
 .. code-block: swift
 
-	    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
 	        // prevent from turning into background
 	        sleepPreventer = MMPDeepSleepPreventer()
 	        sleepPreventer.startPreventSleep()
+			
