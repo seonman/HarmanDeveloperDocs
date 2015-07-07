@@ -1,4 +1,4 @@
-Trouble Shooting
+Troubleshooting
 ====================
 
 Handling of link error “undefined symbols for architecture armv7”
@@ -15,3 +15,11 @@ If you encounter unspecified linking parameter such as library names, etc., ther
 
 	$ cd ~/Library/Developer/Xcode/DerivedData/
 	$ rm -rf [your-project-name]*
+
+Playback stops when the app goes to background mode
+----------------------------------------------------
+
+When an app playing music using HKWirelessHDSDK may stop playing when the app becomes background. It is because iOS stops all on-going network communication when the app is backgrounded. There are several expcetional cases that iOS allows even in background mode. Please refer to `iOS Developer Library`_ for more information 
+
+.. _iOS Develoepr Libbrary: https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html
+

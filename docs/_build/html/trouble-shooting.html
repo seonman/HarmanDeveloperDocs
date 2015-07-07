@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Trouble Shooting &mdash; Harman Developer 1.0 documentation</title>
+    <title>Troubleshooting &mdash; Harman Developer 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -45,8 +45,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="trouble-shooting">
-<h1>Trouble Shooting<a class="headerlink" href="#trouble-shooting" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="handling-of-link-error-undefined-symbols-for-architecture-armv7">
 <h2>Handling of link error “undefined symbols for architecture armv7”<a class="headerlink" href="#handling-of-link-error-undefined-symbols-for-architecture-armv7" title="Permalink to this headline">¶</a></h2>
 <p>HKWirelessHD SDK uses C++ codes, so the linker should include std c++ library. To prevent this kinf od link error, your project setting should include “-lstdc++” in Targets &gt; Build Settings &gt; Linking &gt; Other Linker Flags field.</p>
@@ -58,6 +58,10 @@
 $ rm -rf [your-project-name]*
 </pre></div>
 </div>
+</div>
+<div class="section" id="playback-stops-when-the-app-goes-to-background-mode">
+<h2>Playback stops when the app goes to background mode<a class="headerlink" href="#playback-stops-when-the-app-goes-to-background-mode" title="Permalink to this headline">¶</a></h2>
+<p>When an app playing music using HKWirelessHDSDK may stop playing when the app becomes background. It is because iOS stops all on-going network communication when the app is backgrounded. There are several expcetional cases that iOS allows even in background mode. Please refer to <a href="#id1"><span class="problematic" id="id2">`iOS Developer Library`_</span></a> for more information</p>
 </div>
 </div>
 
@@ -72,9 +76,10 @@ $ rm -rf [your-project-name]*
             </a></p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Trouble Shooting</a><ul>
+<li><a class="reference internal" href="#">Troubleshooting</a><ul>
 <li><a class="reference internal" href="#handling-of-link-error-undefined-symbols-for-architecture-armv7">Handling of link error “undefined symbols for architecture armv7”</a></li>
 <li><a class="reference internal" href="#unspecified-linking-parameter-is-added-in-link-command">Unspecified linking parameter is added in link command</a></li>
+<li><a class="reference internal" href="#playback-stops-when-the-app-goes-to-background-mode">Playback stops when the app goes to background mode</a></li>
 </ul>
 </li>
 </ul>
