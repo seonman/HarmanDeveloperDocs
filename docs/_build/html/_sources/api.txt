@@ -336,39 +336,155 @@ Check if volume is muted or not.
 
 ----
 
-addDeviceToSession()
-~~~~~~~~~~~~~~~~~~~~~~~
-
-removeDeviceFromSession()
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 Device (Speaker) Management
 ------------------------------
 
+addDeviceToSession()
+~~~~~~~~~~~~~~~~~~~~~~~
+Adds the device to the current playback session. The added speaker will play audio. This can be done during the audio playback.
+
+**Signature:**
+	``- (BOOL) addDeviceToSession:(long long) deviceid;``
+
+**Parameters:**
+
+- ``(long long)deviceId`` - The ID of the device to add
+
+**Returns:**
+	``BOOL`` - boolean value indicating whether the addition is successful or not.
+
+----
+
+removeDeviceFromSession()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Removes the device from the current playback session. The removed speaker will not play audio any longer. This can be done during the audio playback.
+
+**Signature:**
+	``- (BOOL) removeDeviceFromSession:(long long) deviceid;``
+
+**Parameters:**
+
+- ``(long long)deviceId`` -  The ID of the device to remove
+
+**Returns:**
+	``BOOL`` - boolean value indicating whether the removal is successful or not.
+
+----
+
 getDeviceCount()
 ~~~~~~~~~~~~~~~~~~
+Gets the number of all devices in the HKWirelessHD network.
+
+**Signature:**
+	``- (NSInteger) getDeviceCount;``
+
+**Returns:**
+	``NSInteger`` - the number of devices.
+
+----
 
 getGroupCount()
 ~~~~~~~~~~~~~~~~~
+Gets the number of the groups defined by the speakers.
 
+**Signature:**
+	``- (NSInteger) getGroupCount;``
+
+**Returns:**
+	``NSInteger`` - the number of the groups
+
+----
+ 
 getDeviceCountInGroupIndex()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Gets the number of the devices that belongs to a group specified by the index.
+
+**Signature:**
+	``- (NSInteger) getDeviceCountInGroupIndex:(NSInteger)groupIndex;``
+
+**Parameters:**
+
+- ``(NSInteger)groupIndex`` - the index of the group looking for. It starts from 0 to (GroupCount-1).
+
+**Returns:**
+	``NSInteger`` - the number of device
+
+----
 
 getDeviceInfoFromTable()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the DeviceInfo object (pointer) pointed by groupIndex and deviceIndex. This API is useful to find a DeviceInfo that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the groupIndex can correspond to section number, and deviceIndex can correspond to row number.
 
+**Signature:**
+	``- (DeviceInfo *) getDeviceInfoFromTable:(NSInteger) groupIndex deviceIndex:(NSInteger)deviceIndex;``
+
+**Parameters:**
+
+- ``(NSInteger)groupIndex`` - The index of the group where the device belongs to.
+- ``(NSInteger)deviceIndex`` -  The index of the device in the group.
+
+**Returns:**
+	``DeviceInfo*`` - the DeviceInfo object
+ 
+----
+ 
 getDeviceInfoByIndex()
 ~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the DeviceInfo object pointed by deviceIndex from the table containing all speakers. The range of deviceIndex will be 0 to (deviceCount - 1).
+
+**Signature:**
+	``- (DeviceInfo *) getDeviceInfoByIndex:(NSInteger)deviceIndex;``
+	
+**Parameters:**
+- ``(NSInteger)deviceIndex`` -  The index of the device from the table with all devices.
+
+**Returns:**
+	``DeviceInfo*`` - the DeviceInfo object
+	
+----
 
 findDeviceGroupWithDeviceId()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the object of the DeviceGroup that a device belongs to.
+
+**Signature:**
+	``- (DeviceGroup *)findDeviceGroupWithDeviceId:(long long)deviceId;``
+
+**Parameters:**
+
+-- ``(long long)`` - deviceId the ID of the device that belongs to a DeviceGroup
+
+**Returns:**
+	 ``DeviceGroup*`` - the DeviceGroup object
+
+----
 
 findDeviceFromList()
 ~~~~~~~~~~~~~~~~~~~~~~~
+Finds a DeviceInfo from the table by DeviceId. It is useful to retrieve DeviceInfo with a particular deviceId.
+
+**Signature:**
+	``- (DeviceInfo *) findDeviceFromList:(long long) deviceId;``
+
+**Parameters:**
+
+- ``(long long)deviceId`` - the ID of the device we are looking for.
+
+**Returns:**
+	``DeviceInfo*`` - The DeviceInfo object
+
+----
 
 isDeviceActive()
 ~~~~~~~~~~~~~~~~~~~
+Checks whether the device is active (added to the current playback session) or not.
 
+**Signature:**
+	``- (BOOL) isDeviceActive:(long long)deviceId;``
+	
+**Parameters:**
+ * @param deviceId The ID of the device
+ * @return boolean indicating if the device is active or not.
 
 removeDeviceFromGroup()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
