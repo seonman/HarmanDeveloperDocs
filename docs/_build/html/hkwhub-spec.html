@@ -188,6 +188,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="close-session">
 <h4>Close Session<a class="headerlink" href="#close-session" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -216,6 +217,7 @@
 </div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="device-management">
 <h3>Device Management<a class="headerlink" href="#device-management" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="get-device-cound">
@@ -245,6 +247,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="get-the-list-of-devices-and-their-information">
 <h4>Get the list of Devices and their information<a class="headerlink" href="#get-the-list-of-devices-and-their-information" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -303,6 +306,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="get-the-device-information">
 <h4>Get the Device Information<a class="headerlink" href="#get-the-device-information" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -343,6 +347,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="add-a-device-to-session">
 <h4>Add a Device to Session<a class="headerlink" href="#add-a-device-to-session" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -370,6 +375,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="remove-a-device-from-session">
 <h4>Remove a Device from Session<a class="headerlink" href="#remove-a-device-from-session" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -398,6 +404,7 @@
 </div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="remote-hub-media-playback-management">
 <h3>Remote (Hub) Media Playback Management<a class="headerlink" href="#remote-hub-media-playback-management" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="get-the-list-of-stored-media">
@@ -439,8 +446,9 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="play-a-song-in-th-remote-hub">
-<h4>Play a Song in th Remote Hub<a class="headerlink" href="#play-a-song-in-th-remote-hub" title="Permalink to this headline">¶</a></h4>
+<hr class="docutils" />
+<div class="section" id="play-a-song-in-the-hub-device">
+<h4>Play a Song in the Hub Device<a class="headerlink" href="#play-a-song-in-the-hub-device" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p class="first">API: GET /v1/play_hub_media?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
 </li>
@@ -466,6 +474,39 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
+<div class="section" id="play-a-song-from-web-server">
+<h4>Play a Song from Web Server<a class="headerlink" href="#play-a-song-from-web-server" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/play_web_media?SessionID=&lt;session id&gt;&amp;MediaUrl=&lt;URL of the song&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Play a song stored in the hub, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/play_hub_media?SessionID=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This API call takes several hundreds millisecond to return the response.</p>
+</div>
+</div>
+<hr class="docutils" />
 <div class="section" id="pause-the-current-playback">
 <h4>Pause the Current Playback<a class="headerlink" href="#pause-the-current-playback" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -494,6 +535,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="resume-the-current-playback-with-hub-media">
 <h4>Resume the Current Playback with Hub Media<a class="headerlink" href="#resume-the-current-playback-with-hub-media" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -521,6 +563,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="stop-the-current-playback">
 <h4>Stop the Current Playback<a class="headerlink" href="#stop-the-current-playback" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -549,6 +592,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="get-the-playback-status-current-playback-state-and-elapsed-time">
 <h4>Get the Playback Status (Current Playback State and Elapsed Time)<a class="headerlink" href="#get-the-playback-status-current-playback-state-and-elapsed-time" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -607,6 +651,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="check-if-the-hub-is-playing-audio">
 <h4>Check if the Hub is playing audio<a class="headerlink" href="#check-if-the-hub-is-playing-audio" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -665,6 +710,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="get-volume-for-a-particular-device">
 <h4>Get Volume for a particular device<a class="headerlink" href="#get-volume-for-a-particular-device" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -693,6 +739,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="set-volume-for-all-devices">
 <h4>Set Volume for all devices<a class="headerlink" href="#set-volume-for-all-devices" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -720,6 +767,7 @@
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="set-volume-for-a-particular-device">
 <h4>Set Volume for a particular device<a class="headerlink" href="#set-volume-for-a-particular-device" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -795,7 +843,8 @@
 </li>
 <li><a class="reference internal" href="#remote-hub-media-playback-management">Remote (Hub) Media Playback Management</a><ul>
 <li><a class="reference internal" href="#get-the-list-of-stored-media">Get the list of stored media</a></li>
-<li><a class="reference internal" href="#play-a-song-in-th-remote-hub">Play a Song in th Remote Hub</a></li>
+<li><a class="reference internal" href="#play-a-song-in-the-hub-device">Play a Song in the Hub Device</a></li>
+<li><a class="reference internal" href="#play-a-song-from-web-server">Play a Song from Web Server</a></li>
 <li><a class="reference internal" href="#pause-the-current-playback">Pause the Current Playback</a></li>
 <li><a class="reference internal" href="#resume-the-current-playback-with-hub-media">Resume the Current Playback with Hub Media</a></li>
 <li><a class="reference internal" href="#stop-the-current-playback">Stop the Current Playback</a></li>

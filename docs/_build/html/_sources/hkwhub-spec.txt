@@ -103,6 +103,8 @@ Start Session
 
 	{"SessionID" : "1000"}
 
+----
+
 Close Session
 ^^^^^^^^^^^^^^
 
@@ -116,6 +118,8 @@ Close Session
 .. code-block:: json
 
 	{"Result" : "true"}
+
+----
 
 Device Management
 ~~~~~~~~~~~~~~~~~~~~
@@ -133,6 +137,8 @@ Get device cound
 .. code-block:: json
 
 	{"DeviceCount":"2"}
+
+----
 
 
 Get the list of Devices and their information
@@ -179,7 +185,9 @@ Get the list of Devices and their information
 		"DeviceID":"129321920968880"
 		}]
 	}
-	
+
+----
+
 Get the Device Information
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -207,6 +215,8 @@ Get the Device Information
 	"IsPlaying":true, 
 	"DeviceID":"129321920968880"}
 
+----
+
 Add a Device to Session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -220,6 +230,8 @@ Add a Device to Session
 .. code-block:: json
 
 	{"Result":"true"}
+
+----
 
 Remove a Device from Session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -235,6 +247,8 @@ Remove a Device from Session
 
 	{"Result":"true"}
 	
+
+----
 
 Remote (Hub) Media Playback Management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -265,7 +279,9 @@ Get the list of stored media
 		"AlbumTitle":"Wordplay [SINGLE EP]"}
 	]}
 
-Play a Song in th Remote Hub
+----
+
+Play a Song in the Hub Device
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - API: GET /v1/play_hub_media?SessionID=<session id>&PersistentID=<persistent id>
@@ -278,6 +294,28 @@ Play a Song in th Remote Hub
 .. code-block:: json
 
 	{"Result":"true"}
+
+
+----
+
+Play a Song from Web Server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- API: GET /v1/play_web_media?SessionID=<session id>&MediaUrl=<URL of the song>
+- Response
+	- Play a song stored in the hub, and then return true or false.
+- Example:
+	- Request: ``http://192.168.1.10/v1/play_hub_media?SessionID=1000&MediaUrl=http://seonman.github.io/music/hyolyn.mp3``
+	- Response: 
+
+.. code-block:: json
+
+	{"Result":"true"}
+
+.. Note::
+	This API call takes several hundreds millisecond to return the response.
+	
+----
 
 Pause the Current Playback
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -294,6 +332,8 @@ Pause the Current Playback
 
 	{"Result":"true"}
 	
+----
+
 Resume the Current Playback with Hub Media
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -307,6 +347,8 @@ Resume the Current Playback with Hub Media
 .. code-block:: json
 
 	{"Result":"true"}
+
+----
 
 Stop the Current Playback
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -323,6 +365,7 @@ Stop the Current Playback
 
 	{"Result":"true"}
 	
+----
 
 Get the Playback Status (Current Playback State and Elapsed Time)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -350,6 +393,7 @@ Get the Playback Status (Current Playback State and Elapsed Time)
 	{"PlaybackState":"PlayerStatePlaying",
 	 "TimeElapsed":"15"}
 
+----
 
 Check if the Hub is playing audio
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -383,6 +427,8 @@ Get Volume for all Devices
 
 	{"Volume":"10"}
 
+----
+
 Get Volume for a particular device
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -398,6 +444,8 @@ Get Volume for a particular device
 
 	{"Volume":"10"}
 
+----
+
 Set Volume for all devices
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -412,6 +460,8 @@ Set Volume for all devices
 
 	{"Result":"true"}
 	
+----
+
 Set Volume for a particular device
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
