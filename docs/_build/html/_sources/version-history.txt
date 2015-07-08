@@ -9,6 +9,7 @@ V1.2 - Jul. 8 , 2015
 	- HKWirelessHDSDKlw (lightweight version) : lightweight version : no support for web streaming audio
 - Added mute(), unmute(), isMuted()
 - New sample apps
+	- HKWPlayer app: a sample player app with full usage of HKWirelessHD APIs. Apple Watch support.
 	- HKWHub app : Web hub app for handling REST API request
 	- HKWSimple app: a very simple player app
 
