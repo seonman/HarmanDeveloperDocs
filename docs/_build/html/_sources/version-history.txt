@@ -6,7 +6,7 @@ V1.2 - Jul. 8 , 2015
 
 - HKWirelessHDSDK supports two versions of SDK: normal version and lightweight version
 	- HKWirelessHDSDK (normal version) - support for playback of web streaming audio
-	- HKWirelessHDSDKlw : lightweight version : no support for web streaming audio
+	- HKWirelessHDSDKlw (lightweight version) : lightweight version : no support for web streaming audio
 - Added mute(), unmute(), isMuted()
 - New sample apps
 	- HKWHub app : Web hub app for handling REST API request
