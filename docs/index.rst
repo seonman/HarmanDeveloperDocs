@@ -38,6 +38,9 @@ This documentation is organized into a few different sections:
 `Troubleshooting`_
     This chatper describes several common problems that developers can experience at the beginning of using HKWirelessHD SDK, and provides known solutions.
 	
+`Version History`_
+    Version History
+	
 	
 .. _SDK Overview: sdk-overview.html
 .. _Getting Started (iOS): getting-started-iOS.html
@@ -46,6 +49,7 @@ This documentation is organized into a few different sections:
 .. _API Documentation: api.html
 .. _HKWHub Specification: hkwhub-spec.html
 .. _Troubleshooting: trouble-shooting.html
+.. _Version History: version-history.html
 
 Contents
 --------
@@ -105,6 +109,14 @@ Troubleshooting
 	:maxdepth: 2
 
 	trouble-shooting
+	
+Version History
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	version-history
 	
 Search
 ======
