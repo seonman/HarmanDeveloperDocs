@@ -379,8 +379,6 @@ Get the Playback Status (Current Playback State and Elapsed Time)
 		- PlayerStatePlaying : Now playing audio
 		- PlayerStatePaused : Playing is paused. It can resume.
 		- PlayerStateStopped : Playing is stopped. It cannot resume.
-		- PlayerStateInterrupted : The current playback was interrupted by some reasons.
-			- For example, if other client overrides the current playback by starting a new session and play, then the on-going playback is interrupted (stopped).
 
 	- Note that if the playback has stopped, then it cannot resume.
 	- Developers need to check the playback status during the playback to handle any possible exceptional cases like interruption or errors. We recommedn to call this API every second.
