@@ -7,7 +7,8 @@ API Documentation
 Initialization
 ------------------
 
-The following methods should be defined by all SmartApps. They are called by the SmartThings platform at various points in the SmartApp lifecycle.
+Refer to HKWControlHandler.h in the SDK.
+
 
 initializeHKWirelessController()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -219,5 +220,191 @@ Inquires the current state of playback.
 	
 ----
 
+Volume Control
+----------------
+
+setVolumeAll()
+~~~~~~~~~~~~~~~~
+
+Sets a volume level to all speakers in the network. The same volume level is set to all speakers.
+
+The range of volume level is 0 (min) to the maximumVolumeLevel (currently, 50) defined by getMaximumVolumeLevel.
+
+Setting volume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The VolumeLevelChanged callback defined by registerCallbackVolumeLevelChanged() will be called when the volume level of the specified speaker has changed.
+
+If the volume is being muted, the volume becomes unmuted first, and then set the volume.
+
+**Signature:**
+	``- (void) setVolumeAll:(NSInteger)volume;``
+
+**Parameters:**
+
+- ``(NSInteger)volume`` -  the volume level to set
+
+**Returns:**
+	``void``
+
+----
+
+setVolumeDevice()
+~~~~~~~~~~~~~~~~~~~~
+Set a volume level to an individual speaker specified by deviceId. The range of volume level is 0 (min) to the maximumVolumeLevel (currently, 50) defined by getMaximumVolumeLevel. setVolume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The VolumeLevelChanged callback defined by registerCallbackVolumeLevelChanged() will be called when the volume level of the specified speaker has changed.<p>If the volume is being muted, the volume becomes unmuted first, and then set the volume.
+
+**Signature:**
+	``- (void) setVolumeDevice:(long long)deviceId volume:(NSInteger)volume;``
+
+**Parameters:**
+
+- ``(long long)deviceId`` - the device ID of the speaker
+- ``(NSInteger)volume`` -  the volume level to set
+
+**Returns:**
+	``void``
+	
+----
+
+getVolume()
+~~~~~~~~~~~~~
+Gets the average volume level for all devices.
+
+**Signature:**
+	``- (NSInteger) getVolume;``
+	
+**Returns:**
+	``NSInteger`` - the average volume level of all speakers
+
+----
+
+getDeviceVolume()
+~~~~~~~~~~~~~~~~~~~
+Gets the volume level of the specified speaker.
+
+**Signature:**
+	``- (NSInteger) getDeviceVolume:(long long)deviceId;``
+
+**Parameters:**
+- ``(long long)deviceId`` - the deviceId of the speaker inquired.
+
+**Returns:**
+	``NSInteger`` - the device volume level
+	
+----
+
+getMaximumVolumeLevel()
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the maximum volume level that the system provides.
+
+**Signature:**
+	``- (NSInteger) getMaximumVolumeLevel;``
+
+**Returns:**
+	``NSInteger`` - the maximum volume level
+
+mute()
+~~~~~~~~
+Mutes the current volume of all speakers.
+
+**Signature:**
+	``- (void) mute;``
+	
+**Returns:**
+	``void``
+	
+----
+
+unmute()
+~~~~~~~~~~
+Unmute the volume. It returns the previous volume level before mute.
+
+**Signature:**
+	``- (void) unmute;``
+	
+**Returns:**
+	``void``
+
+----
+
+isMuted()
+~~~~~~~~~~~
+Check if volume is muted or not.
+
+**Signature:**
+	``- (bool) isMuted;``
+	
+**Returns:**
+	``BOOL``  - the Boolean value indicating if mute is on or not.
+
+----
+
+addDeviceToSession()
+~~~~~~~~~~~~~~~~~~~~~~~
+
+removeDeviceFromSession()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Device (Speaker) Management
+------------------------------
+
+getDeviceCount()
+~~~~~~~~~~~~~~~~~~
+
+getGroupCount()
+~~~~~~~~~~~~~~~~~
+
+getDeviceCountInGroupIndex()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+getDeviceInfoFromTable()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+getDeviceInfoByIndex()
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+findDeviceGroupWithDeviceId()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+findDeviceFromList()
+~~~~~~~~~~~~~~~~~~~~~~~
+
+isDeviceActive()
+~~~~~~~~~~~~~~~~~~~
+
+
+removeDeviceFromGroup()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+getDeviceGroupByIndex()
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+getDeviceGroupById()
+~~~~~~~~~~~~~~~~~~~~~~~
+
+getDeviceGroupNameByIndex()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+getDeviceGroupIdByIndex()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+setDeviceName()
+~~~~~~~~~~~~~~~~~~
+
+setDeviceGroupName()
+~~~~~~~~~~~~~~~~~~~~~~
+
+setDeviceRole()
+~~~~~~~~~~~~~~~~~
+
+getActiveDeviceCount()
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+getActiveGroupCount()
+~~~~~~~~~~~~~~~~~~~~~~~
+
+refreshDeviceWiFiSignal()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+getWifiSignalStrengthType()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

@@ -53,7 +53,7 @@
 <span id="smartapp-ref"></span><h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="initialization">
 <h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
-<p>The following methods should be defined by all SmartApps. They are called by the SmartThings platform at various points in the SmartApp lifecycle.</p>
+<p>Refer to HKWControlHandler.h in the SDK.</p>
 <div class="section" id="initializehkwirelesscontroller">
 <h3>initializeHKWirelessController()<a class="headerlink" href="#initializehkwirelesscontroller" title="Permalink to this headline">¶</a></h3>
 <p>Initializes and starts HKWirelessHD controller. This API requires a license key as string. If the input license key fails in key validation, then the API returns -1 as result. If it is successful, return 0.</p>
@@ -240,7 +240,186 @@
 <dt><strong>Returns:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">HKPlayState</span></code> - indicates the current player state.</dd>
 </dl>
+</div>
+</div>
 <hr class="docutils" />
+<div class="section" id="volume-control">
+<h2>Volume Control<a class="headerlink" href="#volume-control" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setvolumeall">
+<h3>setVolumeAll()<a class="headerlink" href="#setvolumeall" title="Permalink to this headline">¶</a></h3>
+<p>Sets a volume level to all speakers in the network. The same volume level is set to all speakers.</p>
+<p>The range of volume level is 0 (min) to the maximumVolumeLevel (currently, 50) defined by getMaximumVolumeLevel.</p>
+<p>Setting volume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The VolumeLevelChanged callback defined by registerCallbackVolumeLevelChanged() will be called when the volume level of the specified speaker has changed.</p>
+<p>If the volume is being muted, the volume becomes unmuted first, and then set the volume.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setVolumeAll:(NSInteger)volume;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)volume</span></code> -  the volume level to set</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="setvolumedevice">
+<h3>setVolumeDevice()<a class="headerlink" href="#setvolumedevice" title="Permalink to this headline">¶</a></h3>
+<p>Set a volume level to an individual speaker specified by deviceId. The range of volume level is 0 (min) to the maximumVolumeLevel (currently, 50) defined by getMaximumVolumeLevel. setVolume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The VolumeLevelChanged callback defined by registerCallbackVolumeLevelChanged() will be called when the volume level of the specified speaker has changed.&lt;p&gt;If the volume is being muted, the volume becomes unmuted first, and then set the volume.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setVolumeDevice:(long</span> <span class="pre">long)deviceId</span> <span class="pre">volume:(NSInteger)volume;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - the device ID of the speaker</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)volume</span></code> -  the volume level to set</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getvolume">
+<h3>getVolume()<a class="headerlink" href="#getvolume" title="Permalink to this headline">¶</a></h3>
+<p>Gets the average volume level for all devices.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getVolume;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the average volume level of all speakers</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdevicevolume">
+<h3>getDeviceVolume()<a class="headerlink" href="#getdevicevolume" title="Permalink to this headline">¶</a></h3>
+<p>Gets the volume level of the specified speaker.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getDeviceVolume:(long</span> <span class="pre">long)deviceId;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong>
+- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - the deviceId of the speaker inquired.</p>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the device volume level</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getmaximumvolumelevel">
+<h3>getMaximumVolumeLevel()<a class="headerlink" href="#getmaximumvolumelevel" title="Permalink to this headline">¶</a></h3>
+<p>Returns the maximum volume level that the system provides.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getMaximumVolumeLevel;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the maximum volume level</dd>
+</dl>
+</div>
+<div class="section" id="mute">
+<h3>mute()<a class="headerlink" href="#mute" title="Permalink to this headline">¶</a></h3>
+<p>Mutes the current volume of all speakers.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">mute;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="unmute">
+<h3>unmute()<a class="headerlink" href="#unmute" title="Permalink to this headline">¶</a></h3>
+<p>Unmute the volume. It returns the previous volume level before mute.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">unmute;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="ismuted">
+<h3>isMuted()<a class="headerlink" href="#ismuted" title="Permalink to this headline">¶</a></h3>
+<p>Check if volume is muted or not.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(bool)</span> <span class="pre">isMuted;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code>  - the Boolean value indicating if mute is on or not.</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="adddevicetosession">
+<h3>addDeviceToSession()<a class="headerlink" href="#adddevicetosession" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="removedevicefromsession">
+<h3>removeDeviceFromSession()<a class="headerlink" href="#removedevicefromsession" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="device-speaker-management">
+<h2>Device (Speaker) Management<a class="headerlink" href="#device-speaker-management" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getdevicecount">
+<h3>getDeviceCount()<a class="headerlink" href="#getdevicecount" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="getgroupcount">
+<h3>getGroupCount()<a class="headerlink" href="#getgroupcount" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="getdevicecountingroupindex">
+<h3>getDeviceCountInGroupIndex()<a class="headerlink" href="#getdevicecountingroupindex" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="getdeviceinfofromtable">
+<h3>getDeviceInfoFromTable()<a class="headerlink" href="#getdeviceinfofromtable" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="getdeviceinfobyindex">
+<h3>getDeviceInfoByIndex()<a class="headerlink" href="#getdeviceinfobyindex" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="finddevicegroupwithdeviceid">
+<h3>findDeviceGroupWithDeviceId()<a class="headerlink" href="#finddevicegroupwithdeviceid" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="finddevicefromlist">
+<h3>findDeviceFromList()<a class="headerlink" href="#finddevicefromlist" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="isdeviceactive">
+<h3>isDeviceActive()<a class="headerlink" href="#isdeviceactive" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="removedevicefromgroup">
+<h3>removeDeviceFromGroup()<a class="headerlink" href="#removedevicefromgroup" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="getdevicegroupbyindex">
+<h3>getDeviceGroupByIndex()<a class="headerlink" href="#getdevicegroupbyindex" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="getdevicegroupbyid">
+<h3>getDeviceGroupById()<a class="headerlink" href="#getdevicegroupbyid" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="getdevicegroupnamebyindex">
+<h3>getDeviceGroupNameByIndex()<a class="headerlink" href="#getdevicegroupnamebyindex" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="getdevicegroupidbyindex">
+<h3>getDeviceGroupIdByIndex()<a class="headerlink" href="#getdevicegroupidbyindex" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="setdevicename">
+<h3>setDeviceName()<a class="headerlink" href="#setdevicename" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="setdevicegroupname">
+<h3>setDeviceGroupName()<a class="headerlink" href="#setdevicegroupname" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="setdevicerole">
+<h3>setDeviceRole()<a class="headerlink" href="#setdevicerole" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="getactivedevicecount">
+<h3>getActiveDeviceCount()<a class="headerlink" href="#getactivedevicecount" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="getactivegroupcount">
+<h3>getActiveGroupCount()<a class="headerlink" href="#getactivegroupcount" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="refreshdevicewifisignal">
+<h3>refreshDeviceWiFiSignal()<a class="headerlink" href="#refreshdevicewifisignal" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="getwifisignalstrengthtype">
+<h3>getWifiSignalStrengthType()<a class="headerlink" href="#getwifisignalstrengthtype" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 </div>
@@ -278,6 +457,42 @@
 <li><a class="reference internal" href="#stop">stop()</a></li>
 <li><a class="reference internal" href="#isplaying">isPlaying()</a></li>
 <li><a class="reference internal" href="#getplayerstate">getPlayerState()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#volume-control">Volume Control</a><ul>
+<li><a class="reference internal" href="#setvolumeall">setVolumeAll()</a></li>
+<li><a class="reference internal" href="#setvolumedevice">setVolumeDevice()</a></li>
+<li><a class="reference internal" href="#getvolume">getVolume()</a></li>
+<li><a class="reference internal" href="#getdevicevolume">getDeviceVolume()</a></li>
+<li><a class="reference internal" href="#getmaximumvolumelevel">getMaximumVolumeLevel()</a></li>
+<li><a class="reference internal" href="#mute">mute()</a></li>
+<li><a class="reference internal" href="#unmute">unmute()</a></li>
+<li><a class="reference internal" href="#ismuted">isMuted()</a></li>
+<li><a class="reference internal" href="#adddevicetosession">addDeviceToSession()</a></li>
+<li><a class="reference internal" href="#removedevicefromsession">removeDeviceFromSession()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#device-speaker-management">Device (Speaker) Management</a><ul>
+<li><a class="reference internal" href="#getdevicecount">getDeviceCount()</a></li>
+<li><a class="reference internal" href="#getgroupcount">getGroupCount()</a></li>
+<li><a class="reference internal" href="#getdevicecountingroupindex">getDeviceCountInGroupIndex()</a></li>
+<li><a class="reference internal" href="#getdeviceinfofromtable">getDeviceInfoFromTable()</a></li>
+<li><a class="reference internal" href="#getdeviceinfobyindex">getDeviceInfoByIndex()</a></li>
+<li><a class="reference internal" href="#finddevicegroupwithdeviceid">findDeviceGroupWithDeviceId()</a></li>
+<li><a class="reference internal" href="#finddevicefromlist">findDeviceFromList()</a></li>
+<li><a class="reference internal" href="#isdeviceactive">isDeviceActive()</a></li>
+<li><a class="reference internal" href="#removedevicefromgroup">removeDeviceFromGroup()</a></li>
+<li><a class="reference internal" href="#getdevicegroupbyindex">getDeviceGroupByIndex()</a></li>
+<li><a class="reference internal" href="#getdevicegroupbyid">getDeviceGroupById()</a></li>
+<li><a class="reference internal" href="#getdevicegroupnamebyindex">getDeviceGroupNameByIndex()</a></li>
+<li><a class="reference internal" href="#getdevicegroupidbyindex">getDeviceGroupIdByIndex()</a></li>
+<li><a class="reference internal" href="#setdevicename">setDeviceName()</a></li>
+<li><a class="reference internal" href="#setdevicegroupname">setDeviceGroupName()</a></li>
+<li><a class="reference internal" href="#setdevicerole">setDeviceRole()</a></li>
+<li><a class="reference internal" href="#getactivedevicecount">getActiveDeviceCount()</a></li>
+<li><a class="reference internal" href="#getactivegroupcount">getActiveGroupCount()</a></li>
+<li><a class="reference internal" href="#refreshdevicewifisignal">refreshDeviceWiFiSignal()</a></li>
+<li><a class="reference internal" href="#getwifisignalstrengthtype">getWifiSignalStrengthType()</a></li>
 </ul>
 </li>
 </ul>
