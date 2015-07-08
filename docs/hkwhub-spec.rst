@@ -250,7 +250,7 @@ Remove a Device from Session
 
 ----
 
-Remote (Hub) Media Playback Management
+Media Playback Management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Get the list of stored media
