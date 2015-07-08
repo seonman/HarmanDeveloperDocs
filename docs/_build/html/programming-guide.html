@@ -320,9 +320,10 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
 <hr class="docutils" />
 <div class="section" id="play-song">
 <h2>Play song<a class="headerlink" href="#play-song" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="play-mp3-and-wav-file">
-<h3>Play MP3 and WAV file<a class="headerlink" href="#play-mp3-and-wav-file" title="Permalink to this headline">¶</a></h3>
-<p>If one or more speakers are added to the session, you can start to play a song. Currently, MP3 and WAV formats are supported. Use <code class="docutils literal"><span class="pre">playCAF()</span></code> to play MP3 or WAV file, and <code class="docutils literal"><span class="pre">playWAV()</span></code> only for WAV file.</p>
+<div class="section" id="play-caf-file-mp3-wav-etc">
+<h3>Play CAF file (MP3, WAV, etc.)<a class="headerlink" href="#play-caf-file-mp3-wav-etc" title="Permalink to this headline">¶</a></h3>
+<p>If one or more speakers are available to the session, or if there is at least one speaker active, you can start to play a song.</p>
+<p>The playback is based on the Apple Core Audio framework. So, the supported audio file and data formats are the same as those supported by Apple&#8217;s Core Audio framework. The detailed information is available at <a class="reference external" href="https://developer.apple.com/library/mac/documentation/MusicAudio/Conceptual/CoreAudioOverview/SupportedAudioFormatsMacOSX/SupportedAudioFormatsMacOSX.html">Supported Audio File and Data Formats in OS X</a>. According to the Apple developer documentation, CAF supports AAC (.aac, .adts), AC3 (.ac3), AIFC (.aif, .aiff, .aifc), Apple Core Audio Format (.caf), MPEG Layer 3 (.mp3), MPEG 4 Audio (.mp4), NeXT/SUN Audio (.snd, .au), Sound Designer II (.sd2), and WAVE (.wav).</p>
 <div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">BOOL</span><span class="p">)</span> <span class="n">playCAF</span><span class="p">:(</span><span class="bp">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">assetURL</span> <span class="n">songName</span><span class="p">:(</span><span class="bp">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">songName</span> <span class="n">resumeFlag</span><span class="p">:(</span><span class="n">BOOL</span><span class="p">)</span><span class="n">resumeFlag</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -672,7 +673,7 @@ This function is invoked when playback state is changed during the playback. The
 </ul>
 </li>
 <li><a class="reference internal" href="#play-song">Play song</a><ul>
-<li><a class="reference internal" href="#play-mp3-and-wav-file">Play MP3 and WAV file</a></li>
+<li><a class="reference internal" href="#play-caf-file-mp3-wav-etc">Play CAF file (MP3, WAV, etc.)</a></li>
 <li><a class="reference internal" href="#play-web-streaming-music">Play Web Streaming Music</a><ul>
 <li><a class="reference internal" href="#playback-controls">Playback controls</a></li>
 </ul>
