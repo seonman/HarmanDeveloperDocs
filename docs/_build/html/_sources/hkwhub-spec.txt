@@ -46,23 +46,23 @@ Web Hub handles all the requests from and response to the sensors or the clouds 
 Session Management
 -------------------
 
-Since the HKWHub app should be able to handle REST HTTP requests from more than on clients at the same time, the HKWHub app manages the requests with session information associated with the priority when the session is initialized.
+Since the HKWHub app should be able to handle REST HTTP requests from more than one clients at the same time, the HKWHub app manages the requests with session information associated with the priority when the session is initialized.
 
 The following is the policy of the session management:
 
 Session Creation
 ~~~~~~~~~~~~~~~~~
 - When a client wants to access speakers through the HKWHub app, it must create a session first. (Use ``init_session`` command.)
-- When a client initializes session, it also sets the priority of the session (using Priority=<priority value> parameter).
+- When a client initializes session, it also sets the priority of the session (using ``Priority=<priority value>`` parameter).
 
 Priority of Session
 ~~~~~~~~~~~~~~~~~~~~~
 - Each session is associated with a priority value which will be used to determine which request can override the current on-going playback session.
-- The priority value is specified as parameter (Priority) when the client calls ``init_session``.
+- The priority value is specified as parameter (``Priority``) when the client calls ``init_session``.
 	- If the command does not specify the Priority parameter, 100 is set as default value.
-- If the priority of the session of a new playback request (e.g. ``play_hub_media``, and so on) is greater than or equal to the priority of the current session, then it interrupts the current playback session.
-	- The playback status of the interrupted session becomes ``PlayerStateInterrupted``. (see the related API in the next section)
-	- Once a session is overridden by a higher priority playback request, then the session is no longer valid. (the session is closed.)
+- If the priority of the session of a new playback request, such as ``play_hub_media`` or ``play_web_media``, and so on, is greater than or equal to the priority of the current session, then it interrupts the current playback session, that is, stops the current playback session and start a new playback for itself.
+	- The playback status of the interrupted session becomes ``PlayerStateStopped``. (see the related API in the next section)
+	- Even if a session is interrupted by a higher or equal priority playback request, the session is still valid. So, it can continue to send requests with the session id.
 	
 The following diagrams show how HKWHub app handles incoming playback request based on the session priorities.
 
