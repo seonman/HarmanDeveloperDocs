@@ -60,10 +60,10 @@ Go to Setup (via Hamburger icon) menu, and add music items from iOS Music librar
 .. figure:: img/hub/medialist.png
 	:scale: 30
 
-Use ``curl`` command or web browser to sedn REST request
+Use ``curl`` command or web browser to send REST requests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use **curl** command in your shell, or use your web browser to send the HTTP requests to the server URL. In this example, we will use **curl** commands.
+Use **curl** command in your shell, or use your web browser to send  HTTP requests to the server URL. In this example, we will use **curl** commands.
 
 a. Init Session
 ^^^^^^^^^^^^^^^
