@@ -43,6 +43,111 @@ Web Hub handles all the requests from and response to the sensors or the clouds 
 
 ----
 
+Quick Guide to HKWHub App
+-------------------------------
+
+Run HKWHub app on your iOS device
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: img/hub/hub-first-run.png
+	:scale: 50
+
+
+Copy the URL information (http://192.168.1.192:8080/). This is the HTTP server address. You need to use this URL for your every REST API request.
+
+Use ``curl`` command or web browser to sedn REST request
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use **curl** command in your shell, or use your web browser to send the HTTP requests to the server URL. In this example, we will use **curl** commands.
+
+a. Init Session
+^^^^^^^^^^^^^^^
+``curl "http://192.168.1.192:8080/v1/init_session"``
+
+This returns the session id.
+
+b. Get the media list
+^^^^^^^^^^^^^^^^^^^^^^^
+``curl "http://192.168.1.192:8080/v1/media_list?SessionID=1000"``
+
+Here, SessionID should be the session id you got from ``init_session``. You will get a list of media in JSON like below
+
+.. code-block:: json
+
+	{"MediaList": [
+		{"PersistentID":"7387446959931482519",
+		"Title":"I Will Run To You",
+		"Artist":"Hillsong",
+		"Duration":436,
+		"AlbumTitle":"Simply Worship"
+		},
+		{"PersistentID":"5829171347867182746",
+		"Title":"I'm Yours [ORIGINAL DEMO]",
+		"Artist":"Jason Mraz",
+		"Duration":257,
+		"AlbumTitle":"Wordplay [SINGLE EP]"}
+	]}
+
+c. Choose a media item and play it by specifying PersistentID
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``curl "http://192.168.1.192:8080/v1/pub_hub_media?SessionID=1000&PersistentID=5829171347867182746"``
+
+
+4. Play a media iteam from HTTP server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``curl "http://192.168.1.192:8080/v1/pub_hub_media?SessionID=1000&http://seonman.github.io/music/hyolyn.mp3"``
+
+5. Stop playing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``curl "http://192.168.1.192:8080/v1/stop_playing?SessionID=1000"``
+
+6. Set Volume
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``curl "http://192.168.1.192:8080/v1/set_volume?SessionID=1000&Volume=30"``
+
+Please see the REST API specification for more information and examples.
+
+Use ``WebHubWebApp`` to play music
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The source code of HKWHub app also contains a Web app to test the Hub app. The UI is created using Polymer v0.5 (https://www.polymer-project.org/0.5/). 
+
+- Unzip WebHubWebApp.zip. You will see the following sub directories.
+	- bower_components : This is the folder for polymer library
+	- hkwhub : this is the folder containing the WebHubApp that we will run.
+
+.. code-block:: shell
+
+	$ cd WebHubWebApp
+	$ python -m SimpleHTTPServer
+	
+You will get some log messages like "Serving HTTP on 0.0.0.0 port 8000 ..."
+
+Next, launch your web browser (Chrome, Safari, ...) and go to http://localhost:8000/hkwhub/
+
+.. note::
+Your iOS device running HKWHub app and your Desktop PC running web browser should be in the same network.
+
+At the fist screen looking like this:
+
+.. figure:: img/hub/hub-first-screen.png
+
+Enter the URL that the HKWHub app says: http://192.168.1.192:8080/, like this:
+
+.. figure:: img/hub/hub-enter-url.png
+
+If you press **Submit**, then you will see the first screen like below. This is the list of media items available at the HKWHub app. 
+
+.. figure:: img/hub/hub-playlist.png
+
+Now you can click one of items to play audio, and then move to **Media Player** tab to control playback (pause/resume/stop) and control volume. 
+
+.. figure:: img/hub/hub-media-player.png
+
+In **Speaker List** tab, you can select and turn on/off speaker.
+
+.. figure:: img/hub/hub-speaker-list.png
+
+
 Session Management
 -------------------
 

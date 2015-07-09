@@ -106,6 +106,104 @@
 </div>
 </div>
 <hr class="docutils" />
+<div class="section" id="quick-guide-to-hkwhub-app">
+<h2>Quick Guide to HKWHub App<a class="headerlink" href="#quick-guide-to-hkwhub-app" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="run-hkwhub-app-on-your-ios-device">
+<h3>Run HKWHub app on your iOS device<a class="headerlink" href="#run-hkwhub-app-on-your-ios-device" title="Permalink to this headline">¶</a></h3>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/hub-first-run.png"><img alt="_images/hub-first-run.png" src="_images/hub-first-run.png" /></a>
+</div>
+<p>Copy the URL information (<a class="reference external" href="http://192.168.1.192:8080/">http://192.168.1.192:8080/</a>). This is the HTTP server address. You need to use this URL for your every REST API request.</p>
+</div>
+<div class="section" id="use-curl-command-or-web-browser-to-sedn-rest-request">
+<h3>Use <code class="docutils literal"><span class="pre">curl</span></code> command or web browser to sedn REST request<a class="headerlink" href="#use-curl-command-or-web-browser-to-sedn-rest-request" title="Permalink to this headline">¶</a></h3>
+<p>Use <strong>curl</strong> command in your shell, or use your web browser to send the HTTP requests to the server URL. In this example, we will use <strong>curl</strong> commands.</p>
+<div class="section" id="a-init-session">
+<h4>a. Init Session<a class="headerlink" href="#a-init-session" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/init_session&quot;</span></code></p>
+<p>This returns the session id.</p>
+</div>
+<div class="section" id="b-get-the-media-list">
+<h4>b. Get the media list<a class="headerlink" href="#b-get-the-media-list" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/media_list?SessionID=1000&quot;</span></code></p>
+<p>Here, SessionID should be the session id you got from <code class="docutils literal"><span class="pre">init_session</span></code>. You will get a list of media in JSON like below</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;MediaList&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;7387446959931482519&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Title&quot;</span><span class="p">:</span><span class="s2">&quot;I Will Run To You&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Artist&quot;</span><span class="p">:</span><span class="s2">&quot;Hillsong&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="mi">436</span><span class="p">,</span>
+        <span class="nt">&quot;AlbumTitle&quot;</span><span class="p">:</span><span class="s2">&quot;Simply Worship&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;5829171347867182746&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Title&quot;</span><span class="p">:</span><span class="s2">&quot;I&#39;m Yours [ORIGINAL DEMO]&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Artist&quot;</span><span class="p">:</span><span class="s2">&quot;Jason Mraz&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="mi">257</span><span class="p">,</span>
+        <span class="nt">&quot;AlbumTitle&quot;</span><span class="p">:</span><span class="s2">&quot;Wordplay [SINGLE EP]&quot;</span><span class="p">}</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="c-choose-a-media-item-and-play-it-by-specifying-persistentid">
+<h4>c. Choose a media item and play it by specifying PersistentID<a class="headerlink" href="#c-choose-a-media-item-and-play-it-by-specifying-persistentid" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/pub_hub_media?SessionID=1000&amp;PersistentID=5829171347867182746&quot;</span></code></p>
+</div>
+<div class="section" id="play-a-media-iteam-from-http-server">
+<h4>4. Play a media iteam from HTTP server<a class="headerlink" href="#play-a-media-iteam-from-http-server" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/pub_hub_media?SessionID=1000&amp;http://seonman.github.io/music/hyolyn.mp3&quot;</span></code></p>
+</div>
+<div class="section" id="stop-playing">
+<h4>5. Stop playing<a class="headerlink" href="#stop-playing" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/stop_playing?SessionID=1000&quot;</span></code></p>
+</div>
+<div class="section" id="set-volume">
+<h4>6. Set Volume<a class="headerlink" href="#set-volume" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/set_volume?SessionID=1000&amp;Volume=30&quot;</span></code></p>
+<p>Please see the REST API specification for more information and examples.</p>
+</div>
+</div>
+<div class="section" id="use-webhubwebapp-to-play-music">
+<h3>Use <code class="docutils literal"><span class="pre">WebHubWebApp</span></code> to play music<a class="headerlink" href="#use-webhubwebapp-to-play-music" title="Permalink to this headline">¶</a></h3>
+<p>The source code of HKWHub app also contains a Web app to test the Hub app. The UI is created using Polymer v0.5 (<a class="reference external" href="https://www.polymer-project.org/0.5/">https://www.polymer-project.org/0.5/</a>).</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Unzip WebHubWebApp.zip. You will see the following sub directories.</dt>
+<dd><ul class="first last simple">
+<li>bower_components : This is the folder for polymer library</li>
+<li>hkwhub : this is the folder containing the WebHubApp that we will run.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-shell"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>WebHubWebApp
+<span class="nv">$ </span>python -m SimpleHTTPServer
+</pre></div>
+</div>
+<p>You will get some log messages like &#8220;Serving HTTP on 0.0.0.0 port 8000 ...&#8221;</p>
+<p>Next, launch your web browser (Chrome, Safari, ...) and go to <a class="reference external" href="http://localhost:8000/hkwhub/">http://localhost:8000/hkwhub/</a></p>
+<p>Your iOS device running HKWHub app and your Desktop PC running web browser should be in the same network.</p>
+<p>At the fist screen looking like this:</p>
+<div class="figure">
+<img alt="_images/hub-first-screen.png" src="_images/hub-first-screen.png" />
+</div>
+<p>Enter the URL that the HKWHub app says: <a class="reference external" href="http://192.168.1.192:8080/">http://192.168.1.192:8080/</a>, like this:</p>
+<div class="figure">
+<img alt="_images/hub-enter-url.png" src="_images/hub-enter-url.png" />
+</div>
+<p>If you press <strong>Submit</strong>, then you will see the first screen like below. This is the list of media items available at the HKWHub app.</p>
+<div class="figure">
+<img alt="_images/hub-playlist.png" src="_images/hub-playlist.png" />
+</div>
+<p>Now you can click one of items to play audio, and then move to <strong>Media Player</strong> tab to control playback (pause/resume/stop) and control volume.</p>
+<div class="figure">
+<img alt="_images/hub-media-player.png" src="_images/hub-media-player.png" />
+</div>
+<p>In <strong>Speaker List</strong> tab, you can select and turn on/off speaker.</p>
+<div class="figure">
+<img alt="_images/hub-speaker-list.png" src="_images/hub-speaker-list.png" />
+</div>
+</div>
+</div>
 <div class="section" id="session-management">
 <h2>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h2>
 <p>Since the HKWHub app should be able to handle REST HTTP requests from more than one clients at the same time, the HKWHub app manages the requests with session information associated with the priority when the session is initialized.</p>
@@ -807,6 +905,20 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#overall-architecture">Overall Architecture</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quick-guide-to-hkwhub-app">Quick Guide to HKWHub App</a><ul>
+<li><a class="reference internal" href="#run-hkwhub-app-on-your-ios-device">Run HKWHub app on your iOS device</a></li>
+<li><a class="reference internal" href="#use-curl-command-or-web-browser-to-sedn-rest-request">Use <code class="docutils literal"><span class="pre">curl</span></code> command or web browser to sedn REST request</a><ul>
+<li><a class="reference internal" href="#a-init-session">a. Init Session</a></li>
+<li><a class="reference internal" href="#b-get-the-media-list">b. Get the media list</a></li>
+<li><a class="reference internal" href="#c-choose-a-media-item-and-play-it-by-specifying-persistentid">c. Choose a media item and play it by specifying PersistentID</a></li>
+<li><a class="reference internal" href="#play-a-media-iteam-from-http-server">4. Play a media iteam from HTTP server</a></li>
+<li><a class="reference internal" href="#stop-playing">5. Stop playing</a></li>
+<li><a class="reference internal" href="#set-volume">6. Set Volume</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-webhubwebapp-to-play-music">Use <code class="docutils literal"><span class="pre">WebHubWebApp</span></code> to play music</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#session-management">Session Management</a><ul>
