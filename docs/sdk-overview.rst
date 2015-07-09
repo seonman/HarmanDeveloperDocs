@@ -94,6 +94,7 @@ The implementation note for Watch App support will be available at the developer
 	:scale: 40
 	
 .. Note::
+
 	Please check out `Apple Watch demo video`_ as well.
 
 .. _`Apple Watch demo video`: https://www.youtube.com/watch?v=M7AtKfPHfXM
