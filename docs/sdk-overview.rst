@@ -93,7 +93,8 @@ The implementation note for Watch App support will be available at the developer
 .. figure:: img/sdk-overview/hkwplayer-watch-3.png
 	:scale: 40
 	
-Please check out `Apple Watch demo video`_ as well.
+.. Note::
+	Please check out `Apple Watch demo video`_ as well.
 
 .. _`Apple Watch demo video`: https://www.youtube.com/watch?v=M7AtKfPHfXM
 
