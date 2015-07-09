@@ -105,7 +105,9 @@ c. Choose a media item and play it by specifying PersistentID
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ``curl "http://192.168.1.192:8080/v1/set_volume?SessionID=1000&Volume=30"``
 
-Please see the REST API specification for more information and examples.
+.. note::
+
+	Please see the REST API specification for more information and examples.
 
 Use ``WebHubWebApp`` to play music
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -125,7 +127,8 @@ You will get some log messages like "Serving HTTP on 0.0.0.0 port 8000 ..."
 Next, launch your web browser (Chrome, Safari, ...) and go to http://localhost:8000/hkwhub/
 
 .. note::
-Your iOS device running HKWHub app and your Desktop PC running web browser should be in the same network.
+
+	Your iOS device running HKWHub app and your Desktop PC running web browser should be in the same network.
 
 At the fist screen looking like this:
 
