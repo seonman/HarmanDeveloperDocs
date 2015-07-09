@@ -663,15 +663,13 @@
 <hr class="docutils" />
 <div class="section" id="getactivegroupcount">
 <h3>getActiveGroupCount()<a class="headerlink" href="#getactivegroupcount" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><p>Gets the number of active groups. An active group is defined as all the devices that belongs to a group are active. If even one of the speakers in the same group is inactive, then the group is inactive.</p>
+<p>Gets the number of active groups. An active group is defined as all the devices that belongs to a group are active. If even one of the speakers in the same group is inactive, then the group is inactive.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getActiveGroupCount;</span></code></dd>
 <dt><strong>Returns:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the number of active groups</dd>
 </dl>
-</div></blockquote>
 </div>
 <hr class="docutils" />
 <div class="section" id="refreshdevicewifisignal">
@@ -681,8 +679,10 @@
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)refreshDeviceWiFiSignal:(long</span> <span class="pre">long)deviceId;</span></code></dd>
 </dl>
-<p><strong>Parameters:</strong>
-- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the device</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the device</li>
+</ul>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">void</span></code></dd>
@@ -696,12 +696,136 @@
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(HKWifiSingalStrength)getWifiSignalStrengthType:(NSInteger)wifiSignal;</span></code></dd>
 </dl>
-<p><strong>Parameters:</strong>
-- <code class="docutils literal"><span class="pre">(NSInteger)wifiSignal</span></code> - the wifi signal value</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)wifiSignal</span></code> - the wifi signal value</li>
+</ul>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">HKWifiSingalStrength</span></code> - a value of HKWifiSignalStrength type</dd>
 </dl>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="hkwdeviceeventhandlersingleton">
+<h2>HKWDeviceEventHandlerSingleton<a class="headerlink" href="#hkwdeviceeventhandlersingleton" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sharedinstance">
+<h3>sharedInstance()<a class="headerlink" href="#sharedinstance" title="Permalink to this headline">¶</a></h3>
+<p><strong>Signature:</strong>
++(HKWDeviceEventHandlerSingleton*)sharedInstance;</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="delegate">
+<h3>delegate<a class="headerlink" href="#delegate" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="k">@property</span> <span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">weak</span><span class="p">)</span> <span class="kt">id</span><span class="o">&lt;</span><span class="n">HKWDeviceEventHandlerDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="hkwdeviceeventhandlerdelegate">
+<h2>HKWDeviceEventHandlerDelegate<a class="headerlink" href="#hkwdeviceeventhandlerdelegate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hkwdevicestateupdated-required">
+<h3>hkwDeviceStateUpdated() - required<a class="headerlink" href="#hkwdevicestateupdated-required" title="Permalink to this headline">¶</a></h3>
+<p>Invoked when some of device information have been changed for any speakers.It is also invoked when the network is disconnected ans no speakers are available any longer, or when the network becomes up from down, so speakers in the network become added to the HKWirelessHD network. &lt;p&gt;The information monitored includes device status (active or inactive), model name, group name, and wifi signal strengths.&lt;p&gt;Volume change does not trigger this call. The volume update is reported by CallbackVolumeLevelChanged.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwDeviceStateUpdated:(long</span> <span class="pre">long)deviceId</span> <span class="pre">withReason:(NSInteger)reason;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - the deviceId of the speaker</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)reason</span></code> - the reason code about the updated status</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="hkwerroroccurred-required">
+<h3>hkwErrorOccurred() - required<a class="headerlink" href="#hkwerroroccurred-required" title="Permalink to this headline">¶</a></h3>
+<p>Invoked when an error occures.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwErrorOccurred:(NSInteger)errorCode</span> <span class="pre">withErrorMessage:(NSString*)errorMesg;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)errorCode</span></code> - an integer value indicating error code.</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)errorMesg</span></code> - a string value containing a description about the error.</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="hkwplayereventhandlersingleton">
+<h2>HKWPlayerEventHandlerSingleton<a class="headerlink" href="#hkwplayereventhandlersingleton" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>sharedInstance()<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">+(HKWPlayerEventHandlerSingleton*)sharedInstance;</span></code></dd>
+</dl>
+</div>
+<div class="section" id="id4">
+<h3>delegate<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="k">@property</span> <span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">weak</span><span class="p">)</span> <span class="kt">id</span><span class="o">&lt;</span><span class="n">HKWPlayerEventHandlerDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="hkwplayereventhandlerdelegate">
+<h2>HKWPlayerEventHandlerDelegate<a class="headerlink" href="#hkwplayereventhandlerdelegate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hkwplayended-required">
+<h3>hkwPlayEnded() - required<a class="headerlink" href="#hkwplayended-required" title="Permalink to this headline">¶</a></h3>
+<p>Invoked when the current playback is ended.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwPlayEnded;</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="hkwdevicevolumechanged-optional">
+<h3>hkwDeviceVolumeChanged() - optional<a class="headerlink" href="#hkwdevicevolumechanged-optional" title="Permalink to this headline">¶</a></h3>
+<p>Invoked when volume level has been changed for any spekaers.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwDeviceVolumeChanged:(long</span> <span class="pre">long)deviceId</span> <span class="pre">deviceVolume:(NSInteger)deviceVolume</span> <span class="pre">withAverageVolume:(NSInteger)avgVolume;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - the device unique ID (long long type)</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)deviceVolume</span></code> - the volume level of the device (speaker)</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)avgVolume</span></code> - the average volume level</li>
+</ul>
+</div>
+<div class="section" id="hkwplaybackstatechanged-optional">
+<h3>hkwPlaybackStateChanged() - optional<a class="headerlink" href="#hkwplaybackstatechanged-optional" title="Permalink to this headline">¶</a></h3>
+<p>Invoked when player state has been changed during the playback.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwPlaybackStateChanged:(NSInteger)playState;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)playState</span></code> - The player state</li>
+</ul>
+</div>
+<div class="section" id="hkwplaybacktimechanged-optional">
+<h3>hkwPlaybackTimeChanged() - optional<a class="headerlink" href="#hkwplaybacktimechanged-optional" title="Permalink to this headline">¶</a></h3>
+<p>Invoked when the current time of playback has been changed. It is called every one second.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwPlaybackTimeChanged:(NSInteger)timeElapsed;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)timeElapsed</span></code> - the time (in second) passed since the beginning of the playback.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -775,6 +899,28 @@
 <li><a class="reference internal" href="#getactivegroupcount">getActiveGroupCount()</a></li>
 <li><a class="reference internal" href="#refreshdevicewifisignal">refreshDeviceWiFiSignal()</a></li>
 <li><a class="reference internal" href="#getwifisignalstrengthtype">getWifiSignalStrengthType()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hkwdeviceeventhandlersingleton">HKWDeviceEventHandlerSingleton</a><ul>
+<li><a class="reference internal" href="#sharedinstance">sharedInstance()</a></li>
+<li><a class="reference internal" href="#delegate">delegate</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hkwdeviceeventhandlerdelegate">HKWDeviceEventHandlerDelegate</a><ul>
+<li><a class="reference internal" href="#hkwdevicestateupdated-required">hkwDeviceStateUpdated() - required</a></li>
+<li><a class="reference internal" href="#hkwerroroccurred-required">hkwErrorOccurred() - required</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hkwplayereventhandlersingleton">HKWPlayerEventHandlerSingleton</a><ul>
+<li><a class="reference internal" href="#id3">sharedInstance()</a></li>
+<li><a class="reference internal" href="#id4">delegate</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hkwplayereventhandlerdelegate">HKWPlayerEventHandlerDelegate</a><ul>
+<li><a class="reference internal" href="#hkwplayended-required">hkwPlayEnded() - required</a></li>
+<li><a class="reference internal" href="#hkwdevicevolumechanged-optional">hkwDeviceVolumeChanged() - optional</a></li>
+<li><a class="reference internal" href="#hkwplaybackstatechanged-optional">hkwPlaybackStateChanged() - optional</a></li>
+<li><a class="reference internal" href="#hkwplaybacktimechanged-optional">hkwPlaybackTimeChanged() - optional</a></li>
 </ul>
 </li>
 </ul>

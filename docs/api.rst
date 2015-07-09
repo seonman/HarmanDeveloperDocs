@@ -666,12 +666,12 @@ getActiveDeviceCount()
 getActiveGroupCount()
 ~~~~~~~~~~~~~~~~~~~~~~~
 
- Gets the number of active groups. An active group is defined as all the devices that belongs to a group are active. If even one of the speakers in the same group is inactive, then the group is inactive.
+Gets the number of active groups. An active group is defined as all the devices that belongs to a group are active. If even one of the speakers in the same group is inactive, then the group is inactive.
  
- **Signature:**
- 	``- (NSInteger) getActiveGroupCount;``
+**Signature:**
+	``- (NSInteger) getActiveGroupCount;``
  
- **Returns:**
+**Returns:**
 	``NSInteger`` - the number of active groups
 
 ----
@@ -685,6 +685,7 @@ Refresh the device's Wifi Signal strength value. This is asynchronous call, and 
  	``- (void)refreshDeviceWiFiSignal:(long long)deviceId;``
  
 **Parameters:**
+
 - ``(long long)deviceId`` - The ID of the device
 
 **Returns:**
@@ -702,9 +703,137 @@ Gets Wifi signal strength type by signal value
 	``- (HKWifiSingalStrength)getWifiSignalStrengthType:(NSInteger)wifiSignal;``
 
 **Parameters:**
+
 - ``(NSInteger)wifiSignal`` - the wifi signal value
 
 **Returns:**
 	``HKWifiSingalStrength`` - a value of HKWifiSignalStrength type
+
+----
 	
+HKWDeviceEventHandlerSingleton
+-------------------------------
+
+sharedInstance()
+~~~~~~~~~~~~~~~~~~~~
+
+**Signature:**
++(HKWDeviceEventHandlerSingleton*)sharedInstance;
+
+----
+
+delegate
+~~~~~~~~~~~~~
+
+.. code-block:: objective-c
+
+	@property (nonatomic, weak) id<HKWDeviceEventHandlerDelegate> delegate;
+
+----
+
+HKWDeviceEventHandlerDelegate
+-------------------------------
+
+hkwDeviceStateUpdated() - required
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Invoked when some of device information have been changed for any speakers.It is also invoked when the network is disconnected ans no speakers are available any longer, or when the network becomes up from down, so speakers in the network become added to the HKWirelessHD network. <p>The information monitored includes device status (active or inactive), model name, group name, and wifi signal strengths.<p>Volume change does not trigger this call. The volume update is reported by CallbackVolumeLevelChanged.
+
+**Signature:**
+	``-(void)hkwDeviceStateUpdated:(long long)deviceId withReason:(NSInteger)reason;``
+
+**Parameters:**
+
+- ``(long long)deviceId`` - the deviceId of the speaker
+- ``(NSInteger)reason`` - the reason code about the updated status
+
+**Returns:**
+	``void``
+	
+----
+
+hkwErrorOccurred() - required
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Invoked when an error occures.
+
+**Signature:**
+	``-(void)hkwErrorOccurred:(NSInteger)errorCode withErrorMessage:(NSString*)errorMesg;``
+
+**Parameters:**
+
+- ``(NSInteger)errorCode`` - an integer value indicating error code.
+- ``(NSString*)errorMesg`` - a string value containing a description about the error.
+
+**Returns:**
+	``void``
+	
+----
+
+HKWPlayerEventHandlerSingleton
+-------------------------------
+
+sharedInstance()
+~~~~~~~~~~~~~~~~~~~~
+
+**Signature:**
+	``+(HKWPlayerEventHandlerSingleton*)sharedInstance;``
+
+delegate
+~~~~~~~~~~~~~
+
+.. code-block:: objective-c
+
+	@property (nonatomic, weak) id<HKWPlayerEventHandlerDelegate> delegate;
+
+HKWPlayerEventHandlerDelegate
+-------------------------------
+
+hkwPlayEnded() - required
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Invoked when the current playback is ended.
+
+**Signature:**
+	``-(void)hkwPlayEnded;``
+
+----
+
+hkwDeviceVolumeChanged() - optional
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Invoked when volume level has been changed for any spekaers.
+
+**Signature:**
+	``-(void)hkwDeviceVolumeChanged:(long long)deviceId deviceVolume:(NSInteger)deviceVolume withAverageVolume:(NSInteger)avgVolume;``
+
+**Parameters:**
+
+- ``(long long)deviceId`` - the device unique ID (long long type)
+- ``(NSInteger)deviceVolume`` - the volume level of the device (speaker)
+- ``(NSInteger)avgVolume`` - the average volume level
+ 
+hkwPlaybackStateChanged() - optional
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Invoked when player state has been changed during the playback.
+
+**Signature:**
+	``-(void)hkwPlaybackStateChanged:(NSInteger)playState;``
+
+**Parameters:**
+
+- ``(NSInteger)playState`` - The player state
+
+hkwPlaybackTimeChanged() - optional
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Invoked when the current time of playback has been changed. It is called every one second.
+
+**Signature:**
+	``-(void)hkwPlaybackTimeChanged:(NSInteger)timeElapsed;``
+
+**Parameters:**
+
+- ``(NSInteger)timeElapsed`` - the time (in second) passed since the beginning of the playback.
 
