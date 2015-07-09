@@ -18,7 +18,7 @@ Please see the descriptions of each version below and make a proper choice for y
 	- libz.dylib and libbz2.dylib are required when linking.
 	
 - HKWirelessHDlw (lightweight version)
-	- Do not support web streaming music playback 
+	- **Do not support web streaming music playback**
 	- No other library required
 		
 So, if you do not need web streaming music playback for your app, you may use HKWirelessHDlw (lightweight) version. Otherwise, you should use HHWirelessHD version.
