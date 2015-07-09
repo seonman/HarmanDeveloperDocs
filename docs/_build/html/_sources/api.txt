@@ -779,6 +779,8 @@ sharedInstance()
 **Signature:**
 	``+(HKWPlayerEventHandlerSingleton*)sharedInstance;``
 
+----
+
 delegate
 ~~~~~~~~~~~~~
 
@@ -825,6 +827,8 @@ Invoked when player state has been changed during the playback.
 
 - ``(NSInteger)playState`` - The player state
 
+----
+
 hkwPlaybackTimeChanged() - optional
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -837,3 +841,4 @@ Invoked when the current time of playback has been changed. It is called every o
 
 - ``(NSInteger)timeElapsed`` - the time (in second) passed since the beginning of the playback.
 
+----
