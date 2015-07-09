@@ -48,7 +48,9 @@ Quick Guide to HKWHub App
 
 .. Note::
 
-Please check out the HKWHub app demo video: https://www.youtube.com/watch?v=_ljpReAvk0g&feature=youtu.be
+Please check out the `HKWHub app demo video`_.
+
+.. _`HKWHub app demo video`: https://www.youtube.com/watch?v=_ljpReAvk0g&feature=youtu.be
 
 
 Run HKWHub app on your iOS device
