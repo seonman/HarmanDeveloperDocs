@@ -55,6 +55,11 @@ Run HKWHub app on your iOS device
 
 Copy the URL information (http://192.168.1.192:8080/). This is the HTTP server address. You need to use this URL for your every REST API request.
 
+Go to Setup (via Hamburger icon) menu, and add music items from iOS Music library. 
+
+.. figure:: img/hub/medalist.png
+	:scale: 50
+
 Use ``curl`` command or web browser to sedn REST request
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
