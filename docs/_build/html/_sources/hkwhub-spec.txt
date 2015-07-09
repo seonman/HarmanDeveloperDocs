@@ -57,7 +57,7 @@ Copy the URL information (http://192.168.1.192:8080/). This is the HTTP server a
 
 Go to Setup (via Hamburger icon) menu, and add music items from iOS Music library. 
 
-.. figure:: img/hub/medalist.png
+.. figure:: img/hub/medialist.png
 	:scale: 50
 
 Use ``curl`` command or web browser to sedn REST request
