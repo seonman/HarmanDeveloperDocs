@@ -13,14 +13,12 @@ The reason we support the SDK as two separate versions is that we know that many
 
 Please see the descriptions of each version below and make a proper choice for your app.
 
-- HKWirelessHD (normal version) : support web streaming audio
-	- Only support 32bit (armv7) architecture. armv7s and arm64 are not supported.
-	- Support webstreaming music playback.
+- HKWirelessHD (normal version)
+	- Support web streaming music playback (streaming music from HTTP server, etc.)
 	- libz.dylib and libbz2.dylib are required when linking.
 	
-- HKWirelessHDlw (lightweight version) : do not support web streaming audio
-	- Supports both 32bit (armv7, armv7s) and 64bit architecture (arm64)
-	- Do not support web streaming music playback (streaming music from HTTP server, etc.)
+- HKWirelessHDlw (lightweight version)
+	- Do not support web streaming music playback 
 	- No other library required
 		
 So, if you do not need web streaming music playback for your app, you may use HKWirelessHDlw (lightweight) version. Otherwise, you should use HHWirelessHD version.
