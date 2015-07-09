@@ -221,8 +221,8 @@ If the execution is successful, then the attribute "active" of the speaker is se
 
 ----
 
-Play song
-----------
+Play Audio File
+----------------
 
 Play CAF file (MP3, WAV, etc.)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
