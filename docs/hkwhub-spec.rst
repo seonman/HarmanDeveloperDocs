@@ -48,7 +48,7 @@ Quick Guide to HKWHub App
 
 .. Note::
 
-Please check out the `HKWHub app demo video`_.
+	Please check out `HKWHub app demo video`_.
 
 .. _`HKWHub app demo video`: https://www.youtube.com/watch?v=_ljpReAvk0g&feature=youtu.be
 
