@@ -6,6 +6,14 @@ Overview of HWKHub
 
 HKWHub app is an iOS that that uses HKWirelessHD SDK and acts as a Web Hub that handles HTTP requests to control speakers and stream music. It enables any type of "connected" devices (like sensors or smart devices) and cloud-based service to connect HK Omni speakers and stream music.
 
+.. note::
+
+	Please note that HKWHub app is an on-going project, and not yet ready for production. We hope developers play around with this app and implement their own apps or services by integrating many other IoT devices or services and adding intelligence to the Hub app.
+	
+	Any feedback or request for new APIs and features are always welcome.
+
+
+
 Use Cases
 ~~~~~~~~~~~~
 
