@@ -15,28 +15,28 @@ Welcome to Harman Developer documentation!
 
 Welcome to the Harman developer documentation. Here you will find information about creating your app using HKWirelessHD SDK.
 
-This documentation is organized into a few different sections:
+This documentation is organized into a few different chapters:
 
 `SDK Overview`_
-    This chatper is the overview of HKWirelessHD SDK and the SDK apps based on the SDK.
+    This chapter is the overview of HKWirelessHD SDK and the SDK apps.
 	
 `Getting Started (iOS)`_
-    This chatper describes how you can quickly get started with the HKWirelessHD SDK. Just follow the instruction to setup your Xcode project files, and learn how to create a HKWirelessHD App.
+    This chatper describes how you can quickly get started with the HKWirelessHD SDK. Just follow the instruction to setup your Xcode project, and learn how to create a HKWirelessHD App.
 
 `Programming Guide`_
-    This chatper explains the APIs of HKWirelessHD SDK.
+    This chapter explains about the APIs of HKWirelessHD SDK.
 	
 `Architecture Overview`_
-    This chatper explains about the overall architecture of HKWirelessHD SDK.
+    This chapter explains about the overall architecture of HKWirelessHD SDK.
 
 `API Documentation`_
-    This chatper describes the API Specification of HKWirelessHD SDK.
+    This chapter describes the API Specification of HKWirelessHD SDK.
 	
 `HKWHub Specification`_
-    This chatper explains about the overall architecture of HKWirelessHD SDK.
+    This chapter explains about the HKWHub App and its REST API Specification.
 
 `Troubleshooting`_
-    This chatper describes several common problems that developers can experience at the beginning of using HKWirelessHD SDK, and provides known solutions.
+    This chatper describes several common problems that developers can face at the beginning of using HKWirelessHD SDK, and provides solutions for them.
 	
 `Version History`_
     Version History
