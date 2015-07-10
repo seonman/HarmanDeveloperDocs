@@ -11,7 +11,7 @@ There are two types of entities in HKWirelessHD audio streaming - one is source 
 
 In case of multi-channel streaming, each speaker is assigned with a role to process a dedicated audio channel. For example, a speaker can play either left channel or right channel in stereo mode.
 
-Source device can be iOS device, such as iPhone and iPad, and destination devices are Harman Kardon Omni speakers (Omni Adapt, Omni 10, Omni 20, Omni Bar, etc.) You can find more information on HK Omni speakers at http://www.harmankardon.com/content?ContentID=wireless.
+Source device can be iOS device, such as iPhone and iPad, and destination devices are Harman Kardon Omni speakers (Omni Adapt, Omni 10, Omni 20, Omni Bar, etc.) You can find more information on HK Omni speakers at http://www.harmankardon.com/content?ContentID=omni-v2.
 
 .. figure:: img/architecture-overview/architecture.png
 
