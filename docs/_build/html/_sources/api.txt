@@ -856,5 +856,3 @@ Invoked when the current time of playback has been changed. It is called every o
 **Parameters:**
 
 - ``(NSInteger)timeElapsed`` - the time (in second) passed since the beginning of the playback.
-
-----
