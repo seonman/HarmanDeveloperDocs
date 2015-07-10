@@ -167,7 +167,7 @@
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">(NSURL</span> <span class="pre">*)assetURL</span></code> - NSURL to the audio file.</li>
 <li><code class="docutils literal"><span class="pre">(NSString*)songName</span></code> - the song name to be played. This information is used internally to save a temporary PCM file converted from the original audio file.</li>
-<li><a href="#id1"><span class="problematic" id="id2">``</span></a>(NSInteger)startTime - time in second that specifies the start time.</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)startTime</span></code> - time in second that specifies the start time.</li>
 </ul>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
@@ -779,16 +779,16 @@
 <hr class="docutils" />
 <div class="section" id="hkwplayereventhandlersingleton">
 <h2>HKWPlayerEventHandlerSingleton<a class="headerlink" href="#hkwplayereventhandlersingleton" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id3">
-<h3>sharedInstance()<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>sharedInstance()<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">+(HKWPlayerEventHandlerSingleton*)sharedInstance;</span></code></dd>
 </dl>
 </div>
 <hr class="docutils" />
-<div class="section" id="id4">
-<h3>delegate<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>delegate<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-objective-c"><div class="highlight"><pre><span class="k">@property</span> <span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">weak</span><span class="p">)</span> <span class="kt">id</span><span class="o">&lt;</span><span class="n">HKWPlayerEventHandlerDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -931,8 +931,8 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#hkwplayereventhandlersingleton">HKWPlayerEventHandlerSingleton</a><ul>
-<li><a class="reference internal" href="#id3">sharedInstance()</a></li>
-<li><a class="reference internal" href="#id4">delegate</a></li>
+<li><a class="reference internal" href="#id1">sharedInstance()</a></li>
+<li><a class="reference internal" href="#id2">delegate</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#hkwplayereventhandlerdelegate">HKWPlayerEventHandlerDelegate</a><ul>

@@ -137,7 +137,7 @@ Plays a CAF audio file from a certain time. CAF includes mp3, wav, and m4a. Diff
 
 - ``(NSURL *)assetURL`` - NSURL to the audio file.
 - ``(NSString*)songName`` - the song name to be played. This information is used internally to save a temporary PCM file converted from the original audio file.
-- ``(NSInteger)startTime - time in second that specifies the start time.
+- ``(NSInteger)startTime`` - time in second that specifies the start time.
 
 **Returns:**
 	``BOOL`` - boolean value indicating success or failure
