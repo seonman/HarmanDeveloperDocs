@@ -525,6 +525,7 @@ Checks whether the device is active (added to the current playback session) or n
 
 **Returns:**
 	``(BOOL)`` - boolean indicating if the device is active or not.
+
 ----
 
 removeDeviceFromGroup()
