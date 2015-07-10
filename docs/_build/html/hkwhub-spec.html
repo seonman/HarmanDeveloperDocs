@@ -848,7 +848,7 @@
 <div class="section" id="set-volume-for-all-devices">
 <h4>Set Volume for all devices<a class="headerlink" href="#set-volume-for-all-devices" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/set_volume_device?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
+<li><p class="first">API: GET /v1/set_volume?SessionID=&lt;session id&gt;&amp;Volume=&lt;volume&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -861,7 +861,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/get_volume_device?SessionID=1000&amp;Volume=10</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/set_volume?SessionID=1000&amp;Volume=10</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -889,7 +889,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/get_volume_device?SessionID=1000&amp;DeviceID=1234567&amp;Volume=10</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/set_volume_device?SessionID=1000&amp;DeviceID=1234567&amp;Volume=10</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>

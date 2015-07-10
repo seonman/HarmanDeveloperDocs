@@ -250,15 +250,15 @@
 <hr class="docutils" />
 <div class="section" id="volume-control">
 <h2>Volume Control<a class="headerlink" href="#volume-control" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="setvolumeall">
-<h3>setVolumeAll()<a class="headerlink" href="#setvolumeall" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="setvolume">
+<h3>setVolume()<a class="headerlink" href="#setvolume" title="Permalink to this headline">¶</a></h3>
 <p>Sets a volume level to all speakers in the network. The same volume level is set to all speakers.</p>
 <p>The range of volume level is 0 (min) to the maximumVolumeLevel (currently, 50) defined by getMaximumVolumeLevel.</p>
 <p>Setting volume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The VolumeLevelChanged callback defined by registerCallbackVolumeLevelChanged() will be called when the volume level of the specified speaker has changed.</p>
 <p>If the volume is being muted, the volume becomes unmuted first, and then set the volume.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setVolumeAll:(NSInteger)volume;</span></code></dd>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setVolume:(NSInteger)volume;</span></code></dd>
 </dl>
 <p><strong>Parameters:</strong></p>
 <ul class="simple">
@@ -433,12 +433,12 @@
 </dl>
 </div>
 <hr class="docutils" />
-<div class="section" id="getdeviceinfofromtable">
-<h3>getDeviceInfoFromTable()<a class="headerlink" href="#getdeviceinfofromtable" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="getdeviceinfobygroupindexanddeviceindex">
+<h3>getDeviceInfoByGroupIndexAndDeviceIndex()<a class="headerlink" href="#getdeviceinfobygroupindexanddeviceindex" title="Permalink to this headline">¶</a></h3>
 <p>Returns the DeviceInfo object (pointer) pointed by groupIndex and deviceIndex. This API is useful to find a DeviceInfo that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the groupIndex can correspond to section number, and deviceIndex can correspond to row number.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceInfo</span> <span class="pre">*)</span> <span class="pre">getDeviceInfoFromTable:(NSInteger)</span> <span class="pre">groupIndex</span> <span class="pre">deviceIndex:(NSInteger)deviceIndex;</span></code></dd>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceInfo</span> <span class="pre">*)</span> <span class="pre">getDeviceInfoByGroupIndexAndDeviceIndex:(NSInteger)</span> <span class="pre">groupIndex</span> <span class="pre">deviceIndex:(NSInteger)deviceIndex;</span></code></dd>
 </dl>
 <p><strong>Parameters:</strong></p>
 <ul class="simple">
@@ -466,12 +466,12 @@
 </dl>
 </div>
 <hr class="docutils" />
-<div class="section" id="finddevicegroupwithdeviceid">
-<h3>findDeviceGroupWithDeviceId()<a class="headerlink" href="#finddevicegroupwithdeviceid" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="getdevicegroupbydeviceid">
+<h3>getDeviceGroupByDeviceId()<a class="headerlink" href="#getdevicegroupbydeviceid" title="Permalink to this headline">¶</a></h3>
 <p>Returns the object of the DeviceGroup that a device belongs to.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceGroup</span> <span class="pre">*)findDeviceGroupWithDeviceId:(long</span> <span class="pre">long)deviceId;</span></code></dd>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceGroup</span> <span class="pre">*)getDeviceGroupByDeviceId:(long</span> <span class="pre">long)deviceId;</span></code></dd>
 </dl>
 <p><strong>Parameters:</strong></p>
 <p>&#8211; <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)</span></code> - deviceId the ID of the device that belongs to a DeviceGroup</p>
@@ -481,12 +481,12 @@
 </dl>
 </div>
 <hr class="docutils" />
-<div class="section" id="finddevicefromlist">
-<h3>findDeviceFromList()<a class="headerlink" href="#finddevicefromlist" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="getdeviceinfobyid">
+<h3>getDeviceInfoById()<a class="headerlink" href="#getdeviceinfobyid" title="Permalink to this headline">¶</a></h3>
 <p>Finds a DeviceInfo from the table by DeviceId. It is useful to retrieve DeviceInfo with a particular deviceId.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceInfo</span> <span class="pre">*)</span> <span class="pre">findDeviceFromList:(long</span> <span class="pre">long)</span> <span class="pre">deviceId;</span></code></dd>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceInfo</span> <span class="pre">*)</span> <span class="pre">getDeviceInfoById:(long</span> <span class="pre">long)</span> <span class="pre">deviceId;</span></code></dd>
 </dl>
 <p><strong>Parameters:</strong></p>
 <ul class="simple">
@@ -495,6 +495,21 @@
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">DeviceInfo*</span></code> - The DeviceInfo object</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="isdeviceavailable">
+<h3>isDeviceAvailable()<a class="headerlink" href="#isdeviceavailable" title="Permalink to this headline">¶</a></h3>
+<p>Checks whether the device is available on the network or not.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">isDeviceAvailable:(long</span> <span class="pre">long)deviceId;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong>
+- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the device</p>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">(BOOL)</span></code> - boolean indicating if the device is available or not.</dd>
 </dl>
 </div>
 <hr class="docutils" />
@@ -545,12 +560,12 @@
 </dl>
 </div>
 <hr class="docutils" />
-<div class="section" id="getdevicegroupbyid">
-<h3>getDeviceGroupById()<a class="headerlink" href="#getdevicegroupbyid" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="getdevicegroupbygroupid">
+<h3>getDeviceGroupByGroupId()<a class="headerlink" href="#getdevicegroupbygroupid" title="Permalink to this headline">¶</a></h3>
 <p>Gets DeviceGroup by group ID.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceGroup</span> <span class="pre">*)getDeviceGroupById:(long</span> <span class="pre">long)groupId;</span></code></dd>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceGroup</span> <span class="pre">*)getDeviceGroupByGroupId:(long</span> <span class="pre">long)groupId;</span></code></dd>
 <dt><strong>Parameters:</strong></dt>
 <dd><ul class="first last simple">
 <li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)groupId</span></code> - the ID of the group</li>
@@ -869,7 +884,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#volume-control">Volume Control</a><ul>
-<li><a class="reference internal" href="#setvolumeall">setVolumeAll()</a></li>
+<li><a class="reference internal" href="#setvolume">setVolume()</a></li>
 <li><a class="reference internal" href="#setvolumedevice">setVolumeDevice()</a></li>
 <li><a class="reference internal" href="#getvolume">getVolume()</a></li>
 <li><a class="reference internal" href="#getdevicevolume">getDeviceVolume()</a></li>
@@ -885,14 +900,15 @@
 <li><a class="reference internal" href="#getdevicecount">getDeviceCount()</a></li>
 <li><a class="reference internal" href="#getgroupcount">getGroupCount()</a></li>
 <li><a class="reference internal" href="#getdevicecountingroupindex">getDeviceCountInGroupIndex()</a></li>
-<li><a class="reference internal" href="#getdeviceinfofromtable">getDeviceInfoFromTable()</a></li>
+<li><a class="reference internal" href="#getdeviceinfobygroupindexanddeviceindex">getDeviceInfoByGroupIndexAndDeviceIndex()</a></li>
 <li><a class="reference internal" href="#getdeviceinfobyindex">getDeviceInfoByIndex()</a></li>
-<li><a class="reference internal" href="#finddevicegroupwithdeviceid">findDeviceGroupWithDeviceId()</a></li>
-<li><a class="reference internal" href="#finddevicefromlist">findDeviceFromList()</a></li>
+<li><a class="reference internal" href="#getdevicegroupbydeviceid">getDeviceGroupByDeviceId()</a></li>
+<li><a class="reference internal" href="#getdeviceinfobyid">getDeviceInfoById()</a></li>
+<li><a class="reference internal" href="#isdeviceavailable">isDeviceAvailable()</a></li>
 <li><a class="reference internal" href="#isdeviceactive">isDeviceActive()</a></li>
 <li><a class="reference internal" href="#removedevicefromgroup">removeDeviceFromGroup()</a></li>
 <li><a class="reference internal" href="#getdevicegroupbyindex">getDeviceGroupByIndex()</a></li>
-<li><a class="reference internal" href="#getdevicegroupbyid">getDeviceGroupById()</a></li>
+<li><a class="reference internal" href="#getdevicegroupbygroupid">getDeviceGroupByGroupId()</a></li>
 <li><a class="reference internal" href="#getdevicegroupnamebyindex">getDeviceGroupNameByIndex()</a></li>
 <li><a class="reference internal" href="#getdevicegroupidbyindex">getDeviceGroupIdByIndex()</a></li>
 <li><a class="reference internal" href="#setdevicename">setDeviceName()</a></li>

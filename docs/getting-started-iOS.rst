@@ -211,7 +211,7 @@ The follow codes are all about listing the speakers with their detailed informat
 		override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 			let cell = tableView.dequeueReusableCellWithIdentifier("Speaker_Cell", forIndexPath: indexPath) as! UITableViewCell
 			cell.selectionStyle = UITableViewCellSelectionStyle.None
-			var deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoFromTable(indexPath.section, deviceIndex: indexPath.row)
+			var deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByGroupIndexAndDeviceIndex(indexPath.section, deviceIndex: indexPath.row)
 			cell.textLabel?.text = deviceInfo.deviceName;
 			var uniqueId: NSString = NSString(format: "ID:%llu, Vol:%d", deviceInfo.deviceId, deviceInfo.volume)
 			cell.detailTextLabel?.text = uniqueId as String
@@ -232,7 +232,7 @@ The follow codes are all about listing the speakers with their detailed informat
 
 		override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 			let cell = tableView.dequeueReusableCellWithIdentifier("Speaker_Cell", forIndexPath: indexPath) as! UITableViewCell
-			var deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoFromTable(indexPath.section, deviceIndex: indexPath.row)
+			var deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByGroupIndexAndDeviceIndex(indexPath.section, deviceIndex: indexPath.row)
 			if deviceInfo.active {
 				HKWControlHandler.sharedInstance().removeDeviceFromSession(deviceInfo.deviceId)
 				cell.accessoryType = UITableViewCellAccessoryType.Checkmark
@@ -452,7 +452,7 @@ The following figure shows an example of the SongSelectionTVC screen.
 	        if curVolume > 50 {
 	            curVolume = 50
 	        }
-	        HKWControlHandler.sharedInstance().setVolumeAll(curVolume)
+	        HKWControlHandler.sharedInstance().setVolume(curVolume)
 	        labelAverageVolume.text = "Volume: \(curVolume)"
 	    }
 
@@ -461,7 +461,7 @@ The following figure shows an example of the SongSelectionTVC screen.
 	        if curVolume < 0 {
 	            curVolume = 0
 	        }
-	        HKWControlHandler.sharedInstance().setVolumeAll(curVolume)
+	        HKWControlHandler.sharedInstance().setVolume(curVolume)
 	        labelAverageVolume.text = "Volume: \(curVolume)"
 	    }
     

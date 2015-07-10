@@ -575,11 +575,11 @@ Get Volume for a particular device
 Set Volume for all devices
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- API: GET /v1/set_volume_device?SessionID=<session id>&DeviceID=<device id>
+- API: GET /v1/set_volume?SessionID=<session id>&Volume=<volume>
 - Response
 	- Returns true or false
 - Example:
-	- Request: ``http://192.168.1.10/v1/get_volume_device?SessionID=1000&Volume=10``
+	- Request: ``http://192.168.1.10/v1/set_volume?SessionID=1000&Volume=10``
 	- Response: 
 
 .. code-block:: json
@@ -595,7 +595,7 @@ Set Volume for a particular device
 - Response
 	- Returns true or false
 - Example:
-	- Request: ``http://192.168.1.10/v1/get_volume_device?SessionID=1000&DeviceID=1234567&Volume=10``
+	- Request: ``http://192.168.1.10/v1/set_volume_device?SessionID=1000&DeviceID=1234567&Volume=10``
 	- Response: 
 
 .. code-block:: json

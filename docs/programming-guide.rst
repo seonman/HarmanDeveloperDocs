@@ -90,7 +90,7 @@ The following is an example of retrieving some of attributes of a speaker inform
 
 .. code-block:: swift
 	
-	let deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoFromTable(groupIndex, deviceIndex:deviceIndex)
+	let deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByGroupIndexAndDeviceIndex(groupIndex, deviceIndex:deviceIndex)
 	
 	println("deviceName: \(deviceInfo.deviceName")
 	println("groupName: \(deviceInfo.groupName")
@@ -124,7 +124,7 @@ You can retrieve a speaker information by specifying a group index and the index
 
 .. code-block:: swift
 
-	- (DeviceInfo *) getDeviceInfoFromTable:(NSInteger) groupIndex 
+	- (DeviceInfo *) getDeviceInfoByGroupIndexAndDeviceIndex:(NSInteger) groupIndex 
 							deviceIndex:(NSInteger)deviceIndex;
 
 Here, ``groupIndex`` represents the index of the group where the device belong to. ``deviceIndex`` means the index of the device in the group.
@@ -137,7 +137,7 @@ If you already knows the deviceId (device unique identifier) of a speaker, then 
 
 .. code-block:: swift
 
-	- (DeviceInfo *) findDeviceFromList:(long long) deviceId;
+	- (DeviceInfo *) getDeviceInfoById:(long long) deviceId;
 
 
 Refreshing device status information
@@ -364,11 +364,11 @@ You can set volumes in two ways – one is set volume for an individual speaker,
 Set volume to all speakers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Use ``setVolumeAll()`` to set the same volume level to all speakers.
+Use ``setVolume()`` to set the same volume level to all speakers.
 
 .. code-block:: swift
 
-	- (void) setVolumeAll:(NSInteger)volume;
+	- (void) setVolume:(NSInteger)volume;
 
 For example,
 
@@ -376,7 +376,7 @@ For example,
 
 	// set volume level to 25 to all speakers
 	var volume  = 25
-	HKWControlHandler.sharedInstance().setVolumeAll(volume)
+	HKWControlHandler.sharedInstance().setVolume(volume)
 
 Set volume to a particular speaker 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -570,7 +570,7 @@ The function delivers the device ID of the speaker with volume changed, a new de
 	-(void)hkwDeviceVolumeChanged:(long long)deviceId deviceVolume:(NSInteger)deviceVolume withAverageVolume:(NSInteger)avgVolume;
 
 .. note::
-	When speaker volume is changed by a call to ``setVolumeAll()``, then all the speakers are set to a new volume level, and this function can be used to get the new volume level value.
+	When speaker volume is changed by a call to ``setVolume()``, then all the speakers are set to a new volume level, and this function can be used to get the new volume level value.
 	
 **hkwPlaybackStateChanged (optional)**
 This function is invoked when playback state is changed during the playback. The callback delivers the playState value as parameter.

@@ -228,7 +228,7 @@ Inquires the current state of playback.
 Volume Control
 ----------------
 
-setVolumeAll()
+setVolume()
 ~~~~~~~~~~~~~~~~
 
 Sets a volume level to all speakers in the network. The same volume level is set to all speakers.
@@ -240,7 +240,7 @@ Setting volume is asynchronous call. So, the effect of the API call will occur a
 If the volume is being muted, the volume becomes unmuted first, and then set the volume.
 
 **Signature:**
-	``- (void) setVolumeAll:(NSInteger)volume;``
+	``- (void) setVolume:(NSInteger)volume;``
 
 **Parameters:**
 
@@ -428,13 +428,13 @@ Gets the number of the devices that belongs to a group specified by the index.
 
 ----
 
-getDeviceInfoFromTable()
+getDeviceInfoByGroupIndexAndDeviceIndex()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Returns the DeviceInfo object (pointer) pointed by groupIndex and deviceIndex. This API is useful to find a DeviceInfo that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the groupIndex can correspond to section number, and deviceIndex can correspond to row number.
 
 **Signature:**
-	``- (DeviceInfo *) getDeviceInfoFromTable:(NSInteger) groupIndex deviceIndex:(NSInteger)deviceIndex;``
+	``- (DeviceInfo *) getDeviceInfoByGroupIndexAndDeviceIndex:(NSInteger) groupIndex deviceIndex:(NSInteger)deviceIndex;``
 
 **Parameters:**
 
@@ -462,13 +462,13 @@ Returns the DeviceInfo object pointed by deviceIndex from the table containing a
 	
 ----
 
-findDeviceGroupWithDeviceId()
+getDeviceGroupByDeviceId()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Returns the object of the DeviceGroup that a device belongs to.
 
 **Signature:**
-	``- (DeviceGroup *)findDeviceGroupWithDeviceId:(long long)deviceId;``
+	``- (DeviceGroup *)getDeviceGroupByDeviceId:(long long)deviceId;``
 
 **Parameters:**
 
@@ -479,13 +479,13 @@ Returns the object of the DeviceGroup that a device belongs to.
 
 ----
 
-findDeviceFromList()
+getDeviceInfoById()
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Finds a DeviceInfo from the table by DeviceId. It is useful to retrieve DeviceInfo with a particular deviceId.
 
 **Signature:**
-	``- (DeviceInfo *) findDeviceFromList:(long long) deviceId;``
+	``- (DeviceInfo *) getDeviceInfoById:(long long) deviceId;``
 
 **Parameters:**
 
@@ -493,6 +493,22 @@ Finds a DeviceInfo from the table by DeviceId. It is useful to retrieve DeviceIn
 
 **Returns:**
 	``DeviceInfo*`` - The DeviceInfo object
+
+----
+
+isDeviceAvailable()
+~~~~~~~~~~~~~~~~~~~
+
+Checks whether the device is available on the network or not.
+
+**Signature:**
+	``- (BOOL) isDeviceAvailable:(long long)deviceId;``
+	
+**Parameters:**
+- ``(long long)deviceId`` - The ID of the device
+
+**Returns:**
+	``(BOOL)`` - boolean indicating if the device is available or not.
 
 ----
 
@@ -509,7 +525,6 @@ Checks whether the device is active (added to the current playback session) or n
 
 **Returns:**
 	``(BOOL)`` - boolean indicating if the device is active or not.
-
 ----
 
 removeDeviceFromGroup()
@@ -545,13 +560,13 @@ Gets the DeviceGroup by index.
  
 ----
 
-getDeviceGroupById()
+getDeviceGroupByGroupId()
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Gets DeviceGroup by group ID.
 
 **Signature:**
-	``- (DeviceGroup *)getDeviceGroupById:(long long)groupId;``
+	``- (DeviceGroup *)getDeviceGroupByGroupId:(long long)groupId;``
 
 **Parameters:**
 	- ``(long long)groupId`` - the ID of the group

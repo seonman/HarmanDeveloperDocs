@@ -217,7 +217,7 @@
 </table>
 <p>As shown in the table above, some of the attributes can be set by the APIs. And some attributes change during the runtime, so the app should keep the latest value of the attributes by calling corresponding APIs or by callback functions.</p>
 <p>The following is an example of retrieving some of attributes of a speaker information.</p>
-<div class="highlight-swift"><div class="highlight"><pre>let deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoFromTable(groupIndex, deviceIndex:deviceIndex)
+<div class="highlight-swift"><div class="highlight"><pre>let deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByGroupIndexAndDeviceIndex(groupIndex, deviceIndex:deviceIndex)
 
 println(&quot;deviceName: \(deviceInfo.deviceName&quot;)
 println(&quot;groupName: \(deviceInfo.groupName&quot;)
@@ -240,7 +240,7 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
 <p>This function is useful when you need to show all the speakers in ordered list in <code class="docutils literal"><span class="pre">TableViewCell</span></code>.</p>
 <p><strong>Get a speaker information from the group list</strong></p>
 <p>You can retrieve a speaker information by specifying a group index and the index of the speaker in the group.</p>
-<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">DeviceInfo</span> <span class="o">*</span><span class="p">)</span> <span class="n">getDeviceInfoFromTable</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span> <span class="n">groupIndex</span>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">DeviceInfo</span> <span class="o">*</span><span class="p">)</span> <span class="n">getDeviceInfoByGroupIndexAndDeviceIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span> <span class="n">groupIndex</span>
                                                 <span class="n">deviceIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">deviceIndex</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -248,7 +248,7 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
 <p>This function is useful to find the device information (<code class="docutils literal"><span class="pre">DeviceInfo</span></code> object) that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the <code class="docutils literal"><span class="pre">groupIndex</span></code> can correspond to the section number, and <code class="docutils literal"><span class="pre">deviceIndex</span></code> can correspond to the row number.</p>
 <p><strong>Get a speaker information with deviceId</strong></p>
 <p>If you already knows the deviceId (device unique identifier) of a speaker, then you can retrieve the deviceInfo object with the following function.</p>
-<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">DeviceInfo</span> <span class="o">*</span><span class="p">)</span> <span class="n">findDeviceFromList</span><span class="p">:(</span><span class="n">long</span> <span class="n">long</span><span class="p">)</span> <span class="n">deviceId</span><span class="p">;</span>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">DeviceInfo</span> <span class="o">*</span><span class="p">)</span> <span class="n">getDeviceInfoById</span><span class="p">:(</span><span class="n">long</span> <span class="n">long</span><span class="p">)</span> <span class="n">deviceId</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -423,14 +423,14 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
 </div>
 <div class="section" id="set-volume-to-all-speakers">
 <h4>Set volume to all speakers<a class="headerlink" href="#set-volume-to-all-speakers" title="Permalink to this headline">¶</a></h4>
-<p>Use <code class="docutils literal"><span class="pre">setVolumeAll()</span></code> to set the same volume level to all speakers.</p>
-<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">setVolumeAll</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">volume</span><span class="p">;</span>
+<p>Use <code class="docutils literal"><span class="pre">setVolume()</span></code> to set the same volume level to all speakers.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">setVolume</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">volume</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>For example,</p>
 <div class="highlight-swift"><div class="highlight"><pre><span class="c1">// set volume level to 25 to all speakers</span>
 <span class="kd">var</span> <span class="nv">volume</span>  <span class="p">=</span> <span class="mi">25</span>
-<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">setVolumeAll</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span>
+<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">setVolume</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -590,7 +590,7 @@ println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">When speaker volume is changed by a call to <code class="docutils literal"><span class="pre">setVolumeAll()</span></code>, then all the speakers are set to a new volume level, and this function can be used to get the new volume level value.</p>
+<p class="last">When speaker volume is changed by a call to <code class="docutils literal"><span class="pre">setVolume()</span></code>, then all the speakers are set to a new volume level, and this function can be used to get the new volume level value.</p>
 </div>
 <p><strong>hkwPlaybackStateChanged (optional)</strong>
 This function is invoked when playback state is changed during the playback. The callback delivers the playState value as parameter.</p>
