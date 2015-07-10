@@ -429,7 +429,7 @@ Gets the number of the devices that belongs to a group specified by the index.
 ----
 
 getDeviceInfoByGroupIndexAndDeviceIndex()
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Returns the DeviceInfo object (pointer) pointed by groupIndex and deviceIndex. This API is useful to find a DeviceInfo that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the groupIndex can correspond to section number, and deviceIndex can correspond to row number.
 
@@ -561,7 +561,7 @@ Gets the DeviceGroup by index.
 ----
 
 getDeviceGroupByGroupId()
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Gets DeviceGroup by group ID.
 
