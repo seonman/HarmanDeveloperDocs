@@ -451,7 +451,7 @@ Pause the Current Playback
 - API: GET /v1/pause_play?SessionID=<session id>
 - Response
 	- Pause the current playback, and then return true or false.
-	- It can resume the current playback by calling ``resume_hub_media`` if and only if the playback is playing hub media.
+	- It can resume the current playback by calling ``resume_hub_media`` if and only if the playback is playing hub media. ``play_web_media`` cannot be resumed once it is paused or stopped.
 - Example:
 	- Request: ``http://192.168.1.10/v1/pause_play?SessionID=1000``
 	- Response: 
