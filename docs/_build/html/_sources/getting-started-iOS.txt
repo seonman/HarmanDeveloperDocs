@@ -74,7 +74,7 @@ HKWirelessHD SDK has been written in C++ and Objective-C. Therefore, when you us
 Add -lstdc++ as linker flag
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Project Setting > Your Targets > Build Settings > Linking > Other Linder Flags
+- Project Setting > Your Targets > Build Settings > Linking > Other Linker Flags
 	- Add “-lstdc++” in the text field
 
 .. figure:: img/getting-started-iOS/project-setting-4.png
@@ -102,7 +102,7 @@ Add libz.dylib and libbz.dylib to your *Link Binary With Libraries*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Project Setting > Your Targets > Build Phases > Link Binary With Libraries 
-	- Click '+' and find and add *libz.dylib* and *libbz2.lib* to the list
+	- Click '+' and find and add *libz.dylib* and *libbz2.dylib* to the list
 
 After adding the HKWirelessHDSDKw folder into your project and adding libHKWirelessHD.a, libz.dylib and libbz2.dylib, the project navigator will look like as below:
 
