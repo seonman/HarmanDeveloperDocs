@@ -56,10 +56,11 @@
 <p>Refer to HKWControlHandler.h in the SDK.</p>
 <div class="section" id="initializehkwirelesscontroller">
 <h3>initializeHKWirelessController()<a class="headerlink" href="#initializehkwirelesscontroller" title="Permalink to this headline">¶</a></h3>
-<p>Initializes and starts HKWirelessHD controller. This API requires a license key as string. If the input license key fails in key validation, then the API returns -1 as result. If it is successful, return 0.</p>
+<p>Initializes and starts HKWirelessHD controller. This API requires a license key as string. If the input license key fails in key validation, then the API returns -1. If it is successful, return 0.</p>
+<p>The license key will be delivered to you once you sign on to developer.harman.com. Until it is delivered, you may use the license key included in the sample apps.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>This is a blocking call, and it will not return until the caller successfully initializes HKWireless controller. If the phone is not connected to a Wi-Fi network, or any other app on the same phone is using the HKWireless controller, it waits until the app releases the controller.</p>
+<p>This is a blocking call, and it will not return until the caller successfully initializes HKWireless controller. If the phone is not connected to a Wi-Fi network, or any other app on the same phone is using the HKWireless controller, it waits until the other app releases the controller.</p>
 <p class="last">If you needs non-blocking behavior, you should call this API asynchronously using other thread.</p>
 </div>
 <dl class="docutils">
@@ -102,7 +103,7 @@
 <h2>Refreshing Speaker Information<a class="headerlink" href="#refreshing-speaker-information" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="refreshdeviceinfoonce">
 <h3>refreshDeviceInfoOnce()<a class="headerlink" href="#refreshdeviceinfoonce" title="Permalink to this headline">¶</a></h3>
-<p>Refreshes the device status only one time. The device information will be refreshed and updated in DeviceInfo objects. If there is any updates on DeviceInfo objects, then DeviceStateUpdated callback defined by registerCallbackDeviceStateUpdated will be called.</p>
+<p>Refreshes the device status one time. The device information will be refreshed and updated to DeviceInfo objects. If there is any update on DeviceInfo, then hkwDeviceStateUpdated delegate function defined by HKWDeviceEventHandlerDelegate will be called. From there, you can see which device has been updated and what was the reason of the update.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">refreshDeviceInfoOnce;</span></code></dd>
@@ -113,7 +114,7 @@
 <hr class="docutils" />
 <div class="section" id="startrefreshdeviceinfo">
 <h3>startRefreshDeviceInfo()<a class="headerlink" href="#startrefreshdeviceinfo" title="Permalink to this headline">¶</a></h3>
-<p>Starts to refresh devices every two seconds. It continues until stopRefreshDeviceInfo(). The result of refreshing device info is the same as described in refreshDeviceInfoOnce().</p>
+<p>Starts to refresh devices every two seconds. It continues until stopRefreshDeviceInfo() is called. The result of refreshing device info is the same as described in refreshDeviceInfoOnce().</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">startRefreshDeviceInfo;</span></code></dd>

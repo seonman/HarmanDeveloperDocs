@@ -13,10 +13,12 @@ Refer to HKWControlHandler.h in the SDK.
 initializeHKWirelessController()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Initializes and starts HKWirelessHD controller. This API requires a license key as string. If the input license key fails in key validation, then the API returns -1 as result. If it is successful, return 0.
+Initializes and starts HKWirelessHD controller. This API requires a license key as string. If the input license key fails in key validation, then the API returns -1. If it is successful, return 0.
+
+The license key will be delivered to you once you sign on to developer.harman.com. Until it is delivered, you may use the license key included in the sample apps.
 
 .. note::
-	This is a blocking call, and it will not return until the caller successfully initializes HKWireless controller. If the phone is not connected to a Wi-Fi network, or any other app on the same phone is using the HKWireless controller, it waits until the app releases the controller.
+	This is a blocking call, and it will not return until the caller successfully initializes HKWireless controller. If the phone is not connected to a Wi-Fi network, or any other app on the same phone is using the HKWireless controller, it waits until the other app releases the controller.
 
 	If you needs non-blocking behavior, you should call this API asynchronously using other thread.
 
@@ -63,7 +65,7 @@ Refreshing Speaker Information
 refreshDeviceInfoOnce()
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Refreshes the device status only one time. The device information will be refreshed and updated in DeviceInfo objects. If there is any updates on DeviceInfo objects, then DeviceStateUpdated callback defined by registerCallbackDeviceStateUpdated will be called.
+Refreshes the device status one time. The device information will be refreshed and updated to DeviceInfo objects. If there is any update on DeviceInfo, then hkwDeviceStateUpdated delegate function defined by HKWDeviceEventHandlerDelegate will be called. From there, you can see which device has been updated and what was the reason of the update.
 
 **Signature:**
 	``- (void) refreshDeviceInfoOnce;``
@@ -76,7 +78,7 @@ Refreshes the device status only one time. The device information will be refres
 startRefreshDeviceInfo()
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Starts to refresh devices every two seconds. It continues until stopRefreshDeviceInfo(). The result of refreshing device info is the same as described in refreshDeviceInfoOnce().
+Starts to refresh devices every two seconds. It continues until stopRefreshDeviceInfo() is called. The result of refreshing device info is the same as described in refreshDeviceInfoOnce().
 
 **Signature:**
 	``- (void) startRefreshDeviceInfo;``
