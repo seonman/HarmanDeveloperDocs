@@ -65,7 +65,7 @@ Refreshing Speaker Information
 refreshDeviceInfoOnce()
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Refreshes the device status one time. The device information will be refreshed and updated to DeviceInfo objects. If there is any update on DeviceInfo, then hkwDeviceStateUpdated delegate function defined by HKWDeviceEventHandlerDelegate will be called. From there, you can see which device has been updated and what was the reason of the update.
+Refreshes the device status one time. The device information will be refreshed and updated to ``DeviceInfo`` objects (defined in DeviceInfo.h). If there is any update on ``DeviceInfo``, then ``hkwDeviceStateUpdated`` delegate function defined by ``HKWDeviceEventHandlerDelegate`` will be called. From there, you can see which device has been updated and what was the reason of the update.
 
 **Signature:**
 	``- (void) refreshDeviceInfoOnce;``
@@ -78,7 +78,7 @@ Refreshes the device status one time. The device information will be refreshed a
 startRefreshDeviceInfo()
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Starts to refresh devices every two seconds. It continues until stopRefreshDeviceInfo() is called. The result of refreshing device info is the same as described in refreshDeviceInfoOnce().
+Starts to keep refreshing ``DeviceInfo`` every two seconds. It continues until ``stopRefreshDeviceInfo()`` is called.
 
 **Signature:**
 	``- (void) startRefreshDeviceInfo;``
@@ -91,7 +91,7 @@ Starts to refresh devices every two seconds. It continues until stopRefreshDevic
 stopRefreshDeviceInfo()
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Stops refreshing devices, which was initiated by startRefreshDeviceInfo().
+Stops refreshing ``DeviceInfo``, which was initiated by ``startRefreshDeviceInfo()``.
 
 **Signature:**
 	``- (void) stopRefreshDeviceInfo;``
@@ -107,7 +107,7 @@ Playback Control
 playCAF()
 ~~~~~~~~~
 
-Plays a CAF audio file. PlaybackStateChanged callback will return the status, EPlayerState_Play.
+Plays a CAF audio file in local storage. PlaybackStateChanged callback will return the status, EPlayerState_Play.
 
 The playback is based on the Apple Core Audio framework. So, the supported audio file and data formats by HKWirelessHDSDK are the same as those supported by Apple's Core Audio framework. The detailed information is available at `iOS audio file formats`_. According to the Apple developer documentation, CAF supports AIFF (.aif, .aiff), CAF (.caf), MPEG-1, Layer 3 (.mp3), MPEG-2 or MPEG-4 ADTS (.aac), MPEG-4 Audio (.mp4, .m4a), and WAVE (.wav).
 

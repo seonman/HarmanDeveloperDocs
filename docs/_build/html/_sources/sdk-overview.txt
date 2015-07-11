@@ -95,6 +95,10 @@ The implementation note for Watch App support will be available at the developer
 	
 .. Note::
 
+	You should replace the bundle id of the HKWPlayer app with yours. Otherwise, Xcode will not build the binary of the app. Just try to search for all the string "com.harman.dev" in your Xcode project, and replace them with your bundle ID prefix, for example, "com.somebody". And also, for Apple Watch extension, you need to set App Groups. Please go to TARGETS > HKWPlayer > Capabilities > App Groups, and then set App Groups with your own bundle ID prefix, e.g. "group.com.somebody.hkwplayer". The same thing should be done for HKWPlayer WatchKit Extension target as well.
+
+.. Note::
+
 	Please check out `Apple Watch demo video`_ as well.
 
 .. _`Apple Watch demo video`: https://www.youtube.com/watch?v=M7AtKfPHfXM

@@ -154,6 +154,10 @@ Xcode 6.4 (supporting iOS8.4) or later is required for building HKWirelessHD ena
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
+<p class="last">You should replace the bundle id of the HKWPlayer app with yours. Otherwise, Xcode will not build the binary of the app. Just try to search for all the string &#8220;com.harman.dev&#8221; in your Xcode project, and replace them with your bundle ID prefix, for example, &#8220;com.somebody&#8221;. And also, for Apple Watch extension, you need to set App Groups. Please go to TARGETS &gt; HKWPlayer &gt; Capabilities &gt; App Groups, and then set App Groups with your own bundle ID prefix, e.g. &#8220;group.com.somebody.hkwplayer&#8221;. The same thing should be done for HKWPlayer WatchKit Extension target as well.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p class="last">Please check out <a class="reference external" href="https://www.youtube.com/watch?v=M7AtKfPHfXM">Apple Watch demo video</a> as well.</p>
 </div>
 </div>

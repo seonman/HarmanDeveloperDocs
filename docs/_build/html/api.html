@@ -103,7 +103,7 @@
 <h2>Refreshing Speaker Information<a class="headerlink" href="#refreshing-speaker-information" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="refreshdeviceinfoonce">
 <h3>refreshDeviceInfoOnce()<a class="headerlink" href="#refreshdeviceinfoonce" title="Permalink to this headline">¶</a></h3>
-<p>Refreshes the device status one time. The device information will be refreshed and updated to DeviceInfo objects. If there is any update on DeviceInfo, then hkwDeviceStateUpdated delegate function defined by HKWDeviceEventHandlerDelegate will be called. From there, you can see which device has been updated and what was the reason of the update.</p>
+<p>Refreshes the device status one time. The device information will be refreshed and updated to <code class="docutils literal"><span class="pre">DeviceInfo</span></code> objects (defined in DeviceInfo.h). If there is any update on <code class="docutils literal"><span class="pre">DeviceInfo</span></code>, then <code class="docutils literal"><span class="pre">hkwDeviceStateUpdated</span></code> delegate function defined by <code class="docutils literal"><span class="pre">HKWDeviceEventHandlerDelegate</span></code> will be called. From there, you can see which device has been updated and what was the reason of the update.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">refreshDeviceInfoOnce;</span></code></dd>
@@ -114,7 +114,7 @@
 <hr class="docutils" />
 <div class="section" id="startrefreshdeviceinfo">
 <h3>startRefreshDeviceInfo()<a class="headerlink" href="#startrefreshdeviceinfo" title="Permalink to this headline">¶</a></h3>
-<p>Starts to refresh devices every two seconds. It continues until stopRefreshDeviceInfo() is called. The result of refreshing device info is the same as described in refreshDeviceInfoOnce().</p>
+<p>Starts to keep refreshing <code class="docutils literal"><span class="pre">DeviceInfo</span></code> every two seconds. It continues until <code class="docutils literal"><span class="pre">stopRefreshDeviceInfo()</span></code> is called.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">startRefreshDeviceInfo;</span></code></dd>
@@ -125,7 +125,7 @@
 <hr class="docutils" />
 <div class="section" id="stoprefreshdeviceinfo">
 <h3>stopRefreshDeviceInfo()<a class="headerlink" href="#stoprefreshdeviceinfo" title="Permalink to this headline">¶</a></h3>
-<p>Stops refreshing devices, which was initiated by startRefreshDeviceInfo().</p>
+<p>Stops refreshing <code class="docutils literal"><span class="pre">DeviceInfo</span></code>, which was initiated by <code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code>.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">stopRefreshDeviceInfo;</span></code></dd>
@@ -139,7 +139,7 @@
 <h2>Playback Control<a class="headerlink" href="#playback-control" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="playcaf">
 <h3>playCAF()<a class="headerlink" href="#playcaf" title="Permalink to this headline">¶</a></h3>
-<p>Plays a CAF audio file. PlaybackStateChanged callback will return the status, EPlayerState_Play.</p>
+<p>Plays a CAF audio file in local storage. PlaybackStateChanged callback will return the status, EPlayerState_Play.</p>
 <p>The playback is based on the Apple Core Audio framework. So, the supported audio file and data formats by HKWirelessHDSDK are the same as those supported by Apple&#8217;s Core Audio framework. The detailed information is available at <a class="reference external" href="https://developer.apple.com/library/ios/documentation/MusicAudio/Conceptual/CoreAudioOverview/CoreAudioEssentials/CoreAudioEssentials.html#//apple_ref/doc/uid/TP40003577-CH10-SW57">iOS audio file formats</a>. According to the Apple developer documentation, CAF supports AIFF (.aif, .aiff), CAF (.caf), MPEG-1, Layer 3 (.mp3), MPEG-2 or MPEG-4 ADTS (.aac), MPEG-4 Audio (.mp4, .m4a), and WAVE (.wav).</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
