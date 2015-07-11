@@ -499,6 +499,7 @@ The following figure shows an example of the SongSelectionTVC screen.
 	                self.presentViewController(self.g_alert, animated: true, completion: nil)
 	            } else {
 	                println("playStreamingMedia: successful")
+	                self.btnPlayStop.setTitle("Stop", forState: UIControlState.Normal)
 	            }
 	        })
 	    }
