@@ -116,7 +116,7 @@ Follow the instruction for adding Swift bridging header and -lstdc++ linker flag
 Creating a Sample Application (HKWSimple)
 -------------------------------------------
 
-In this section, we explain how to create a HKWirelessHD iOS App. We will create a simple iOS app called **HKWSimple** that can play WAV or MP3 file, and also play Web-based streaming music with HTTP protocol.
+In this section, we explain how to create a HKWirelessHD iOS App. We will create a simple iOS app called **HKWSimple** that can play WAV or MP3 file, and also play Web-based streaming music with HTTP protocol. This app is really simple, so we hightly recommend you to start with this app to understand how HKWirelessHD is working.
 
 As shown in the figure, the app is composed of a sequence of UIViewController starting from a TableViewController showing a list of available speakers, and then a TableViewController showing a list of songs to play, and then finally a ViewController that shows a playback control panel with Play/Stop buttons and Volume control buttons.
 
