@@ -87,11 +87,11 @@ The companion watch app is provided as Watch App Extension within a single iOS A
 The implementation note for Watch App support will be available at the developer community web site shortly.
 
 .. figure:: img/sdk-overview/hkwplayer-watch-1.png
-	:scale: 40
+	:scale: 60
 .. figure:: img/sdk-overview/hkwplayer-watch-2.png
-	:scale: 40
+	:scale: 60
 .. figure:: img/sdk-overview/hkwplayer-watch-3.png
-	:scale: 40
+	:scale: 60
 	
 .. Note::
 
