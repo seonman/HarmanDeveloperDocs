@@ -104,6 +104,12 @@ HKWHub App (Hub for IoT Integration)
 
 HKWHub app is an iOS app that uses HKWirelessHD SDK and acts as a Web Hub that handles HTTP requests to control speakers and stream music. It enables any types of connected devices (e.g. sensors or smart devices like tablet, smart TV, etc.) and cloud-based services (e.g. SmartThings) to connect HK Omni speakers and stream music. HKWHub runs a web server inside that handles HTTP requests of REST API. 
 
+.. note::
+
+	Please refer to `HKWHub App`_ section of the documentation page for the REST API specification and other information.
+	
+.. _`HKWHub App`: http://harmandeveloperdocs.readthedocs.org/en/latest/hkwhub-spec.html
+
 User can add songs or sound file from iOS Music app to the media list, so that client devices can access the list and play media in the list remotely by sending REST API request to the Hub app. For example, a door open/close sensor can send REST API request to play 'dog-barking' sound in the media list of the HKWHub app.
 
 The following images are the screen captures of HKWHub app.
