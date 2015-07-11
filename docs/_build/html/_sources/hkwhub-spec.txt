@@ -433,7 +433,7 @@ Play a Song from Web Server
 - Response
 	- Play a song stored in the hub, and then return true or false.
 - Example:
-	- Request: ``http://192.168.1.10/v1/play_hub_media?SessionID=1000&MediaUrl=http://seonman.github.io/music/hyolyn.mp3``
+	- Request: ``http://192.168.1.10/v1/play_web_media?SessionID=1000&MediaUrl=http://seonman.github.io/music/hyolyn.mp3``
 	- Response: 
 
 .. code-block:: json
