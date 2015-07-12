@@ -253,10 +253,10 @@
 <h2>Volume Control<a class="headerlink" href="#volume-control" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="setvolume">
 <h3>setVolume()<a class="headerlink" href="#setvolume" title="Permalink to this headline">¶</a></h3>
-<p>Sets a volume level to all speakers in the network. The same volume level is set to all speakers.</p>
-<p>The range of volume level is 0 (min) to the maximumVolumeLevel (currently, 50) defined by getMaximumVolumeLevel.</p>
-<p>Setting volume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The VolumeLevelChanged callback defined by registerCallbackVolumeLevelChanged() will be called when the volume level of the specified speaker has changed.</p>
-<p>If the volume is being muted, the volume becomes unmuted first, and then set the volume.</p>
+<p>Sets a volume level to all speakers. The same volume level is set to all speakers.</p>
+<p>The range of volume level is 0 to the maximumVolumeLevel (currently, 50) defined by <code class="docutils literal"><span class="pre">getMaximumVolumeLevel()</span></code>.</p>
+<p>Setting volume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The <code class="docutils literal"><span class="pre">hkwDeviceVolumeChanged()</span></code> delegate function defined in <code class="docutils literal"><span class="pre">HKWPlayerEventHandlerDelegate</span></code> (in HKWPlayerEventHandlerSingleton.h) will be called when the volume level of the specified speaker has actually changed.</p>
+<p>If the volume is being muted by calling <code class="docutils literal"><span class="pre">mute()</span></code>, the volume level is changed from the original volume level before mute.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setVolume:(NSInteger)volume;</span></code></dd>
@@ -273,7 +273,8 @@
 <hr class="docutils" />
 <div class="section" id="setvolumedevice">
 <h3>setVolumeDevice()<a class="headerlink" href="#setvolumedevice" title="Permalink to this headline">¶</a></h3>
-<p>Set a volume level to an individual speaker specified by deviceId. The range of volume level is 0 (min) to the maximumVolumeLevel (currently, 50) defined by getMaximumVolumeLevel. setVolume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The VolumeLevelChanged callback defined by registerCallbackVolumeLevelChanged() will be called when the volume level of the specified speaker has changed.&lt;p&gt;If the volume is being muted, the volume becomes unmuted first, and then set the volume.</p>
+<p>Set a volume level to a speaker specified by device ID. The range of volume level is 0 to the maximumVolumeLevel (currently, 50) defined by <code class="docutils literal"><span class="pre">getMaximumVolumeLevel()</span></code>. <code class="docutils literal"><span class="pre">setVolume</span></code> is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The <code class="docutils literal"><span class="pre">hkwDeviceVolumeChanged()</span></code> delegate function defined in <code class="docutils literal"><span class="pre">HKWPlayerEventHandlerDelegate</span></code> (in HKWPlayerEventHandlerSingleton.h) will be called when the volume level of the specified speaker has actually changed.</p>
+<p>If the volume is being muted by calling <code class="docutils literal"><span class="pre">mute()</span></code>, the volume level is changed from the original volume level before mute.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setVolumeDevice:(long</span> <span class="pre">long)deviceId</span> <span class="pre">volume:(NSInteger)volume;</span></code></dd>
@@ -317,7 +318,7 @@
 <hr class="docutils" />
 <div class="section" id="getmaximumvolumelevel">
 <h3>getMaximumVolumeLevel()<a class="headerlink" href="#getmaximumvolumelevel" title="Permalink to this headline">¶</a></h3>
-<p>Returns the maximum volume level that the system provides.</p>
+<p>Returns the maximum volume level that the system provides. Currently, it is 50.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getMaximumVolumeLevel;</span></code></dd>
@@ -363,7 +364,7 @@
 <h2>Device (Speaker) Management<a class="headerlink" href="#device-speaker-management" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="adddevicetosession">
 <h3>addDeviceToSession()<a class="headerlink" href="#adddevicetosession" title="Permalink to this headline">¶</a></h3>
-<p>Adds the device to the current playback session. The added speaker will play audio. This can be done during the audio playback.</p>
+<p>Adds a speaker to the current playback session. The added speaker will start playing audio. This can be done during the audio playback.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">addDeviceToSession:(long</span> <span class="pre">long)</span> <span class="pre">deviceid;</span></code></dd>
@@ -380,7 +381,7 @@
 <hr class="docutils" />
 <div class="section" id="removedevicefromsession">
 <h3>removeDeviceFromSession()<a class="headerlink" href="#removedevicefromsession" title="Permalink to this headline">¶</a></h3>
-<p>Removes the device from the current playback session. The removed speaker will not play audio any longer. This can be done during the audio playback.</p>
+<p>Removes a speaker from the current playback session. The removed speaker will stop playing audio. This can be done during the audio playback.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">removeDeviceFromSession:(long</span> <span class="pre">long)</span> <span class="pre">deviceid;</span></code></dd>
@@ -397,18 +398,18 @@
 <hr class="docutils" />
 <div class="section" id="getdevicecount">
 <h3>getDeviceCount()<a class="headerlink" href="#getdevicecount" title="Permalink to this headline">¶</a></h3>
-<p>Gets the number of all devices in the HKWirelessHD network.</p>
+<p>Gets the number of all speakers in the HKWirelessHD network.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getDeviceCount;</span></code></dd>
 <dt><strong>Returns:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the number of devices.</dd>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the number of speakers.</dd>
 </dl>
 </div>
 <hr class="docutils" />
 <div class="section" id="getgroupcount">
 <h3>getGroupCount()<a class="headerlink" href="#getgroupcount" title="Permalink to this headline">¶</a></h3>
-<p>Gets the number of the groups defined by the speakers.</p>
+<p>Gets the number of the groups of speakers.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getGroupCount;</span></code></dd>
@@ -419,7 +420,7 @@
 <hr class="docutils" />
 <div class="section" id="getdevicecountingroupindex">
 <h3>getDeviceCountInGroupIndex()<a class="headerlink" href="#getdevicecountingroupindex" title="Permalink to this headline">¶</a></h3>
-<p>Gets the number of the devices that belongs to a group specified by the index.</p>
+<p>Gets the number of the speakers that belongs to a group specified by the index.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getDeviceCountInGroupIndex:(NSInteger)groupIndex;</span></code></dd>
@@ -430,21 +431,21 @@
 </ul>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the number of device</dd>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the number of speakers</dd>
 </dl>
 </div>
 <hr class="docutils" />
 <div class="section" id="getdeviceinfobygroupindexanddeviceindex">
 <h3>getDeviceInfoByGroupIndexAndDeviceIndex()<a class="headerlink" href="#getdeviceinfobygroupindexanddeviceindex" title="Permalink to this headline">¶</a></h3>
-<p>Returns the DeviceInfo object (pointer) pointed by groupIndex and deviceIndex. This API is useful to find a DeviceInfo that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the groupIndex can correspond to section number, and deviceIndex can correspond to row number.</p>
+<p>Returns the <code class="docutils literal"><span class="pre">DeviceInfo</span></code> object (defined in DeviceInfo.h) pointed by groupIndex and deviceIndex. This API is useful to find a <code class="docutils literal"><span class="pre">DeviceInfo</span></code> that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the groupIndex can correspond to the section number, and deviceIndex can correspond to the row number.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceInfo</span> <span class="pre">*)</span> <span class="pre">getDeviceInfoByGroupIndexAndDeviceIndex:(NSInteger)</span> <span class="pre">groupIndex</span> <span class="pre">deviceIndex:(NSInteger)deviceIndex;</span></code></dd>
 </dl>
 <p><strong>Parameters:</strong></p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">(NSInteger)groupIndex</span></code> - The index of the group where the device belongs to.</li>
-<li><code class="docutils literal"><span class="pre">(NSInteger)deviceIndex</span></code> -  The index of the device in the group.</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)groupIndex</span></code> - The index of the group where the speaker belongs to.</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)deviceIndex</span></code> -  The index of the speaker in the group.</li>
 </ul>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
@@ -454,7 +455,7 @@
 <hr class="docutils" />
 <div class="section" id="getdeviceinfobyindex">
 <h3>getDeviceInfoByIndex()<a class="headerlink" href="#getdeviceinfobyindex" title="Permalink to this headline">¶</a></h3>
-<p>Returns the DeviceInfo object pointed by deviceIndex from the table containing all speakers. The range of deviceIndex will be 0 to (deviceCount - 1).</p>
+<p>Returns the <code class="docutils literal"><span class="pre">DeviceInfo</span></code> object pointed by deviceIndex from the table containing all speakers. The range of deviceIndex will be 0 to (deviceCount - 1).</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceInfo</span> <span class="pre">*)</span> <span class="pre">getDeviceInfoByIndex:(NSInteger)deviceIndex;</span></code></dd>
@@ -469,13 +470,13 @@
 <hr class="docutils" />
 <div class="section" id="getdevicegroupbydeviceid">
 <h3>getDeviceGroupByDeviceId()<a class="headerlink" href="#getdevicegroupbydeviceid" title="Permalink to this headline">¶</a></h3>
-<p>Returns the object of the DeviceGroup that a device belongs to.</p>
+<p>Returns the object of the <code class="docutils literal"><span class="pre">DeviceGroup</span></code> that a speaker belongs to.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceGroup</span> <span class="pre">*)getDeviceGroupByDeviceId:(long</span> <span class="pre">long)deviceId;</span></code></dd>
 </dl>
 <p><strong>Parameters:</strong></p>
-<p>&#8211; <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)</span></code> - deviceId the ID of the device that belongs to a DeviceGroup</p>
+<p>&#8211; <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)</span></code> -  the ID of the speaker that belongs to a DeviceGroup</p>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">DeviceGroup*</span></code> - the DeviceGroup object</dd>
@@ -484,7 +485,7 @@
 <hr class="docutils" />
 <div class="section" id="getdeviceinfobyid">
 <h3>getDeviceInfoById()<a class="headerlink" href="#getdeviceinfobyid" title="Permalink to this headline">¶</a></h3>
-<p>Finds a DeviceInfo from the table by DeviceId. It is useful to retrieve DeviceInfo with a particular deviceId.</p>
+<p>Finds a <code class="docutils literal"><span class="pre">DeviceInfo</span></code> from the table by device Id. It is useful to retrieve <code class="docutils literal"><span class="pre">DeviceInfo</span></code> with a particular deviceId.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceInfo</span> <span class="pre">*)</span> <span class="pre">getDeviceInfoById:(long</span> <span class="pre">long)</span> <span class="pre">deviceId;</span></code></dd>
@@ -501,43 +502,43 @@
 <hr class="docutils" />
 <div class="section" id="isdeviceavailable">
 <h3>isDeviceAvailable()<a class="headerlink" href="#isdeviceavailable" title="Permalink to this headline">¶</a></h3>
-<p>Checks whether the device is available on the network or not.</p>
+<p>Checks whether the specified speaker is available on the network or not.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">isDeviceAvailable:(long</span> <span class="pre">long)deviceId;</span></code></dd>
 </dl>
 <p><strong>Parameters:</strong>
-- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the device</p>
+- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the speaker</p>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">(BOOL)</span></code> - boolean indicating if the device is available or not.</dd>
+<dd><code class="docutils literal"><span class="pre">(BOOL)</span></code> - boolean indicating if the speaker is available or not.</dd>
 </dl>
 </div>
 <hr class="docutils" />
 <div class="section" id="isdeviceactive">
 <h3>isDeviceActive()<a class="headerlink" href="#isdeviceactive" title="Permalink to this headline">¶</a></h3>
-<p>Checks whether the device is active (added to the current playback session) or not.</p>
+<p>Checks whether the speaker is active (added to the current playback session) or not.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">isDeviceActive:(long</span> <span class="pre">long)deviceId;</span></code></dd>
 </dl>
 <p><strong>Parameters:</strong>
-- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the device</p>
+- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the speaker</p>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">(BOOL)</span></code> - boolean indicating if the device is active or not.</dd>
+<dd><code class="docutils literal"><span class="pre">(BOOL)</span></code> - boolean indicating if the speaker is active or not.</dd>
 </dl>
 </div>
 <hr class="docutils" />
 <div class="section" id="removedevicefromgroup">
 <h3>removeDeviceFromGroup()<a class="headerlink" href="#removedevicefromgroup" title="Permalink to this headline">¶</a></h3>
-<p>Removes (ungroup) the device from the currently belonged group. It is done internally by setting the GroupName as &#8220;harman&#8221; (which is factory default device name, and implies Not-Assigned.).</p>
+<p>Removes (ungroup) the specified speaker from the currently belonged group. It is done internally by setting the GroupName as &#8220;harman&#8221; (which is factory default device name, and implies Not-Assigned.).</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)removeDeviceFromGroup:(long</span> <span class="pre">long)deviceId;</span></code></dd>
 </dl>
 <p><strong>Parameters:</strong>
-- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the device to ungroup.</p>
+- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the speaker to ungroup.</p>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">void</span></code></dd>
@@ -546,7 +547,7 @@
 <hr class="docutils" />
 <div class="section" id="getdevicegroupbyindex">
 <h3>getDeviceGroupByIndex()<a class="headerlink" href="#getdevicegroupbyindex" title="Permalink to this headline">¶</a></h3>
-<p>Gets the DeviceGroup by index.</p>
+<p>Gets the <code class="docutils literal"><span class="pre">DeviceGroup</span></code> object by index.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceGroup</span> <span class="pre">*)getDeviceGroupByIndex:(NSInteger)groupIndex;</span></code></dd>
@@ -614,6 +615,10 @@
 <div class="section" id="setdevicename">
 <h3>setDeviceName()<a class="headerlink" href="#setdevicename" title="Permalink to this headline">¶</a></h3>
 <p>Sets device name to a speaker. Note that you cannot set the device name by setting &#8220;deviceName&#8221; property directly. The property is read-only.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you set a device name while the a playback is running, the speaker stops playing and return error.</p>
+</div>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setDeviceName:(long</span> <span class="pre">long)deviceId</span> <span class="pre">deviceName:(NSString</span> <span class="pre">*)deviceName;</span></code></dd>
@@ -632,6 +637,10 @@
 <div class="section" id="setdevicegroupname">
 <h3>setDeviceGroupName()<a class="headerlink" href="#setdevicegroupname" title="Permalink to this headline">¶</a></h3>
 <p>Sets device group to a speaker with Group name. Note that you cannot set the group name by setting &#8220;groupName&#8221; property directly. The property is read-only.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you set a group name while the a playback is running, the speaker stops playing and return error.</p>
+</div>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setDeviceGroupName:(long</span> <span class="pre">long)deviceId</span> <span class="pre">groupName:(NSString</span> <span class="pre">*)groupName;</span></code></dd>
@@ -668,7 +677,7 @@
 <div class="section" id="getactivedevicecount">
 <h3>getActiveDeviceCount()<a class="headerlink" href="#getactivedevicecount" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div>Gets the number of active devices (the devices that are added to the current playback session.)</div></blockquote>
+<div>Gets the number of active speakers (the speakers that are being added to the current playback session.)</div></blockquote>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getActiveDeviceCount;</span></code></dd>
@@ -679,7 +688,7 @@
 <hr class="docutils" />
 <div class="section" id="getactivegroupcount">
 <h3>getActiveGroupCount()<a class="headerlink" href="#getactivegroupcount" title="Permalink to this headline">¶</a></h3>
-<p>Gets the number of active groups. An active group is defined as all the devices that belongs to a group are active. If even one of the speakers in the same group is inactive, then the group is inactive.</p>
+<p>Gets the number of active groups. An active group is defined as a group that all the speakers that belongs to a group are active. If even one of the speakers in the same group is inactive, then the group is inactive.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getActiveGroupCount;</span></code></dd>
@@ -690,7 +699,7 @@
 <hr class="docutils" />
 <div class="section" id="refreshdevicewifisignal">
 <h3>refreshDeviceWiFiSignal()<a class="headerlink" href="#refreshdevicewifisignal" title="Permalink to this headline">¶</a></h3>
-<p>Refresh the device&#8217;s Wifi Signal strength value. This is asynchronous call, and the result of refreshing will come a few milliseconds later. The new WiFi signal strength value will be reported by DeviceStateUpdated callback, defined by registerCallbackDeviceStateUpdated().</p>
+<p>Refreshes the device&#8217;s Wifi Signal strength value. This is asynchronous call, and the result of refreshing will come a few milliseconds later. The new WiFi signal strength value will be reported by <code class="docutils literal"><span class="pre">hkwDeviceStateUpdated()</span></code> delegate function defined in HKWDeviceEventHandlerDelegate (in HKWDeviceEventHandlerSingleton.h). In <code class="docutils literal"><span class="pre">hkwDeviceStateUpdated()</span></code>, you should get the wifi signal value by getting <code class="docutils literal"><span class="pre">wifiSignalStrength</span></code> attribute of <code class="docutils literal"><span class="pre">DeviceInfo</span></code> object.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)refreshDeviceWiFiSignal:(long</span> <span class="pre">long)deviceId;</span></code></dd>
@@ -707,7 +716,7 @@
 <hr class="docutils" />
 <div class="section" id="getwifisignalstrengthtype">
 <h3>getWifiSignalStrengthType()<a class="headerlink" href="#getwifisignalstrengthtype" title="Permalink to this headline">¶</a></h3>
-<p>Gets Wifi signal strength type by signal value</p>
+<p>Gets Wifi signal strength type by signal value.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(HKWifiSingalStrength)getWifiSignalStrengthType:(NSInteger)wifiSignal;</span></code></dd>

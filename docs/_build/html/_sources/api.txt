@@ -233,13 +233,13 @@ Volume Control
 setVolume()
 ~~~~~~~~~~~~~~~~
 
-Sets a volume level to all speakers in the network. The same volume level is set to all speakers.
+Sets a volume level to all speakers. The same volume level is set to all speakers.
 
-The range of volume level is 0 (min) to the maximumVolumeLevel (currently, 50) defined by getMaximumVolumeLevel.
+The range of volume level is 0 to the maximumVolumeLevel (currently, 50) defined by ``getMaximumVolumeLevel()``.
 
-Setting volume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The VolumeLevelChanged callback defined by registerCallbackVolumeLevelChanged() will be called when the volume level of the specified speaker has changed.
+Setting volume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The ``hkwDeviceVolumeChanged()`` delegate function defined in ``HKWPlayerEventHandlerDelegate`` (in HKWPlayerEventHandlerSingleton.h) will be called when the volume level of the specified speaker has actually changed.
 
-If the volume is being muted, the volume becomes unmuted first, and then set the volume.
+If the volume is being muted by calling ``mute()``, the volume level is changed from the original volume level before mute.
 
 **Signature:**
 	``- (void) setVolume:(NSInteger)volume;``
@@ -256,7 +256,9 @@ If the volume is being muted, the volume becomes unmuted first, and then set the
 setVolumeDevice()
 ~~~~~~~~~~~~~~~~~~~~
 
-Set a volume level to an individual speaker specified by deviceId. The range of volume level is 0 (min) to the maximumVolumeLevel (currently, 50) defined by getMaximumVolumeLevel. setVolume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The VolumeLevelChanged callback defined by registerCallbackVolumeLevelChanged() will be called when the volume level of the specified speaker has changed.<p>If the volume is being muted, the volume becomes unmuted first, and then set the volume.
+Set a volume level to a speaker specified by device ID. The range of volume level is 0 to the maximumVolumeLevel (currently, 50) defined by ``getMaximumVolumeLevel()``. ``setVolume`` is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The ``hkwDeviceVolumeChanged()`` delegate function defined in ``HKWPlayerEventHandlerDelegate`` (in HKWPlayerEventHandlerSingleton.h) will be called when the volume level of the specified speaker has actually changed.
+
+If the volume is being muted by calling ``mute()``, the volume level is changed from the original volume level before mute.
 
 **Signature:**
 	``- (void) setVolumeDevice:(long long)deviceId volume:(NSInteger)volume;``
@@ -303,7 +305,7 @@ Gets the volume level of the specified speaker.
 getMaximumVolumeLevel()
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Returns the maximum volume level that the system provides.
+Returns the maximum volume level that the system provides. Currently, it is 50.
 
 **Signature:**
 	``- (NSInteger) getMaximumVolumeLevel;``
@@ -356,7 +358,7 @@ Device (Speaker) Management
 addDeviceToSession()
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Adds the device to the current playback session. The added speaker will play audio. This can be done during the audio playback.
+Adds a speaker to the current playback session. The added speaker will start playing audio. This can be done during the audio playback.
 
 **Signature:**
 	``- (BOOL) addDeviceToSession:(long long) deviceid;``
@@ -373,7 +375,7 @@ Adds the device to the current playback session. The added speaker will play aud
 removeDeviceFromSession()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Removes the device from the current playback session. The removed speaker will not play audio any longer. This can be done during the audio playback.
+Removes a speaker from the current playback session. The removed speaker will stop playing audio. This can be done during the audio playback.
 
 **Signature:**
 	``- (BOOL) removeDeviceFromSession:(long long) deviceid;``
@@ -390,20 +392,20 @@ Removes the device from the current playback session. The removed speaker will n
 getDeviceCount()
 ~~~~~~~~~~~~~~~~~~
 
-Gets the number of all devices in the HKWirelessHD network.
+Gets the number of all speakers in the HKWirelessHD network.
 
 **Signature:**
 	``- (NSInteger) getDeviceCount;``
 
 **Returns:**
-	``NSInteger`` - the number of devices.
+	``NSInteger`` - the number of speakers.
 
 ----
 
 getGroupCount()
 ~~~~~~~~~~~~~~~~~
 
-Gets the number of the groups defined by the speakers.
+Gets the number of the groups of speakers.
 
 **Signature:**
 	``- (NSInteger) getGroupCount;``
@@ -416,7 +418,7 @@ Gets the number of the groups defined by the speakers.
 getDeviceCountInGroupIndex()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Gets the number of the devices that belongs to a group specified by the index.
+Gets the number of the speakers that belongs to a group specified by the index.
 
 **Signature:**
 	``- (NSInteger) getDeviceCountInGroupIndex:(NSInteger)groupIndex;``
@@ -426,22 +428,22 @@ Gets the number of the devices that belongs to a group specified by the index.
 - ``(NSInteger)groupIndex`` - the index of the group looking for. It starts from 0 to (GroupCount-1).
 
 **Returns:**
-	``NSInteger`` - the number of device
+	``NSInteger`` - the number of speakers
 
 ----
 
 getDeviceInfoByGroupIndexAndDeviceIndex()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Returns the DeviceInfo object (pointer) pointed by groupIndex and deviceIndex. This API is useful to find a DeviceInfo that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the groupIndex can correspond to section number, and deviceIndex can correspond to row number.
+Returns the ``DeviceInfo`` object (defined in DeviceInfo.h) pointed by groupIndex and deviceIndex. This API is useful to find a ``DeviceInfo`` that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the groupIndex can correspond to the section number, and deviceIndex can correspond to the row number.
 
 **Signature:**
 	``- (DeviceInfo *) getDeviceInfoByGroupIndexAndDeviceIndex:(NSInteger) groupIndex deviceIndex:(NSInteger)deviceIndex;``
 
 **Parameters:**
 
-- ``(NSInteger)groupIndex`` - The index of the group where the device belongs to.
-- ``(NSInteger)deviceIndex`` -  The index of the device in the group.
+- ``(NSInteger)groupIndex`` - The index of the group where the speaker belongs to.
+- ``(NSInteger)deviceIndex`` -  The index of the speaker in the group.
 
 **Returns:**
 	``DeviceInfo*`` - the DeviceInfo object
@@ -451,7 +453,7 @@ Returns the DeviceInfo object (pointer) pointed by groupIndex and deviceIndex. T
 getDeviceInfoByIndex()
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Returns the DeviceInfo object pointed by deviceIndex from the table containing all speakers. The range of deviceIndex will be 0 to (deviceCount - 1).
+Returns the ``DeviceInfo`` object pointed by deviceIndex from the table containing all speakers. The range of deviceIndex will be 0 to (deviceCount - 1).
 
 **Signature:**
 	``- (DeviceInfo *) getDeviceInfoByIndex:(NSInteger)deviceIndex;``
@@ -467,14 +469,14 @@ Returns the DeviceInfo object pointed by deviceIndex from the table containing a
 getDeviceGroupByDeviceId()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Returns the object of the DeviceGroup that a device belongs to.
+Returns the object of the ``DeviceGroup`` that a speaker belongs to.
 
 **Signature:**
 	``- (DeviceGroup *)getDeviceGroupByDeviceId:(long long)deviceId;``
 
 **Parameters:**
 
--- ``(long long)`` - deviceId the ID of the device that belongs to a DeviceGroup
+-- ``(long long)`` -  the ID of the speaker that belongs to a DeviceGroup
 
 **Returns:**
 	 ``DeviceGroup*`` - the DeviceGroup object
@@ -484,7 +486,7 @@ Returns the object of the DeviceGroup that a device belongs to.
 getDeviceInfoById()
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Finds a DeviceInfo from the table by DeviceId. It is useful to retrieve DeviceInfo with a particular deviceId.
+Finds a ``DeviceInfo`` from the table by device Id. It is useful to retrieve ``DeviceInfo`` with a particular deviceId.
 
 **Signature:**
 	``- (DeviceInfo *) getDeviceInfoById:(long long) deviceId;``
@@ -501,45 +503,45 @@ Finds a DeviceInfo from the table by DeviceId. It is useful to retrieve DeviceIn
 isDeviceAvailable()
 ~~~~~~~~~~~~~~~~~~~
 
-Checks whether the device is available on the network or not.
+Checks whether the specified speaker is available on the network or not.
 
 **Signature:**
 	``- (BOOL) isDeviceAvailable:(long long)deviceId;``
 	
 **Parameters:**
-- ``(long long)deviceId`` - The ID of the device
+- ``(long long)deviceId`` - The ID of the speaker
 
 **Returns:**
-	``(BOOL)`` - boolean indicating if the device is available or not.
+	``(BOOL)`` - boolean indicating if the speaker is available or not.
 
 ----
 
 isDeviceActive()
 ~~~~~~~~~~~~~~~~~~~
 
-Checks whether the device is active (added to the current playback session) or not.
+Checks whether the speaker is active (added to the current playback session) or not.
 
 **Signature:**
 	``- (BOOL) isDeviceActive:(long long)deviceId;``
 	
 **Parameters:**
-- ``(long long)deviceId`` - The ID of the device
+- ``(long long)deviceId`` - The ID of the speaker
 
 **Returns:**
-	``(BOOL)`` - boolean indicating if the device is active or not.
+	``(BOOL)`` - boolean indicating if the speaker is active or not.
 
 ----
 
 removeDeviceFromGroup()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Removes (ungroup) the device from the currently belonged group. It is done internally by setting the GroupName as "harman" (which is factory default device name, and implies Not-Assigned.).
+Removes (ungroup) the specified speaker from the currently belonged group. It is done internally by setting the GroupName as "harman" (which is factory default device name, and implies Not-Assigned.).
 
 **Signature:**
 	``- (void)removeDeviceFromGroup:(long long)deviceId;``
 
 **Parameters:**
-- ``(long long)deviceId`` - The ID of the device to ungroup.
+- ``(long long)deviceId`` - The ID of the speaker to ungroup.
 
 **Returns:**
 	``void``
@@ -549,7 +551,7 @@ Removes (ungroup) the device from the currently belonged group. It is done inter
 getDeviceGroupByIndex()
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Gets the DeviceGroup by index.
+Gets the ``DeviceGroup`` object by index.
 
 **Signature:**
 	``- (DeviceGroup *)getDeviceGroupByIndex:(NSInteger)groupIndex;``
@@ -619,6 +621,10 @@ setDeviceName()
 
 Sets device name to a speaker. Note that you cannot set the device name by setting "deviceName" property directly. The property is read-only.
 
+.. note::
+
+	If you set a device name while the a playback is running, the speaker stops playing and return error.
+
 **Signature:**
 	``- (void) setDeviceName:(long long)deviceId deviceName:(NSString *)deviceName;``
 
@@ -636,6 +642,10 @@ setDeviceGroupName()
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Sets device group to a speaker with Group name. Note that you cannot set the group name by setting "groupName" property directly. The property is read-only.
+
+.. note::
+
+	If you set a group name while the a playback is running, the speaker stops playing and return error.
 
 **Signature:**
 	``- (void) setDeviceGroupName:(long long)deviceId groupName:(NSString *)groupName;``
@@ -671,7 +681,7 @@ Sets the role for the speaker. The role information is used to define which part
 getActiveDeviceCount()
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
- Gets the number of active devices (the devices that are added to the current playback session.)
+ Gets the number of active speakers (the speakers that are being added to the current playback session.)
 
 **Signature:**
 	``- (NSInteger) getActiveDeviceCount;``
@@ -684,7 +694,7 @@ getActiveDeviceCount()
 getActiveGroupCount()
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Gets the number of active groups. An active group is defined as all the devices that belongs to a group are active. If even one of the speakers in the same group is inactive, then the group is inactive.
+Gets the number of active groups. An active group is defined as a group that all the speakers that belongs to a group are active. If even one of the speakers in the same group is inactive, then the group is inactive.
  
 **Signature:**
 	``- (NSInteger) getActiveGroupCount;``
@@ -697,7 +707,7 @@ Gets the number of active groups. An active group is defined as all the devices 
 refreshDeviceWiFiSignal()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Refresh the device's Wifi Signal strength value. This is asynchronous call, and the result of refreshing will come a few milliseconds later. The new WiFi signal strength value will be reported by DeviceStateUpdated callback, defined by registerCallbackDeviceStateUpdated().
+Refreshes the device's Wifi Signal strength value. This is asynchronous call, and the result of refreshing will come a few milliseconds later. The new WiFi signal strength value will be reported by ``hkwDeviceStateUpdated()`` delegate function defined in HKWDeviceEventHandlerDelegate (in HKWDeviceEventHandlerSingleton.h). In ``hkwDeviceStateUpdated()``, you should get the wifi signal value by getting ``wifiSignalStrength`` attribute of ``DeviceInfo`` object.
 
 **Signature:**
  	``- (void)refreshDeviceWiFiSignal:(long long)deviceId;``
@@ -715,7 +725,7 @@ Refresh the device's Wifi Signal strength value. This is asynchronous call, and 
 getWifiSignalStrengthType()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Gets Wifi signal strength type by signal value
+Gets Wifi signal strength type by signal value.
 
 **Signature:**
 	``- (HKWifiSingalStrength)getWifiSignalStrengthType:(NSInteger)wifiSignal;``
