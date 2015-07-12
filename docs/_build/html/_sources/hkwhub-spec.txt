@@ -113,15 +113,15 @@ c. Choose a media item and play it by specifying PersistentID
 ``curl "http://192.168.1.192:8080/v1/play_hub_media?SessionID=1000&PersistentID=5829171347867182746"``
 
 
-4. Play a HTTP streaming media
+d. Play a HTTP streaming media
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ``curl "http://192.168.1.192:8080/v1/play_web_media?SessionID=1000&MediaUrl=http://seonman.github.io/music/hyolyn.mp3"``
 
-5. Stop playing
+e. Stop playing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ``curl "http://192.168.1.192:8080/v1/stop_play?SessionID=1000"``
 
-6. Set Volume
+f. Set Volume
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ``curl "http://192.168.1.192:8080/v1/set_volume?SessionID=1000&Volume=30"``
 
