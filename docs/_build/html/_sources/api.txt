@@ -119,8 +119,8 @@ The playback uses Apple Core Audio framework. So, the types of supported audio f
 **Parameters:**
 
 - ``(NSURL*) assetURL`` - NSURL to the audio file
-- ``(NSString*) songName`` -  the song name to be played. The songName is used internally to save the temporary PCM file generated from the original audio file
-- ``(BOOL) resumeFlag`` -  a boolean specifying if the playback should resume from the playback time when paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.
+- ``(NSString*) songName`` -  the song name to be played. The songName is used internally to save the temporary PCM file generated from the original audio file.
+- ``(BOOL) resumeFlag`` -  a boolean specifying if the playback should resume from the point where it was paused in the previous playback. When you want to start a song from the beginning, resumeFlag must be false. If the previous playback was stopped not paused, then the playback will start from the beginning even with resumeFlag true.
 
 **Returns:**
 	``BOOL`` - boolean value indicating success or failure
@@ -130,7 +130,7 @@ The playback uses Apple Core Audio framework. So, the types of supported audio f
 playCAFFromCertainTime()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Plays a CAF audio file from a certain time. CAF includes mp3, wav, and m4a. Differently from ``playCAF()``, this function allows to play a song from a certain time, specifyed by startTime (second). PlaybackStateChanged callback will return the status, EPlayerState_Play.
+Plays a CAF audio file beginning from a certain time of playback specified by ``startTime``. For example, you can start a song from the point of 10 seconds of the song. ``hwkPlaybackStateChanged`` delegate function will be called and return the status value of ``HKPlayerState.EPlayerState_Play``.
 
 **Signature:**
 	``- (BOOL) playCAFFromCertainTime:(NSURL *)assetURL songName:(NSString*)songName startTime:(NSInteger)startTime;``
@@ -138,7 +138,7 @@ Plays a CAF audio file from a certain time. CAF includes mp3, wav, and m4a. Diff
 **Parameters:**
 
 - ``(NSURL *)assetURL`` - NSURL to the audio file.
-- ``(NSString*)songName`` - the song name to be played. This information is used internally to save a temporary PCM file converted from the original audio file.
+- ``(NSString*)songName`` - the song name to be played. The songName is used internally to save the temporary PCM file generated from the original audio file.
 - ``(NSInteger)startTime`` - time in second that specifies the start time.
 
 **Returns:**
@@ -149,7 +149,7 @@ Plays a CAF audio file from a certain time. CAF includes mp3, wav, and m4a. Diff
 playWAV()
 ~~~~~~~~~~~~
 
-Plays a WAV file. PlaybackStateChanged callback will return the status, EPlayerState_Play.
+Plays a WAV file. ``hkwPlaybackStateChanged`` delegate function will be called and return the status value of ``HKPlayerState.EPlayerState_Play``.
 
 **Signature:**
 	``- (BOOL) playWAV:(NSString*)wavPath;``
@@ -160,14 +160,14 @@ Plays a WAV file. PlaybackStateChanged callback will return the status, EPlayerS
 playStreamingMedia()
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Plays a streaming media. Note that when you stop playing the streaming music, you must use stop(), not pause().
+Plays a streaming media from web server. Because this API takes a little while to get the result of play because of all networking stuffs, the API just returns immediately, and instead it takes a callback to be called when the result is ready. You should take the result of the call inside of the callback.
 
 **Signature:**
 	``- (void)playStreamingMedia:(NSString *)streamingMediaUrl withCallback:(void (^)(bool result))completedCallback;``
 
 **Parameters:**
 
-- ``(NSString*)streamingMediaUrl`` - a string that specifies the URL of the streaming media source. It starts with a protocol name, such as "http://" or "rtps://". Currently, http, rtps, and mms are supported. The supported file format is mp3, m4a, wav.
+- ``(NSString*)streamingMediaUrl`` - a string that specifies the URL of the streaming media source. It starts with a protocol name, such as "http://" or "rtps://". Currently, http, rtps, and mms are supported. The supported file format is mp3, m4a, and wav.
 - ``(void (^)(bool result))completedCallback`` - a callback that returns the result of the playback
 
 **Returns:**

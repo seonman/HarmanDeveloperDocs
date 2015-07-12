@@ -148,8 +148,8 @@
 <p><strong>Parameters:</strong></p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">(NSURL*)</span> <span class="pre">assetURL</span></code> - NSURL to the audio file</li>
-<li><code class="docutils literal"><span class="pre">(NSString*)</span> <span class="pre">songName</span></code> -  the song name to be played. The songName is used internally to save the temporary PCM file generated from the original audio file</li>
-<li><code class="docutils literal"><span class="pre">(BOOL)</span> <span class="pre">resumeFlag</span></code> -  a boolean specifying if the playback should resume from the playback time when paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)</span> <span class="pre">songName</span></code> -  the song name to be played. The songName is used internally to save the temporary PCM file generated from the original audio file.</li>
+<li><code class="docutils literal"><span class="pre">(BOOL)</span> <span class="pre">resumeFlag</span></code> -  a boolean specifying if the playback should resume from the point where it was paused in the previous playback. When you want to start a song from the beginning, resumeFlag must be false. If the previous playback was stopped not paused, then the playback will start from the beginning even with resumeFlag true.</li>
 </ul>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
@@ -159,7 +159,7 @@
 <hr class="docutils" />
 <div class="section" id="playcaffromcertaintime">
 <h3>playCAFFromCertainTime()<a class="headerlink" href="#playcaffromcertaintime" title="Permalink to this headline">¶</a></h3>
-<p>Plays a CAF audio file from a certain time. CAF includes mp3, wav, and m4a. Differently from <code class="docutils literal"><span class="pre">playCAF()</span></code>, this function allows to play a song from a certain time, specifyed by startTime (second). PlaybackStateChanged callback will return the status, EPlayerState_Play.</p>
+<p>Plays a CAF audio file beginning from a certain time of playback specified by <code class="docutils literal"><span class="pre">startTime</span></code>. For example, you can start a song from the point of 10 seconds of the song. <code class="docutils literal"><span class="pre">hwkPlaybackStateChanged</span></code> delegate function will be called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Play</span></code>.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">playCAFFromCertainTime:(NSURL</span> <span class="pre">*)assetURL</span> <span class="pre">songName:(NSString*)songName</span> <span class="pre">startTime:(NSInteger)startTime;</span></code></dd>
@@ -167,7 +167,7 @@
 <p><strong>Parameters:</strong></p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">(NSURL</span> <span class="pre">*)assetURL</span></code> - NSURL to the audio file.</li>
-<li><code class="docutils literal"><span class="pre">(NSString*)songName</span></code> - the song name to be played. This information is used internally to save a temporary PCM file converted from the original audio file.</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)songName</span></code> - the song name to be played. The songName is used internally to save the temporary PCM file generated from the original audio file.</li>
 <li><code class="docutils literal"><span class="pre">(NSInteger)startTime</span></code> - time in second that specifies the start time.</li>
 </ul>
 <dl class="docutils">
@@ -178,7 +178,7 @@
 <hr class="docutils" />
 <div class="section" id="playwav">
 <h3>playWAV()<a class="headerlink" href="#playwav" title="Permalink to this headline">¶</a></h3>
-<p>Plays a WAV file. PlaybackStateChanged callback will return the status, EPlayerState_Play.</p>
+<p>Plays a WAV file. <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged</span></code> delegate function will be called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Play</span></code>.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">playWAV:(NSString*)wavPath;</span></code></dd>
@@ -188,14 +188,14 @@
 </div>
 <div class="section" id="playstreamingmedia">
 <h3>playStreamingMedia()<a class="headerlink" href="#playstreamingmedia" title="Permalink to this headline">¶</a></h3>
-<p>Plays a streaming media. Note that when you stop playing the streaming music, you must use stop(), not pause().</p>
+<p>Plays a streaming media from web server. Because this API takes a little while to get the result of play because of all networking stuffs, the API just returns immediately, and instead it takes a callback to be called when the result is ready. You should take the result of the call inside of the callback.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)playStreamingMedia:(NSString</span> <span class="pre">*)streamingMediaUrl</span> <span class="pre">withCallback:(void</span> <span class="pre">(^)(bool</span> <span class="pre">result))completedCallback;</span></code></dd>
 </dl>
 <p><strong>Parameters:</strong></p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">(NSString*)streamingMediaUrl</span></code> - a string that specifies the URL of the streaming media source. It starts with a protocol name, such as &#8220;<a class="reference external" href="http://">http://</a>&#8221; or &#8220;rtps://&#8221;. Currently, http, rtps, and mms are supported. The supported file format is mp3, m4a, wav.</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)streamingMediaUrl</span></code> - a string that specifies the URL of the streaming media source. It starts with a protocol name, such as &#8220;<a class="reference external" href="http://">http://</a>&#8221; or &#8220;rtps://&#8221;. Currently, http, rtps, and mms are supported. The supported file format is mp3, m4a, and wav.</li>
 <li><code class="docutils literal"><span class="pre">(void</span> <span class="pre">(^)(bool</span> <span class="pre">result))completedCallback</span></code> - a callback that returns the result of the playback</li>
 </ul>
 <dl class="docutils">
