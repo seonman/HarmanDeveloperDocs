@@ -139,7 +139,7 @@
 <h2>Playback Control<a class="headerlink" href="#playback-control" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="playcaf">
 <h3>playCAF()<a class="headerlink" href="#playcaf" title="Permalink to this headline">¶</a></h3>
-<p>Plays a CAF audio file in local storage. If it is successful, <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged</span></code> delegate function will called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Play</span></code>.</p>
+<p>Plays a CAF audio file in local storage. If it is successful, <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged()</span></code> delegate function will called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Play</span></code>.</p>
 <p>The playback uses Apple Core Audio framework. So, the types of supported audio files and data formats by HKWirelessHDSDK are the same as those supported by Apple&#8217;s Core Audio framework. The detailed information is available at <a class="reference external" href="https://developer.apple.com/library/ios/documentation/MusicAudio/Conceptual/CoreAudioOverview/CoreAudioEssentials/CoreAudioEssentials.html#//apple_ref/doc/uid/TP40003577-CH10-SW57">iOS audio file formats</a>. According to the Apple developer documentation, CAF supports AIFF (.aif, .aiff), CAF (.caf), MPEG-1, Layer 3 (.mp3), MPEG-2 or MPEG-4 ADTS (.aac), MPEG-4 Audio (.mp4, .m4a), and WAVE (.wav).</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
@@ -159,7 +159,7 @@
 <hr class="docutils" />
 <div class="section" id="playcaffromcertaintime">
 <h3>playCAFFromCertainTime()<a class="headerlink" href="#playcaffromcertaintime" title="Permalink to this headline">¶</a></h3>
-<p>Plays a CAF audio file beginning from a certain time of playback specified by <code class="docutils literal"><span class="pre">startTime</span></code>. For example, you can start a song from the point of 10 seconds of the song. <code class="docutils literal"><span class="pre">hwkPlaybackStateChanged</span></code> delegate function will be called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Play</span></code>.</p>
+<p>Plays a CAF audio file beginning from a certain time of playback specified by <code class="docutils literal"><span class="pre">startTime</span></code>. For example, you can start a song from the point of 10 seconds of the song. <code class="docutils literal"><span class="pre">hwkPlaybackStateChanged()</span></code> delegate function will be called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Play</span></code>.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">playCAFFromCertainTime:(NSURL</span> <span class="pre">*)assetURL</span> <span class="pre">songName:(NSString*)songName</span> <span class="pre">startTime:(NSInteger)startTime;</span></code></dd>
@@ -206,7 +206,7 @@
 <hr class="docutils" />
 <div class="section" id="pause">
 <h3>pause()<a class="headerlink" href="#pause" title="Permalink to this headline">¶</a></h3>
-<p>Pauses the current playback. PlaybackStateChanged callback will return the status, EPlayerState_Pause.</p>
+<p>Pauses the current playback. <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged()</span></code> delegate function will be called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Pause</span></code>. Once the playback is paused, it can resume by calling <code class="docutils literal"><span class="pre">playCAF()</span></code> with <code class="docutils literal"><span class="pre">resumeFlag</span></code> true and the same <code class="docutils literal"><span class="pre">songName</span></code>. A playback by <code class="docutils literal"><span class="pre">playStreamingMedia()</span></code> cannot be paused. If <code class="docutils literal"><span class="pre">pause()</span></code> is called, then the playback will stop.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">pause;</span></code></dd>
@@ -217,7 +217,7 @@
 <hr class="docutils" />
 <div class="section" id="stop">
 <h3>stop()<a class="headerlink" href="#stop" title="Permalink to this headline">¶</a></h3>
-<p>Stops the current playback. PlaybackStateChanged callback will return the status, EPlayerState_Stop.</p>
+<p>Stops the current playback. <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged()</span></code> delegate function will be called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Stop</span></code>.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">stop;</span></code></dd>
@@ -228,18 +228,18 @@
 <hr class="docutils" />
 <div class="section" id="isplaying">
 <h3>isPlaying()<a class="headerlink" href="#isplaying" title="Permalink to this headline">¶</a></h3>
-<p>Inquires whether an audio file is being played or not.</p>
+<p>Checks if the player is playing some audio or not.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(bool)</span> <span class="pre">isPlaying;</span></code></dd>
 <dt><strong>Returns:</strong></dt>
-<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating if the audio is being played or now.</dd>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating if the player is playing or now.</dd>
 </dl>
 </div>
 <hr class="docutils" />
 <div class="section" id="getplayerstate">
 <h3>getPlayerState()<a class="headerlink" href="#getplayerstate" title="Permalink to this headline">¶</a></h3>
-<p>Inquires the current state of playback.</p>
+<p>Gets the current state of playback.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(HKPlayerState)getPlayerState;</span></code></dd>

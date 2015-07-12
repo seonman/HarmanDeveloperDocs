@@ -110,7 +110,7 @@ Here, SessionID should be the session id you got from ``init_session``. You will
 
 c. Choose a media item and play it by specifying PersistentID
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-``curl "http://192.168.1.192:8080/v1/pub_hub_media?SessionID=1000&PersistentID=5829171347867182746"``
+``curl "http://192.168.1.192:8080/v1/play_hub_media?SessionID=1000&PersistentID=5829171347867182746"``
 
 
 4. Play a HTTP streaming media

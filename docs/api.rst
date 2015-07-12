@@ -107,7 +107,7 @@ Playback Control
 playCAF()
 ~~~~~~~~~
 
-Plays a CAF audio file in local storage. If it is successful, ``hkwPlaybackStateChanged`` delegate function will called and return the status value of ``HKPlayerState.EPlayerState_Play``.
+Plays a CAF audio file in local storage. If it is successful, ``hkwPlaybackStateChanged()`` delegate function will called and return the status value of ``HKPlayerState.EPlayerState_Play``.
 
 The playback uses Apple Core Audio framework. So, the types of supported audio files and data formats by HKWirelessHDSDK are the same as those supported by Apple's Core Audio framework. The detailed information is available at `iOS audio file formats`_. According to the Apple developer documentation, CAF supports AIFF (.aif, .aiff), CAF (.caf), MPEG-1, Layer 3 (.mp3), MPEG-2 or MPEG-4 ADTS (.aac), MPEG-4 Audio (.mp4, .m4a), and WAVE (.wav).
 
@@ -130,7 +130,7 @@ The playback uses Apple Core Audio framework. So, the types of supported audio f
 playCAFFromCertainTime()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Plays a CAF audio file beginning from a certain time of playback specified by ``startTime``. For example, you can start a song from the point of 10 seconds of the song. ``hwkPlaybackStateChanged`` delegate function will be called and return the status value of ``HKPlayerState.EPlayerState_Play``.
+Plays a CAF audio file beginning from a certain time of playback specified by ``startTime``. For example, you can start a song from the point of 10 seconds of the song. ``hwkPlaybackStateChanged()`` delegate function will be called and return the status value of ``HKPlayerState.EPlayerState_Play``.
 
 **Signature:**
 	``- (BOOL) playCAFFromCertainTime:(NSURL *)assetURL songName:(NSString*)songName startTime:(NSInteger)startTime;``
@@ -178,7 +178,7 @@ Plays a streaming media from web server. Because this API takes a little while t
 pause()
 ~~~~~~~~~~
 
-Pauses the current playback. PlaybackStateChanged callback will return the status, EPlayerState_Pause.
+Pauses the current playback. ``hkwPlaybackStateChanged()`` delegate function will be called and return the status value of ``HKPlayerState.EPlayerState_Pause``. Once the playback is paused, it can resume by calling ``playCAF()`` with ``resumeFlag`` true and the same ``songName``. A playback by ``playStreamingMedia()`` cannot be paused. If ``pause()`` is called, then the playback will stop.
 
 **Signature:**
 	``- (void) pause;``
@@ -191,7 +191,7 @@ Pauses the current playback. PlaybackStateChanged callback will return the statu
 stop()
 ~~~~~~~~~
 
-Stops the current playback. PlaybackStateChanged callback will return the status, EPlayerState_Stop.
+Stops the current playback. ``hkwPlaybackStateChanged()`` delegate function will be called and return the status value of ``HKPlayerState.EPlayerState_Stop``.
 
 **Signature:**
 	``- (void) stop;``
@@ -204,26 +204,26 @@ Stops the current playback. PlaybackStateChanged callback will return the status
 isPlaying()
 ~~~~~~~~~~~~
 
-Inquires whether an audio file is being played or not.
+Checks if the player is playing some audio or not.
 
 **Signature:**
 	``- (bool) isPlaying;``
 
 **Returns:**
-	``BOOL`` - boolean value indicating if the audio is being played or now.
+	``BOOL`` - boolean value indicating if the player is playing or now.
 
 ----
 	
 getPlayerState()
 ~~~~~~~~~~~~~~~~~~~
 
-Inquires the current state of playback.
+Gets the current state of playback.
 
 **Signature:**
 	``- (HKPlayerState)getPlayerState;``
 	
 **Returns:**
-	``HKPlayState`` - indicates the current player state.
+	``HKPlayState`` - indicates the current player state. 
 	
 ----
 
