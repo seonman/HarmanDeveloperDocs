@@ -107,9 +107,9 @@ Playback Control
 playCAF()
 ~~~~~~~~~
 
-Plays a CAF audio file in local storage. PlaybackStateChanged callback will return the status, EPlayerState_Play.
+Plays a CAF audio file in local storage. If it is successful, ``hkwPlaybackStateChanged`` delegate function will called and return the status value of ``HKPlayerState.EPlayerState_Play``.
 
-The playback is based on the Apple Core Audio framework. So, the supported audio file and data formats by HKWirelessHDSDK are the same as those supported by Apple's Core Audio framework. The detailed information is available at `iOS audio file formats`_. According to the Apple developer documentation, CAF supports AIFF (.aif, .aiff), CAF (.caf), MPEG-1, Layer 3 (.mp3), MPEG-2 or MPEG-4 ADTS (.aac), MPEG-4 Audio (.mp4, .m4a), and WAVE (.wav).
+The playback uses Apple Core Audio framework. So, the types of supported audio files and data formats by HKWirelessHDSDK are the same as those supported by Apple's Core Audio framework. The detailed information is available at `iOS audio file formats`_. According to the Apple developer documentation, CAF supports AIFF (.aif, .aiff), CAF (.caf), MPEG-1, Layer 3 (.mp3), MPEG-2 or MPEG-4 ADTS (.aac), MPEG-4 Audio (.mp4, .m4a), and WAVE (.wav).
 
 .. _iOS audio file formats: https://developer.apple.com/library/ios/documentation/MusicAudio/Conceptual/CoreAudioOverview/CoreAudioEssentials/CoreAudioEssentials.html#//apple_ref/doc/uid/TP40003577-CH10-SW57
 
@@ -119,8 +119,8 @@ The playback is based on the Apple Core Audio framework. So, the supported audio
 **Parameters:**
 
 - ``(NSURL*) assetURL`` - NSURL to the audio file
-- ``(NSString*) songName`` -  the song name to be played. The soneName is used internally to save a temporary PCM file convered from the original audio file
-- ``(BOOL) resumeFlag`` -  a boolean that specifies if the play resume from the point that paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.
+- ``(NSString*) songName`` -  the song name to be played. The songName is used internally to save the temporary PCM file generated from the original audio file
+- ``(BOOL) resumeFlag`` -  a boolean specifying if the playback should resume from the playback time when paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.
 
 **Returns:**
 	``BOOL`` - boolean value indicating success or failure

@@ -139,8 +139,8 @@
 <h2>Playback Control<a class="headerlink" href="#playback-control" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="playcaf">
 <h3>playCAF()<a class="headerlink" href="#playcaf" title="Permalink to this headline">¶</a></h3>
-<p>Plays a CAF audio file in local storage. PlaybackStateChanged callback will return the status, EPlayerState_Play.</p>
-<p>The playback is based on the Apple Core Audio framework. So, the supported audio file and data formats by HKWirelessHDSDK are the same as those supported by Apple&#8217;s Core Audio framework. The detailed information is available at <a class="reference external" href="https://developer.apple.com/library/ios/documentation/MusicAudio/Conceptual/CoreAudioOverview/CoreAudioEssentials/CoreAudioEssentials.html#//apple_ref/doc/uid/TP40003577-CH10-SW57">iOS audio file formats</a>. According to the Apple developer documentation, CAF supports AIFF (.aif, .aiff), CAF (.caf), MPEG-1, Layer 3 (.mp3), MPEG-2 or MPEG-4 ADTS (.aac), MPEG-4 Audio (.mp4, .m4a), and WAVE (.wav).</p>
+<p>Plays a CAF audio file in local storage. If it is successful, <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged</span></code> delegate function will called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Play</span></code>.</p>
+<p>The playback uses Apple Core Audio framework. So, the types of supported audio files and data formats by HKWirelessHDSDK are the same as those supported by Apple&#8217;s Core Audio framework. The detailed information is available at <a class="reference external" href="https://developer.apple.com/library/ios/documentation/MusicAudio/Conceptual/CoreAudioOverview/CoreAudioEssentials/CoreAudioEssentials.html#//apple_ref/doc/uid/TP40003577-CH10-SW57">iOS audio file formats</a>. According to the Apple developer documentation, CAF supports AIFF (.aif, .aiff), CAF (.caf), MPEG-1, Layer 3 (.mp3), MPEG-2 or MPEG-4 ADTS (.aac), MPEG-4 Audio (.mp4, .m4a), and WAVE (.wav).</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">playCAF:(NSURL</span> <span class="pre">*)assetURL</span> <span class="pre">songName:(NSString*)songName</span> <span class="pre">resumeFlag:(BOOL)resumeFlag;</span></code></dd>
@@ -148,8 +148,8 @@
 <p><strong>Parameters:</strong></p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">(NSURL*)</span> <span class="pre">assetURL</span></code> - NSURL to the audio file</li>
-<li><code class="docutils literal"><span class="pre">(NSString*)</span> <span class="pre">songName</span></code> -  the song name to be played. The soneName is used internally to save a temporary PCM file convered from the original audio file</li>
-<li><code class="docutils literal"><span class="pre">(BOOL)</span> <span class="pre">resumeFlag</span></code> -  a boolean that specifies if the play resume from the point that paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)</span> <span class="pre">songName</span></code> -  the song name to be played. The songName is used internally to save the temporary PCM file generated from the original audio file</li>
+<li><code class="docutils literal"><span class="pre">(BOOL)</span> <span class="pre">resumeFlag</span></code> -  a boolean specifying if the playback should resume from the playback time when paused or stopped in the previous playback. When starting a song from the beginning, resumeFlag must be false.</li>
 </ul>
 <dl class="docutils">
 <dt><strong>Returns:</strong></dt>
