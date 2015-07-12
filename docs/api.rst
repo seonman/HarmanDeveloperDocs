@@ -745,6 +745,8 @@ HKWDeviceEventHandlerSingleton
 sharedInstance()
 ~~~~~~~~~~~~~~~~~~~~
 
+Returns the singleton object to HKWDeviceEventHandler. 
+
 **Signature:**
 +(HKWDeviceEventHandlerSingleton*)sharedInstance;
 
@@ -752,6 +754,8 @@ sharedInstance()
 
 delegate
 ~~~~~~~~~~~~~
+
+The delegate attribute to be set by an object to be a HKWDeviceEventHandlerDelegate.
 
 .. code-block:: objective-c
 
@@ -804,6 +808,8 @@ HKWPlayerEventHandlerSingleton
 sharedInstance()
 ~~~~~~~~~~~~~~~~~~~~
 
+Returns the singleton object to HKWPlayerEventHandler. 
+
 **Signature:**
 	``+(HKWPlayerEventHandlerSingleton*)sharedInstance;``
 
@@ -811,6 +817,8 @@ sharedInstance()
 
 delegate
 ~~~~~~~~~~~~~
+
+The delegate attribute to be set by an object to be a HKWPlayerEventHandlerDelegate.
 
 .. code-block:: objective-c
 
@@ -822,7 +830,7 @@ HKWPlayerEventHandlerDelegate
 hkwPlayEnded() - required
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Invoked when the current playback is ended.
+This is called when the current playback has ended.
 
 **Signature:**
 	``-(void)hkwPlayEnded;``
@@ -832,7 +840,7 @@ Invoked when the current playback is ended.
 hkwDeviceVolumeChanged() - optional
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Invoked when volume level has been changed for any spekaers.
+This is called when volume level has changed for any spekaers.
 
 **Signature:**
 	``-(void)hkwDeviceVolumeChanged:(long long)deviceId deviceVolume:(NSInteger)deviceVolume withAverageVolume:(NSInteger)avgVolume;``
@@ -846,7 +854,7 @@ Invoked when volume level has been changed for any spekaers.
 hkwPlaybackStateChanged() - optional
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Invoked when player state has been changed during the playback.
+This is called when player state has changed during the playback.
 
 **Signature:**
 	``-(void)hkwPlaybackStateChanged:(NSInteger)playState;``
@@ -860,7 +868,7 @@ Invoked when player state has been changed during the playback.
 hkwPlaybackTimeChanged() - optional
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Invoked when the current time of playback has been changed. It is called every one second.
+This is called when the current time of playback has changed. It is called every one second.
 
 **Signature:**
 	``-(void)hkwPlaybackTimeChanged:(NSInteger)timeElapsed;``

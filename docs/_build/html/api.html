@@ -736,12 +736,14 @@
 <h2>HKWDeviceEventHandlerSingleton<a class="headerlink" href="#hkwdeviceeventhandlersingleton" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="sharedinstance">
 <h3>sharedInstance()<a class="headerlink" href="#sharedinstance" title="Permalink to this headline">¶</a></h3>
+<p>Returns the singleton object to HKWDeviceEventHandler.</p>
 <p><strong>Signature:</strong>
 +(HKWDeviceEventHandlerSingleton*)sharedInstance;</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="delegate">
 <h3>delegate<a class="headerlink" href="#delegate" title="Permalink to this headline">¶</a></h3>
+<p>The delegate attribute to be set by an object to be a HKWDeviceEventHandlerDelegate.</p>
 <div class="highlight-objective-c"><div class="highlight"><pre><span class="k">@property</span> <span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">weak</span><span class="p">)</span> <span class="kt">id</span><span class="o">&lt;</span><span class="n">HKWDeviceEventHandlerDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -791,6 +793,7 @@
 <h2>HKWPlayerEventHandlerSingleton<a class="headerlink" href="#hkwplayereventhandlersingleton" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
 <h3>sharedInstance()<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Returns the singleton object to HKWPlayerEventHandler.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">+(HKWPlayerEventHandlerSingleton*)sharedInstance;</span></code></dd>
@@ -799,6 +802,7 @@
 <hr class="docutils" />
 <div class="section" id="id2">
 <h3>delegate<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The delegate attribute to be set by an object to be a HKWPlayerEventHandlerDelegate.</p>
 <div class="highlight-objective-c"><div class="highlight"><pre><span class="k">@property</span> <span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">weak</span><span class="p">)</span> <span class="kt">id</span><span class="o">&lt;</span><span class="n">HKWPlayerEventHandlerDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -808,7 +812,7 @@
 <h2>HKWPlayerEventHandlerDelegate<a class="headerlink" href="#hkwplayereventhandlerdelegate" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="hkwplayended-required">
 <h3>hkwPlayEnded() - required<a class="headerlink" href="#hkwplayended-required" title="Permalink to this headline">¶</a></h3>
-<p>Invoked when the current playback is ended.</p>
+<p>This is called when the current playback has ended.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-(void)hkwPlayEnded;</span></code></dd>
@@ -817,7 +821,7 @@
 <hr class="docutils" />
 <div class="section" id="hkwdevicevolumechanged-optional">
 <h3>hkwDeviceVolumeChanged() - optional<a class="headerlink" href="#hkwdevicevolumechanged-optional" title="Permalink to this headline">¶</a></h3>
-<p>Invoked when volume level has been changed for any spekaers.</p>
+<p>This is called when volume level has changed for any spekaers.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-(void)hkwDeviceVolumeChanged:(long</span> <span class="pre">long)deviceId</span> <span class="pre">deviceVolume:(NSInteger)deviceVolume</span> <span class="pre">withAverageVolume:(NSInteger)avgVolume;</span></code></dd>
@@ -831,7 +835,7 @@
 </div>
 <div class="section" id="hkwplaybackstatechanged-optional">
 <h3>hkwPlaybackStateChanged() - optional<a class="headerlink" href="#hkwplaybackstatechanged-optional" title="Permalink to this headline">¶</a></h3>
-<p>Invoked when player state has been changed during the playback.</p>
+<p>This is called when player state has changed during the playback.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-(void)hkwPlaybackStateChanged:(NSInteger)playState;</span></code></dd>
@@ -844,7 +848,7 @@
 <hr class="docutils" />
 <div class="section" id="hkwplaybacktimechanged-optional">
 <h3>hkwPlaybackTimeChanged() - optional<a class="headerlink" href="#hkwplaybacktimechanged-optional" title="Permalink to this headline">¶</a></h3>
-<p>Invoked when the current time of playback has been changed. It is called every one second.</p>
+<p>This is called when the current time of playback has changed. It is called every one second.</p>
 <dl class="docutils">
 <dt><strong>Signature:</strong></dt>
 <dd><code class="docutils literal"><span class="pre">-(void)hkwPlaybackTimeChanged:(NSInteger)timeElapsed;</span></code></dd>
