@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Troubleshooting &mdash; Harman Developer 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="handling-of-link-error-undefined-symbols-for-architecture-armv7">
+<h2>Handling of link error “undefined symbols for architecture armv7”<a class="headerlink" href="#handling-of-link-error-undefined-symbols-for-architecture-armv7" title="Permalink to this headline">¶</a></h2>
+<p>HKWirelessHD SDK uses C++ codes, so the linker should include std c++ library. To prevent this kinf od link error, your project setting should include “-lstdc++” in Targets &gt; Build Settings &gt; Linking &gt; Other Linker Flags field.</p>
+</div>
+<div class="section" id="unspecified-linking-parameter-is-added-in-link-command">
+<h2>Unspecified linking parameter is added in link command<a class="headerlink" href="#unspecified-linking-parameter-is-added-in-link-command" title="Permalink to this headline">¶</a></h2>
+<p>If you encounter unspecified linking parameter such as library names, etc., there is possibility that Xcode is using cached build parameters that were used before. In this case, just delete “Xcode/DerivedData” folder in your ~/Library/Developer folder. That is,</p>
+<div class="highlight-swift"><div class="highlight"><pre>$ cd ~/Library/Developer/Xcode/DerivedData/
+$ rm -rf [your-project-name]*
+</pre></div>
+</div>
+</div>
+<div class="section" id="playback-stops-when-the-app-turns-to-background-mode">
+<h2>Playback stops when the app turns to background mode<a class="headerlink" href="#playback-stops-when-the-app-turns-to-background-mode" title="Permalink to this headline">¶</a></h2>
+<p>When an app playing music using HKWirelessHDSDK may stop playing when the app becomes background. It is because iOS stops all on-going network communication when the app is backgrounded. There are several expcetional cases that iOS allows even in background mode. Please refer to <a class="reference external" href="https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html">iOS Developer Library</a> for more information on background execution.</p>
+<p>To prevent our HKWirelessHD apps from stopping in background mode, we can do a trick based on iOS Audio background mode. For our sample apps not to be stopped during the background mode, we use <a class="reference external" href="https://github.com/marcop/MMPDeepSleepPreventer">MMPDeepSleepPreventer</a>. The idea of MMPDeepSleepPreventer is to play zero length of silent audio every 5 seconds by enabling iOS Audio background mode.</p>
+<p>To enable iOS Audio background mode, you need to enable it in Project setting.</p>
+<ul class="simple">
+<li>Go to Project &gt; Targets &gt; Capabilities &gt; Background Modes</li>
+<li>Turn on the option of  <strong>Audio and AirPlay</strong></li>
+</ul>
+<div class="figure">
+<img alt="../_images/background-execution.png" src="../_images/background-execution.png" />
+</div>
+<p>Then, just initialize and start DeepSleepPreventer in <code class="docutils literal"><span class="pre">AppDeleget.application:didFinishedLaunchingWithOption()</span></code> as follows:</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">:</span> <span class="bp">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="bp">NSObject</span><span class="p">:</span> <span class="nb">AnyObject</span><span class="p">]?)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
+
+        <span class="c1">// prevent from turning into background</span>
+        <span class="n">sleepPreventer</span> <span class="p">=</span> <span class="n">MMPDeepSleepPreventer</span><span class="p">()</span>
+        <span class="n">sleepPreventer</span><span class="p">.</span><span class="n">startPreventSleep</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can stop the sleep preventer when the app becomes foregrounded (<code class="docutils literal"><span class="pre">applicationWillEnterForeground()</span></code>), and start it again just before the app becomes backgrounded (<code class="docutils literal"><span class="pre">applicationWillResignActive()</span></code>).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/HarmanDeveloperLogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#handling-of-link-error-undefined-symbols-for-architecture-armv7">Handling of link error “undefined symbols for architecture armv7”</a></li>
+<li><a class="reference internal" href="#unspecified-linking-parameter-is-added-in-link-command">Unspecified linking parameter is added in link command</a></li>
+<li><a class="reference internal" href="#playback-stops-when-the-app-turns-to-background-mode">Playback stops when the app turns to background mode</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/iOS/trouble-shooting.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Harman International.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

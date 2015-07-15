@@ -1,0 +1,739 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Programming Guide (iOS) &mdash; Harman Developer 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="programming-guide-ios">
+<h1>Programming Guide (iOS)<a class="headerlink" href="#programming-guide-ios" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter, we explain how to use HKWirelessHD APIs to create an app controlling HK Omni speakers. The sample codes explained in this section are copied from HKWPlayer app.</p>
+<p>All APIs can be accessed through the singleton object pointer of HKWControlHandler. The first thing you have to do is create an instance of HKWControlHandler and use it to invoke the APIs you want to use.</p>
+<p>In HKWirelessHD SDK, all the APIs are defined in Objective-C. However, the examples in this document are written in Swift. In case you use Swift for app development, you need to create a Swift bridging header file to make Objective-C APIs visible to Swift code.</p>
+<p>For setting up a project with HKWirelessHD SDK, please refer to Getting Started Guide.</p>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio">
+<h3>Initialize HKWirelessHD Control Handler and start the Wireless Audio<a class="headerlink" href="#initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio" title="Permalink to this headline">¶</a></h3>
+<p>Controlling HK Omni speakers are done by calling APIs provided by HKWControlHandler. So, the first thing to do to use HKWirelessHD APIs is to acquire the singleton object of HKWControlHandler and initialize it.</p>
+<p>Once you acquire the HKWControlHandler object, you need to initialize it by calling initializeHKWirelessController(). <code class="docutils literal"><span class="pre">initializeHKWirelessController()</span></code> takes a string of license key as parameter. Every developer who signs up for Harman developer community will receive a license key. If you have not received it yet, then just use the license key specified in the sample code for temporary use until your own license key is delivered to you.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="k">if</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">isInitialized</span><span class="p">()</span> <span class="p">==</span> <span class="kc">false</span> <span class="p">{</span>
+        <span class="c1">// HKWControlHandler has not been initialized before. Initialize it now.</span>
+        <span class="n">dispatch_async</span><span class="p">(</span><span class="n">dispatch_get_global_queue</span><span class="p">(</span><span class="n">DISPATCH_QUEUE_PRIORITY_DEFAULT</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">initializeHKWirelessController</span><span class="p">(</span><span class="n">g_licenseKey</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">{</span>
+                        <span class="bp">println</span><span class="p">(</span><span class="s">&quot;initializeHKWirelessControl failed&quot;</span><span class="p">)</span>
+                        <span class="k">return</span>
+                <span class="p">}</span>
+
+                <span class="p">...</span>
+        <span class="p">})</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that <code class="docutils literal"><span class="pre">intializeHKWirelessController()</span></code> is a blocking call. So, it will not return until the caller initializes HKWireless Controller. If the phone is not connected to a Wi-Fi network, or any other app on the same phone is already using the HKWireless controller, then the call will wait until the app releases the controller. If you want non-blocking behavior, you should call this function asynchronously by running it in a separate thread, not within the main thread. So, it would be nice to present a dialog to user before calling <code class="docutils literal"><span class="pre">initializeHKWirelessController()</span></code> to notice that the app will wait until HKWirelessHD network is available.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that even after a successful call to initializeHKWirelessController(), it takes a little time (a few hundreds milliseconds) to get the information of all the speakers available for streaming audio.</p>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="getting-the-information-of-speakers">
+<h2>Getting the information of speakers<a class="headerlink" href="#getting-the-information-of-speakers" title="Permalink to this headline">¶</a></h2>
+<p>HKWControlHandler maintains the list of speakers available in the network. The list changes every time a speaker is added to the network or removed from the network. Whenever a speaker is added to or removed from the network, the <strong>hkwDeviceStateUpdated()</strong> delegate function is called. So developer needs to check which speaker has been added or removed, and handle the case accordingly, such as update the UI of speaker list, and so on.</p>
+<div class="section" id="device-information">
+<h3>Device Information<a class="headerlink" href="#device-information" title="Permalink to this headline">¶</a></h3>
+<p>Each speaker information contains a list of attributes that specify its static information such as speaker name, group name, IP address, etc. and also dynamic information such as volume level, boolean value indicating if it is playing or not, Wi-Fi signal strength, etc.</p>
+<p>You can retrieve all the attributes of device (speaker) information through DeviceInfo object, and it is specified in DeviceInfo.h. The following table shows the list of information that DeviceInfo provides.</p>
+<p>In the table, &#8220;Fixed/Variable&#8221; column means if the attribute value is a fixed value during the execution, or can be changed by itself or by calling APIs. &#8220;Set by API&#8221; column means whether the value of the attribute can be changed by API calls.</p>
+<p>Note that all the attributes in DeviceInfo.h are &#8220;readonly&#8221;. So, you can only read the value of each attribute. You need to use corresponding API functions to change the values of the attributes.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="10%" />
+<col width="40%" />
+<col width="28%" />
+<col width="9%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Attribute</th>
+<th class="head">Type in Swift</th>
+<th class="head">Description</th>
+<th class="head">Fixed/Variable</th>
+<th class="head">Set by API</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>deviceId</td>
+<td>CLongLong</td>
+<td>the unique ID of the speaker</td>
+<td>Fixed (in manufacturing)</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>deviceName</td>
+<td>String</td>
+<td>the name of the speaker</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>groupId</td>
+<td>CLongLong</td>
+<td>the unique ID of the group that the speaker belongs to</td>
+<td>Variable (set when a group is created)</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>groupName</td>
+<td>String</td>
+<td>the name of the group that the speaker belongs to</td>
+<td>Variable (set when a group is created)</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>modelName</td>
+<td>String</td>
+<td>the name of the Model of the speaker</td>
+<td>Fixed (in manufacturing)</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>ipAddress</td>
+<td>String</td>
+<td>the IP address as String</td>
+<td>Fixed (when network setup)</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>port</td>
+<td>String</td>
+<td>the port number</td>
+<td>Fixed (when network setup)</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>macAddress</td>
+<td>String</td>
+<td>the mac address as String</td>
+<td>Fixed (in manufacturing)</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>volume</td>
+<td>Int</td>
+<td>the volume level value (0 to 50)</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>active</td>
+<td>Bool</td>
+<td>indicates if added to the current playback session</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>wifiSignalStrength</td>
+<td>Int</td>
+<td>Wi-Fi strength in dBm scale, -100 (low) to 0 (high)</td>
+<td>Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>role</td>
+<td>Int</td>
+<td>the role definition (stereo or 5.1 channel)</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>String</td>
+<td>the firmware version number as String</td>
+<td>Fixed (when firmware update)</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>balance</td>
+<td>Int</td>
+<td>the balance value in stereo mode. -6 to 6, 0 is neutral</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>isPlaying</td>
+<td>Bool</td>
+<td>indicates whether the speaker is playing or not</td>
+<td>Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>channelType</td>
+<td>Int</td>
+<td>the channel type: 1 is stereo.</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>isMaster</td>
+<td>Bool</td>
+<td>indicates if it is the master in stereo or group mode</td>
+<td>Variable</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>As shown in the table above, some of the attributes can be set by the APIs. And some attributes change during the runtime, so the app should keep the latest value of the attributes by calling corresponding APIs or by callback functions.</p>
+<p>The following is an example of retrieving some of attributes of a speaker information.</p>
+<div class="highlight-swift"><div class="highlight"><pre>let deviceInfo: DeviceInfo = HKWControlHandler.sharedInstance().getDeviceInfoByGroupIndexAndDeviceIndex(groupIndex, deviceIndex:deviceIndex)
+
+println(&quot;deviceName: \(deviceInfo.deviceName&quot;)
+println(&quot;groupName: \(deviceInfo.groupName&quot;)
+println(&quot;volume: \(deviceInfo.volume&quot;)
+println(&quot;deviceId: \(deviceInfo.deviceId&quot;)
+println(&quot;deviceActive: \(deviceInfo.active&quot;)
+println(&quot;deviceModel: \(deviceInfo.modelName&quot;)
+...
+</pre></div>
+</div>
+<div class="section" id="getting-a-speaker-device-information">
+<h4>Getting a speaker (device) information<a class="headerlink" href="#getting-a-speaker-device-information" title="Permalink to this headline">¶</a></h4>
+<p>HKWControlHandler maintains the list of speaker internally. Each speaker information can be retrieved either by specifying the index in the table, or by specifying the index of group and the index of member inside of the group.</p>
+<p><strong>Get the speaker information from the table</strong></p>
+<p>You can retrieve a speaker information (as <code class="docutils literal"><span class="pre">DeviceInfo</span></code> object) by specifying the index in the table.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">DeviceInfo</span> <span class="o">*</span><span class="p">)</span> <span class="n">getDeviceInfoByIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">deviceIndex</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Here, the range of deviceIndex is 0 to the number of speakers (deviceCount) minus 1.</p>
+<p>This function is useful when you need to show all the speakers in ordered list in <code class="docutils literal"><span class="pre">TableViewCell</span></code>.</p>
+<p><strong>Get a speaker information from the group list</strong></p>
+<p>You can retrieve a speaker information by specifying a group index and the index of the speaker in the group.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">DeviceInfo</span> <span class="o">*</span><span class="p">)</span> <span class="n">getDeviceInfoByGroupIndexAndDeviceIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span> <span class="n">groupIndex</span>
+                                                <span class="n">deviceIndex</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">deviceIndex</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal"><span class="pre">groupIndex</span></code> represents the index of the group where the device belong to. <code class="docutils literal"><span class="pre">deviceIndex</span></code> means the index of the device in the group.</p>
+<p>This function is useful to find the device information (<code class="docutils literal"><span class="pre">DeviceInfo</span></code> object) that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the <code class="docutils literal"><span class="pre">groupIndex</span></code> can correspond to the section number, and <code class="docutils literal"><span class="pre">deviceIndex</span></code> can correspond to the row number.</p>
+<p><strong>Get a speaker information with deviceId</strong></p>
+<p>If you already knows the deviceId (device unique identifier) of a speaker, then you can retrieve the deviceInfo object with the following function.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">DeviceInfo</span> <span class="o">*</span><span class="p">)</span> <span class="n">getDeviceInfoById</span><span class="p">:(</span><span class="n">long</span> <span class="n">long</span><span class="p">)</span> <span class="n">deviceId</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="refreshing-device-status-information">
+<h3>Refreshing device status information<a class="headerlink" href="#refreshing-device-status-information" title="Permalink to this headline">¶</a></h3>
+<p>If any change happens on a speaker, the speaker sends an event with updated information to HKWControlHandler and then the speaker information stored in HKWControlHandler is updated. Then, HKWControlHandler calls corresponding delegate protocol functions registered by the app to make it processed by the event handler.</p>
+<p>However, in our current implementation, the event dispatching initiated by speaker takes a little more time than the app polling to check if there is any update on speakers. To reduce the time of status update, we provide a pair of functions to refresh device status, which is a kind of polling speakers to check the update. Especially, if you need to show a list of speakers with the latest information, you&#8217;d better force to refresh the speaker information, not just waiting updates from speakers.</p>
+<p>To discover and update the status of speakers immediately, you can use the following functions:</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="c1">// start to refresh devices ...</span>
+<span class="n">g_HKWControlHandler</span><span class="p">.</span><span class="n">startRefreshDeviceInfo</span><span class="p">()</span>
+
+<span class="p">...</span> <span class="p">...</span>
+
+<span class="c1">// stop to refresh devices</span>
+<span class="n">g_HKWControlHandler</span><span class="p">.</span><span class="n">stopRefreshDeviceInfo</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code> will refresh and update every 2 seconds the status of the devices in the current Wi-Fi network.</p>
+</div>
+<div class="section" id="add-or-remove-a-speaker-to-from-a-playback-session">
+<h3>Add or remove a speaker to/from a playback session<a class="headerlink" href="#add-or-remove-a-speaker-to-from-a-playback-session" title="Permalink to this headline">¶</a></h3>
+<p>To play a music on a specific speaker, the speaker should be added to the current playback session.</p>
+<p>You can check whether or not a speaker is currently added to the current playback session by check the &#8220;active&#8221; attribute of DeviceInfo object (in DeviceInfo.h).</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="cm">/*! Indicates if the speaker is active (added to the current playback session) */</span>
+<span class="p">@</span><span class="n">property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">readonly</span><span class="p">)</span> <span class="n">BOOL</span> <span class="n">active</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="add-a-speaker-to-a-session-to-play-on">
+<h4>Add a speaker to a session (to play on)<a class="headerlink" href="#add-a-speaker-to-a-session-to-play-on" title="Permalink to this headline">¶</a></h4>
+<p>Use <code class="docutils literal"><span class="pre">addDeviceToSession()</span></code> to add a speaker to the current playback session.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">BOOL</span><span class="p">)</span> <span class="n">addDeviceToSession</span><span class="p">:(</span><span class="n">long</span> <span class="n">long</span><span class="p">)</span> <span class="n">deviceid</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For example,</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="c1">// add the speaker to the current playback session</span>
+<span class="n">g_HKWControlHandler</span><span class="p">.</span><span class="n">addDeviceToSession</span><span class="p">(</span><span class="n">deviceId</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the execution is successful, then the attribute &#8220;active&#8221; of the speaker is set to &#8220;true&#8221;.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A speaker can be added to the current on-going playback session anytime, even the playbach is started already. It usually takes a couple of seconds for the added speaker to start to play audio.</p>
+</div>
+</div>
+<div class="section" id="remove-a-speaker-from-a-session">
+<h4>Remove a speaker from a session<a class="headerlink" href="#remove-a-speaker-from-a-session" title="Permalink to this headline">¶</a></h4>
+<p>Use <code class="docutils literal"><span class="pre">removeDeviceFromSession()</span></code> to remove a speaker from current playback session. The removed speaker will stop playing audio immediately.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">BOOL</span><span class="p">)</span> <span class="n">removeDeviceFromSession</span><span class="p">:(</span><span class="n">long</span> <span class="n">long</span><span class="p">)</span> <span class="n">deviceid</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For example,</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="c1">// remove a speaker from the current playback session</span>
+<span class="n">g_HKWControlHandler</span><span class="p">.</span><span class="n">removeDeviceFromSession</span><span class="p">(</span><span class="n">deviceId</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the execution is successful, then the attribute &#8220;active&#8221; of the speaker is set to &#8220;false&#8221;.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A speaker can be removed from the current on-going playback session anytime.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">After a speaker was removed from the session and there is no speaker remaining in the session, then the current playback stops automatically.</p>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="play-audio-file">
+<h2>Play Audio File<a class="headerlink" href="#play-audio-file" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="play-caf-file-mp3-wav-etc">
+<h3>Play CAF file (MP3, WAV, etc.)<a class="headerlink" href="#play-caf-file-mp3-wav-etc" title="Permalink to this headline">¶</a></h3>
+<p>If one or more speakers are available to the session, or if there is at least one speaker active, you can start to play a song.</p>
+<p>The playback is based on the Apple Core Audio framework. So, the supported audio file and data formats by HKWirelessHDSDK are the same as those supported by Apple&#8217;s Core Audio framework. The detailed information is available at <a class="reference external" href="https://developer.apple.com/library/ios/documentation/MusicAudio/Conceptual/CoreAudioOverview/CoreAudioEssentials/CoreAudioEssentials.html#//apple_ref/doc/uid/TP40003577-CH10-SW57">iOS audio file formats</a>. According to the Apple developer documentation, CAF supports AIFF (.aif, .aiff), CAF (.caf), MPEG-1, Layer 3 (.mp3), MPEG-2 or MPEG-4 ADTS (.aac), MPEG-4 Audio (.mp4, .m4a), and WAVE (.wav).</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">BOOL</span><span class="p">)</span> <span class="n">playCAF</span><span class="p">:(</span><span class="bp">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">assetURL</span> <span class="n">songName</span><span class="p">:(</span><span class="bp">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">songName</span> <span class="n">resumeFlag</span><span class="p">:(</span><span class="n">BOOL</span><span class="p">)</span><span class="n">resumeFlag</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To play a song, you should prepare a <code class="docutils literal"><span class="pre">AssetURL</span></code> using <code class="docutils literal"><span class="pre">NSURL</span></code> first. Here is an example:</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kd">let</span> <span class="nv">assetUrl</span> <span class="p">=</span> <span class="bp">NSURL</span><span class="p">(</span><span class="n">fileURKWithPath</span><span class="p">:</span> <span class="n">nsPath</span><span class="p">)</span>
+
+<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">playCAF</span><span class="p">(</span><span class="n">assetUrl</span><span class="p">,</span> <span class="n">songName</span><span class="p">:</span> <span class="n">songTitle</span><span class="p">,</span> <span class="n">resumeFlag</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal"><span class="pre">resumeFlag</span></code> is false, if you start the song from the beginning. If you want to resume to play the current song, then <code class="docutils literal"><span class="pre">resumeFlag</span></code> should be true. <code class="docutils literal"><span class="pre">songTitle</span></code> is a string, representing the song name. (This is only internally used as a file name to store converted PCM data in the memory temporarily.)</p>
+<p>If you want to specify a starting point of the audio stream, then you can use <code class="docutils literal"><span class="pre">playCAFFromCertainTime()</span></code> to start the playback from a specified time.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">bool</span><span class="p">)</span> <span class="n">playCAFFromCertainTime</span><span class="p">:(</span><span class="bp">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">assetURL</span>
+                                                <span class="n">songName</span><span class="p">:(</span><span class="bp">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">songName</span>
+                                                <span class="n">startTime</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">startTime</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal"><span class="pre">startTime</span></code> is in second.</p>
+<p><code class="docutils literal"><span class="pre">playCAF()</span></code> and <code class="docutils literal"><span class="pre">playCAFFromCertainTime()</span></code> can play both WAV and MP3 audio file. In case of WAV, it is played without conversion. In case of MP3, it is converted to PCM format first, and then played.</p>
+<p>To play WAF audio file, use <code class="docutils literal"><span class="pre">playWAV()</span></code>.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">bool</span><span class="p">)</span> <span class="n">playWAV</span><span class="p">:(</span><span class="bp">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">wavPath</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The following example shows how to play a WAV file stored in the application bundle.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="n">nsWavPath</span> <span class="p">=</span> <span class="bp">NSBundle</span><span class="p">.</span><span class="n">mainBundle</span><span class="p">().</span><span class="n">bundlePath</span><span class="p">.</span><span class="n">stringByAppendingPathComponent</span><span class="p">(</span><span class="n">songTitle</span><span class="p">)</span>
+
+<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">playWAV</span><span class="p">(</span><span class="n">nsWavPath</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">playCAF()</span></code> and <code class="docutils literal"><span class="pre">playCAFFromCertainTime()</span></code> cannot play an audio file in Apple’s iTunes Match service. Songs should reside locally on the device for playback. So, it would be nice to check if the song resides on the device when your app gets the MPMediaItem of a song from MediaPicker.</p>
+</div>
+<p>You can check the playback status anytime, that is, before and after as well as in the middle of the playback. You can get the player status by calling <code class="docutils literal"><span class="pre">getPlayerState()</span></code>. (<code class="docutils literal"><span class="pre">HKPlayerState</span></code> is defined in HKWControlHandler.h)</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">HKPlayerState</span><span class="p">)</span><span class="n">getPlayerState</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>If you just want to check if the player is playing audio now, then use isPlaying().</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">bool</span><span class="p">)</span> <span class="n">isPlaying</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="play-web-streaming-music">
+<h3>Play Web Streaming Music<a class="headerlink" href="#play-web-streaming-music" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This API is <strong>NOT</strong> supported by HKWirelessHDSDKlw (lightweight version of HKWirelessHDSDK). It is only supported by HKWirelessHD SDK.</p>
+</div>
+<p>Use <code class="docutils literal"><span class="pre">playStreamingMedia()</span></code> to playt a streaming media. It uses a parameter of <code class="docutils literal"><span class="pre">streamingMediaUrl</span></code> to specify the URL of the media file in the streaming service. It starts with a protocol name, such as &#8220;<a class="reference external" href="http://">http://</a>&#8221; or &#8220;rtps://&#8221;. Currently, http:, rtps:, and mms: are supported. The supported file format is mp3, m4a, wav.</p>
+<p><code class="docutils literal"><span class="pre">completedCallback</span></code> is a callback that returns the result of the call, that is, if the call is successful or not. If it cannot find the media file on the server or some other errors occur, then it return false.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">playStreamingMedia</span><span class="p">:(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">streamingMediaUrl</span> <span class="n">withCallback</span><span class="p">:(</span><span class="n">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">bool</span> <span class="n">result</span><span class="p">))</span><span class="n">completedCallback</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When you stop playing the streaming music, you must use stop(), not pause().</p>
+</div>
+<div class="section" id="playback-controls">
+<h4>Playback controls<a class="headerlink" href="#playback-controls" title="Permalink to this headline">¶</a></h4>
+<p><strong>Stop playback</strong></p>
+<p>To stop the current playback, use <code class="docutils literal"><span class="pre">stop()</span></code>. As a result. the playback status is changed to <code class="docutils literal"><span class="pre">EPlayerState_Stop</span></code>, and <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged()</span></code> delegate protocol is called if implemented.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">stop</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For example,</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It is safe to call <code class="docutils literal"><span class="pre">stop()</span></code> even if there is no on-going playback. Actually, we recommand to call <code class="docutils literal"><span class="pre">stop()</span></code> before you start to play a new audio stream.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the current playback is stopped by calling <code class="docutils literal"><span class="pre">stop()</span></code>, the playback cannot be resumed. Resuming is only possible when the playback is paused by calling <code class="docutils literal"><span class="pre">pause()</span></code>.</p>
+</div>
+<p><strong>Pause playback</strong></p>
+<p>To pause the current play, use <code class="docutils literal"><span class="pre">pause()</span></code>. As a result, the playback status is changed to <code class="docutils literal"><span class="pre">EPlayerState_Pause</span></code>, and <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged()</span></code> delegate protocol is called if implemented.</p>
+<p>The playback paused by calling <code class="docutils literal"><span class="pre">pause()</span></code> can be resumed.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">pause</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For example,</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">pause</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Resume playback</strong></p>
+<p>To resume the paused playback, use <code class="docutils literal"><span class="pre">playCAF()</span></code> with the parameter <code class="docutils literal"><span class="pre">resumeFlag</span></code> set to <code class="docutils literal"><span class="pre">true</span></code>. The API is described earlier in this section.</p>
+</div>
+</div>
+<div class="section" id="volume-control">
+<h3>Volume Control<a class="headerlink" href="#volume-control" title="Permalink to this headline">¶</a></h3>
+<p>You can set volumes in two ways – one is set volume for an individual speaker, and the other is set volume for all speakers with the same volume level. The volume level ranges from 0 (mute) to 50 (max).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Volume change funcions are all asynchronous call. That is, it takes a little time (a few milli second) for a volue change to take effect on the speakers.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When <code class="docutils literal"><span class="pre">setVolumeDevice()</span></code> is called, the average volume can be also changed. So, it is safe to retrieve the speaker volumes using VolumeLevelChanged callback (explained later) when your app calls volume control APIs.</p>
+</div>
+<div class="section" id="set-volume-to-all-speakers">
+<h4>Set volume to all speakers<a class="headerlink" href="#set-volume-to-all-speakers" title="Permalink to this headline">¶</a></h4>
+<p>Use <code class="docutils literal"><span class="pre">setVolume()</span></code> to set the same volume level to all speakers.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">setVolume</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">volume</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For example,</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="c1">// set volume level to 25 to all speakers</span>
+<span class="kd">var</span> <span class="nv">volume</span>  <span class="p">=</span> <span class="mi">25</span>
+<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">setVolume</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-volume-to-a-particular-speaker">
+<h4>Set volume to a particular speaker<a class="headerlink" href="#set-volume-to-a-particular-speaker" title="Permalink to this headline">¶</a></h4>
+<p>Use <code class="docutils literal"><span class="pre">setVolumeDevice()</span></code> to set volume to a particular speaker. You need to specify the deviceId for the speaker.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">setVolumeDevice</span><span class="p">:(</span><span class="n">long</span> <span class="n">long</span><span class="p">)</span><span class="n">deviceId</span> <span class="n">volume</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">volume</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For example,</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="c1">// set volume level to 25 to a speaker</span>
+<span class="kd">var</span> <span class="nv">volume</span>  <span class="p">=</span> <span class="mi">25</span>
+<span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">setVolumeDevice</span><span class="p">(</span><span class="n">deviceId</span> <span class="n">volume</span><span class="p">:</span><span class="n">volume</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-volume-of-all-speakers">
+<h4>Get volume of all speakers<a class="headerlink" href="#get-volume-of-all-speakers" title="Permalink to this headline">¶</a></h4>
+<p>Use <code class="docutils literal"><span class="pre">getVolume()</span></code> to get the average volume level fro all speakers.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span> <span class="n">getVolume</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For example,</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kd">var</span> <span class="nv">averageVolume</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getVolume</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-volume-of-a-particular-speaker">
+<h4>Get volume of a particular speaker<a class="headerlink" href="#get-volume-of-a-particular-speaker" title="Permalink to this headline">¶</a></h4>
+<p>Use <code class="docutils literal"><span class="pre">getDeviceVolume()</span></code> to get the volume level of a particular speaker.</p>
+<p>For example,</p>
+<blockquote>
+<div>var volume = HKWControlHandler.sharedInstance().getDeviceVolume(deviceId)</div></blockquote>
+</div>
+<div class="section" id="mute-and-unmute">
+<h4>Mute and Unmute<a class="headerlink" href="#mute-and-unmute" title="Permalink to this headline">¶</a></h4>
+<p>Use <code class="docutils literal"><span class="pre">mute()</span></code> to mute the current playback. The volume level turns to 0.</p>
+<p>Use <code class="docutils literal"><span class="pre">unmute()</span></code> to unmute the current muted playback. After <code class="docutils literal"><span class="pre">unmute()</span></code>, the volume level returns to the original volume level before <code class="docutils literal"><span class="pre">mute()</span></code> is called.</p>
+<p>Use <code class="docutils literal"><span class="pre">isMuted()</span></code> to check if the current playback is muted or not.</p>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="speakers-and-groups">
+<h2>Speakers and Groups<a class="headerlink" href="#speakers-and-groups" title="Permalink to this headline">¶</a></h2>
+<p>In HKWirelessHD SDK, a group is a collection of speakers. A group is defined as below:</p>
+<ul class="simple">
+<li>The group of a speaker is defined by specifying a group name in the speaker information as attribute.</li>
+<li>A speaker can join only one group at a time. The meaning of &#8220;joining a group&#8221; is to have the group name in its attribute.</li>
+<li>All the speakers with the same group name belong to the same group associated with the group name.</li>
+<li>The group ID is determined by following the device ID of the initial member of a group. For example, there is no group with the name &#8220;Group-A&#8221;, and Speaker-A sets the group as &#8220;Group-A&#8221;, then the GroupID is created with the deviceID of Speaker-A. After that, if Speaker-B joins Group-A, then the group name and the group ID are set by the ones that Speaker-A has.</li>
+</ul>
+<div class="section" id="change-speaker-name">
+<h3>Change speaker name<a class="headerlink" href="#change-speaker-name" title="Permalink to this headline">¶</a></h3>
+<p>Use <code class="docutils literal"><span class="pre">setDeviceName()</span></code> to change the speaker name.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You cannot set the device name by setting <code class="docutils literal"><span class="pre">deviceName</span></code> property value directly. The property is read-only.</p>
+</div>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">setDeviceName</span><span class="p">:(</span><span class="n">long</span> <span class="n">long</span><span class="p">)</span><span class="n">deviceId</span> <span class="n">deviceName</span><span class="p">:(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">deviceName</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For example,</p>
+<div class="highlight-swift"><div class="highlight"><pre>HKWControlHandler.sharedInstance().setDeviceName(deviceId, deviceName:”My Omni10”)
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While a speaker is playing audio, if the name of the speaker is changed, then the current playback is interrupted (stopped) with error. The error code and message are returned by <code class="docutils literal"><span class="pre">hkwErrorOccurred()</span></code> delegate defined in <code class="docutils literal"><span class="pre">HKWDeviceEventHandlerDelegate</span></code> protocol.</p>
+</div>
+</div>
+<div class="section" id="set-the-group-for-a-speaker">
+<h3>Set the group for a speaker<a class="headerlink" href="#set-the-group-for-a-speaker" title="Permalink to this headline">¶</a></h3>
+<p>To set a group for a speaker (in other words, to join a speaker to a group), use <code class="docutils literal"><span class="pre">setDeviceGroupName()</span></code> as below:</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">setDeviceGroupName</span><span class="p">:(</span><span class="n">long</span> <span class="n">long</span><span class="p">)</span><span class="n">deviceId</span> <span class="n">groupName</span><span class="p">:(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">groupName</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For example,</p>
+<div class="highlight-swift"><div class="highlight"><pre>HKWControlHandler.sharedInstance().setDeviceGroupName(deviceId, groupName:”Living Room”)
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you change the group name of a speaker, then the list of speakers of the group automatically changes.</p>
+</div>
+</div>
+<div class="section" id="remove-a-speaker-from-a-group">
+<h3>Remove a speaker from a group<a class="headerlink" href="#remove-a-speaker-from-a-group" title="Permalink to this headline">¶</a></h3>
+<p>Use <code class="docutils literal"><span class="pre">removeDeviceFromGroup()</span></code> to remove the speaker from the currently belonged group. After being removed from a group, the name of group of the speaker is set to <code class="docutils literal"><span class="pre">harman</span></code>, which is a default group name implying that the speaker does not belong to any group.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">removeDeviceFromGroup</span><span class="p">:(</span><span class="n">long</span> <span class="n">long</span><span class="p">)</span><span class="n">deviceId</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For example,</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">removeDeviceFromGroup</span><span class="p">(</span><span class="n">deviceId</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="delegate-apis-for-events-handling">
+<h2>Delegate APIs for events handling<a class="headerlink" href="#delegate-apis-for-events-handling" title="Permalink to this headline">¶</a></h2>
+<p>In HKWirelessHD, the communication between user’s phone and speakers are done in asynchronous way. Therefore, some API calls from HKWControlHandler can take a little time to take effects on the speaker side. Similarly, any change of status on the speaker side are reported to the phone a little time later. For example, the status of availability of a speaker can be updated a few seconds later after a speaker turns on or off.</p>
+<p>All the status update from the speaker side are reported to the phone via <strong>delegate protocols</strong>. So, your app needs to implement the delegate protocols accordingly to receive and handle the events from HKWControlHandler.</p>
+<p>There are two kinds of delegate protocols for event handling.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>HKWDeviceEventHandlerDelegate (defined in HKWDeviceEventHandlerSingleton.h)</dt>
+<dd><ul class="first last simple">
+<li>This delegate protocol defines several APIs for receiving events about status changes or error from speakers.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>HKWPlayerEventHandlerDelegate (defined in HKWPlayerEventHandlerSingleton.h)</dt>
+<dd><ul class="first last simple">
+<li>This delegate protocol defines several APIs for receiving events about playback status and volume control.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="hkwdeviceeventhandlerdelegate">
+<h3>HKWDeviceEventHandlerDelegate<a class="headerlink" href="#hkwdeviceeventhandlerdelegate" title="Permalink to this headline">¶</a></h3>
+<p><strong>hkwDeviceStateUpdated (required)</strong></p>
+<p>This function is invoked when some of device information have been changed on a particular speaker. The information being monitored incudes device status (active or inactive), model name, group name, and wifi signal strengths, etc. The parameter <code class="docutils literal"><span class="pre">reason</span></code> specifies what the update is about. The reason code is defined in HKWControlHandler.h.</p>
+<p>Note that volume level change does not trigger this call. The volume update is reported by <code class="docutils literal"><span class="pre">hkwVolumeLevelChanged()</span></code> callback.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">hkwDeviceStateUpdated</span><span class="p">:(</span><span class="n">long</span> <span class="n">long</span><span class="p">)</span><span class="n">deviceId</span> <span class="n">withReason</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span> <span class="n">reason</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This callback is essential to retrieve and update the speaker information in timely manner. If your app has a screen that shows a list of speakers available in the network with latest information, you can receive the event via this function and update the list.</p>
+<p>A most common usage for this function is to invole <code class="docutils literal"><span class="pre">tableView.reloadData()</span></code> to update the list of speakers in a table view controller, as shown below.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kd">func</span> <span class="nf">hkwDeviceStateUpdated</span><span class="p">(</span><span class="n">deviceId</span><span class="p">:</span> <span class="nb">CLongLong</span><span class="p">,</span> <span class="n">withReason</span> <span class="n">reason</span><span class="p">:</span><span class="nb">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">reloadData</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>hkwErrorOccured (required)</strong></p>
+<p>This function is invoked when an error occurs during the execution. The callback returns the error code, and also corresponding error message for detailed description. The error codes are defined in HKWCOntrolHandler.h.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span><span class="p">(</span><span class="n">void</span><span class="p">)</span> <span class="n">hkwErrorOccurred</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">errorCode</span> <span class="n">withErrorMessage</span><span class="p">:(</span><span class="bp">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">errorMesg</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>A most common usage of this function is to show an alert dialog to notice the user of the error.</p>
+<div class="section" id="hkwplayereventhandlerdelegate">
+<h4>HKWPlayerEventHandlerDelegate<a class="headerlink" href="#hkwplayereventhandlerdelegate" title="Permalink to this headline">¶</a></h4>
+<p><strong>hkwPlayEnded (required)</strong></p>
+<p>This function is invoked when the current playback has ended.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span><span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">hkwPlayEnded</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This function is useful to take any actioin when the current playback has ended.</p>
+<p><strong>hkwDeviceVolumeChanged (optional)</strong></p>
+<p>This function is invoked when volume level is changed for any speakers. It is called asynchronously right after any of SetVolume APIs are called by apps.</p>
+<p>The function delivers the device ID of the speaker with volume changed, a new device volume level, and average volume level value, as below:</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span><span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">hkwDeviceVolumeChanged</span><span class="p">:(</span><span class="n">long</span> <span class="n">long</span><span class="p">)</span><span class="n">deviceId</span> <span class="n">deviceVolume</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">deviceVolume</span> <span class="n">withAverageVolume</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">avgVolume</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When speaker volume is changed by a call to <code class="docutils literal"><span class="pre">setVolume()</span></code>, then all the speakers are set to a new volume level, and this function can be used to get the new volume level value.</p>
+</div>
+<p><strong>hkwPlaybackStateChanged (optional)</strong>
+This function is invoked when playback state is changed during the playback. The callback delivers the playState value as parameter.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span><span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">hkwPlaybackStateChanged</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">playState</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>hkwPlaybackTimeChanged (optional)</strong></p>
+<p>This function is invoked when the current playback time is changed. It is called every one second. The function parameter timeElapsed returns the time (in second) elapsed since the start of the playback. This function is useful when your app update the progress bar of the current playback.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="o">-</span><span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">hkwPlaybackTimeChanged</span><span class="p">:(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">timeElapsed</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-implement-the-delegate-protocols">
+<h4>How to implement the delegate protocols<a class="headerlink" href="#how-to-implement-the-delegate-protocols" title="Permalink to this headline">¶</a></h4>
+<p>To make your ViewController as delegate, that is, to receive the events from HKWControlHandler in your ViewController, your ViewController class has to implement the protocol by specifying the delegate protocol name in the class definition as below:</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">SpeakerListViewController</span><span class="p">:</span> <span class="bp">UIViewController</span><span class="p">,</span> <span class="bp">UITableViewDataSource</span><span class="p">,</span>
+        <span class="n">SpeakerTableCellDelegate</span><span class="p">,</span> <span class="n">HKWDeviceEventHandlerDelegate</span>  <span class="p">{</span>
+        <span class="p">...</span> <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And then, the ViewController class should set itself to <code class="docutils literal"><span class="pre">delegate</span></code> attribute of the handler singleton class as below:</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="n">HKDeviceEventHandlerSingleton</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+</pre></div>
+</div>
+<p>Note that during the runtime, only one instance of the event handler for HKWControlHandler is instantiated, so it is designed as a singleton. It can be retrieved by calling <code class="docutils literal"><span class="pre">sharedInstance()</span></code> to the class.</p>
+<p><strong>For device event handler</strong></p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="n">HKWDeviceEventHandlerSingleton</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">delegate</span>
+</pre></div>
+</div>
+<p><strong>For player event handler</strong></p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="n">HKWPlayerEventHandlerSingleton</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">delegate</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since there is only one instance of delegator for each delegate, if you set delegate in several different places of your app, then the latest setting will override the delegate value, and the previous setting will be overridden. So, you need to set the delegate every time you show a ViewController, and one right place to set the delegate is inside <code class="docutils literal"><span class="pre">viewDidAppear()</span></code> in ViewController class as shown below.</p>
+</div>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidAppear</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="nb">Bool</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">HKWDeviceEventHandlerSingleton</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+        <span class="n">HKWPlayerEventHandlerSingleton</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+
+        <span class="p">...</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/HarmanDeveloperLogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Programming Guide (iOS)</a><ul>
+<li><a class="reference internal" href="#initialization">Initialization</a><ul>
+<li><a class="reference internal" href="#initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio">Initialize HKWirelessHD Control Handler and start the Wireless Audio</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getting-the-information-of-speakers">Getting the information of speakers</a><ul>
+<li><a class="reference internal" href="#device-information">Device Information</a><ul>
+<li><a class="reference internal" href="#getting-a-speaker-device-information">Getting a speaker (device) information</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#refreshing-device-status-information">Refreshing device status information</a></li>
+<li><a class="reference internal" href="#add-or-remove-a-speaker-to-from-a-playback-session">Add or remove a speaker to/from a playback session</a><ul>
+<li><a class="reference internal" href="#add-a-speaker-to-a-session-to-play-on">Add a speaker to a session (to play on)</a></li>
+<li><a class="reference internal" href="#remove-a-speaker-from-a-session">Remove a speaker from a session</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#play-audio-file">Play Audio File</a><ul>
+<li><a class="reference internal" href="#play-caf-file-mp3-wav-etc">Play CAF file (MP3, WAV, etc.)</a></li>
+<li><a class="reference internal" href="#play-web-streaming-music">Play Web Streaming Music</a><ul>
+<li><a class="reference internal" href="#playback-controls">Playback controls</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#volume-control">Volume Control</a><ul>
+<li><a class="reference internal" href="#set-volume-to-all-speakers">Set volume to all speakers</a></li>
+<li><a class="reference internal" href="#set-volume-to-a-particular-speaker">Set volume to a particular speaker</a></li>
+<li><a class="reference internal" href="#get-volume-of-all-speakers">Get volume of all speakers</a></li>
+<li><a class="reference internal" href="#get-volume-of-a-particular-speaker">Get volume of a particular speaker</a></li>
+<li><a class="reference internal" href="#mute-and-unmute">Mute and Unmute</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#speakers-and-groups">Speakers and Groups</a><ul>
+<li><a class="reference internal" href="#change-speaker-name">Change speaker name</a></li>
+<li><a class="reference internal" href="#set-the-group-for-a-speaker">Set the group for a speaker</a></li>
+<li><a class="reference internal" href="#remove-a-speaker-from-a-group">Remove a speaker from a group</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#delegate-apis-for-events-handling">Delegate APIs for events handling</a><ul>
+<li><a class="reference internal" href="#hkwdeviceeventhandlerdelegate">HKWDeviceEventHandlerDelegate</a><ul>
+<li><a class="reference internal" href="#hkwplayereventhandlerdelegate">HKWPlayerEventHandlerDelegate</a></li>
+<li><a class="reference internal" href="#how-to-implement-the-delegate-protocols">How to implement the delegate protocols</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/iOS/programming-guide.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Harman International.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

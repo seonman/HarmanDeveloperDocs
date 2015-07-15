@@ -1,0 +1,1042 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>HKWHub App - Making your Omni speakers connected from any devices (sensors) or services &mdash; Harman Developer 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="hkwhub-app-making-your-omni-speakers-connected-from-any-devices-sensors-or-services">
+<h1>HKWHub App - Making your Omni speakers connected from any devices (sensors) or services<a class="headerlink" href="#hkwhub-app-making-your-omni-speakers-connected-from-any-devices-sensors-or-services" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview-of-hwkhub">
+<h2>Overview of HWKHub<a class="headerlink" href="#overview-of-hwkhub" title="Permalink to this headline">¶</a></h2>
+<p>HKWHub app is an iOS that that uses HKWirelessHD SDK and acts as a Web Hub that handles HTTP requests to control speakers and stream music. It enables any type of &#8220;connected&#8221; devices (like sensors or smart devices) and cloud-based service to connect HK Omni speakers and stream music.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Please note that HKWHub app is an on-going project, and not yet ready for production. We hope developers play around with this app and implement their own apps or services by integrating many other IoT devices or services and adding intelligence to the Hub app.</p>
+<p class="last">Any feedback or request for new APIs and features are always welcome.</p>
+</div>
+<div class="section" id="use-cases">
+<h3>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h3>
+<div class="figure">
+<img alt="../_images/hub-use-cases.png" src="../_images/hub-use-cases.png" />
+</div>
+</div>
+<div class="section" id="hkwhub-app">
+<h3>HKWHub App<a class="headerlink" href="#hkwhub-app" title="Permalink to this headline">¶</a></h3>
+<p>Web Hub handles all the requests from and response to the sensors or the clouds to control audio play with wireless speakers in the house.</p>
+<div class="section" id="features">
+<h4>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><dl class="first docutils">
+<dt>Supports integration with clouds and sensors as well as smartphones</dt>
+<dd><ul class="first last simple">
+<li>Receives the requests from clouds (web service) outside or sensors in the house</li>
+<li>Translates the requests into HKWirelessHD commands and controls the speakers based on the requests.</li>
+<li>Sends response with status of speakers to the cloud if necessary</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Central Music Playlist manager</dt>
+<dd><ul class="first last simple">
+<li>Maintain user’s playlist from the iOS local music library and streaming services, like MixRadio, etc.</li>
+<li>Maintain a collection of sound files used for IoT use cases, like door bell, etc.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="usage">
+<h4>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>User puts an iOS device on the cradle and run WebHub app. Then the app acts as Web Hub. (AppleTV can be a nice iOS device for WebHub.)</li>
+</ul>
+<div class="figure">
+<img alt="../_images/hub-app.png" src="../_images/hub-app.png" />
+</div>
+</div>
+</div>
+<div class="section" id="overall-architecture">
+<h3>Overall Architecture<a class="headerlink" href="#overall-architecture" title="Permalink to this headline">¶</a></h3>
+<p>Web Hub handles all the requests from and response to the sensors or the clouds to control audio play with wireless speakers in the house.</p>
+<div class="figure">
+<img alt="../_images/architecture1.png" src="../_images/architecture1.png" />
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="quick-guide-to-hkwhub-app">
+<h2>Quick Guide to HKWHub App<a class="headerlink" href="#quick-guide-to-hkwhub-app" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please check out <a class="reference external" href="https://www.youtube.com/watch?v=_ljpReAvk0g&amp;feature=youtu.be">HKWHub app demo video</a>.</p>
+</div>
+<div class="section" id="run-hkwhub-app-on-your-ios-device">
+<h3>Run HKWHub app on your iOS device<a class="headerlink" href="#run-hkwhub-app-on-your-ios-device" title="Permalink to this headline">¶</a></h3>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hub-first-run.png"><img alt="../_images/hub-first-run.png" src="../_images/hub-first-run.png" /></a>
+</div>
+<p>Copy the URL information (<a class="reference external" href="http://192.168.1.192:8080/">http://192.168.1.192:8080/</a>). This is the HTTP server address. You need to use this URL for your every REST API request.</p>
+<p>Go to Setup (via Hamburger icon) menu, and add music items from iOS Music library.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/medialist.png"><img alt="../_images/medialist.png" src="../_images/medialist.png" /></a>
+</div>
+</div>
+<div class="section" id="use-curl-command-or-web-browser-to-send-rest-requests">
+<h3>Use <code class="docutils literal"><span class="pre">curl</span></code> command or web browser to send REST requests<a class="headerlink" href="#use-curl-command-or-web-browser-to-send-rest-requests" title="Permalink to this headline">¶</a></h3>
+<p>Use <strong>curl</strong> command in your shell, or use your web browser to send  HTTP requests to the server URL. In this example, we will use <strong>curl</strong> commands.</p>
+<div class="section" id="a-init-session">
+<h4>a. Init session<a class="headerlink" href="#a-init-session" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/init_session&quot;</span></code></p>
+<p>This returns the session id.</p>
+</div>
+<div class="section" id="b-add-alls-speaker-to-session">
+<h4>b. Add alls speaker to session<a class="headerlink" href="#b-add-alls-speaker-to-session" title="Permalink to this headline">¶</a></h4>
+<p>By default, none of speakers is selected for playback at first. You need to add one or more speakers to play audio.
+To add all speakers to playback session, use <code class="docutils literal"><span class="pre">set_party_mode</span></code>. <strong>Party Mode</strong> means that all speakers are playing the same audio altogether. So, by <code class="docutils literal"><span class="pre">set_party_mode</span></code>, you can select all speakers to play.</p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/set_party_mode?SessionID=1000&quot;</span></code></p>
+</div>
+<div class="section" id="c-add-a-speaker-to-session">
+<h4>c. Add a speaker to session<a class="headerlink" href="#c-add-a-speaker-to-session" title="Permalink to this headline">¶</a></h4>
+<p>If you want to add a speaker to session, use <a href="#id1"><span class="problematic" id="id2">``</span></a>add_device_to_session`. This command does not impact other speakers regardless of their status.</p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/add_device_to_session?SessionID=1000&amp;DeviceID=&quot;34317244381360&quot;</span></code></p>
+</div>
+<div class="section" id="d-get-the-media-list">
+<h4>d. Get the media list<a class="headerlink" href="#d-get-the-media-list" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/media_list?SessionID=1000&quot;</span></code></p>
+<p>Here, SessionID should be the session id you got from <code class="docutils literal"><span class="pre">init_session</span></code>. You will get a list of media in JSON like below</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;MediaList&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;7387446959931482519&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Title&quot;</span><span class="p">:</span><span class="s2">&quot;I Will Run To You&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Artist&quot;</span><span class="p">:</span><span class="s2">&quot;Hillsong&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="mi">436</span><span class="p">,</span>
+        <span class="nt">&quot;AlbumTitle&quot;</span><span class="p">:</span><span class="s2">&quot;Simply Worship&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;5829171347867182746&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Title&quot;</span><span class="p">:</span><span class="s2">&quot;I&#39;m Yours [ORIGINAL DEMO]&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Artist&quot;</span><span class="p">:</span><span class="s2">&quot;Jason Mraz&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="mi">257</span><span class="p">,</span>
+        <span class="nt">&quot;AlbumTitle&quot;</span><span class="p">:</span><span class="s2">&quot;Wordplay [SINGLE EP]&quot;</span><span class="p">}</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="e-play-a-media-item-listed-in-the-hkwhub-app">
+<h4>e. Play a media item listed in the HKWHub app<a class="headerlink" href="#e-play-a-media-item-listed-in-the-hkwhub-app" title="Permalink to this headline">¶</a></h4>
+<p>If you want to play a media item listed in the HKWHub app, use <code class="docutils literal"><span class="pre">play_hub_media</span></code> by specifying the media item with <code class="docutils literal"><span class="pre">PersistentID</span></code>. The <code class="docutils literal"><span class="pre">PersistentID</span></code> is available from the response of <code class="docutils literal"><span class="pre">media_list</span></code> command.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that, before calling <code class="docutils literal"><span class="pre">play_hub_media</span></code>, at least one or more speakers must be selected (added to session) in advance. If not, then the playback will fail.</p>
+</div>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/play_hub_media?SessionID=1000&amp;PersistentID=5829171347867182746&quot;</span></code></p>
+</div>
+<div class="section" id="f-play-a-media-item-in-the-hkwhub-by-specifying-a-speaker-list-to-play">
+<h4>f. Play a media item in the HKWHub by specifying a speaker list to play<a class="headerlink" href="#f-play-a-media-item-in-the-hkwhub-by-specifying-a-speaker-list-to-play" title="Permalink to this headline">¶</a></h4>
+<p>You can play a media item in the HKWHub app by specifying the list of speakers.</p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/play_hub_media_selected_speakers?SessionID=1000&amp;PersistentID=5829171347867182746&amp;DeviceIDList=34317244381360,129321920968880&quot;</span></code></p>
+<p>The list of speakers are listed by the parameter <code class="docutils literal"><span class="pre">DeviceIDList</span></code> with delimitor &#8221;,&#8221;.</p>
+</div>
+<div class="section" id="g-play-a-http-streaming-media">
+<h4>g. Play a HTTP streaming media<a class="headerlink" href="#g-play-a-http-streaming-media" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/play_web_media?SessionID=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3&quot;</span></code></p>
+</div>
+<div class="section" id="h-stop-playing">
+<h4>h. Stop playing<a class="headerlink" href="#h-stop-playing" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/stop_play?SessionID=1000&quot;</span></code></p>
+</div>
+<div class="section" id="i-set-volume">
+<h4>i. Set Volume<a class="headerlink" href="#i-set-volume" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/set_volume?SessionID=1000&amp;Volume=30&quot;</span></code></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please see the REST API specification for more information and examples.</p>
+</div>
+</div>
+</div>
+<div class="section" id="use-webhubwebapp-to-play-music">
+<h3>Use <code class="docutils literal"><span class="pre">WebHubWebApp</span></code> to play music<a class="headerlink" href="#use-webhubwebapp-to-play-music" title="Permalink to this headline">¶</a></h3>
+<p>The source code of HKWHub app also contains a Web app to test the Hub app. The UI is created using Polymer v0.5 (<a class="reference external" href="https://www.polymer-project.org/0.5/">https://www.polymer-project.org/0.5/</a>).</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Unzip WebHubWebApp.zip. You will see the following sub directories.</dt>
+<dd><ul class="first last simple">
+<li>bower_components : This is the folder for polymer library</li>
+<li>hkwhub : this is the folder containing the WebHubApp that we will run.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-shell"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>WebHubWebApp
+<span class="nv">$ </span>python -m SimpleHTTPServer
+</pre></div>
+</div>
+<p>You will get some log messages like &#8220;Serving HTTP on 0.0.0.0 port 8000 ...&#8221;</p>
+<p>Next, launch your web browser (Chrome, Safari, ...) and go to <a class="reference external" href="http://localhost:8000/hkwhub/">http://localhost:8000/hkwhub/</a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Your iOS device running HKWHub app and your Desktop PC running web browser should be in the same network.</p>
+</div>
+<p>At the fist screen looking like this:</p>
+<div class="figure">
+<img alt="../_images/hub-first-screen.png" src="../_images/hub-first-screen.png" />
+</div>
+<p>Enter the URL that the HKWHub app says: <a class="reference external" href="http://192.168.1.192:8080/">http://192.168.1.192:8080/</a>, like this:</p>
+<div class="figure">
+<img alt="../_images/hub-enter-url.png" src="../_images/hub-enter-url.png" />
+</div>
+<p>If you press <strong>Submit</strong>, then you will see the first screen like below. This is the list of media items available at the HKWHub app.</p>
+<div class="figure">
+<img alt="../_images/hub-playlist.png" src="../_images/hub-playlist.png" />
+</div>
+<p>Now you can click one of items to play audio, and then move to <strong>Media Player</strong> tab to control playback (pause/resume/stop) and control volume.</p>
+<div class="figure">
+<img alt="../_images/hub-media-player.png" src="../_images/hub-media-player.png" />
+</div>
+<p>In <strong>Speaker List</strong> tab, you can select and turn on/off speaker.</p>
+<div class="figure">
+<img alt="../_images/hub-speaker-list.png" src="../_images/hub-speaker-list.png" />
+</div>
+</div>
+</div>
+<div class="section" id="session-management">
+<h2>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h2>
+<p>Since the HKWHub app should be able to handle REST HTTP requests from more than one clients at the same time, the HKWHub app manages the requests with session information associated with the priority when the session is initialized.</p>
+<p>The following is the policy of the session management:</p>
+<div class="section" id="session-creation">
+<h3>Session Creation<a class="headerlink" href="#session-creation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>When a client wants to access speakers through the HKWHub app, it must create a session first. (Use <code class="docutils literal"><span class="pre">init_session</span></code> command.)</li>
+<li>When a client initializes session, it also sets the priority of the session (using <code class="docutils literal"><span class="pre">Priority=&lt;priority</span> <span class="pre">value&gt;</span></code> parameter).</li>
+</ul>
+</div>
+<div class="section" id="priority-of-session">
+<h3>Priority of Session<a class="headerlink" href="#priority-of-session" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Each session is associated with a priority value which will be used to determine which request can override the current on-going playback session.</p>
+</li>
+<li><dl class="first docutils">
+<dt>The priority value is specified as parameter (<code class="docutils literal"><span class="pre">Priority</span></code>) when the client calls <code class="docutils literal"><span class="pre">init_session</span></code>.</dt>
+<dd><ul class="first last simple">
+<li>If the command does not specify the Priority parameter, 100 is set as default value.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>If the priority of the session of a new playback request, such as <code class="docutils literal"><span class="pre">play_hub_media</span></code> or <code class="docutils literal"><span class="pre">play_web_media</span></code>, and so on, is greater than or equal to the priority of the current session, then it interrupts the current playback session, that is, stops the current playback session and start a new playback for itself.</dt>
+<dd><ul class="first last simple">
+<li>The playback status of the interrupted session becomes <code class="docutils literal"><span class="pre">PlayerStateStopped</span></code>. (see the related API in the next section)</li>
+<li>Even if a session is interrupted by a higher or equal priority playback request, the session is still valid. So, it can continue to send requests with the session id.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The following diagrams show how HKWHub app handles incoming playback request based on the session priorities.</p>
+<div class="figure">
+<img alt="Session management flow diagram" src="../_images/session-management.png" />
+</div>
+</div>
+<div class="section" id="session-timeout">
+<h3>Session Timeout<a class="headerlink" href="#session-timeout" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>A session becomes expired and invalid when about 60 minutes is passed since the last command was received.</li>
+<li>All requests with expired session will be denied and &#8220;SessionNotFound&#8221; error returns.</li>
+</ul>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="rest-api-specification">
+<h2>REST API Specification<a class="headerlink" href="#rest-api-specification" title="Permalink to this headline">¶</a></h2>
+<p>This specification describes the REST API for controlling HKWHub app remotely to control HK Omni speakers and stream audio to the speakers.</p>
+<p>All the APIS are in REST API protocol.</p>
+<div class="section" id="id3">
+<h3>Session Management<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="start-session">
+<h4>Start Session<a class="headerlink" href="#start-session" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/init_session?Priority=&lt;priority value&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns a unique session id</li>
+<li>The session id will be used for upcoming requests.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/init_session?Priority=100</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;SessionID&quot;</span> <span class="p">:</span> <span class="s2">&quot;1000&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="close-session">
+<h4>Close Session<a class="headerlink" href="#close-session" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/close_session?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns true or false indicating success or failure</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/close_session?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span> <span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="device-management">
+<h3>Device Management<a class="headerlink" href="#device-management" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="get-device-cound">
+<h4>Get device cound<a class="headerlink" href="#get-device-cound" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/device_count?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns the number of devices connected to the network</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/device_count?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;DeviceCount&quot;</span><span class="p">:</span><span class="s2">&quot;2&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="get-the-list-of-devices-and-their-information">
+<h4>Get the list of Devices and their information<a class="headerlink" href="#get-the-list-of-devices-and-their-information" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/device_list?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns the list of devices with all the device information</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/device_list?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;DeviceList&quot;</span><span class="p">:</span>
+        <span class="p">[{</span><span class="nt">&quot;GroupName&quot;</span><span class="p">:</span><span class="s2">&quot;Bathroom&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Role&quot;</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span>
+        <span class="nt">&quot;MacAddress&quot;</span><span class="p">:</span><span class="s2">&quot;b0:38:29:1b:36:1f&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;WifiSignalStrength&quot;</span><span class="p">:</span><span class="mi">-47</span><span class="p">,</span>
+        <span class="nt">&quot;Port&quot;</span><span class="p">:</span><span class="mi">44055</span><span class="p">,</span>
+        <span class="nt">&quot;Active&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;DeviceName&quot;</span><span class="p">:</span><span class="s2">&quot;Adapt1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="s2">&quot;0.1.6.2&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;ModelName&quot;</span><span class="p">:</span><span class="s2">&quot;Omni Adapt&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;IPAddress&quot;</span><span class="p">:</span><span class="s2">&quot;192.168.1.40&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="s2">&quot;3431724438&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="mi">47</span><span class="p">,</span>
+        <span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;DeviceID&quot;</span><span class="p">:</span><span class="s2">&quot;34317244381360&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span><span class="nt">&quot;GroupName&quot;</span><span class="p">:</span><span class="s2">&quot;Temp&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Role&quot;</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span>
+        <span class="nt">&quot;MacAddress&quot;</span><span class="p">:</span><span class="s2">&quot;b0:38:29:1b:9e:75&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;WifiSignalStrength&quot;</span><span class="p">:</span><span class="mi">-53</span><span class="p">,</span>
+        <span class="nt">&quot;Port&quot;</span><span class="p">:</span><span class="mi">44055</span><span class="p">,</span>
+        <span class="nt">&quot;Active&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&quot;DeviceName&quot;</span><span class="p">:</span><span class="s2">&quot;Adapt&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="s2">&quot;0.1.6.2&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;ModelName&quot;</span><span class="p">:</span><span class="s2">&quot;Omni Adapt&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;IPAddress&quot;</span><span class="p">:</span><span class="s2">&quot;192.168.1.39&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="s2">&quot;1293219209&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="mi">47</span><span class="p">,</span>
+        <span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;DeviceID&quot;</span><span class="p">:</span><span class="s2">&quot;129321920968880&quot;</span>
+        <span class="p">}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="get-the-device-information">
+<h4>Get the Device Information<a class="headerlink" href="#get-the-device-information" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/device_info?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns the information of the device</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/device_info?SessionID=1000&amp;DeviceID=129321920968880</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;GroupName&quot;</span><span class="p">:</span><span class="s2">&quot;Temp&quot;</span><span class="p">,</span>
+<span class="nt">&quot;Role&quot;</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span>
+<span class="nt">&quot;MacAddress&quot;</span><span class="p">:</span><span class="s2">&quot;b0:38:29:1b:9e:75&quot;</span><span class="p">,</span>
+<span class="nt">&quot;WifiSignalStrength&quot;</span><span class="p">:</span><span class="mi">-52</span><span class="p">,</span>
+<span class="nt">&quot;Port&quot;</span><span class="p">:</span><span class="mi">44055</span><span class="p">,</span>
+<span class="nt">&quot;Active&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+<span class="nt">&quot;DeviceName&quot;</span><span class="p">:</span><span class="s2">&quot;Adapt&quot;</span><span class="p">,</span>
+<span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="s2">&quot;0.1.6.2&quot;</span><span class="p">,</span>
+<span class="nt">&quot;ModelName&quot;</span><span class="p">:</span><span class="s2">&quot;Omni Adapt&quot;</span><span class="p">,</span>
+<span class="nt">&quot;IPAddress&quot;</span><span class="p">:</span><span class="s2">&quot;192.168.1.39&quot;</span><span class="p">,</span>
+<span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="s2">&quot;1293219209&quot;</span><span class="p">,</span>
+<span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="mi">47</span><span class="p">,</span>
+<span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+<span class="nt">&quot;DeviceID&quot;</span><span class="p">:</span><span class="s2">&quot;129321920968880&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="add-a-device-to-session">
+<h4>Add a Device to Session<a class="headerlink" href="#add-a-device-to-session" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/add_device_tosession?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns true or false</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/add_device_to_session?SessionID=1000&amp;DeviceID=129321920968880</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="remove-a-device-from-session">
+<h4>Remove a Device from Session<a class="headerlink" href="#remove-a-device-from-session" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/remove_device_from_session?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns true or false</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/remove_device_from_session?SessionID=1000&amp;DeviceID=129321920968880</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="media-playback-management">
+<h3>Media Playback Management<a class="headerlink" href="#media-playback-management" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="get-the-list-of-stored-media">
+<h4>Get the list of stored media<a class="headerlink" href="#get-the-list-of-stored-media" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/media_list?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns JSON of the list of store media in the HKWHub app.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/media_list?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;MediaList&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;7387446959931482519&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Title&quot;</span><span class="p">:</span><span class="s2">&quot;I Will Run To You&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Artist&quot;</span><span class="p">:</span><span class="s2">&quot;Hillsong&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="mi">436</span><span class="p">,</span>
+        <span class="nt">&quot;AlbumTitle&quot;</span><span class="p">:</span><span class="s2">&quot;Simply Worship&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;5829171347867182746&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Title&quot;</span><span class="p">:</span><span class="s2">&quot;I&#39;m Yours [ORIGINAL DEMO]&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Artist&quot;</span><span class="p">:</span><span class="s2">&quot;Jason Mraz&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="mi">257</span><span class="p">,</span>
+        <span class="nt">&quot;AlbumTitle&quot;</span><span class="p">:</span><span class="s2">&quot;Wordplay [SINGLE EP]&quot;</span><span class="p">}</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="play-a-song-in-the-hub-device">
+<h4>Play a Song in the Hub Device<a class="headerlink" href="#play-a-song-in-the-hub-device" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/play_hub_media?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Play a song stored in the hub, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/play_hub_media?SessionID=1000&amp;PersistentID=7387446959931482519</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="play-a-song-from-web-server">
+<h4>Play a Song from Web Server<a class="headerlink" href="#play-a-song-from-web-server" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/play_web_media?SessionID=&lt;session id&gt;&amp;MediaUrl=&lt;URL of the song&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Play a song from HTTP server, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/play_web_media?SessionID=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This API call takes several hundreds millisecond to return the response.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="pause-the-current-playback">
+<h4>Pause the Current Playback<a class="headerlink" href="#pause-the-current-playback" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/pause_play?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Pause the current playback, and then return true or false.</li>
+<li>It can resume the current playback by calling <code class="docutils literal"><span class="pre">resume_hub_media</span></code> if and only if the playback is playing hub media. <code class="docutils literal"><span class="pre">play_web_media</span></code> cannot be resumed once it is paused or stopped.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/pause_play?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="resume-the-current-playback-with-hub-media">
+<h4>Resume the Current Playback with Hub Media<a class="headerlink" href="#resume-the-current-playback-with-hub-media" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/resume_hub_media?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Resume the current playback with Hub Media, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/resume_hub_media?SessionID=1000&amp;PersistentID=7387446959931482519</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="stop-the-current-playback">
+<h4>Stop the Current Playback<a class="headerlink" href="#stop-the-current-playback" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/stop_play?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Stop the current playback with Hub Media, and then return true or false.</li>
+<li>If the playback has stopped, then it cannot resume.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/stop_play?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="get-the-playback-status-current-playback-state-and-elapsed-time">
+<h4>Get the Playback Status (Current Playback State and Elapsed Time)<a class="headerlink" href="#get-the-playback-status-current-playback-state-and-elapsed-time" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/playback_status?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last">
+<li><p class="first">It returns the current state of the playback and also return the elapsed time (in second) of the playback.</p>
+</li>
+<li><p class="first">If it is not playing, then the elapsed time is (-1)</p>
+</li>
+<li><dl class="first docutils">
+<dt>The following is the value of each playback state:</dt>
+<dd><ul class="first last simple">
+<li>PlayerStateInitialized : Play is ready</li>
+<li>PlayerStatePlaying : Now playing audio</li>
+<li>PlayerStatePaused : Playing is paused. It can resume.</li>
+<li>PlayerStateStopped : Playing is stopped. It cannot resume.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Note that if the playback has stopped, then it cannot resume.</p>
+</li>
+<li><p class="first">Developers need to check the playback status during the playback to handle any possible exceptional cases like interruption or errors. We recommedn to call this API every second.</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/playback_status?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;PlaybackState&quot;</span><span class="p">:</span><span class="s2">&quot;PlayerStatePlaying&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;TimeElapsed&quot;</span><span class="p">:</span><span class="s2">&quot;15&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="check-if-the-hub-is-playing-audio">
+<h4>Check if the Hub is playing audio<a class="headerlink" href="#check-if-the-hub-is-playing-audio" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/is_playing?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns true (playing) or false (not playing)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/is_playing?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="volume-control">
+<h3>Volume Control<a class="headerlink" href="#volume-control" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="get-volume-for-all-devices">
+<h4>Get Volume for all Devices<a class="headerlink" href="#get-volume-for-all-devices" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/get_volume?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns the average volume of all devices.</li>
+<li>The range of volume is 0 (muted) to 50 (max)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/get_volume?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="s2">&quot;10&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="get-volume-for-a-particular-device">
+<h4>Get Volume for a particular device<a class="headerlink" href="#get-volume-for-a-particular-device" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/get_volume_device?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns the  volume of a particular device</li>
+<li>The range of volume is 0 (muted) to 50 (max)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/get_volume_device?SessionID=1000&amp;DeviceID=1234567</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="s2">&quot;10&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="set-volume-for-all-devices">
+<h4>Set Volume for all devices<a class="headerlink" href="#set-volume-for-all-devices" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/set_volume?SessionID=&lt;session id&gt;&amp;Volume=&lt;volume&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns true or false</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/set_volume?SessionID=1000&amp;Volume=10</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="set-volume-for-a-particular-device">
+<h4>Set Volume for a particular device<a class="headerlink" href="#set-volume-for-a-particular-device" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/set_volume_device?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;&amp;Volume=&lt;volume&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns true or false</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/set_volume_device?SessionID=1000&amp;DeviceID=1234567&amp;Volume=10</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/HarmanDeveloperLogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">HKWHub App - Making your Omni speakers connected from any devices (sensors) or services</a><ul>
+<li><a class="reference internal" href="#overview-of-hwkhub">Overview of HWKHub</a><ul>
+<li><a class="reference internal" href="#use-cases">Use Cases</a></li>
+<li><a class="reference internal" href="#hkwhub-app">HKWHub App</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#overall-architecture">Overall Architecture</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quick-guide-to-hkwhub-app">Quick Guide to HKWHub App</a><ul>
+<li><a class="reference internal" href="#run-hkwhub-app-on-your-ios-device">Run HKWHub app on your iOS device</a></li>
+<li><a class="reference internal" href="#use-curl-command-or-web-browser-to-send-rest-requests">Use <code class="docutils literal"><span class="pre">curl</span></code> command or web browser to send REST requests</a><ul>
+<li><a class="reference internal" href="#a-init-session">a. Init session</a></li>
+<li><a class="reference internal" href="#b-add-alls-speaker-to-session">b. Add alls speaker to session</a></li>
+<li><a class="reference internal" href="#c-add-a-speaker-to-session">c. Add a speaker to session</a></li>
+<li><a class="reference internal" href="#d-get-the-media-list">d. Get the media list</a></li>
+<li><a class="reference internal" href="#e-play-a-media-item-listed-in-the-hkwhub-app">e. Play a media item listed in the HKWHub app</a></li>
+<li><a class="reference internal" href="#f-play-a-media-item-in-the-hkwhub-by-specifying-a-speaker-list-to-play">f. Play a media item in the HKWHub by specifying a speaker list to play</a></li>
+<li><a class="reference internal" href="#g-play-a-http-streaming-media">g. Play a HTTP streaming media</a></li>
+<li><a class="reference internal" href="#h-stop-playing">h. Stop playing</a></li>
+<li><a class="reference internal" href="#i-set-volume">i. Set Volume</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#use-webhubwebapp-to-play-music">Use <code class="docutils literal"><span class="pre">WebHubWebApp</span></code> to play music</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#session-management">Session Management</a><ul>
+<li><a class="reference internal" href="#session-creation">Session Creation</a></li>
+<li><a class="reference internal" href="#priority-of-session">Priority of Session</a></li>
+<li><a class="reference internal" href="#session-timeout">Session Timeout</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rest-api-specification">REST API Specification</a><ul>
+<li><a class="reference internal" href="#id3">Session Management</a><ul>
+<li><a class="reference internal" href="#start-session">Start Session</a></li>
+<li><a class="reference internal" href="#close-session">Close Session</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#device-management">Device Management</a><ul>
+<li><a class="reference internal" href="#get-device-cound">Get device cound</a></li>
+<li><a class="reference internal" href="#get-the-list-of-devices-and-their-information">Get the list of Devices and their information</a></li>
+<li><a class="reference internal" href="#get-the-device-information">Get the Device Information</a></li>
+<li><a class="reference internal" href="#add-a-device-to-session">Add a Device to Session</a></li>
+<li><a class="reference internal" href="#remove-a-device-from-session">Remove a Device from Session</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#media-playback-management">Media Playback Management</a><ul>
+<li><a class="reference internal" href="#get-the-list-of-stored-media">Get the list of stored media</a></li>
+<li><a class="reference internal" href="#play-a-song-in-the-hub-device">Play a Song in the Hub Device</a></li>
+<li><a class="reference internal" href="#play-a-song-from-web-server">Play a Song from Web Server</a></li>
+<li><a class="reference internal" href="#pause-the-current-playback">Pause the Current Playback</a></li>
+<li><a class="reference internal" href="#resume-the-current-playback-with-hub-media">Resume the Current Playback with Hub Media</a></li>
+<li><a class="reference internal" href="#stop-the-current-playback">Stop the Current Playback</a></li>
+<li><a class="reference internal" href="#get-the-playback-status-current-playback-state-and-elapsed-time">Get the Playback Status (Current Playback State and Elapsed Time)</a></li>
+<li><a class="reference internal" href="#check-if-the-hub-is-playing-audio">Check if the Hub is playing audio</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#volume-control">Volume Control</a><ul>
+<li><a class="reference internal" href="#get-volume-for-all-devices">Get Volume for all Devices</a></li>
+<li><a class="reference internal" href="#get-volume-for-a-particular-device">Get Volume for a particular device</a></li>
+<li><a class="reference internal" href="#set-volume-for-all-devices">Set Volume for all devices</a></li>
+<li><a class="reference internal" href="#set-volume-for-a-particular-device">Set Volume for a particular device</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/iOS/hkwhub-spec.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Harman International.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

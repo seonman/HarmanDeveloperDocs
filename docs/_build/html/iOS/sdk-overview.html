@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Overview of HKWirelessHD SDK (iOS) &mdash; Harman Developer 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="overview-of-hkwirelesshd-sdk-ios">
+<h1>Overview of HKWirelessHD SDK (iOS)<a class="headerlink" href="#overview-of-hkwirelesshd-sdk-ios" title="Permalink to this headline">¶</a></h1>
+<p>The Harman Kardon WirelessHD (HKWirelessHD) SDK is provided for iOS 3rd party developers to communicate with Harman/Kardon Omni Series audio/video devices. The intent of this SDK is to provide the tools and libraries necessary to build, test and deploy the latest audio applications on the iOS platform.</p>
+<div class="section" id="what-s-included">
+<h2>What&#8217;s Included<a class="headerlink" href="#what-s-included" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>HKWirelessHD library and header files</dt>
+<dd><ul class="first last simple">
+<li>We provide two versions of SDK - a normal version and a lightweight version. See below for the information.</li>
+<li>The reason we support the SDK as two separate version is that we know that many developers want a feature of web streaming. To support this feature, we need to include a version of FFMPEG library inside of the SDK library. But, some developers may want to use their own version of MMPEG to handle audio stream for some particular reasons. We describe more about these two versions in the <a class="reference external" href="getting-started-iOS.html">Getting Started (iOS)</a>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">License Agreement.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Sample Application source code Located within the Sample Apps page:</dt>
+<dd><ul class="first last simple">
+<li>Page app</li>
+<li>Wake app</li>
+<li>Timer app</li>
+<li>HKWPlayer app with Apple Watch app support</li>
+<li>HKWHub app</li>
+<li>HKWSimple app</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>The HKWirelessHD SDK requires the lastest iOS (8.4 as of writing this) for iPhone or iPad devices.
+Xcode 6.4 (supporting iOS8.4) or later is required for building HKWirelessHD enabled iOS apps with Apple Watch app support.</p>
+</div>
+<div class="section" id="demo-applications">
+<h2>Demo Applications<a class="headerlink" href="#demo-applications" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hk-page-app">
+<h3>HK Page app<a class="headerlink" href="#hk-page-app" title="Permalink to this headline">¶</a></h3>
+<p>The Page app records user’s voice and broadcasts it to a set of selected speakers in the network. User can select speakers individually or select rooms. The Page app also contain House Alert feature that broadcast an alarm sound like siren to all of the speakers in the network.</p>
+<p>The application also has a feature for changing the speaker information, like speaker name, group name, taking a note, and so on.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/page-app-1.png"><img alt="../_images/page-app-1.png" src="../_images/page-app-1.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/page-app-2.png"><img alt="../_images/page-app-2.png" src="../_images/page-app-2.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/page-app-3.png"><img alt="../_images/page-app-3.png" src="../_images/page-app-3.png" /></a>
+</div>
+</div>
+<div class="section" id="hk-wake-app">
+<h3>HK Wake app<a class="headerlink" href="#hk-wake-app" title="Permalink to this headline">¶</a></h3>
+<p>Wake app is a kind of Alarm clock. Instead of playing an alarm sound on your phone, the app play a song over the Omni speakers in the network. User can select a set of individual speakers or room to play the alarm sound with.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/wake-app-1.png"><img alt="../_images/wake-app-1.png" src="../_images/wake-app-1.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/wake-app-2.png"><img alt="../_images/wake-app-2.png" src="../_images/wake-app-2.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/wake-app-3.png"><img alt="../_images/wake-app-3.png" src="../_images/wake-app-3.png" /></a>
+</div>
+</div>
+<div class="section" id="hk-time-app">
+<h3>HK Time app<a class="headerlink" href="#hk-time-app" title="Permalink to this headline">¶</a></h3>
+<p>Time (Timer) app is a kind of timer app. Instead of playing a beep sound on your phone, the app plays a predefined song over the Omni speakers in the network. User can select a set of individual speakers or room to play the alarm sound with.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/time-app-1.png"><img alt="../_images/time-app-1.png" src="../_images/time-app-1.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/time-app-2.png"><img alt="../_images/time-app-2.png" src="../_images/time-app-2.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/time-app-3.png"><img alt="../_images/time-app-3.png" src="../_images/time-app-3.png" /></a>
+</div>
+</div>
+<div class="section" id="hkwplayer-app-with-apple-watch-support">
+<h3>HKWPlayer app with Apple Watch support<a class="headerlink" href="#hkwplayer-app-with-apple-watch-support" title="Permalink to this headline">¶</a></h3>
+<p>HKWPlayer is a sample music player app that plays MP3 audio files with Omni speakers wirelessly. You can create and manage a playlist of MP3 titles from iOS Music app library, and play songs over the Omni speakers in the network. The purpose of the app is to demonstrate the key features of the HKWirelessHD SDK.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwplayer-app-1.png"><img alt="../_images/hkwplayer-app-1.png" src="../_images/hkwplayer-app-1.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwplayer-app-2.png"><img alt="../_images/hkwplayer-app-2.png" src="../_images/hkwplayer-app-2.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwplayer-app-3.png"><img alt="../_images/hkwplayer-app-3.png" src="../_images/hkwplayer-app-3.png" /></a>
+</div>
+<p>HKWPlayer app also support Apple Watch app. If user installs the HKWPlayer app on the iPhone and enable &#8220;Show App on Apple Watch&#8221; option in Apple Watch app, then the corresponding watch app will appear in the menu screen of Apple Watch.</p>
+<p>The companion watch app is provided as Watch App Extension within a single iOS App package. The Watch app extension communicates with the main iOS app (e.g. HKWPlayer app) for control command and response, and share the playlist and the device status for rendering the menu.</p>
+<p>The implementation note for Watch App support will be available at the developer community web site shortly.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwplayer-watch-1.png"><img alt="../_images/hkwplayer-watch-1.png" src="../_images/hkwplayer-watch-1.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwplayer-watch-2.png"><img alt="../_images/hkwplayer-watch-2.png" src="../_images/hkwplayer-watch-2.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwplayer-watch-3.png"><img alt="../_images/hkwplayer-watch-3.png" src="../_images/hkwplayer-watch-3.png" /></a>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You should replace the bundle id of the HKWPlayer app with yours. Otherwise, Xcode will not build the binary of the app. Just try to search for all the string &#8220;com.harman.dev&#8221; in your Xcode project, and replace them with your bundle ID prefix, for example, &#8220;com.somebody&#8221;. And also, for Apple Watch extension, you need to set App Groups. Please go to TARGETS &gt; HKWPlayer &gt; Capabilities &gt; App Groups, and then set App Groups with your own bundle ID prefix, e.g. &#8220;group.com.somebody.hkwplayer&#8221;. The same thing should be done for HKWPlayer WatchKit Extension target as well.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please check out <a class="reference external" href="https://www.youtube.com/watch?v=M7AtKfPHfXM">Apple Watch demo video</a> as well.</p>
+</div>
+</div>
+<div class="section" id="hkwhub-app-hub-for-iot-integration">
+<h3>HKWHub App (Hub for IoT Integration)<a class="headerlink" href="#hkwhub-app-hub-for-iot-integration" title="Permalink to this headline">¶</a></h3>
+<p>HKWHub app is an iOS app that uses HKWirelessHD SDK and acts as a Web Hub that handles HTTP requests to control speakers and stream music. It enables any types of connected devices (e.g. sensors or smart devices like tablet, smart TV, etc.) and cloud-based services (e.g. SmartThings) to connect HK Omni speakers and stream music. HKWHub runs a web server inside that handles HTTP requests of REST API.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please refer to <a class="reference external" href="http://harmandeveloperdocs.readthedocs.org/en/latest/hkwhub-spec.html">HKWHub App</a> section of the documentation page for the REST API specification and other information.</p>
+</div>
+<p>User can add songs or sound file from iOS Music app to the media list, so that client devices can access the list and play media in the list remotely by sending REST API request to the Hub app. For example, a door open/close sensor can send REST API request to play &#8216;dog-barking&#8217; sound in the media list of the HKWHub app.</p>
+<p>The following images are the screen captures of HKWHub app.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwhub-1.png"><img alt="../_images/hkwhub-1.png" src="../_images/hkwhub-1.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwhub-2.png"><img alt="../_images/hkwhub-2.png" src="../_images/hkwhub-2.png" /></a>
+</div>
+<p>We also created a sample HTML5 app working as a client of the HKWHub app. The HTML5 app uses AJAX to send REST API requests to the HKWHub app to control speakers and stream music. The UI of the HTML5 app is based on Google&#8217;s Polymer v0.5 (<a class="reference external" href="https://www.polymer-project.org/0.5/">https://www.polymer-project.org/0.5/</a>).</p>
+<p>The following images are the screen captures of the HTML5 app.</p>
+<div class="figure">
+<img alt="../_images/webhub-1.png" src="../_images/webhub-1.png" />
+</div>
+<div class="figure">
+<img alt="../_images/webhub-2.png" src="../_images/webhub-2.png" />
+</div>
+<div class="figure">
+<img alt="../_images/webhub-3.png" src="../_images/webhub-3.png" />
+</div>
+</div>
+<div class="section" id="hkwsimple-a-very-simple-music-player-for-getting-started-with-hkwirelesshdsdk">
+<h3>HKWSimple (a very simple music player for getting started with HKWirelessHDSDK)<a class="headerlink" href="#hkwsimple-a-very-simple-music-player-for-getting-started-with-hkwirelesshdsdk" title="Permalink to this headline">¶</a></h3>
+<p>HKWSimple app is a simple music player that was created to explain how to create an app with HKWirelessHD SDK. This app is very simple, but contains key features of HKWirelessHDSDK, such as, manage speakers, control audio playback and volume, play local media files and also web streaming audio, and so on.</p>
+<p>Just get started with the HKWSimple app to quickly build your own HKWirelessHD app!</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwsimple-11.png"><img alt="../_images/hkwsimple-11.png" src="../_images/hkwsimple-11.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwsimple-2.png"><img alt="../_images/hkwsimple-2.png" src="../_images/hkwsimple-2.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwsimple-3.png"><img alt="../_images/hkwsimple-3.png" src="../_images/hkwsimple-3.png" /></a>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/HarmanDeveloperLogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Overview of HKWirelessHD SDK (iOS)</a><ul>
+<li><a class="reference internal" href="#what-s-included">What&#8217;s Included</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#demo-applications">Demo Applications</a><ul>
+<li><a class="reference internal" href="#hk-page-app">HK Page app</a></li>
+<li><a class="reference internal" href="#hk-wake-app">HK Wake app</a></li>
+<li><a class="reference internal" href="#hk-time-app">HK Time app</a></li>
+<li><a class="reference internal" href="#hkwplayer-app-with-apple-watch-support">HKWPlayer app with Apple Watch support</a></li>
+<li><a class="reference internal" href="#hkwhub-app-hub-for-iot-integration">HKWHub App (Hub for IoT Integration)</a></li>
+<li><a class="reference internal" href="#hkwsimple-a-very-simple-music-player-for-getting-started-with-hkwirelesshdsdk">HKWSimple (a very simple music player for getting started with HKWirelessHDSDK)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/iOS/sdk-overview.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Harman International.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

@@ -42,14 +42,14 @@ This documentation is organized into a few different chapters:
     Version History
 	
 	
-.. _SDK Overview: sdk-overview.html
-.. _Getting Started (iOS): getting-started-iOS.html
-.. _Programming Guide: programming-guide.html
-.. _Architecture Overview: architecture-overview.html
-.. _API Documentation: api.html
-.. _HKWHub Specification: hkwhub-spec.html
-.. _Troubleshooting: trouble-shooting.html
-.. _Version History: version-history.html
+.. _SDK Overview: iOS/sdk-overview.html
+.. _Getting Started (iOS): iOS/getting-started-iOS.html
+.. _Programming Guide: iOS/programming-guide.html
+.. _Architecture Overview: iOS/architecture-overview.html
+.. _API Documentation: iOS/api.html
+.. _HKWHub Specification: iOS/hkwhub-spec.html
+.. _Troubleshooting: iOS/trouble-shooting.html
+.. _Version History: iOS/version-history.html
 
 Contents
 --------

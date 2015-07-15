@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Architecture Overview &mdash; Harman Developer 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="architecture-overview">
+<h1>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="overall-configuration">
+<h3>Overall Configuration<a class="headerlink" href="#overall-configuration" title="Permalink to this headline">¶</a></h3>
+<p>There are two types of entities in HKWirelessHD audio streaming - one is source device and the other is destination device. Source device sends audio stream to destination devices (speakers), and destination devices receive the audio stream from source and play it. In HKWirelessHD audio, audio streaming is in a one-to-many way. That is, there is one single source device sending an audio stream, and multiple destination devices receive the audio stream by synchronizing with other speakers.</p>
+<p>In case of multi-channel streaming, each speaker is assigned with a role to process a dedicated audio channel. For example, a speaker can play either left channel or right channel in stereo mode.</p>
+<p>Source device can be iOS device, such as iPhone and iPad, and destination devices are Harman Kardon Omni speakers (Omni Adapt, Omni 10, Omni 20, Omni Bar, etc.) You can find more information on HK Omni speakers at <a class="reference external" href="http://www.harmankardon.com/content?ContentID=omni-v2">http://www.harmankardon.com/content?ContentID=omni-v2</a>.</p>
+<div class="figure">
+<img alt="../_images/architecture.png" src="../_images/architecture.png" />
+</div>
+</div>
+<div class="section" id="use-of-hkwirelesshd-api-to-stream-audio-to-omni-speakers">
+<h3>Use of HKWirelessHD API to stream audio to Omni Speakers<a class="headerlink" href="#use-of-hkwirelesshd-api-to-stream-audio-to-omni-speakers" title="Permalink to this headline">¶</a></h3>
+<p>To send audio stream to destination devices, an App has to use HKWirelessHD API. HKWirelessHD SDK provides the library of the APIs for arm32/64bit architecture.</p>
+<p>Note that as of date of writing, no x86 architecture is supported, so developer cannot use iOS Simulator for running the app with HKWirelessHD API.</p>
+</div>
+<div class="section" id="communication-channels-between-source-and-destinations">
+<h3>Communication channels between source and destinations<a class="headerlink" href="#communication-channels-between-source-and-destinations" title="Permalink to this headline">¶</a></h3>
+<p>As shown in the figure above, there are two kind of communications between a source device and (multiple) destination devices.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Channel for audio streaming - one way communication from a source to multiple destinations</dt>
+<dd><ul class="first last simple">
+<li>This channel is used for transmitting audio data to destination speakers</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Channel for control commands and device status - bidirectional communication</dt>
+<dd><ul class="first last">
+<li><p class="first">This channel is used to send commands from the source to the destinations to control the device, like volume control, etc.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Destination device can also send commands to the source device in some cases.</dt>
+<dd><ul class="first last simple">
+<li>For example, a speaker which is not belonging to the current playback session can send a command to the source to add itself to the current playback session.</li>
+<li>User can add Omni 10 or Omni 20 speaker to the current running playback session by long-pressing the Home button on the control panel. Please refer to Omni 10 or 20 User&#8217;s Manual for more information.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>This channel is also used to send the device information and the status data of a destination speakers to the source device.</dt>
+<dd><ul class="first last simple">
+<li>Device information includes the speaker name, the group name, IP address and port number, firmware version, etc.</li>
+<li>Device status information includes the status about the device availability and changes of its attributes, whether or not it is playing music, Wi-Fi signal strength, volume change, etc.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="asynchronous-communication">
+<h3>Asynchronous Communication<a class="headerlink" href="#asynchronous-communication" title="Permalink to this headline">¶</a></h3>
+<p>The communication between the source device and the destination speakers are accomplished in asynchronous way. Asynchronous behavior is natural because all the commands and status updates are executed in a way like RPC (Remote Procedure Call). Even more, audio streaming always involves some amount of buffering of audio data packets, so the timing gap between the source and the destinations is inevitable.</p>
+<p>Below are some examples of asynchronous communications.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Device availability</dt>
+<dd><ul class="first last simple">
+<li>When a speaker is turned on, the availability of the speaker is reflected to the source device a few second later. This is because several steps are involved to be attached the network and become discoverable by other speakers in the same network. Likewise, if a speaker is turned off or disconnected from the network, its unavailability is reflected to the source device a few second later.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Playback control</dt>
+<dd><ul class="first last simple">
+<li>When the source device starts music playback and streaming to destination speakers, actual playback in destination speakers occurs a few hundreds milliseconds later. Similar things occur when the source pauses or stops the current audio streaming, although stop or pause requires much less time.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Volume Control</dt>
+<dd><ul class="first last simple">
+<li>When the source changes the volume level of speakers, actual volume changes occur a few millisecond later.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="speaker-management">
+<h3>Speaker Management<a class="headerlink" href="#speaker-management" title="Permalink to this headline">¶</a></h3>
+<p>Whenever a speaker updates its status, the latest status information should be updated on the source device side as well. HKWirelessHD API manages the latest device status information inside DeviceInfo instances. HKWControlHandler instance maintains a list of DeviceInfo objects, each of which corresponds to a speaker found in the network.</p>
+<p>The detailed description on each attribute in the device are described in DeviceInfo.h.</p>
+</div>
+</div>
+<div class="section" id="visibility-of-speakers">
+<h2>Visibility of Speakers<a class="headerlink" href="#visibility-of-speakers" title="Permalink to this headline">¶</a></h2>
+<p>Any speakers in a network are visible to source devices (iOS devices) if a source device successfully initializes the HKWControlHandler when it starts up. Source device can be multiple. This means, even in the case that a speaker is being used by a source device, the status of each speaker is also visible to all other source devices in the network, once they are successfully initialized with HKWControlHandler.</p>
+<p>For example, as described in the figure below, let&#8217;s assume that Speaker-A and Speaker-B are being used by Source A, and Speaker-D and Speaker-E are being used by Source B. Once Source A and Source B initialize HKWControlHandler, then all the speakers from Speaker-A to Speaker-E are also visible both to Source A and Source B. Therefore, it is possible for Source A to add Speaker-D to its on-going playback session, even if it is being used by Source B. In this case, Speaker-D stops playing the audio stream from Source B, and join the on-going playback audio stream from Source A.</p>
+<p>There is an API, called isPlaying(), in DeviceInfo.h to return a boolean value indicating if the speaker is being playing audio or not, regardless that which source audio stream comes from.</p>
+<div class="figure">
+<img alt="../_images/speaker-visibility.png" src="../_images/speaker-visibility.png" />
+</div>
+</div>
+<div class="section" id="controlling-speakers-and-handling-the-events-from-speakers">
+<h2>Controlling Speakers and Handling the Events from Speakers<a class="headerlink" href="#controlling-speakers-and-handling-the-events-from-speakers" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<img alt="../_images/control-handler.png" src="../_images/control-handler.png" />
+</div>
+<div class="section" id="controlling-speakers">
+<h3>Controlling speakers<a class="headerlink" href="#controlling-speakers" title="Permalink to this headline">¶</a></h3>
+<p>Speaker controls, like start/pause/resume/stop audio streaming, change volume level, etc. are done by calling APIs provided by the HKWControlHandler singleton object. The app just needs to acquire the HKWControlHandler object, initialize it, and then use it to control the speakers. For example, as shown in the figure above, the app can call playCAF() with the HKWControlHandler to start to play a CAF audio file. The control APIs are described in HKWControlHandler.h.</p>
+<p>HKWControlHandler is a singleton object, and it can be acquired by calling as below. Note that there is no initializer API for the object. The sharedInstance() singleton API will create and initialize it if there is no instance in the runtime.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="handling-events-from-speakers">
+<h3>Handling events from speakers<a class="headerlink" href="#handling-events-from-speakers" title="Permalink to this headline">¶</a></h3>
+<p>On the other hand, the events from speakers are sent to the app through Delegate protocol APIs. By implementing the event handler delegate functions (in ViewController class in most cases), you can receive and handle the events from speakers. Whenever an event occurs from speakers, the corresponding handler is called and the event information is passed to the handler as parameter.</p>
+<p>The SDK provides two delegate protocols:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>HKWDeviceEventHandlerDelegate (defined in HKWDeviceEventHandlerSingleton.h)</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>All the events related to the status of speakers. There are two cases the event is sent:</dt>
+<dd><ul class="first last simple">
+<li>device status updated</li>
+<li>error occurred</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>To register an object as the delegate, do as below (self is the object that implements the delegate protocols):</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">HKWDeviceEventHandlerSingleton.sharedInstance().delete</span> <span class="pre">=</span> <span class="pre">self</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>HKWPlayerEventHandlerDelegate (defined in HKWPlayerEventHandlerSingleton.h)</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>All the events related to play music.</dt>
+<dd><ul class="first last simple">
+<li>play ended</li>
+<li>playback state changed</li>
+<li>playback time changed</li>
+<li>volume changed</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>To register an object as the delegate, do as below (self is the object that implements the delegate protocols):</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">HKWPlayerEventHandlerSingleton.sharedInstance().delete</span> <span class="pre">=</span> <span class="pre">self</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/HarmanDeveloperLogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Architecture Overview</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#overall-configuration">Overall Configuration</a></li>
+<li><a class="reference internal" href="#use-of-hkwirelesshd-api-to-stream-audio-to-omni-speakers">Use of HKWirelessHD API to stream audio to Omni Speakers</a></li>
+<li><a class="reference internal" href="#communication-channels-between-source-and-destinations">Communication channels between source and destinations</a></li>
+<li><a class="reference internal" href="#asynchronous-communication">Asynchronous Communication</a></li>
+<li><a class="reference internal" href="#speaker-management">Speaker Management</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#visibility-of-speakers">Visibility of Speakers</a></li>
+<li><a class="reference internal" href="#controlling-speakers-and-handling-the-events-from-speakers">Controlling Speakers and Handling the Events from Speakers</a><ul>
+<li><a class="reference internal" href="#controlling-speakers">Controlling speakers</a></li>
+<li><a class="reference internal" href="#handling-events-from-speakers">Handling events from speakers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/iOS/architecture-overview.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Harman International.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

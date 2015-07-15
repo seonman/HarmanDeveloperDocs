@@ -1,0 +1,668 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started Guide (iOS) &mdash; Harman Developer 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started-guide-ios">
+<h1>Getting Started Guide (iOS)<a class="headerlink" href="#getting-started-guide-ios" title="Permalink to this headline">¶</a></h1>
+<p>HKWirelessHD SDK supports both Objective-C and Swift. This document assumes that developer creates his/her app using the Swift language.</p>
+<p>There are two versions of SDK
+- a normal version: HKWirelessHDSDK
+- a lightweight version: HKWirelessHDSDKlw</p>
+<p>Most of the features are common in the two version. The only difference is that the normal version includes an API for playing web streaming audio, while the lightweight version does not.</p>
+<p>The reason we support the SDK as two separate versions is that we know that many developers want APIs for web streaming. To support this feature, we had to include a version of FFMPEG library inside of the SDK library. But, some developers may want to use their own version of MMPEG to handle audio stream for their own particular purpose. We don&#8217;t want to discourage developers to use any open source libraries along with our SDK.</p>
+<p>Please see the descriptions of each version below and make a proper choice for your app.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>HKWirelessHD (normal version)</dt>
+<dd><ul class="first last simple">
+<li>Support web streaming music playback (streaming music from HTTP server, etc.)</li>
+<li>libz.dylib and libbz2.dylib are required when linking.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>HKWirelessHDlw (lightweight version)</dt>
+<dd><ul class="first last simple">
+<li><strong>Do not support web streaming music playback</strong></li>
+<li>No other library required</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>So, if you do not need web streaming music playback for your app, you may use HKWirelessHDlw (lightweight) version. Otherwise, you should use HHWirelessHD version.</p>
+<p>In the section, we will use HKWSimple app as an example of using the normal version and HKPage app as an example of using the lightweight version.</p>
+<div class="section" id="project-setup-with-hkwirelesshdsdklw-lightweight-version">
+<h2>Project Setup with HKWirelessHDSDKlw (lightweight version)<a class="headerlink" href="#project-setup-with-hkwirelesshdsdklw-lightweight-version" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="include-hkwirelesshdsdklw-into-your-project">
+<h3>Include HKWirelessHDSDKlw into your project<a class="headerlink" href="#include-hkwirelesshdsdklw-into-your-project" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Add <em>HKWirelessHDSDKlw</em> to your project by dragging and dropping the HKWirelessHDSDKlw folder into the project navigator.</p>
+</li>
+<li><dl class="first docutils">
+<dt>When you get a dialog saying <em>Choose options for adding these files</em> :,</dt>
+<dd><ul class="first last simple">
+<li>Check the checkmark of <em>Copy items if needed</em></li>
+<li>Select <em>Create groups</em>, and click finish.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">By doing this, the include headers and libraries for HKWirelessHDSDKlw are added to your project.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="make-sure-if-libhkwirelesshdlw-a-was-added-to-your-link-binary-with-libraries">
+<h3>Make sure if libHKWirelessHDlw.a was added to your <em>Link Binary With Libraries</em><a class="headerlink" href="#make-sure-if-libhkwirelesshdlw-a-was-added-to-your-link-binary-with-libraries" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Project Setting &gt; Your Targets &gt; Build Phases &gt; Link Binary With Libraries</dt>
+<dd><ul class="first last simple">
+<li>Check if <em>libHKWirelessHDlw.a</em> was added to the list.</li>
+<li>If it was not added, add it by clicking <em>+</em> and <em>Add Other...</em>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>After adding the HKWirelessHDSDKlw folder into your project and adding libHKWirelessHD.a, the project navigator will look like as below:</p>
+<div class="figure">
+<img alt="../_images/project-setting-lw-1.png" src="../_images/project-setting-lw-1.png" />
+</div>
+</div>
+<div class="section" id="add-swift-bridging-header">
+<h3>Add Swift Bridging Header<a class="headerlink" href="#add-swift-bridging-header" title="Permalink to this headline">¶</a></h3>
+<p>HKWirelessHD SDK has been written in C++ and Objective-C. Therefore, when you use the SDK in Swift, you should include Swift Bridging Header in your project. To do this:</p>
+<ol class="arabic simple">
+<li>Go to Project Setting &gt; Build Setting &gt; Swift Compiler - Code Generation &gt; Objective-C Bridging Header</li>
+</ol>
+<div class="figure">
+<img alt="../_images/project-setting-3.png" src="../_images/project-setting-3.png" />
+</div>
+<ol class="arabic" start="2">
+<li><p class="first">Add [My-Project-Name]/[My-Project-Name]-Bridging-Header.h</p>
+<blockquote>
+<div><ul class="simple">
+<li>In our example, it looks like : HKPage/HKPage-Bridging-Header.h</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Add the following lines in the header file.</p>
+</li>
+</ol>
+<div class="highlight-swift"><div class="highlight"><pre><span class="p">#</span><span class="kd">import</span> <span class="s">&quot;HKWControlHandler.h&quot;</span>
+<span class="p">#</span><span class="kd">import</span> <span class="s">&quot;HKWPlayerEventHandlerSingleton.h&quot;</span>
+<span class="p">#</span><span class="kd">import</span> <span class="s">&quot;HKWDeviceEventHandlerSingleton.h&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-lstdc-as-linker-flag">
+<h3>Add -lstdc++ as linker flag<a class="headerlink" href="#add-lstdc-as-linker-flag" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Project Setting &gt; Your Targets &gt; Build Settings &gt; Linking &gt; Other Linker Flags</dt>
+<dd><ul class="first last simple">
+<li>Add “-lstdc++” in the text field</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="figure">
+<img alt="../_images/project-setting-4.png" src="../_images/project-setting-4.png" />
+</div>
+</div>
+</div>
+<div class="section" id="project-setup-with-hkwirelesshdsdk-normal-version">
+<h2>Project Setup with HKWirelessHDSDK (normal version)<a class="headerlink" href="#project-setup-with-hkwirelesshdsdk-normal-version" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="include-hkwirelesshdsdk-into-your-project">
+<h3>Include HKWirelessHDSDK into your project<a class="headerlink" href="#include-hkwirelesshdsdk-into-your-project" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Add <em>HKWirelessHDSDK</em> to your project by dragging and dropping the HKWirelessHDSDK folder into the project navigator.</p>
+</li>
+<li><dl class="first docutils">
+<dt>When you get a dialog saying <em>Choose options for adding these files</em> :,</dt>
+<dd><ul class="first last simple">
+<li>Check the checkmark of <em>Copy items if needed</em></li>
+<li>Select <em>Create groups</em>, and click finish.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">By doing this, the include headers and libraries for HKWirelessHDSDK are added to your project.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="make-sure-if-libhkwirelesshd-a-was-added-to-your-link-binary-with-libraries">
+<h3>Make sure if libHKWirelessHD.a was added to your <em>Link Binary With Libraries</em><a class="headerlink" href="#make-sure-if-libhkwirelesshd-a-was-added-to-your-link-binary-with-libraries" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Project Setting &gt; Your Targets &gt; Build Phases &gt; Link Binary With Libraries</dt>
+<dd><ul class="first last simple">
+<li>Check if <em>libHKWirelessHDlw.a</em> was added to the list.</li>
+<li>If it was not added, add it by clicking &#8216;+&#8217; and <em>Add Other...</em>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="add-libz-dylib-and-libbz-dylib-to-your-link-binary-with-libraries">
+<h3>Add libz.dylib and libbz.dylib to your <em>Link Binary With Libraries</em><a class="headerlink" href="#add-libz-dylib-and-libbz-dylib-to-your-link-binary-with-libraries" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>Project Setting &gt; Your Targets &gt; Build Phases &gt; Link Binary With Libraries</dt>
+<dd><ul class="first last simple">
+<li>Click &#8216;+&#8217; and find and add <em>libz.dylib</em> and <em>libbz2.dylib</em> to the list</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>After adding the HKWirelessHDSDKw folder into your project and adding libHKWirelessHD.a, libz.dylib and libbz2.dylib, the project navigator will look like as below:</p>
+<div class="figure">
+<img alt="../_images/project-setting-normal.png" src="../_images/project-setting-normal.png" />
+</div>
+</div>
+<div class="section" id="add-swift-bridging-header-and-lstdc-as-linker-flag">
+<h3>Add Swift Bridging Header and -lstdc++ as linker flag<a class="headerlink" href="#add-swift-bridging-header-and-lstdc-as-linker-flag" title="Permalink to this headline">¶</a></h3>
+<p>Follow the instruction for adding Swift bridging header and -lstdc++ linker flag as described in the previous section.</p>
+</div>
+</div>
+<div class="section" id="creating-a-sample-application-hkwsimple">
+<h2>Creating a Sample Application (HKWSimple)<a class="headerlink" href="#creating-a-sample-application-hkwsimple" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we explain how to create a HKWirelessHD iOS App. We will create a simple iOS app called <strong>HKWSimple</strong> that can play WAV or MP3 file, and also play Web-based streaming music with HTTP protocol.</p>
+<p>This app is so simple, so we hightly recommend you to start with this app to understand how HKWirelessHD is working.</p>
+<p>As shown in the figure, the app is composed of a sequence of UIViewController starting from a TableViewController showing a list of available speakers, and then a TableViewController showing a list of songs to play, and then finally a ViewController that shows a playback control panel with Play/Stop buttons and Volume control buttons.</p>
+<div class="figure">
+<img alt="../_images/hkwsimple-1.png" src="../_images/hkwsimple-1.png" />
+</div>
+<div class="section" id="project-setup">
+<h3>1. Project Setup<a class="headerlink" href="#project-setup" title="Permalink to this headline">¶</a></h3>
+<p>For the project setup, please refer to the previous session of <strong>Project Setup with HKWirelessHDSDK (normal version)</strong>.</p>
+</div>
+<div class="section" id="initialize-hkwirelesshd-controller">
+<h3>2. Initialize HKWirelessHD Controller<a class="headerlink" href="#initialize-hkwirelesshd-controller" title="Permalink to this headline">¶</a></h3>
+<p>In HKWSimple app, the initialization of HKWirelessHD Controller is done in the first ViewController called MainVC. When the app is launched, if HKWControlHandler is not initialized, then the app shows a dialog saying it is about to initialize the HKWControlHandler. This is done in <code class="docutils literal"><span class="pre">viewDidLoad()</span></code>. After that, in <code class="docutils literal"><span class="pre">viewDidAppear()</span></code>, the app actually tries to initialize HKWControlHandler. And it is successful, it dismisses the dialog. If not, it keeps showing the dialog so that the user can take an action.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">MainVC</span><span class="p">:</span> <span class="bp">UIViewController</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nv">g_alert</span><span class="p">:</span> <span class="bp">UIAlertController</span><span class="p">!</span>
+
+        <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+                <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="o">!</span><span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">isInitialized</span><span class="p">()</span> <span class="p">{</span>
+                        <span class="c1">// show the network initialization dialog</span>
+                        <span class="bp">println</span><span class="p">(</span><span class="s">&quot;show dialog&quot;</span><span class="p">)</span>
+                        <span class="n">g_alert</span> <span class="p">=</span> <span class="bp">UIAlertController</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&quot;Initializing&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="s">&quot;If this dialog does not disappear, please check if any other HK WirelessHD App is running on the phone and kill it. Or, your phone is not in a Wifi network.&quot;</span><span class="p">,</span> <span class="n">preferredStyle</span><span class="p">:</span> <span class="p">.</span><span class="n">Alert</span><span class="p">)</span>
+                        <span class="kc">self</span><span class="p">.</span><span class="n">presentViewController</span><span class="p">(</span><span class="n">g_alert</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidAppear</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="nb">Bool</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="o">!</span><span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">initializing</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">isInitialized</span><span class="p">()</span> <span class="p">{</span>
+                        <span class="n">dispatch_async</span><span class="p">(</span><span class="n">dispatch_get_global_queue</span><span class="p">(</span><span class="n">DISPATCH_QUEUE_PRIORITY_DEFAULT</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">{</span>
+                                <span class="k">if</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">initializeHKWirelessController</span><span class="p">(</span><span class="n">kLicenseKeyGlobal</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">{</span>
+                                        <span class="bp">println</span><span class="p">(</span><span class="s">&quot;initializeHKWirelessControl failed : invalid license key&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+                <span class="p">}</span>
+                <span class="bp">println</span><span class="p">(</span><span class="s">&quot;initializeHKWirelessControl - OK&quot;</span><span class="p">);</span>
+
+                <span class="c1">// dismiss the network initialization dialog</span>
+                <span class="k">if</span> <span class="kc">self</span><span class="p">.</span><span class="n">g_alert</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+                                        <span class="kc">self</span><span class="p">.</span><span class="n">g_alert</span><span class="p">.</span><span class="n">dismissViewControllerAnimated</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+                <span class="p">}</span>
+                        <span class="p">})</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-the-list-of-available-speakers">
+<h3>3. Get the list of available speakers<a class="headerlink" href="#get-the-list-of-available-speakers" title="Permalink to this headline">¶</a></h3>
+<p>The list of speakers are presented in <code class="docutils literal"><span class="pre">SpeakerSelectionTVC</span></code> TableViewController. It should receive the event about the device status, so it should implement the functions of <code class="docutils literal"><span class="pre">HKWDeviceEventHandelrDelegate</span></code>. First, the <code class="docutils literal"><span class="pre">SpeakerSelectionTVC</span></code> class should have <code class="docutils literal"><span class="pre">HKWDeviceEventHandlerDelegate</span></code> in its class declaration.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">SpeakerSelectionTVC</span><span class="p">:</span> <span class="bp">UITableViewController</span><span class="p">,</span> <span class="n">HKWDeviceEventHandlerDelegate</span> <span class="p">{</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">viewDidLoad()</span></code>, the class will set the <code class="docutils literal"><span class="pre">delegate</span></code> of HKWDeviceEventHandler instance as itself. And then, it starts to refresh the device information, by calling <code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code>.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+        <span class="n">HKWDeviceEventHandlerSingleton</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+        <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">startRefreshDeviceInfo</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the SpeakerSelectionTVC disappears, for example, by clicking <strong>Back</strong> button of Navigation Controller, it should stop refreshing the device info, so it calls <code class="docutils literal"><span class="pre">stopRefreshDeviceInfo()</span></code> in <code class="docutils literal"><span class="pre">viewDidDisappear()</span></code>.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidDisappear</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="nb">Bool</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidDisappear</span><span class="p">(</span><span class="n">animated</span><span class="p">)</span>
+        <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">stopRefreshDeviceInfo</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The follow codes are all about listing the speakers with their detailed information in the TableView. If a speaker is active, that is, the speaker belongs to the current session, then it checks the checkmark of the cell.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kr">override</span> <span class="kd">func</span> <span class="nf">numberOfSectionsInTableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="bp">UITableView</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getGroupCount</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="bp">UITableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getDeviceCountInGroupIndex</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="bp">UITableView</span><span class="p">,</span> <span class="n">cellForRowAtIndexPath</span> <span class="n">indexPath</span><span class="p">:</span> <span class="bp">NSIndexPath</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="bp">UITableViewCell</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">cell</span> <span class="p">=</span> <span class="n">tableView</span><span class="p">.</span><span class="n">dequeueReusableCellWithIdentifier</span><span class="p">(</span><span class="s">&quot;Speaker_Cell&quot;</span><span class="p">,</span> <span class="n">forIndexPath</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span> <span class="kc">as</span><span class="p">!</span> <span class="bp">UITableViewCell</span>
+        <span class="n">cell</span><span class="p">.</span><span class="n">selectionStyle</span> <span class="p">=</span> <span class="n">UITableViewCellSelectionStyle</span><span class="p">.</span><span class="n">None</span>
+        <span class="kd">var</span> <span class="nv">deviceInfo</span><span class="p">:</span> <span class="n">DeviceInfo</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getDeviceInfoByGroupIndexAndDeviceIndex</span><span class="p">(</span><span class="n">indexPath</span><span class="p">.</span><span class="n">section</span><span class="p">,</span> <span class="n">deviceIndex</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">)</span>
+        <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">deviceInfo</span><span class="p">.</span><span class="n">deviceName</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nv">uniqueId</span><span class="p">:</span> <span class="bp">NSString</span> <span class="p">=</span> <span class="bp">NSString</span><span class="p">(</span><span class="n">format</span><span class="p">:</span> <span class="s">&quot;ID:%llu, Vol:%d&quot;</span><span class="p">,</span> <span class="n">deviceInfo</span><span class="p">.</span><span class="n">deviceId</span><span class="p">,</span> <span class="n">deviceInfo</span><span class="p">.</span><span class="n">volume</span><span class="p">)</span>
+        <span class="n">cell</span><span class="p">.</span><span class="n">detailTextLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">uniqueId</span> <span class="kc">as</span> <span class="nb">String</span>
+
+        <span class="c1">// Show the checkmark if the speaker is active</span>
+        <span class="k">if</span> <span class="n">deviceInfo</span><span class="p">.</span><span class="n">active</span> <span class="p">{</span>
+                <span class="n">cell</span><span class="p">.</span><span class="n">accessoryType</span> <span class="p">=</span> <span class="n">UITableViewCellAccessoryType</span><span class="p">.</span><span class="n">Checkmark</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">cell</span><span class="p">.</span><span class="n">accessoryType</span> <span class="p">=</span> <span class="n">UITableViewCellAccessoryType</span><span class="p">.</span><span class="n">None</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">cell</span>
+<span class="p">}</span>
+
+<span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="bp">UITableView</span><span class="p">,</span> <span class="n">titleForHeaderInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span><span class="p">?</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nv">header</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getDeviceGroupNameByIndex</span><span class="p">(</span><span class="n">section</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">header</span>
+<span class="p">}</span>
+
+<span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="bp">UITableView</span><span class="p">,</span> <span class="n">didSelectRowAtIndexPath</span> <span class="n">indexPath</span><span class="p">:</span> <span class="bp">NSIndexPath</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">cell</span> <span class="p">=</span> <span class="n">tableView</span><span class="p">.</span><span class="n">dequeueReusableCellWithIdentifier</span><span class="p">(</span><span class="s">&quot;Speaker_Cell&quot;</span><span class="p">,</span> <span class="n">forIndexPath</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span> <span class="kc">as</span><span class="p">!</span> <span class="bp">UITableViewCell</span>
+        <span class="kd">var</span> <span class="nv">deviceInfo</span><span class="p">:</span> <span class="n">DeviceInfo</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getDeviceInfoByGroupIndexAndDeviceIndex</span><span class="p">(</span><span class="n">indexPath</span><span class="p">.</span><span class="n">section</span><span class="p">,</span> <span class="n">deviceIndex</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">deviceInfo</span><span class="p">.</span><span class="n">active</span> <span class="p">{</span>
+                <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">removeDeviceFromSession</span><span class="p">(</span><span class="n">deviceInfo</span><span class="p">.</span><span class="n">deviceId</span><span class="p">)</span>
+                <span class="n">cell</span><span class="p">.</span><span class="n">accessoryType</span> <span class="p">=</span> <span class="n">UITableViewCellAccessoryType</span><span class="p">.</span><span class="n">Checkmark</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">addDeviceToSession</span><span class="p">(</span><span class="n">deviceInfo</span><span class="p">.</span><span class="n">deviceId</span><span class="p">)</span>
+                <span class="n">cell</span><span class="p">.</span><span class="n">accessoryType</span> <span class="p">=</span> <span class="n">UITableViewCellAccessoryType</span><span class="p">.</span><span class="n">None</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The follow codes are for handling events from Device Handler. In this example, it just redraw the table when it receives any device update events from the HKWControlHandler.</p>
+<div class="highlight-swift"><div class="highlight"><pre>        <span class="kd">func</span> <span class="nf">hkwDeviceStateUpdated</span><span class="p">(</span><span class="n">deviceId</span><span class="p">:</span> <span class="nb">Int64</span><span class="p">,</span> <span class="n">withReason</span> <span class="n">reason</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">reloadData</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="kd">func</span> <span class="nf">hkwErrorOccurred</span><span class="p">(</span><span class="n">errorCode</span><span class="p">:</span> <span class="nb">Int</span><span class="p">,</span> <span class="n">withErrorMessage</span> <span class="n">errorMesg</span><span class="p">:</span> <span class="nb">String</span><span class="p">!)</span> <span class="p">{</span>
+                <span class="bp">println</span><span class="p">(</span><span class="s">&quot;Error: </span><span class="si">\(</span><span class="n">errorMesg</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The following figure shows a screen of the speaker list.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/speaker-list.png"><img alt="../_images/speaker-list.png" src="../_images/speaker-list.png" /></a>
+</div>
+</div>
+<div class="section" id="create-the-playlist-to-play">
+<h3>4. Create the playlist to play<a class="headerlink" href="#create-the-playlist-to-play" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">SongSelectionTVC</span></code> shows the list of songs availabe for playback. It searches for the songs included in the app as bundle, and show the list of the songs. And also it adds the songs for web-based streaming.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">SongSelectionTVC</span><span class="p">:</span> <span class="bp">UITableViewController</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">g_wavFiles</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span><span class="p">]()</span>
+    <span class="kd">var</span> <span class="nv">g_mp3Files</span> <span class="p">=</span> <span class="p">[</span><span class="nb">String</span><span class="p">]()</span>
+    <span class="kd">var</span> <span class="nv">curSection</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="kd">var</span> <span class="nv">curRow</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="kd">let</span> <span class="nv">serverUrlPrefix</span> <span class="p">=</span> <span class="s">&quot;http://seonman.github.io/music/&quot;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nv">songList</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;ec-faith.wav&quot;</span><span class="p">,</span> <span class="s">&quot;hyolyn.mp3&quot;</span><span class="p">]</span>
+    <span class="kr">@IBOutlet</span> <span class="kd">var</span> <span class="nv">bbiNowPlaying</span><span class="p">:</span> <span class="bp">UIBarButtonItem</span><span class="p">!</span>
+
+    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+
+        <span class="kd">var</span> <span class="nv">bundleRoot</span> <span class="p">=</span> <span class="bp">NSBundle</span><span class="p">.</span><span class="n">mainBundle</span><span class="p">().</span><span class="n">bundlePath</span>
+        <span class="kd">var</span> <span class="nv">dirContents</span><span class="p">:</span> <span class="bp">NSArray</span> <span class="p">=</span> <span class="bp">NSFileManager</span><span class="p">.</span><span class="n">defaultManager</span><span class="p">().</span><span class="n">contentsOfDirectoryAtPath</span><span class="p">(</span><span class="n">bundleRoot</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span><span class="o">!</span>
+        <span class="kd">var</span> <span class="nv">fltr</span><span class="p">:</span> <span class="bp">NSPredicate</span> <span class="p">=</span> <span class="bp">NSPredicate</span><span class="p">(</span><span class="n">format</span><span class="p">:</span> <span class="s">&quot;self ENDSWITH &#39;.wav&#39;&quot;</span><span class="p">)</span>
+        <span class="n">g_wavFiles</span> <span class="p">=</span> <span class="n">dirContents</span><span class="p">.</span><span class="n">filteredArrayUsingPredicate</span><span class="p">(</span><span class="n">fltr</span><span class="p">)</span> <span class="kc">as</span><span class="p">!</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="kd">var</span> <span class="nv">i</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">g_wavFiles</span><span class="p">.</span><span class="bp">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+            <span class="bp">println</span><span class="p">(</span><span class="s">&quot;wav file: </span><span class="si">\(</span><span class="n">g_wavFiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="kd">var</span> <span class="nv">fltr2</span><span class="p">:</span> <span class="bp">NSPredicate</span> <span class="p">=</span> <span class="bp">NSPredicate</span><span class="p">(</span><span class="n">format</span><span class="p">:</span> <span class="s">&quot;self ENDSWITH &#39;.mp3&#39;&quot;</span><span class="p">)</span>
+        <span class="n">g_mp3Files</span> <span class="p">=</span> <span class="n">dirContents</span><span class="p">.</span><span class="n">filteredArrayUsingPredicate</span><span class="p">(</span><span class="n">fltr2</span><span class="p">)</span> <span class="kc">as</span><span class="p">!</span> <span class="p">[</span><span class="nb">String</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="kd">var</span> <span class="nv">i</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">g_mp3Files</span><span class="p">.</span><span class="bp">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+            <span class="bp">println</span><span class="p">(</span><span class="s">&quot;mp3 file: </span><span class="si">\(</span><span class="n">g_mp3Files</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">bbiNowPlaying</span><span class="p">.</span><span class="n">enabled</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">isPlaying</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">numberOfSectionsInTableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="bp">UITableView</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">3</span>
+    <span class="p">}</span>
+
+    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="bp">UITableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">section</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">g_wavFiles</span><span class="p">.</span><span class="bp">count</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">section</span> <span class="p">==</span> <span class="mi">1</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">g_mp3Files</span><span class="p">.</span><span class="bp">count</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">section</span> <span class="p">==</span> <span class="mi">2</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">songList</span><span class="p">.</span><span class="bp">count</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="bp">UITableView</span><span class="p">,</span> <span class="n">cellForRowAtIndexPath</span> <span class="n">indexPath</span><span class="p">:</span> <span class="bp">NSIndexPath</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="bp">UITableViewCell</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">cell</span> <span class="p">=</span> <span class="n">tableView</span><span class="p">.</span><span class="n">dequeueReusableCellWithIdentifier</span><span class="p">(</span><span class="s">&quot;SongTitle_Cell&quot;</span><span class="p">,</span> <span class="n">forIndexPath</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span> <span class="kc">as</span><span class="p">!</span> <span class="bp">UITableViewCell</span>
+        <span class="k">if</span> <span class="n">indexPath</span><span class="p">.</span><span class="n">section</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+            <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">g_wavFiles</span><span class="p">[</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">]</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">indexPath</span><span class="p">.</span><span class="n">section</span> <span class="p">==</span> <span class="mi">1</span> <span class="p">{</span>
+            <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">g_mp3Files</span><span class="p">[</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">]</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">cell</span><span class="p">.</span><span class="n">textLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">songList</span><span class="p">[</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">cell</span>
+    <span class="p">}</span>
+
+    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="n">tableView</span><span class="p">:</span> <span class="bp">UITableView</span><span class="p">,</span> <span class="n">titleForHeaderInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">String</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">section</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s">&quot;WAV file&quot;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">section</span> <span class="p">==</span> <span class="mi">1</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s">&quot;MP3 file&quot;</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s">&quot;Web Streaming&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">prepareForSegue</span><span class="p">(</span><span class="n">segue</span><span class="p">:</span> <span class="bp">UIStoryboardSegue</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="nb">AnyObject</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">segue</span><span class="p">.</span><span class="n">identifier</span> <span class="p">==</span> <span class="s">&quot;Song_Cell&quot;</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nv">section</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">indexPathForSelectedRow</span><span class="p">()?.</span><span class="n">section</span>
+            <span class="n">curSection</span> <span class="p">=</span> <span class="n">section</span><span class="p">!</span>
+            <span class="kd">let</span> <span class="nv">row</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">indexPathForSelectedRow</span><span class="p">()?.</span><span class="n">row</span>
+            <span class="n">curRow</span> <span class="p">=</span> <span class="n">row</span><span class="p">!</span>
+
+            <span class="kd">let</span> <span class="nv">destTVC</span><span class="p">:</span><span class="n">NowPlayingVC</span> <span class="p">=</span> <span class="n">segue</span><span class="p">.</span><span class="n">destinationViewController</span> <span class="kc">as</span><span class="p">!</span> <span class="n">NowPlayingVC</span>
+            <span class="n">destTVC</span><span class="p">.</span><span class="n">section</span> <span class="p">=</span> <span class="n">curSection</span>
+            <span class="n">destTVC</span><span class="p">.</span><span class="n">row</span> <span class="p">=</span> <span class="n">curRow</span>
+            <span class="k">if</span> <span class="n">curSection</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+                <span class="n">destTVC</span><span class="p">.</span><span class="n">songTitle</span> <span class="p">=</span> <span class="n">g_wavFiles</span><span class="p">[</span><span class="n">curRow</span><span class="p">]</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">curSection</span> <span class="p">==</span> <span class="mi">1</span> <span class="p">{</span>
+                <span class="n">destTVC</span><span class="p">.</span><span class="n">songTitle</span> <span class="p">=</span> <span class="n">g_mp3Files</span><span class="p">[</span><span class="n">curRow</span><span class="p">]</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">destTVC</span><span class="p">.</span><span class="n">songTitle</span> <span class="p">=</span> <span class="n">songList</span><span class="p">[</span><span class="n">curRow</span><span class="p">]</span>
+                <span class="n">destTVC</span><span class="p">.</span><span class="n">songUrl</span> <span class="p">=</span> <span class="n">serverUrlPrefix</span> <span class="o">+</span> <span class="n">songList</span><span class="p">[</span><span class="n">curRow</span><span class="p">]</span>
+                <span class="n">destTVC</span><span class="p">.</span><span class="n">serverUrl</span> <span class="p">=</span> <span class="n">serverUrlPrefix</span>
+            <span class="p">}</span>
+
+            <span class="n">destTVC</span><span class="p">.</span><span class="n">viewLoadByCellSelection</span> <span class="p">=</span> <span class="kc">true</span>
+            <span class="n">destTVC</span><span class="p">.</span><span class="n">nsWavPath</span> <span class="p">=</span> <span class="bp">NSBundle</span><span class="p">.</span><span class="n">mainBundle</span><span class="p">().</span><span class="n">bundlePath</span><span class="p">.</span><span class="n">stringByAppendingPathComponent</span><span class="p">(</span><span class="n">destTVC</span><span class="p">.</span><span class="n">songTitle</span><span class="p">)</span>
+            <span class="n">destTVC</span><span class="p">.</span><span class="n">songSelectionTVC</span> <span class="p">=</span> <span class="kc">self</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="n">segue</span><span class="p">.</span><span class="n">identifier</span> <span class="p">==</span> <span class="s">&quot;NowPlaying_BBI&quot;</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nv">destTVC</span><span class="p">:</span><span class="n">NowPlayingVC</span> <span class="p">=</span> <span class="n">segue</span><span class="p">.</span><span class="n">destinationViewController</span> <span class="kc">as</span><span class="p">!</span> <span class="n">NowPlayingVC</span>
+            <span class="k">if</span> <span class="n">curSection</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+                <span class="n">destTVC</span><span class="p">.</span><span class="n">songTitle</span> <span class="p">=</span> <span class="n">g_wavFiles</span><span class="p">[</span><span class="n">curRow</span><span class="p">]</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">curSection</span> <span class="p">==</span> <span class="mi">1</span> <span class="p">{</span>
+                <span class="n">destTVC</span><span class="p">.</span><span class="n">songTitle</span> <span class="p">=</span> <span class="n">g_mp3Files</span><span class="p">[</span><span class="n">curRow</span><span class="p">]</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">destTVC</span><span class="p">.</span><span class="n">songTitle</span> <span class="p">=</span> <span class="n">songList</span><span class="p">[</span><span class="n">curRow</span><span class="p">]</span>
+                <span class="n">destTVC</span><span class="p">.</span><span class="n">songUrl</span> <span class="p">=</span> <span class="n">serverUrlPrefix</span> <span class="o">+</span> <span class="n">songList</span><span class="p">[</span><span class="n">curRow</span><span class="p">]</span>
+                <span class="n">destTVC</span><span class="p">.</span><span class="n">serverUrl</span> <span class="p">=</span> <span class="n">serverUrlPrefix</span>
+            <span class="p">}</span>
+
+            <span class="n">destTVC</span><span class="p">.</span><span class="n">viewLoadByCellSelection</span> <span class="p">=</span> <span class="kc">false</span>
+            <span class="n">destTVC</span><span class="p">.</span><span class="n">nsWavPath</span> <span class="p">=</span> <span class="bp">NSBundle</span><span class="p">.</span><span class="n">mainBundle</span><span class="p">().</span><span class="n">bundlePath</span><span class="p">.</span><span class="n">stringByAppendingPathComponent</span><span class="p">(</span><span class="n">destTVC</span><span class="p">.</span><span class="n">songTitle</span><span class="p">)</span>
+            <span class="n">destTVC</span><span class="p">.</span><span class="n">songSelectionTVC</span> <span class="p">=</span> <span class="kc">self</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The following figure shows an example of the SongSelectionTVC screen.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/song-list.png"><img alt="../_images/song-list.png" src="../_images/song-list.png" /></a>
+</div>
+</div>
+<div class="section" id="playback-and-volume-control">
+<h3>5. Playback and Volume Control<a class="headerlink" href="#playback-and-volume-control" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">NowPlayingVC</span></code> controls the playback and volume level. To receive the events about playback, it must implement <code class="docutils literal"><span class="pre">HKWPlayerEventHandlerDelegate</span></code>, and set the delegate value as itself.</p>
+<div class="highlight-swift"><div class="highlight"><pre><span class="kd">class</span> <span class="nc">NowPlayingVC</span><span class="p">:</span> <span class="bp">UIViewController</span><span class="p">,</span> <span class="n">HKWPlayerEventHandlerDelegate</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">row</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="kd">var</span> <span class="nv">section</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="kd">var</span> <span class="nv">songTitle</span> <span class="p">=</span> <span class="s">&quot;&quot;</span>
+    <span class="kd">var</span> <span class="nv">nsWavPath</span> <span class="p">=</span> <span class="s">&quot;&quot;</span>
+    <span class="kd">var</span> <span class="nv">viewLoadByCellSelection</span> <span class="p">=</span> <span class="kc">false</span>
+    <span class="kd">var</span> <span class="nv">songSelectionTVC</span><span class="p">:</span> <span class="n">SongSelectionTVC</span><span class="p">!</span>
+    <span class="kd">var</span> <span class="nv">curVolume</span><span class="p">:</span><span class="nb">Int</span> <span class="p">=</span> <span class="mi">50</span>
+    <span class="kd">var</span> <span class="nv">songUrl</span> <span class="p">=</span> <span class="s">&quot;&quot;</span>
+    <span class="kd">var</span> <span class="nv">serverUrl</span> <span class="p">=</span> <span class="s">&quot;&quot;</span>
+    <span class="kd">var</span> <span class="nv">g_alert</span><span class="p">:</span> <span class="bp">UIAlertController</span><span class="p">!</span>
+    <span class="kr">@IBOutlet</span> <span class="kd">var</span> <span class="nv">labelSongTitle</span><span class="p">:</span> <span class="bp">UILabel</span><span class="p">!</span>
+    <span class="kr">@IBOutlet</span> <span class="kd">var</span> <span class="nv">btnPlayStop</span><span class="p">:</span> <span class="bp">UIButton</span><span class="p">!</span>
+    <span class="kr">@IBOutlet</span> <span class="kd">var</span> <span class="nv">labelAverageVolume</span><span class="p">:</span> <span class="bp">UILabel</span><span class="p">!</span>
+    <span class="kr">@IBOutlet</span> <span class="kd">var</span> <span class="nv">btnVolumeDown</span><span class="p">:</span> <span class="bp">UIButton</span><span class="p">!</span>
+    <span class="kr">@IBOutlet</span> <span class="kd">var</span> <span class="nv">btnVolumeUp</span><span class="p">:</span> <span class="bp">UIButton</span><span class="p">!</span>
+    <span class="kr">@IBOutlet</span> <span class="kd">var</span> <span class="nv">labelStatus</span><span class="p">:</span> <span class="bp">UILabel</span><span class="p">!</span>
+
+    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+
+        <span class="n">HKWPlayerEventHandlerSingleton</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">delegate</span> <span class="p">=</span> <span class="kc">self</span>
+
+        <span class="n">labelSongTitle</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">songTitle</span>
+        <span class="n">curVolume</span> <span class="p">=</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">getVolume</span><span class="p">()</span>
+        <span class="n">labelAverageVolume</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&quot;Volume: </span><span class="si">\(</span><span class="n">curVolume</span><span class="si">)</span><span class="s">&quot;</span>
+
+        <span class="k">if</span> <span class="n">viewLoadByCellSelection</span> <span class="p">{</span>
+            <span class="n">playCurrentTitle</span><span class="p">()</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">isPlaying</span><span class="p">()</span> <span class="p">{</span>
+                <span class="n">btnPlayStop</span><span class="p">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s">&quot;Stop&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="p">:</span> <span class="n">UIControlState</span><span class="p">.</span><span class="n">Normal</span><span class="p">)</span>
+                <span class="n">labelStatus</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&quot;Now Playing&quot;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="n">btnPlayStop</span><span class="p">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s">&quot;Play&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="p">:</span> <span class="n">UIControlState</span><span class="p">.</span><span class="n">Normal</span><span class="p">)</span>
+                <span class="n">labelStatus</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&quot;Play Stopped&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">playOrStop</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="bp">UIButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">isPlaying</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">pause</span><span class="p">()</span>
+            <span class="n">labelStatus</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&quot;Play Stopped&quot;</span>
+            <span class="n">btnPlayStop</span><span class="p">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s">&quot;Play&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="p">:</span> <span class="n">UIControlState</span><span class="p">.</span><span class="n">Normal</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">playCurrentTitle</span><span class="p">()</span>
+            <span class="n">labelStatus</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&quot;Now Playing&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">volumeUp</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="bp">UIButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">curVolume</span> <span class="o">+=</span> <span class="mi">5</span>
+        <span class="k">if</span> <span class="n">curVolume</span> <span class="o">&gt;</span> <span class="mi">50</span> <span class="p">{</span>
+            <span class="n">curVolume</span> <span class="p">=</span> <span class="mi">50</span>
+        <span class="p">}</span>
+        <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">setVolume</span><span class="p">(</span><span class="n">curVolume</span><span class="p">)</span>
+        <span class="n">labelAverageVolume</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&quot;Volume: </span><span class="si">\(</span><span class="n">curVolume</span><span class="si">)</span><span class="s">&quot;</span>
+    <span class="p">}</span>
+
+    <span class="kr">@IBAction</span> <span class="kd">func</span> <span class="nf">volumeDown</span><span class="p">(</span><span class="n">sender</span><span class="p">:</span> <span class="bp">UIButton</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">curVolume</span> <span class="o">-=</span> <span class="mi">5</span>
+        <span class="k">if</span> <span class="n">curVolume</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">{</span>
+            <span class="n">curVolume</span> <span class="p">=</span> <span class="mi">0</span>
+        <span class="p">}</span>
+        <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">setVolume</span><span class="p">(</span><span class="n">curVolume</span><span class="p">)</span>
+        <span class="n">labelAverageVolume</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">&quot;Volume: </span><span class="si">\(</span><span class="n">curVolume</span><span class="si">)</span><span class="s">&quot;</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">playCurrentTitle</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// just to be sure that there is no running playback</span>
+        <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="bp">println</span><span class="p">(</span><span class="s">&quot;nsWavPath: </span><span class="si">\(</span><span class="n">nsWavPath</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">section</span> <span class="p">==</span> <span class="mi">0</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">playWAV</span><span class="p">(</span><span class="n">nsWavPath</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// now playing, so change the icon to &quot;STOP&quot;</span>
+                <span class="n">btnPlayStop</span><span class="p">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s">&quot;Stop&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="p">:</span> <span class="n">UIControlState</span><span class="p">.</span><span class="n">Normal</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">section</span> <span class="p">==</span> <span class="mi">1</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nv">assetUrl</span> <span class="p">=</span> <span class="bp">NSURL</span><span class="p">(</span><span class="n">fileURLWithPath</span><span class="p">:</span> <span class="n">nsWavPath</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">playCAF</span><span class="p">(</span><span class="n">assetUrl</span><span class="p">,</span> <span class="n">songName</span><span class="p">:</span> <span class="n">songTitle</span><span class="p">,</span> <span class="n">resumeFlag</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// now playing, so change the icon to &quot;STOP&quot;</span>
+                <span class="n">btnPlayStop</span><span class="p">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s">&quot;Stop&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="p">:</span> <span class="n">UIControlState</span><span class="p">.</span><span class="n">Normal</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">playStreaming</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="n">songSelectionTVC</span><span class="p">.</span><span class="n">bbiNowPlaying</span><span class="p">.</span><span class="n">enabled</span> <span class="p">=</span> <span class="kc">true</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">playStreaming</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">playStreamingMedia</span><span class="p">(</span><span class="n">songUrl</span><span class="p">,</span> <span class="n">withCallback</span><span class="p">:</span> <span class="p">{(</span><span class="n">bool</span> <span class="n">result</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="p">==</span> <span class="kc">false</span> <span class="p">{</span>
+                <span class="bp">println</span><span class="p">(</span><span class="s">&quot;playStreamingMedia: failed&quot;</span><span class="p">)</span>
+                <span class="kc">self</span><span class="p">.</span><span class="n">btnPlayStop</span><span class="p">.</span><span class="n">selected</span> <span class="p">=</span> <span class="kc">false</span>
+                <span class="kc">self</span><span class="p">.</span><span class="n">g_alert</span> <span class="p">=</span> <span class="bp">UIAlertController</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&quot;Warning&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="s">&quot;Playing streaming media failed. Please check the Internet connection or check if the meida URL is correct.&quot;</span><span class="p">,</span> <span class="n">preferredStyle</span><span class="p">:</span> <span class="p">.</span><span class="n">Alert</span><span class="p">)</span>
+                <span class="kc">self</span><span class="p">.</span><span class="n">g_alert</span><span class="p">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">UIAlertAction</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s">&quot;OK&quot;</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">UIAlertActionStyle</span><span class="p">.</span><span class="n">Default</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="kc">nil</span><span class="p">))</span>
+                <span class="kc">self</span><span class="p">.</span><span class="n">presentViewController</span><span class="p">(</span><span class="kc">self</span><span class="p">.</span><span class="n">g_alert</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="n">completion</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="bp">println</span><span class="p">(</span><span class="s">&quot;playStreamingMedia: successful&quot;</span><span class="p">)</span>
+                <span class="kc">self</span><span class="p">.</span><span class="n">btnPlayStop</span><span class="p">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s">&quot;Stop&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="p">:</span> <span class="n">UIControlState</span><span class="p">.</span><span class="n">Normal</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">hkwPlayEnded</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">btnPlayStop</span><span class="p">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s">&quot;Play&quot;</span><span class="p">,</span> <span class="n">forState</span><span class="p">:</span> <span class="n">UIControlState</span><span class="p">.</span><span class="n">Normal</span><span class="p">)</span>
+        <span class="n">songSelectionTVC</span><span class="p">.</span><span class="n">bbiNowPlaying</span><span class="p">.</span><span class="n">enabled</span> <span class="p">=</span> <span class="kc">false</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">hkwDeviceVolumeChanged</span><span class="p">(</span><span class="n">deviceId</span><span class="p">:</span> <span class="nb">Int64</span><span class="p">,</span> <span class="n">deviceVolume</span><span class="p">:</span> <span class="nb">Int</span><span class="p">,</span> <span class="n">withAverageVolume</span> <span class="n">avgVolume</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="bp">println</span><span class="p">(</span><span class="s">&quot;avgVolume: </span><span class="si">\(</span><span class="n">avgVolume</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="n">curVolume</span> <span class="p">=</span> <span class="n">avgVolume</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/HarmanDeveloperLogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Started Guide (iOS)</a><ul>
+<li><a class="reference internal" href="#project-setup-with-hkwirelesshdsdklw-lightweight-version">Project Setup with HKWirelessHDSDKlw (lightweight version)</a><ul>
+<li><a class="reference internal" href="#include-hkwirelesshdsdklw-into-your-project">Include HKWirelessHDSDKlw into your project</a></li>
+<li><a class="reference internal" href="#make-sure-if-libhkwirelesshdlw-a-was-added-to-your-link-binary-with-libraries">Make sure if libHKWirelessHDlw.a was added to your <em>Link Binary With Libraries</em></a></li>
+<li><a class="reference internal" href="#add-swift-bridging-header">Add Swift Bridging Header</a></li>
+<li><a class="reference internal" href="#add-lstdc-as-linker-flag">Add -lstdc++ as linker flag</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#project-setup-with-hkwirelesshdsdk-normal-version">Project Setup with HKWirelessHDSDK (normal version)</a><ul>
+<li><a class="reference internal" href="#include-hkwirelesshdsdk-into-your-project">Include HKWirelessHDSDK into your project</a></li>
+<li><a class="reference internal" href="#make-sure-if-libhkwirelesshd-a-was-added-to-your-link-binary-with-libraries">Make sure if libHKWirelessHD.a was added to your <em>Link Binary With Libraries</em></a></li>
+<li><a class="reference internal" href="#add-libz-dylib-and-libbz-dylib-to-your-link-binary-with-libraries">Add libz.dylib and libbz.dylib to your <em>Link Binary With Libraries</em></a></li>
+<li><a class="reference internal" href="#add-swift-bridging-header-and-lstdc-as-linker-flag">Add Swift Bridging Header and -lstdc++ as linker flag</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-a-sample-application-hkwsimple">Creating a Sample Application (HKWSimple)</a><ul>
+<li><a class="reference internal" href="#project-setup">1. Project Setup</a></li>
+<li><a class="reference internal" href="#initialize-hkwirelesshd-controller">2. Initialize HKWirelessHD Controller</a></li>
+<li><a class="reference internal" href="#get-the-list-of-available-speakers">3. Get the list of available speakers</a></li>
+<li><a class="reference internal" href="#create-the-playlist-to-play">4. Create the playlist to play</a></li>
+<li><a class="reference internal" href="#playback-and-volume-control">5. Playback and Volume Control</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/iOS/getting-started-iOS.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Harman International.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

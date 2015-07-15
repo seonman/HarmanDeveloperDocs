@@ -1,0 +1,992 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API Documentation &mdash; Harman Developer 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api-documentation">
+<span id="smartapp-ref"></span><h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>Refer to HKWControlHandler.h in the SDK.</p>
+<div class="section" id="initializehkwirelesscontroller">
+<h3>initializeHKWirelessController()<a class="headerlink" href="#initializehkwirelesscontroller" title="Permalink to this headline">¶</a></h3>
+<p>Initializes and starts HKWirelessHD controller. This API requires a license key as string. If the input license key fails in key validation, then the API returns -1. If it is successful, return 0.</p>
+<p>The license key will be delivered to you once you sign on to developer.harman.com. Until it is delivered, you may use the license key included in the sample apps.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This is a blocking call, and it will not return until the caller successfully initializes HKWireless controller. If the phone is not connected to a Wi-Fi network, or any other app on the same phone is using the HKWireless controller, it waits until the other app releases the controller.</p>
+<p class="last">If you needs non-blocking behavior, you should call this API asynchronously using other thread.</p>
+</div>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">initializeHKWirelessController:(NSString*)licenseKey;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSString*)</span> <span class="pre">licenseKey</span></code> - a string containing the license key</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - an integer indicating success (0 or HKW_INIT_SUCCESS) or failure (-1 or HKW_INIT_FAILURE_LICENSE_INVALID)</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="isinitialized">
+<h3>isInitialized()<a class="headerlink" href="#isinitialized" title="Permalink to this headline">¶</a></h3>
+<p>Checks if HKWirelessHD controller is already initialied.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">isInitialized;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating if HKWirelessController has been initialized or not.</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="initializing">
+<h3>initializing()<a class="headerlink" href="#initializing" title="Permalink to this headline">¶</a></h3>
+<p>Checks if HKWirelessHD controller is being initialied.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">initializing;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating if HKWirelessController is being initialized</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="refreshing-speaker-information">
+<h2>Refreshing Speaker Information<a class="headerlink" href="#refreshing-speaker-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="refreshdeviceinfoonce">
+<h3>refreshDeviceInfoOnce()<a class="headerlink" href="#refreshdeviceinfoonce" title="Permalink to this headline">¶</a></h3>
+<p>Refreshes the device status one time. The device information will be refreshed and updated to <code class="docutils literal"><span class="pre">DeviceInfo</span></code> objects (defined in DeviceInfo.h). If there is any update on <code class="docutils literal"><span class="pre">DeviceInfo</span></code>, then <code class="docutils literal"><span class="pre">hkwDeviceStateUpdated</span></code> delegate function defined by <code class="docutils literal"><span class="pre">HKWDeviceEventHandlerDelegate</span></code> will be called. From there, you can see which device has been updated and what was the reason of the update.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">refreshDeviceInfoOnce;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="startrefreshdeviceinfo">
+<h3>startRefreshDeviceInfo()<a class="headerlink" href="#startrefreshdeviceinfo" title="Permalink to this headline">¶</a></h3>
+<p>Starts to keep refreshing <code class="docutils literal"><span class="pre">DeviceInfo</span></code> every two seconds. It continues until <code class="docutils literal"><span class="pre">stopRefreshDeviceInfo()</span></code> is called.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">startRefreshDeviceInfo;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="stoprefreshdeviceinfo">
+<h3>stopRefreshDeviceInfo()<a class="headerlink" href="#stoprefreshdeviceinfo" title="Permalink to this headline">¶</a></h3>
+<p>Stops refreshing <code class="docutils literal"><span class="pre">DeviceInfo</span></code>, which was initiated by <code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code>.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">stopRefreshDeviceInfo;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="playback-control">
+<h2>Playback Control<a class="headerlink" href="#playback-control" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="playcaf">
+<h3>playCAF()<a class="headerlink" href="#playcaf" title="Permalink to this headline">¶</a></h3>
+<p>Plays a CAF audio file in local storage. If it is successful, <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged()</span></code> delegate function will called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Play</span></code>.</p>
+<p>The playback uses Apple Core Audio framework. So, the types of supported audio files and data formats by HKWirelessHDSDK are the same as those supported by Apple&#8217;s Core Audio framework. The detailed information is available at <a class="reference external" href="https://developer.apple.com/library/ios/documentation/MusicAudio/Conceptual/CoreAudioOverview/CoreAudioEssentials/CoreAudioEssentials.html#//apple_ref/doc/uid/TP40003577-CH10-SW57">iOS audio file formats</a>. According to the Apple developer documentation, CAF supports AIFF (.aif, .aiff), CAF (.caf), MPEG-1, Layer 3 (.mp3), MPEG-2 or MPEG-4 ADTS (.aac), MPEG-4 Audio (.mp4, .m4a), and WAVE (.wav).</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">playCAF:(NSURL</span> <span class="pre">*)assetURL</span> <span class="pre">songName:(NSString*)songName</span> <span class="pre">resumeFlag:(BOOL)resumeFlag;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSURL*)</span> <span class="pre">assetURL</span></code> - NSURL to the audio file</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)</span> <span class="pre">songName</span></code> -  the song name to be played. The songName is used internally to save the temporary PCM file generated from the original audio file.</li>
+<li><code class="docutils literal"><span class="pre">(BOOL)</span> <span class="pre">resumeFlag</span></code> -  a boolean specifying if the playback should resume from the point where it was paused in the previous playback. When you want to start a song from the beginning, resumeFlag must be false. If the previous playback was stopped not paused, then the playback will start from the beginning even with resumeFlag true.</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating success or failure</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="playcaffromcertaintime">
+<h3>playCAFFromCertainTime()<a class="headerlink" href="#playcaffromcertaintime" title="Permalink to this headline">¶</a></h3>
+<p>Plays a CAF audio file beginning from a certain time of playback specified by <code class="docutils literal"><span class="pre">startTime</span></code>. For example, you can start a song from the point of 10 seconds of the song. <code class="docutils literal"><span class="pre">hwkPlaybackStateChanged()</span></code> delegate function will be called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Play</span></code>.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">playCAFFromCertainTime:(NSURL</span> <span class="pre">*)assetURL</span> <span class="pre">songName:(NSString*)songName</span> <span class="pre">startTime:(NSInteger)startTime;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSURL</span> <span class="pre">*)assetURL</span></code> - NSURL to the audio file.</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)songName</span></code> - the song name to be played. The songName is used internally to save the temporary PCM file generated from the original audio file.</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)startTime</span></code> - time in second that specifies the start time.</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating success or failure</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="playwav">
+<h3>playWAV()<a class="headerlink" href="#playwav" title="Permalink to this headline">¶</a></h3>
+<p>Plays a WAV file. <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged</span></code> delegate function will be called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Play</span></code>.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">playWAV:(NSString*)wavPath;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating success or failure</dd>
+</dl>
+</div>
+<div class="section" id="playstreamingmedia">
+<h3>playStreamingMedia()<a class="headerlink" href="#playstreamingmedia" title="Permalink to this headline">¶</a></h3>
+<p>Plays a streaming media from web server. Because this API takes a little while to get the result of play because of all networking stuffs, the API just returns immediately, and instead it takes a callback to be called when the result is ready. You should take the result of the call inside of the callback.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)playStreamingMedia:(NSString</span> <span class="pre">*)streamingMediaUrl</span> <span class="pre">withCallback:(void</span> <span class="pre">(^)(bool</span> <span class="pre">result))completedCallback;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSString*)streamingMediaUrl</span></code> - a string that specifies the URL of the streaming media source. It starts with a protocol name, such as &#8220;<a class="reference external" href="http://">http://</a>&#8221; or &#8220;rtps://&#8221;. Currently, http, rtps, and mms are supported. The supported file format is mp3, m4a, and wav.</li>
+<li><code class="docutils literal"><span class="pre">(void</span> <span class="pre">(^)(bool</span> <span class="pre">result))completedCallback</span></code> - a callback that returns the result of the playback</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="pause">
+<h3>pause()<a class="headerlink" href="#pause" title="Permalink to this headline">¶</a></h3>
+<p>Pauses the current playback. <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged()</span></code> delegate function will be called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Pause</span></code>. Once the playback is paused, it can resume by calling <code class="docutils literal"><span class="pre">playCAF()</span></code> with <code class="docutils literal"><span class="pre">resumeFlag</span></code> true and the same <code class="docutils literal"><span class="pre">songName</span></code>. A playback by <code class="docutils literal"><span class="pre">playStreamingMedia()</span></code> cannot be paused. If <code class="docutils literal"><span class="pre">pause()</span></code> is called, then the playback will stop.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">pause;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="stop">
+<h3>stop()<a class="headerlink" href="#stop" title="Permalink to this headline">¶</a></h3>
+<p>Stops the current playback. <code class="docutils literal"><span class="pre">hkwPlaybackStateChanged()</span></code> delegate function will be called and return the status value of <code class="docutils literal"><span class="pre">HKPlayerState.EPlayerState_Stop</span></code>.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">stop;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="isplaying">
+<h3>isPlaying()<a class="headerlink" href="#isplaying" title="Permalink to this headline">¶</a></h3>
+<p>Checks if the player is playing some audio or not.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(bool)</span> <span class="pre">isPlaying;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating if the player is playing or now.</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getplayerstate">
+<h3>getPlayerState()<a class="headerlink" href="#getplayerstate" title="Permalink to this headline">¶</a></h3>
+<p>Gets the current state of playback.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(HKPlayerState)getPlayerState;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">HKPlayState</span></code> - indicates the current player state.</dd>
+</dl>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="volume-control">
+<h2>Volume Control<a class="headerlink" href="#volume-control" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setvolume">
+<h3>setVolume()<a class="headerlink" href="#setvolume" title="Permalink to this headline">¶</a></h3>
+<p>Sets a volume level to all speakers. The same volume level is set to all speakers.</p>
+<p>The range of volume level is 0 to the maximumVolumeLevel (currently, 50) defined by <code class="docutils literal"><span class="pre">getMaximumVolumeLevel()</span></code>.</p>
+<p>Setting volume is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The <code class="docutils literal"><span class="pre">hkwDeviceVolumeChanged()</span></code> delegate function defined in <code class="docutils literal"><span class="pre">HKWPlayerEventHandlerDelegate</span></code> (in HKWPlayerEventHandlerSingleton.h) will be called when the volume level of the specified speaker has actually changed.</p>
+<p>If the volume is being muted by calling <code class="docutils literal"><span class="pre">mute()</span></code>, the volume level is changed from the original volume level before mute.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setVolume:(NSInteger)volume;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)volume</span></code> -  the volume level to set</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="setvolumedevice">
+<h3>setVolumeDevice()<a class="headerlink" href="#setvolumedevice" title="Permalink to this headline">¶</a></h3>
+<p>Set a volume level to a speaker specified by device ID. The range of volume level is 0 to the maximumVolumeLevel (currently, 50) defined by <code class="docutils literal"><span class="pre">getMaximumVolumeLevel()</span></code>. <code class="docutils literal"><span class="pre">setVolume</span></code> is asynchronous call. So, the effect of the API call will occur after a few milliseconds. The <code class="docutils literal"><span class="pre">hkwDeviceVolumeChanged()</span></code> delegate function defined in <code class="docutils literal"><span class="pre">HKWPlayerEventHandlerDelegate</span></code> (in HKWPlayerEventHandlerSingleton.h) will be called when the volume level of the specified speaker has actually changed.</p>
+<p>If the volume is being muted by calling <code class="docutils literal"><span class="pre">mute()</span></code>, the volume level is changed from the original volume level before mute.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setVolumeDevice:(long</span> <span class="pre">long)deviceId</span> <span class="pre">volume:(NSInteger)volume;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - the device ID of the speaker</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)volume</span></code> -  the volume level to set</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getvolume">
+<h3>getVolume()<a class="headerlink" href="#getvolume" title="Permalink to this headline">¶</a></h3>
+<p>Gets the average volume level for all devices.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getVolume;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the average volume level of all speakers</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdevicevolume">
+<h3>getDeviceVolume()<a class="headerlink" href="#getdevicevolume" title="Permalink to this headline">¶</a></h3>
+<p>Gets the volume level of the specified speaker.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getDeviceVolume:(long</span> <span class="pre">long)deviceId;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong>
+- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - the deviceId of the speaker inquired.</p>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the device volume level</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getmaximumvolumelevel">
+<h3>getMaximumVolumeLevel()<a class="headerlink" href="#getmaximumvolumelevel" title="Permalink to this headline">¶</a></h3>
+<p>Returns the maximum volume level that the system provides. Currently, it is 50.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getMaximumVolumeLevel;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the maximum volume level</dd>
+</dl>
+</div>
+<div class="section" id="mute">
+<h3>mute()<a class="headerlink" href="#mute" title="Permalink to this headline">¶</a></h3>
+<p>Mutes the current volume of all speakers.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">mute;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="unmute">
+<h3>unmute()<a class="headerlink" href="#unmute" title="Permalink to this headline">¶</a></h3>
+<p>Unmute the volume. It returns the previous volume level before mute.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">unmute;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="ismuted">
+<h3>isMuted()<a class="headerlink" href="#ismuted" title="Permalink to this headline">¶</a></h3>
+<p>Check if volume is muted or not.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(bool)</span> <span class="pre">isMuted;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code>  - the Boolean value indicating if mute is on or not.</dd>
+</dl>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="device-speaker-management">
+<h2>Device (Speaker) Management<a class="headerlink" href="#device-speaker-management" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="adddevicetosession">
+<h3>addDeviceToSession()<a class="headerlink" href="#adddevicetosession" title="Permalink to this headline">¶</a></h3>
+<p>Adds a speaker to the current playback session. The added speaker will start playing audio. This can be done during the audio playback.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">addDeviceToSession:(long</span> <span class="pre">long)</span> <span class="pre">deviceid;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the device to add</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating whether the addition is successful or not.</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="removedevicefromsession">
+<h3>removeDeviceFromSession()<a class="headerlink" href="#removedevicefromsession" title="Permalink to this headline">¶</a></h3>
+<p>Removes a speaker from the current playback session. The removed speaker will stop playing audio. This can be done during the audio playback.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">removeDeviceFromSession:(long</span> <span class="pre">long)</span> <span class="pre">deviceid;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> -  The ID of the device to remove</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">BOOL</span></code> - boolean value indicating whether the removal is successful or not.</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdevicecount">
+<h3>getDeviceCount()<a class="headerlink" href="#getdevicecount" title="Permalink to this headline">¶</a></h3>
+<p>Gets the number of all speakers in the HKWirelessHD network.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getDeviceCount;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the number of speakers.</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getgroupcount">
+<h3>getGroupCount()<a class="headerlink" href="#getgroupcount" title="Permalink to this headline">¶</a></h3>
+<p>Gets the number of the groups of speakers.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getGroupCount;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the number of the groups</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdevicecountingroupindex">
+<h3>getDeviceCountInGroupIndex()<a class="headerlink" href="#getdevicecountingroupindex" title="Permalink to this headline">¶</a></h3>
+<p>Gets the number of the speakers that belongs to a group specified by the index.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getDeviceCountInGroupIndex:(NSInteger)groupIndex;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)groupIndex</span></code> - the index of the group looking for. It starts from 0 to (GroupCount-1).</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the number of speakers</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdeviceinfobygroupindexanddeviceindex">
+<h3>getDeviceInfoByGroupIndexAndDeviceIndex()<a class="headerlink" href="#getdeviceinfobygroupindexanddeviceindex" title="Permalink to this headline">¶</a></h3>
+<p>Returns the <code class="docutils literal"><span class="pre">DeviceInfo</span></code> object (defined in DeviceInfo.h) pointed by groupIndex and deviceIndex. This API is useful to find a <code class="docutils literal"><span class="pre">DeviceInfo</span></code> that will be shown in a TableViewCell. For example, to show a speaker information in two section TableView, the groupIndex can correspond to the section number, and deviceIndex can correspond to the row number.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceInfo</span> <span class="pre">*)</span> <span class="pre">getDeviceInfoByGroupIndexAndDeviceIndex:(NSInteger)</span> <span class="pre">groupIndex</span> <span class="pre">deviceIndex:(NSInteger)deviceIndex;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)groupIndex</span></code> - The index of the group where the speaker belongs to.</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)deviceIndex</span></code> -  The index of the speaker in the group.</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">DeviceInfo*</span></code> - the DeviceInfo object</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdeviceinfobyindex">
+<h3>getDeviceInfoByIndex()<a class="headerlink" href="#getdeviceinfobyindex" title="Permalink to this headline">¶</a></h3>
+<p>Returns the <code class="docutils literal"><span class="pre">DeviceInfo</span></code> object pointed by deviceIndex from the table containing all speakers. The range of deviceIndex will be 0 to (deviceCount - 1).</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceInfo</span> <span class="pre">*)</span> <span class="pre">getDeviceInfoByIndex:(NSInteger)deviceIndex;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong>
+- <code class="docutils literal"><span class="pre">(NSInteger)deviceIndex</span></code> -  The index of the device from the table with all devices.</p>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">DeviceInfo*</span></code> - the DeviceInfo object</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdevicegroupbydeviceid">
+<h3>getDeviceGroupByDeviceId()<a class="headerlink" href="#getdevicegroupbydeviceid" title="Permalink to this headline">¶</a></h3>
+<p>Returns the object of the <code class="docutils literal"><span class="pre">DeviceGroup</span></code> that a speaker belongs to.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceGroup</span> <span class="pre">*)getDeviceGroupByDeviceId:(long</span> <span class="pre">long)deviceId;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<p>&#8211; <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)</span></code> -  the ID of the speaker that belongs to a DeviceGroup</p>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">DeviceGroup*</span></code> - the DeviceGroup object</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdeviceinfobyid">
+<h3>getDeviceInfoById()<a class="headerlink" href="#getdeviceinfobyid" title="Permalink to this headline">¶</a></h3>
+<p>Finds a <code class="docutils literal"><span class="pre">DeviceInfo</span></code> from the table by device Id. It is useful to retrieve <code class="docutils literal"><span class="pre">DeviceInfo</span></code> with a particular deviceId.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceInfo</span> <span class="pre">*)</span> <span class="pre">getDeviceInfoById:(long</span> <span class="pre">long)</span> <span class="pre">deviceId;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - the ID of the device we are looking for.</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">DeviceInfo*</span></code> - The DeviceInfo object</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="isdeviceavailable">
+<h3>isDeviceAvailable()<a class="headerlink" href="#isdeviceavailable" title="Permalink to this headline">¶</a></h3>
+<p>Checks whether the specified speaker is available on the network or not.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">isDeviceAvailable:(long</span> <span class="pre">long)deviceId;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong>
+- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the speaker</p>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">(BOOL)</span></code> - boolean indicating if the speaker is available or not.</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="isdeviceactive">
+<h3>isDeviceActive()<a class="headerlink" href="#isdeviceactive" title="Permalink to this headline">¶</a></h3>
+<p>Checks whether the speaker is active (added to the current playback session) or not.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(BOOL)</span> <span class="pre">isDeviceActive:(long</span> <span class="pre">long)deviceId;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong>
+- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the speaker</p>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">(BOOL)</span></code> - boolean indicating if the speaker is active or not.</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="removedevicefromgroup">
+<h3>removeDeviceFromGroup()<a class="headerlink" href="#removedevicefromgroup" title="Permalink to this headline">¶</a></h3>
+<p>Removes (ungroup) the specified speaker from the currently belonged group. It is done internally by setting the GroupName as &#8220;harman&#8221; (which is factory default device name, and implies Not-Assigned.).</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)removeDeviceFromGroup:(long</span> <span class="pre">long)deviceId;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong>
+- <code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the speaker to ungroup.</p>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdevicegroupbyindex">
+<h3>getDeviceGroupByIndex()<a class="headerlink" href="#getdevicegroupbyindex" title="Permalink to this headline">¶</a></h3>
+<p>Gets the <code class="docutils literal"><span class="pre">DeviceGroup</span></code> object by index.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceGroup</span> <span class="pre">*)getDeviceGroupByIndex:(NSInteger)groupIndex;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)groupIndex</span></code> - the index of the group</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">DeviceGroup*</span></code> - The object of DeviceGroup</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdevicegroupbygroupid">
+<h3>getDeviceGroupByGroupId()<a class="headerlink" href="#getdevicegroupbygroupid" title="Permalink to this headline">¶</a></h3>
+<p>Gets DeviceGroup by group ID.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(DeviceGroup</span> <span class="pre">*)getDeviceGroupByGroupId:(long</span> <span class="pre">long)groupId;</span></code></dd>
+<dt><strong>Parameters:</strong></dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)groupId</span></code> - the ID of the group</li>
+</ul>
+</dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">DeviceGroup*</span></code> - the object of device group.</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdevicegroupnamebyindex">
+<h3>getDeviceGroupNameByIndex()<a class="headerlink" href="#getdevicegroupnamebyindex" title="Permalink to this headline">¶</a></h3>
+<p>Gets the name of the DeviceGroup by index.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSString</span> <span class="pre">*)getDeviceGroupNameByIndex:(NSInteger)groupIndex;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)groupIndex</span></code> - the index of the group in the group table.</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSString*</span></code> - the string of group name</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getdevicegroupidbyindex">
+<h3>getDeviceGroupIdByIndex()<a class="headerlink" href="#getdevicegroupidbyindex" title="Permalink to this headline">¶</a></h3>
+<p>Gets the ID of the DeviceGroup by index.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(long</span> <span class="pre">long)getDeviceGroupIdByIndex:(NSInteger)groupIndex;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)groupIndex</span></code> - the index of the group in the table</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">long</span> <span class="pre">long</span></code> - the group id</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="setdevicename">
+<h3>setDeviceName()<a class="headerlink" href="#setdevicename" title="Permalink to this headline">¶</a></h3>
+<p>Sets device name to a speaker. Note that you cannot set the device name by setting &#8220;deviceName&#8221; property directly. The property is read-only.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you set a device name while the a playback is running, the speaker stops playing and return error.</p>
+</div>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setDeviceName:(long</span> <span class="pre">long)deviceId</span> <span class="pre">deviceName:(NSString</span> <span class="pre">*)deviceName;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)deviceId</span></code> - The ID of the device</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)deviceName</span></code> - The name of the device to set</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="setdevicegroupname">
+<h3>setDeviceGroupName()<a class="headerlink" href="#setdevicegroupname" title="Permalink to this headline">¶</a></h3>
+<p>Sets device group to a speaker with Group name. Note that you cannot set the group name by setting &#8220;groupName&#8221; property directly. The property is read-only.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you set a group name while the a playback is running, the speaker stops playing and return error.</p>
+</div>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)</span> <span class="pre">setDeviceGroupName:(long</span> <span class="pre">long)deviceId</span> <span class="pre">groupName:(NSString</span> <span class="pre">*)groupName;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)deviceId</span></code> - The ID of the device</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)groupName</span></code> - The name of the group name to set</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="setdevicerole">
+<h3>setDeviceRole()<a class="headerlink" href="#setdevicerole" title="Permalink to this headline">¶</a></h3>
+<p>Sets the role for the speaker. The role information is used to define which part of audio channel the speaker takes for the playback.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)setDeviceRole:(long</span> <span class="pre">long)deviceId</span> <span class="pre">role:(int)role;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The id of the device</li>
+<li><code class="docutils literal"><span class="pre">(int)role</span></code> - the interger value indicating the role of the speaker. The possible options are listed in the HKRole enumeration type. The default value is EMono (21).</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getactivedevicecount">
+<h3>getActiveDeviceCount()<a class="headerlink" href="#getactivedevicecount" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Gets the number of active speakers (the speakers that are being added to the current playback session.)</div></blockquote>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getActiveDeviceCount;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the number of active devices</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getactivegroupcount">
+<h3>getActiveGroupCount()<a class="headerlink" href="#getactivegroupcount" title="Permalink to this headline">¶</a></h3>
+<p>Gets the number of active groups. An active group is defined as a group that all the speakers that belongs to a group are active. If even one of the speakers in the same group is inactive, then the group is inactive.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(NSInteger)</span> <span class="pre">getActiveGroupCount;</span></code></dd>
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">NSInteger</span></code> - the number of active groups</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="refreshdevicewifisignal">
+<h3>refreshDeviceWiFiSignal()<a class="headerlink" href="#refreshdevicewifisignal" title="Permalink to this headline">¶</a></h3>
+<p>Refreshes the device&#8217;s Wifi Signal strength value. This is asynchronous call, and the result of refreshing will come a few milliseconds later. The new WiFi signal strength value will be reported by <code class="docutils literal"><span class="pre">hkwDeviceStateUpdated()</span></code> delegate function defined in HKWDeviceEventHandlerDelegate (in HKWDeviceEventHandlerSingleton.h). In <code class="docutils literal"><span class="pre">hkwDeviceStateUpdated()</span></code>, you should get the wifi signal value by getting <code class="docutils literal"><span class="pre">wifiSignalStrength</span></code> attribute of <code class="docutils literal"><span class="pre">DeviceInfo</span></code> object.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(void)refreshDeviceWiFiSignal:(long</span> <span class="pre">long)deviceId;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - The ID of the device</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="getwifisignalstrengthtype">
+<h3>getWifiSignalStrengthType()<a class="headerlink" href="#getwifisignalstrengthtype" title="Permalink to this headline">¶</a></h3>
+<p>Gets Wifi signal strength type by signal value.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-</span> <span class="pre">(HKWifiSingalStrength)getWifiSignalStrengthType:(NSInteger)wifiSignal;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)wifiSignal</span></code> - the wifi signal value</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">HKWifiSingalStrength</span></code> - a value of HKWifiSignalStrength type</dd>
+</dl>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="hkwdeviceeventhandlersingleton">
+<h2>HKWDeviceEventHandlerSingleton<a class="headerlink" href="#hkwdeviceeventhandlersingleton" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sharedinstance">
+<h3>sharedInstance()<a class="headerlink" href="#sharedinstance" title="Permalink to this headline">¶</a></h3>
+<p>Returns the singleton object to HKWDeviceEventHandler.</p>
+<p><strong>Signature:</strong>
++(HKWDeviceEventHandlerSingleton*)sharedInstance;</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="delegate">
+<h3>delegate<a class="headerlink" href="#delegate" title="Permalink to this headline">¶</a></h3>
+<p>The delegate attribute to be set by an object to be a HKWDeviceEventHandlerDelegate.</p>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="k">@property</span> <span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">weak</span><span class="p">)</span> <span class="kt">id</span><span class="o">&lt;</span><span class="n">HKWDeviceEventHandlerDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="hkwdeviceeventhandlerdelegate">
+<h2>HKWDeviceEventHandlerDelegate<a class="headerlink" href="#hkwdeviceeventhandlerdelegate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hkwdevicestateupdated-required">
+<h3>hkwDeviceStateUpdated() - required<a class="headerlink" href="#hkwdevicestateupdated-required" title="Permalink to this headline">¶</a></h3>
+<p>Invoked when some of device information have been changed for any speakers.It is also invoked when the network is disconnected ans no speakers are available any longer, or when the network becomes up from down, so speakers in the network become added to the HKWirelessHD network. &lt;p&gt;The information monitored includes device status (active or inactive), model name, group name, and wifi signal strengths.&lt;p&gt;Volume change does not trigger this call. The volume update is reported by CallbackVolumeLevelChanged.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwDeviceStateUpdated:(long</span> <span class="pre">long)deviceId</span> <span class="pre">withReason:(NSInteger)reason;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - the deviceId of the speaker</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)reason</span></code> - the reason code about the updated status</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="hkwerroroccurred-required">
+<h3>hkwErrorOccurred() - required<a class="headerlink" href="#hkwerroroccurred-required" title="Permalink to this headline">¶</a></h3>
+<p>Invoked when an error occures.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwErrorOccurred:(NSInteger)errorCode</span> <span class="pre">withErrorMessage:(NSString*)errorMesg;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)errorCode</span></code> - an integer value indicating error code.</li>
+<li><code class="docutils literal"><span class="pre">(NSString*)errorMesg</span></code> - a string value containing a description about the error.</li>
+</ul>
+<dl class="docutils">
+<dt><strong>Returns:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">void</span></code></dd>
+</dl>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="hkwplayereventhandlersingleton">
+<h2>HKWPlayerEventHandlerSingleton<a class="headerlink" href="#hkwplayereventhandlersingleton" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>sharedInstance()<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Returns the singleton object to HKWPlayerEventHandler.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">+(HKWPlayerEventHandlerSingleton*)sharedInstance;</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="id2">
+<h3>delegate<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The delegate attribute to be set by an object to be a HKWPlayerEventHandlerDelegate.</p>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="k">@property</span> <span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">weak</span><span class="p">)</span> <span class="kt">id</span><span class="o">&lt;</span><span class="n">HKWPlayerEventHandlerDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="hkwplayereventhandlerdelegate">
+<h2>HKWPlayerEventHandlerDelegate<a class="headerlink" href="#hkwplayereventhandlerdelegate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hkwplayended-required">
+<h3>hkwPlayEnded() - required<a class="headerlink" href="#hkwplayended-required" title="Permalink to this headline">¶</a></h3>
+<p>This is called when the current playback has ended.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwPlayEnded;</span></code></dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="hkwdevicevolumechanged-optional">
+<h3>hkwDeviceVolumeChanged() - optional<a class="headerlink" href="#hkwdevicevolumechanged-optional" title="Permalink to this headline">¶</a></h3>
+<p>This is called when volume level has changed for any spekaers.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwDeviceVolumeChanged:(long</span> <span class="pre">long)deviceId</span> <span class="pre">deviceVolume:(NSInteger)deviceVolume</span> <span class="pre">withAverageVolume:(NSInteger)avgVolume;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(long</span> <span class="pre">long)deviceId</span></code> - the device unique ID (long long type)</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)deviceVolume</span></code> - the volume level of the device (speaker)</li>
+<li><code class="docutils literal"><span class="pre">(NSInteger)avgVolume</span></code> - the average volume level</li>
+</ul>
+</div>
+<div class="section" id="hkwplaybackstatechanged-optional">
+<h3>hkwPlaybackStateChanged() - optional<a class="headerlink" href="#hkwplaybackstatechanged-optional" title="Permalink to this headline">¶</a></h3>
+<p>This is called when player state has changed during the playback.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwPlaybackStateChanged:(NSInteger)playState;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)playState</span></code> - The player state</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="hkwplaybacktimechanged-optional">
+<h3>hkwPlaybackTimeChanged() - optional<a class="headerlink" href="#hkwplaybacktimechanged-optional" title="Permalink to this headline">¶</a></h3>
+<p>This is called when the current time of playback has changed. It is called every one second.</p>
+<dl class="docutils">
+<dt><strong>Signature:</strong></dt>
+<dd><code class="docutils literal"><span class="pre">-(void)hkwPlaybackTimeChanged:(NSInteger)timeElapsed;</span></code></dd>
+</dl>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">(NSInteger)timeElapsed</span></code> - the time (in second) passed since the beginning of the playback.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/HarmanDeveloperLogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API Documentation</a><ul>
+<li><a class="reference internal" href="#initialization">Initialization</a><ul>
+<li><a class="reference internal" href="#initializehkwirelesscontroller">initializeHKWirelessController()</a></li>
+<li><a class="reference internal" href="#isinitialized">isInitialized()</a></li>
+<li><a class="reference internal" href="#initializing">initializing()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#refreshing-speaker-information">Refreshing Speaker Information</a><ul>
+<li><a class="reference internal" href="#refreshdeviceinfoonce">refreshDeviceInfoOnce()</a></li>
+<li><a class="reference internal" href="#startrefreshdeviceinfo">startRefreshDeviceInfo()</a></li>
+<li><a class="reference internal" href="#stoprefreshdeviceinfo">stopRefreshDeviceInfo()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#playback-control">Playback Control</a><ul>
+<li><a class="reference internal" href="#playcaf">playCAF()</a></li>
+<li><a class="reference internal" href="#playcaffromcertaintime">playCAFFromCertainTime()</a></li>
+<li><a class="reference internal" href="#playwav">playWAV()</a></li>
+<li><a class="reference internal" href="#playstreamingmedia">playStreamingMedia()</a></li>
+<li><a class="reference internal" href="#pause">pause()</a></li>
+<li><a class="reference internal" href="#stop">stop()</a></li>
+<li><a class="reference internal" href="#isplaying">isPlaying()</a></li>
+<li><a class="reference internal" href="#getplayerstate">getPlayerState()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#volume-control">Volume Control</a><ul>
+<li><a class="reference internal" href="#setvolume">setVolume()</a></li>
+<li><a class="reference internal" href="#setvolumedevice">setVolumeDevice()</a></li>
+<li><a class="reference internal" href="#getvolume">getVolume()</a></li>
+<li><a class="reference internal" href="#getdevicevolume">getDeviceVolume()</a></li>
+<li><a class="reference internal" href="#getmaximumvolumelevel">getMaximumVolumeLevel()</a></li>
+<li><a class="reference internal" href="#mute">mute()</a></li>
+<li><a class="reference internal" href="#unmute">unmute()</a></li>
+<li><a class="reference internal" href="#ismuted">isMuted()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#device-speaker-management">Device (Speaker) Management</a><ul>
+<li><a class="reference internal" href="#adddevicetosession">addDeviceToSession()</a></li>
+<li><a class="reference internal" href="#removedevicefromsession">removeDeviceFromSession()</a></li>
+<li><a class="reference internal" href="#getdevicecount">getDeviceCount()</a></li>
+<li><a class="reference internal" href="#getgroupcount">getGroupCount()</a></li>
+<li><a class="reference internal" href="#getdevicecountingroupindex">getDeviceCountInGroupIndex()</a></li>
+<li><a class="reference internal" href="#getdeviceinfobygroupindexanddeviceindex">getDeviceInfoByGroupIndexAndDeviceIndex()</a></li>
+<li><a class="reference internal" href="#getdeviceinfobyindex">getDeviceInfoByIndex()</a></li>
+<li><a class="reference internal" href="#getdevicegroupbydeviceid">getDeviceGroupByDeviceId()</a></li>
+<li><a class="reference internal" href="#getdeviceinfobyid">getDeviceInfoById()</a></li>
+<li><a class="reference internal" href="#isdeviceavailable">isDeviceAvailable()</a></li>
+<li><a class="reference internal" href="#isdeviceactive">isDeviceActive()</a></li>
+<li><a class="reference internal" href="#removedevicefromgroup">removeDeviceFromGroup()</a></li>
+<li><a class="reference internal" href="#getdevicegroupbyindex">getDeviceGroupByIndex()</a></li>
+<li><a class="reference internal" href="#getdevicegroupbygroupid">getDeviceGroupByGroupId()</a></li>
+<li><a class="reference internal" href="#getdevicegroupnamebyindex">getDeviceGroupNameByIndex()</a></li>
+<li><a class="reference internal" href="#getdevicegroupidbyindex">getDeviceGroupIdByIndex()</a></li>
+<li><a class="reference internal" href="#setdevicename">setDeviceName()</a></li>
+<li><a class="reference internal" href="#setdevicegroupname">setDeviceGroupName()</a></li>
+<li><a class="reference internal" href="#setdevicerole">setDeviceRole()</a></li>
+<li><a class="reference internal" href="#getactivedevicecount">getActiveDeviceCount()</a></li>
+<li><a class="reference internal" href="#getactivegroupcount">getActiveGroupCount()</a></li>
+<li><a class="reference internal" href="#refreshdevicewifisignal">refreshDeviceWiFiSignal()</a></li>
+<li><a class="reference internal" href="#getwifisignalstrengthtype">getWifiSignalStrengthType()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hkwdeviceeventhandlersingleton">HKWDeviceEventHandlerSingleton</a><ul>
+<li><a class="reference internal" href="#sharedinstance">sharedInstance()</a></li>
+<li><a class="reference internal" href="#delegate">delegate</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hkwdeviceeventhandlerdelegate">HKWDeviceEventHandlerDelegate</a><ul>
+<li><a class="reference internal" href="#hkwdevicestateupdated-required">hkwDeviceStateUpdated() - required</a></li>
+<li><a class="reference internal" href="#hkwerroroccurred-required">hkwErrorOccurred() - required</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hkwplayereventhandlersingleton">HKWPlayerEventHandlerSingleton</a><ul>
+<li><a class="reference internal" href="#id1">sharedInstance()</a></li>
+<li><a class="reference internal" href="#id2">delegate</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hkwplayereventhandlerdelegate">HKWPlayerEventHandlerDelegate</a><ul>
+<li><a class="reference internal" href="#hkwplayended-required">hkwPlayEnded() - required</a></li>
+<li><a class="reference internal" href="#hkwdevicevolumechanged-optional">hkwDeviceVolumeChanged() - optional</a></li>
+<li><a class="reference internal" href="#hkwplaybackstatechanged-optional">hkwPlaybackStateChanged() - optional</a></li>
+<li><a class="reference internal" href="#hkwplaybacktimechanged-optional">hkwPlaybackTimeChanged() - optional</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/iOS/api.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Harman International.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
