@@ -143,7 +143,7 @@ Version History (iOS)
 .. toctree::
 	:maxdepth: 2
 
-	Android/version-history
+	iOS/version-history
 
 ----
 
