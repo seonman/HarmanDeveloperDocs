@@ -1,7 +1,7 @@
 .. _smartapp_ref:
 
-API Documentation
-===================
+API Documentation (iOS)
+========================
 
 
 Initialization

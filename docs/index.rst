@@ -17,39 +17,59 @@ Welcome to the Harman developer documentation. Here you will find information ab
 
 This documentation is organized into a few different chapters:
 
-`SDK Overview`_
+`SDK Overview (iOS)`_
     This chapter is the overview of HKWirelessHD SDK and the SDK apps.
 	
 `Getting Started (iOS)`_
     This chatper describes how you can quickly get started with the HKWirelessHD SDK. Just follow the instruction to setup your Xcode project, and learn how to create a HKWirelessHD App.
 
-`Programming Guide`_
+`Programming Guide (iOS)`_
     This chapter explains about the APIs of HKWirelessHD SDK.
 	
-`Architecture Overview`_
+`Architecture Overview (iOS)`_
     This chapter explains about the overall architecture of HKWirelessHD SDK.
 
-`API Documentation`_
+`API Documentation (iOS)`_
     This chapter describes the API Specification of HKWirelessHD SDK.
 	
-`HKWHub Specification`_
+`HKWHub Specification (iOS)`_
     This chapter explains about the HKWHub App and its REST API Specification.
 
-`Troubleshooting`_
+`Troubleshooting (iOS)`_
     This chatper describes several common problems that developers can face at the beginning of using HKWirelessHD SDK, and provides solutions for them.
 	
-`Version History`_
+`Version History (iOS)`_
+    Version History
+	
+----
+
+`SDK Overview (Android)`_
+    This chatper is the overview of HKWirelessHD SDK and the SDK apps based on the SDK.
+    
+`Getting Started (Android)`_
+    This chatper describes how you can quickly get started with the HKWirelessHD SDK. Just follow the instruction to setup your Xcode project files, and learn how to create a HKWirelessHD App.
+
+`Programming Guide (Android)`_
+    This chatper explains the APIs of HKWirelessHD SDK.
+	
+`Version History (Android)`_
     Version History
 	
 	
-.. _SDK Overview: iOS/sdk-overview.html
+.. _SDK Overview (iOS): iOS/sdk-overview.html
 .. _Getting Started (iOS): iOS/getting-started-iOS.html
-.. _Programming Guide: iOS/programming-guide.html
-.. _Architecture Overview: iOS/architecture-overview.html
-.. _API Documentation: iOS/api.html
-.. _HKWHub Specification: iOS/hkwhub-spec.html
-.. _Troubleshooting: iOS/trouble-shooting.html
-.. _Version History: iOS/version-history.html
+.. _Programming Guide (iOS): iOS/programming-guide.html
+.. _Architecture Overview (iOS): iOS/architecture-overview.html
+.. _API Documentation (iOS): iOS/api.html
+.. _HKWHub Specification (iOS): iOS/hkwhub-spec.html
+.. _Troubleshooting (iOS): iOS/trouble-shooting.html
+.. _Version History (iOS): iOS/version-history.html
+
+.. _SDK Overview (Android): Android/sdk-overview.html	
+.. _Getting Started (Android): Android/getting-started.html
+.. _Programming Guide (Android): Android/programming-guide.html
+.. _Version History (Android): Android/version-history.html
+
 
 Contents
 --------
