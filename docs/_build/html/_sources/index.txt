@@ -15,6 +15,9 @@ Welcome to Harman Developer documentation!
 
 Welcome to the Harman developer documentation. Here you will find information about creating your app using HKWirelessHD SDK.
 
+Documentations for iOS SDK
+---------------------------------
+
 This documentation is organized into a few different chapters:
 
 `SDK Overview (iOS)`_
@@ -42,6 +45,9 @@ This documentation is organized into a few different chapters:
     Version History
 	
 ----
+
+Documentations for Android SDK
+---------------------------------
 
 `SDK Overview (Android)`_
     This chatper is the overview of HKWirelessHD SDK and the SDK apps based on the SDK.
