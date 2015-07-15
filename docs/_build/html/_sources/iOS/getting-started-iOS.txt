@@ -277,7 +277,9 @@ The following figure shows a screen of the speaker list.
 4. Create the playlist to play
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``SongSelectionTVC`` shows the list of songs availabe for playback. It searches for the songs included in the app as bundle, and show the list of the songs. And also it adds the songs for web-based streaming.
+``SongSelectionTVC`` shows the list of songs availabe for playback. It searches for the songs included in the app as bundle, and show the list of the songs in TableViewController. To be bundled within an app, mp3 or wav files should be included in the project setting. It also adds a list of songs with the URL information for web-based streaming.
+
+In ``SongSelectionTVC``, there is no use of HKWirelessHD APIs, because it is all about listing songs to play.
 
 .. code-block:: swift
 
@@ -403,11 +405,44 @@ The following figure shows an example of the SongSelectionTVC screen.
 5. Playback and Volume Control
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-``NowPlayingVC`` controls the playback and volume level. To receive the events about playback, it must implement ``HKWPlayerEventHandlerDelegate``, and set the delegate value as itself.
+``NowPlayingVC`` controls the playback and volume level, so we have to use the related HKWirelessHDSDK APIs. All playback and volume control related events are sent via ``HKWPlayerEventHandlerDelegate``, so ``NowPlayingVC`` class should implement the delegate. 
+
+Add ``HKWPlayerEventHandlerDelegate`` in the class definition.
 
 .. code-block:: swift
 
 	class NowPlayingVC: UIViewController, HKWPlayerEventHandlerDelegate {
+
+In ``viewDidLoad()``, the ``NowPlayingVC`` should set itself to the delegate attribute of HKWPlayerEventHandlerSingleton object, so that all delegate functions implemented in this class can be referenced by the HKWPlayerEventHandler.
+
+.. code-block:: swift
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        HKWPlayerEventHandlerSingleton.sharedInstance().delegate = self
+
+        labelSongTitle.text = songTitle
+        curVolume = HKWControlHandler.sharedInstance().getVolume()
+        labelAverageVolume.text = "Volume: \(curVolume)"
+    
+        if viewLoadByCellSelection {
+            playCurrentTitle()
+        } else {
+            if HKWControlHandler.sharedInstance().isPlaying() {
+                btnPlayStop.setTitle("Stop", forState: UIControlState.Normal)
+                labelStatus.text = "Now Playing"
+            }
+            else {
+                btnPlayStop.setTitle("Play", forState: UIControlState.Normal)
+                labelStatus.text = "Play Stopped"
+            }
+        }
+    }
+	
+The followings are several variable to show the list of songs in the ViewController.
+
+.. code-block:: swift
+
 	    var row = 0
 	    var section = 0
 	    var songTitle = ""
@@ -427,6 +462,10 @@ The following figure shows an example of the SongSelectionTVC screen.
 	    @IBOutlet var btnVolumeUp: UIButton!
 	    @IBOutlet var labelStatus: UILabel!
     
+The following codes are to play and pause the media file.
+
+.. code-block:: swift
+
 	    @IBAction func playOrStop(sender: UIButton) {
 	        if HKWControlHandler.sharedInstance().isPlaying() {
 	            HKWControlHandler.sharedInstance().pause()
@@ -440,62 +479,8 @@ The following figure shows an example of the SongSelectionTVC screen.
 	            labelStatus.text = "Now Playing"
 	        }
 	    }
-    
-	    @IBAction func volumeUp(sender: UIButton) {
-	        curVolume += 5
-        
-	        if curVolume > 50 {
-	            curVolume = 50
-	        }
-	        HKWControlHandler.sharedInstance().setVolume(curVolume)
-
-	        labelAverageVolume.text = "Volume: \(curVolume)"
-
-	    }
-	    @IBAction func volumeDown(sender: UIButton) {
-	        curVolume -= 5
-        
-	        if curVolume < 0 {
-	            curVolume = 0
-	        }
-
-	        HKWControlHandler.sharedInstance().setVolume(curVolume)
-	        labelAverageVolume.text = "Volume: \(curVolume)"
-
-	    }
-    
-	    override func viewDidLoad() {
-	        super.viewDidLoad()
-        
-	        HKWPlayerEventHandlerSingleton.sharedInstance().delegate = self
-
-	        labelSongTitle.text = songTitle
-	        curVolume = HKWControlHandler.sharedInstance().getVolume()
-	        labelAverageVolume.text = "Volume: \(curVolume)"
-        
-	        if viewLoadByCellSelection {
-	            playCurrentTitle()
-            
-	        } else {
-	            if HKWControlHandler.sharedInstance().isPlaying() {
-	                btnPlayStop.setTitle("Stop", forState: UIControlState.Normal)
-	                labelStatus.text = "Now Playing"
-	            }
-	            else {
-	                btnPlayStop.setTitle("Play", forState: UIControlState.Normal)
-	                labelStatus.text = "Play Stopped"
-	            }
-	        }
-        
-	    }
-
-	    override func didReceiveMemoryWarning() {
-	        super.didReceiveMemoryWarning()
-	        // Dispose of any resources that can be recreated.
-	    }
-    
+		
 	    func playCurrentTitle() {
-        
 	        // just to be sure that there is no running playback
 	        HKWControlHandler.sharedInstance().stop()
         
@@ -532,7 +517,33 @@ The following figure shows an example of the SongSelectionTVC screen.
 	            }
 	        })
 	    }
+		
+The following codes are to control volumes, e.g up and down.
+
+.. code-block:: swift
+
+	    @IBAction func volumeUp(sender: UIButton) {
+	        curVolume += 5
+	        if curVolume > 50 {
+	            curVolume = 50
+	        }
+	        HKWControlHandler.sharedInstance().setVolume(curVolume)
+	        labelAverageVolume.text = "Volume: \(curVolume)"
+	    }
+		
+	    @IBAction func volumeDown(sender: UIButton) {
+	        curVolume -= 5
+	        if curVolume < 0 {
+	            curVolume = 0
+	        }
+	        HKWControlHandler.sharedInstance().setVolume(curVolume)
+	        labelAverageVolume.text = "Volume: \(curVolume)"
+	    }
     
+The following codes implements the delegate functions defined by HKWPlayerEventHandlerDelegate. Here, we can add codes to handle the events of ``PlayEnded`` and ``VolumeChanged``.
+
+.. code-block:: swift
+ 
 	    func hkwPlayEnded() {
 	        btnPlayStop.setTitle("Play", forState: UIControlState.Normal)
 	        songSelectionTVC.bbiNowPlaying.enabled = false
