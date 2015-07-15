@@ -74,8 +74,8 @@ This documentation is organized into a few different chapters:
 Contents
 --------
 
-SDK Overview
-~~~~~~~~~~~~
+SDK Overview (iOS)
+~~~~~~~~~~~~~~~~~~~~~
 
 .. toctree::
 	:maxdepth: 2
@@ -98,7 +98,7 @@ Programming Guide (iOS)
 
 	iOS/programming-guide
 
-Architecture Overview
+Architecture Overview (iOS)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. toctree::
@@ -106,7 +106,7 @@ Architecture Overview
 
 	iOS/architecture-overview
 
-API Documentation
+API Documentation (iOS)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. toctree::
@@ -114,7 +114,7 @@ API Documentation
 
 	iOS/api
 	
-HKWHub Specification
+HKWHub Specification (iOS)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. toctree::
@@ -122,7 +122,7 @@ HKWHub Specification
 
 	iOS/hkwhub-spec
 	
-Troubleshooting
+Troubleshooting (iOS)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. toctree::
@@ -130,14 +130,47 @@ Troubleshooting
 
 	iOS/trouble-shooting
 	
-Version History
+Version History (iOS)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. toctree::
 	:maxdepth: 2
 
-	iOS/version-history
-	
+	Android/version-history
+
+
+SDK Overview (Android)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	Android/sdk-overview
+
+Getting Started Guide (Android)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	Android/getting-started-iOS
+
+Programming Guide (Android)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	Android/programming-guide
+
+Version History (Android)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	Android/version-history
+
 Search
 ======
 
