@@ -437,9 +437,9 @@ User can add music items to the **Media List** of the app.
 
 .. Note::
 
-A music item downloaded from Apple Music is not supported. The music file from Apple music is DRM-enabled, and cannot be played with HKWirelessHD. Only music items purchased from iTunes Music or added from user's own library are supported.
+	A music item downloaded from Apple Music is not supported. The music file from Apple music is DRM-enabled, and cannot be played with HKWirelessHD. Only music items purchased from iTunes Music or added from user's own library are supported.
 
-To be added to the Media List, the music item must be located locally on the device. No streaming from iTunes or Apple Music are supported.
+	To be added to the Media List, the music item must be located locally on the device. No streaming from iTunes or Apple Music are supported.
 
 
 - API: GET /v1/media_list?SessionID=<session id>
