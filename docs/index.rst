@@ -68,7 +68,7 @@ Getting Started Guide (iOS)
 .. toctree::
 	:maxdepth: 2
 
-	getting-started-iOS
+	iOS/getting-started-iOS
 
 Programming Guide (iOS)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,7 +76,7 @@ Programming Guide (iOS)
 .. toctree::
 	:maxdepth: 2
 
-	programming-guide
+	iOS/programming-guide
 
 Architecture Overview
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -84,7 +84,7 @@ Architecture Overview
 .. toctree::
 	:maxdepth: 2
 
-	architecture-overview
+	iOS/architecture-overview
 
 API Documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,7 +92,7 @@ API Documentation
 .. toctree::
 	:maxdepth: 2
 
-	api
+	iOS/api
 	
 HKWHub Specification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -100,7 +100,7 @@ HKWHub Specification
 .. toctree::
 	:maxdepth: 2
 
-	hkwhub-spec
+	iOS/hkwhub-spec
 	
 Troubleshooting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,7 +108,7 @@ Troubleshooting
 .. toctree::
 	:maxdepth: 2
 
-	trouble-shooting
+	iOS/trouble-shooting
 	
 Version History
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -116,7 +116,7 @@ Version History
 .. toctree::
 	:maxdepth: 2
 
-	version-history
+	iOS/version-history
 	
 Search
 ======
