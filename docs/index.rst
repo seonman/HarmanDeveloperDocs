@@ -60,7 +60,7 @@ SDK Overview
 .. toctree::
 	:maxdepth: 2
 
-	sdk-overview
+	iOS/sdk-overview
 
 Getting Started Guide (iOS)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
