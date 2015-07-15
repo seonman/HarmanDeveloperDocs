@@ -580,7 +580,7 @@
 <h3>Media Playback Management<a class="headerlink" href="#media-playback-management" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="get-the-list-of-media-item-in-the-media-list-of-the-hkwhub-app">
 <h4>Get the list of media item in the Media List of the HKWHub app<a class="headerlink" href="#get-the-list-of-media-item-in-the-media-list-of-the-hkwhub-app" title="Permalink to this headline">¶</a></h4>
-<p>User can add music items to the <strong>Media List</strong> of the app.</p>
+<p>Returns the list of media items added to the Media List of the app. User can add music items to the <strong>Media List</strong> of the app via <strong>Setting</strong> of the app.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>A music item downloaded from Apple Music is not supported. The music file from Apple music is DRM-enabled, and cannot be played with HKWirelessHD. Only music items purchased from iTunes Music or added from user&#8217;s own library are supported.</p>
@@ -624,8 +624,13 @@
 </div>
 </div>
 <hr class="docutils" />
-<div class="section" id="play-a-song-in-the-hub-device">
-<h4>Play a Song in the Hub Device<a class="headerlink" href="#play-a-song-in-the-hub-device" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="play-a-song-in-the-media-list-of-the-hkwhub-app">
+<h4>Play a song in the Media List of the HKWHub app<a class="headerlink" href="#play-a-song-in-the-media-list-of-the-hkwhub-app" title="Permalink to this headline">¶</a></h4>
+<p>Plays a song in the Media List of the Hub app. Each music item is identified with MPMediaItem&#8217;s PersistentID. It is a unique ID to identify a song in the iOS Music library.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">play_hub_media</span></code> does not specify speakers to play. It just uses the current session setting. If there is no speaker in the current session, then the play fails.</p>
+</div>
 <ul>
 <li><p class="first">API: GET /v1/play_hub_media?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
 </li>
@@ -652,8 +657,75 @@
 </div>
 </div>
 <hr class="docutils" />
+<div class="section" id="play-a-song-in-the-media-list-as-party-mode">
+<h4>Play a song in the Media list as party mode<a class="headerlink" href="#play-a-song-in-the-media-list-as-party-mode" title="Permalink to this headline">¶</a></h4>
+<p>Plays a song in the Media List with all speakers available. So, regardless of current session setting, this command play a song to all speakers.</p>
+<ul>
+<li><p class="first">API: GET /v1/play_hub_media_party_mode?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Play a song in the hub&#8217;s media list to all speakers, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/play_hub_media_party_mode?SessionID=1000&amp;PersistentID=7387446959931482519</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="play-a-song-in-the-media-list-with-selected-speakers">
+<h4>Play a song in the Media list with selected speakers<a class="headerlink" href="#play-a-song-in-the-media-list-with-selected-speakers" title="Permalink to this headline">¶</a></h4>
+<p>Plays a song in the Media List with selected speakers. The selected speakers are represented in <code class="docutils literal"><span class="pre">DeviceIDList</span></code> parameter as a list of <code class="docutils literal"><span class="pre">DeviceID</span></code> separated by &#8221;,&#8221;.</p>
+<ul>
+<li><p class="first">API: GET /v1/play_hub_media_selected_speakers?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;&amp;DeviceIDList=&lt;xxx,xxx,...&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Play a song in the hub&#8217;s media list to selected speakers, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/play_hub_media_selected_speakers?SessionID=1000&amp;PersistentID=7387446959931482519&amp;DeviceIDList=34317244381360,129321920968880</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
 <div class="section" id="play-a-song-from-web-server">
 <h4>Play a Song from Web Server<a class="headerlink" href="#play-a-song-from-web-server" title="Permalink to this headline">¶</a></h4>
+<p>Plays a song from Web (http:) or rstp (rstp:) or mms (mms:) server. The URL of the song to play is specified by <code class="docutils literal"><span class="pre">MediaUrl</span></code> parameter.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">play_web_media</span></code> does not specify speakers to play. It just uses the current session setting. If there is no speaker in the current session, then the play fails.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">play_web_media</span></code> cannot be resumed. If it is paused by calling <code class="docutils literal"><span class="pre">pause</span></code>, then it just stops playing music, and cannot resume.</p>
+</div>
 <ul>
 <li><p class="first">API: GET /v1/play_web_media?SessionID=&lt;session id&gt;&amp;MediaUrl=&lt;URL of the song&gt;</p>
 </li>
@@ -669,6 +741,80 @@
 <dt>Example:</dt>
 <dd><ul class="first last simple">
 <li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/play_web_media?SessionID=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This API call takes several hundreds millisecond to return the response.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="play-a-song-from-web-server-as-party-mode">
+<h4>Play a Song from Web Server as party mode<a class="headerlink" href="#play-a-song-from-web-server-as-party-mode" title="Permalink to this headline">¶</a></h4>
+<p>Plays a song from Web server with all speakers. The URL of the song to play is specified by <code class="docutils literal"><span class="pre">MediaUrl</span></code> parameter.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">play_web_media</span></code> cannot be resumed. If it is paused by calling <code class="docutils literal"><span class="pre">pause</span></code>, then it just stops playing music, and cannot resume.</p>
+</div>
+<ul>
+<li><p class="first">API: GET /v1/play_web_media_party_mode?SessionID=&lt;session id&gt;&amp;MediaUrl=&lt;URL of the song&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Play a song from HTTP server to all speakers, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/play_web_media_party_mode?SessionID=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This API call takes several hundreds millisecond to return the response.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="play-a-song-from-web-server-with-selected-speakers">
+<h4>Play a Song from Web Server with selected speakers<a class="headerlink" href="#play-a-song-from-web-server-with-selected-speakers" title="Permalink to this headline">¶</a></h4>
+<p>Plays a song from Web server with selected speakers. The URL of the song to play is specified by <code class="docutils literal"><span class="pre">MediaUrl</span></code> parameter. The selected speakers are represented in <code class="docutils literal"><span class="pre">DeviceIDList</span></code> parameter as a list of <code class="docutils literal"><span class="pre">DeviceID</span></code> separated by &#8221;,&#8221;.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">play_web_media</span></code> cannot be resumed. If it is paused by calling <code class="docutils literal"><span class="pre">pause</span></code>, then it just stops playing music, and cannot resume.</p>
+</div>
+<ul>
+<li><p class="first">API: GET /v1/play_web_media_selected_speakers?SessionID=&lt;session id&gt;&amp;MediaUrl=&lt;URL of the song&gt;&amp;DeviceIDList=&lt;xxx,xxx,...&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Play a song from HTTP server to selected speakers, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/play_web_media_selected_speakers?SessionID=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3&amp;DeviceIDList=34317244381360,129321920968880&quot;&quot;</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -730,6 +876,62 @@
 <dt>Example:</dt>
 <dd><ul class="first last simple">
 <li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/resume_hub_media?SessionID=1000&amp;PersistentID=7387446959931482519</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="resume-the-current-playback-with-hub-media-as-party-mode">
+<h4>Resume the Current Playback with Hub Media as Party Mode<a class="headerlink" href="#resume-the-current-playback-with-hub-media-as-party-mode" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/resume_hub_media_party_mode?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Resume the current playback with Hub Media with all speakers, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/resume_hub_media_party_mode?SessionID=1000&amp;PersistentID=7387446959931482519</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="resume-the-current-playback-with-hub-media-with-selected-speakers">
+<h4>Resume the Current Playback with Hub Media with selected speakers<a class="headerlink" href="#resume-the-current-playback-with-hub-media-with-selected-speakers" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">API: GET /v1/resume_hub_media_selected_speakers?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;&amp;DeviceIDList=&lt;xxx,xxx,...&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Resume the current playback with Hub Media with selected speakers, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/resume_hub_media_selected_speakers?SessionID=1000&amp;PersistentID=7387446959931482519&amp;DeviceIDList=34317244381360,129321920968880</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -1026,10 +1228,16 @@
 </li>
 <li><a class="reference internal" href="#media-playback-management">Media Playback Management</a><ul>
 <li><a class="reference internal" href="#get-the-list-of-media-item-in-the-media-list-of-the-hkwhub-app">Get the list of media item in the Media List of the HKWHub app</a></li>
-<li><a class="reference internal" href="#play-a-song-in-the-hub-device">Play a Song in the Hub Device</a></li>
+<li><a class="reference internal" href="#play-a-song-in-the-media-list-of-the-hkwhub-app">Play a song in the Media List of the HKWHub app</a></li>
+<li><a class="reference internal" href="#play-a-song-in-the-media-list-as-party-mode">Play a song in the Media list as party mode</a></li>
+<li><a class="reference internal" href="#play-a-song-in-the-media-list-with-selected-speakers">Play a song in the Media list with selected speakers</a></li>
 <li><a class="reference internal" href="#play-a-song-from-web-server">Play a Song from Web Server</a></li>
+<li><a class="reference internal" href="#play-a-song-from-web-server-as-party-mode">Play a Song from Web Server as party mode</a></li>
+<li><a class="reference internal" href="#play-a-song-from-web-server-with-selected-speakers">Play a Song from Web Server with selected speakers</a></li>
 <li><a class="reference internal" href="#pause-the-current-playback">Pause the Current Playback</a></li>
 <li><a class="reference internal" href="#resume-the-current-playback-with-hub-media">Resume the Current Playback with Hub Media</a></li>
+<li><a class="reference internal" href="#resume-the-current-playback-with-hub-media-as-party-mode">Resume the Current Playback with Hub Media as Party Mode</a></li>
+<li><a class="reference internal" href="#resume-the-current-playback-with-hub-media-with-selected-speakers">Resume the Current Playback with Hub Media with selected speakers</a></li>
 <li><a class="reference internal" href="#stop-the-current-playback">Stop the Current Playback</a></li>
 <li><a class="reference internal" href="#get-the-playback-status-current-playback-state-and-elapsed-time">Get the Playback Status (Current Playback State and Elapsed Time)</a></li>
 <li><a class="reference internal" href="#check-if-the-hub-is-playing-audio">Check if the Hub is playing audio</a></li>

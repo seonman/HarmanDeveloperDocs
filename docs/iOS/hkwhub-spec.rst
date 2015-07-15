@@ -433,7 +433,7 @@ Media Playback Management
 
 Get the list of media item in the Media List of the HKWHub app
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-User can add music items to the **Media List** of the app. 
+Returns the list of media items added to the Media List of the app. User can add music items to the **Media List** of the app via **Setting** of the app.
 
 .. Note::
 
@@ -467,8 +467,14 @@ User can add music items to the **Media List** of the app.
 
 ----
 
-Play a Song in the Hub Device
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Play a song in the Media List of the HKWHub app
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Plays a song in the Media List of the Hub app. Each music item is identified with MPMediaItem's PersistentID. It is a unique ID to identify a song in the iOS Music library.
+
+.. note::
+
+	``play_hub_media`` does not specify speakers to play. It just uses the current session setting. If there is no speaker in the current session, then the play fails.
+
 
 - API: GET /v1/play_hub_media?SessionID=<session id>&PersistentID=<persistent id>
 - Response
@@ -481,17 +487,109 @@ Play a Song in the Hub Device
 
 	{"Result":"true"}
 
+----
+
+Play a song in the Media list as party mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Plays a song in the Media List with all speakers available. So, regardless of current session setting, this command play a song to all speakers.
+
+- API: GET /v1/play_hub_media_party_mode?SessionID=<session id>&PersistentID=<persistent id>
+- Response
+	- Play a song in the hub's media list to all speakers, and then return true or false.
+- Example:
+	- Request: ``http://192.168.1.10/v1/play_hub_media_party_mode?SessionID=1000&PersistentID=7387446959931482519``
+	- Response: 
+
+.. code-block:: json
+
+	{"Result":"true"}
+
+----
+
+Play a song in the Media list with selected speakers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Plays a song in the Media List with selected speakers. The selected speakers are represented in ``DeviceIDList`` parameter as a list of ``DeviceID`` separated by ",".
+
+- API: GET /v1/play_hub_media_selected_speakers?SessionID=<session id>&PersistentID=<persistent id>&DeviceIDList=<xxx,xxx,...>
+- Response
+	- Play a song in the hub's media list to selected speakers, and then return true or false.
+- Example:
+	- Request: ``http://192.168.1.10/v1/play_hub_media_selected_speakers?SessionID=1000&PersistentID=7387446959931482519&DeviceIDList=34317244381360,129321920968880``
+	- Response: 
+
+.. code-block:: json
+
+	{"Result":"true"}
 
 ----
 
 Play a Song from Web Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Plays a song from Web (http:) or rstp (rstp:) or mms (mms:) server. The URL of the song to play is specified by ``MediaUrl`` parameter.
 
+.. note::
+
+	``play_web_media`` does not specify speakers to play. It just uses the current session setting. If there is no speaker in the current session, then the play fails.
+	
+.. note::
+
+	``play_web_media`` cannot be resumed. If it is paused by calling ``pause``, then it just stops playing music, and cannot resume.
+	
+	
 - API: GET /v1/play_web_media?SessionID=<session id>&MediaUrl=<URL of the song>
 - Response
 	- Play a song from HTTP server, and then return true or false.
 - Example:
 	- Request: ``http://192.168.1.10/v1/play_web_media?SessionID=1000&MediaUrl=http://seonman.github.io/music/hyolyn.mp3``
+	- Response: 
+
+.. code-block:: json
+
+	{"Result":"true"}
+
+.. Note::
+	This API call takes several hundreds millisecond to return the response.
+	
+----
+
+Play a Song from Web Server as party mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Plays a song from Web server with all speakers. The URL of the song to play is specified by ``MediaUrl`` parameter.
+
+.. note::
+
+	``play_web_media`` cannot be resumed. If it is paused by calling ``pause``, then it just stops playing music, and cannot resume.
+	
+
+- API: GET /v1/play_web_media_party_mode?SessionID=<session id>&MediaUrl=<URL of the song>
+- Response
+	- Play a song from HTTP server to all speakers, and then return true or false.
+- Example:
+	- Request: ``http://192.168.1.10/v1/play_web_media_party_mode?SessionID=1000&MediaUrl=http://seonman.github.io/music/hyolyn.mp3``
+	- Response: 
+
+.. code-block:: json
+
+	{"Result":"true"}
+
+.. Note::
+	This API call takes several hundreds millisecond to return the response.
+	
+----
+
+Play a Song from Web Server with selected speakers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Plays a song from Web server with selected speakers. The URL of the song to play is specified by ``MediaUrl`` parameter. The selected speakers are represented in ``DeviceIDList`` parameter as a list of ``DeviceID`` separated by ",".
+
+.. note::
+
+	``play_web_media`` cannot be resumed. If it is paused by calling ``pause``, then it just stops playing music, and cannot resume.
+
+- API: GET /v1/play_web_media_selected_speakers?SessionID=<session id>&MediaUrl=<URL of the song>&DeviceIDList=<xxx,xxx,...>
+- Response
+	- Play a song from HTTP server to selected speakers, and then return true or false.
+- Example:
+	- Request: ``http://192.168.1.10/v1/play_web_media_selected_speakers?SessionID=1000&MediaUrl=http://seonman.github.io/music/hyolyn.mp3&DeviceIDList=34317244381360,129321920968880""``
 	- Response: 
 
 .. code-block:: json
@@ -528,6 +626,38 @@ Resume the Current Playback with Hub Media
 	- Resume the current playback with Hub Media, and then return true or false.
 - Example:
 	- Request: ``http://192.168.1.10/v1/resume_hub_media?SessionID=1000&PersistentID=7387446959931482519``
+	- Response: 
+
+.. code-block:: json
+
+	{"Result":"true"}
+
+----
+
+Resume the Current Playback with Hub Media as Party Mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- API: GET /v1/resume_hub_media_party_mode?SessionID=<session id>&PersistentID=<persistent id>
+- Response
+	- Resume the current playback with Hub Media with all speakers, and then return true or false.
+- Example:
+	- Request: ``http://192.168.1.10/v1/resume_hub_media_party_mode?SessionID=1000&PersistentID=7387446959931482519``
+	- Response: 
+
+.. code-block:: json
+
+	{"Result":"true"}
+
+----
+
+Resume the Current Playback with Hub Media with selected speakers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- API: GET /v1/resume_hub_media_selected_speakers?SessionID=<session id>&PersistentID=<persistent id>&DeviceIDList=<xxx,xxx,...>
+- Response
+	- Resume the current playback with Hub Media with selected speakers, and then return true or false.
+- Example:
+	- Request: ``http://192.168.1.10/v1/resume_hub_media_selected_speakers?SessionID=1000&PersistentID=7387446959931482519&DeviceIDList=34317244381360,129321920968880``
 	- Response: 
 
 .. code-block:: json
