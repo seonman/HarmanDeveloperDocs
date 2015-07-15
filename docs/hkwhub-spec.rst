@@ -80,13 +80,31 @@ Use ``curl`` command or web browser to send REST requests
 
 Use **curl** command in your shell, or use your web browser to send  HTTP requests to the server URL. In this example, we will use **curl** commands.
 
-a. Init Session
+a. Init session
 ^^^^^^^^^^^^^^^
 ``curl "http://192.168.1.192:8080/v1/init_session"``
 
-This returns the session id.
+This returns the session id. 
 
-b. Get the media list
+
+b. Add alls speaker to session
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default, none of speakers is selected for playback at first. You need to add one or more speakers to play audio.
+To add all speakers to playback session, use ``set_party_mode``. **Party Mode** means that all speakers are playing a same audio altogether.
+
+``curl "http://192.168.1.192:8080/v1/set_party_mode?SessionID=1000"``
+
+
+c. Add a speaker to session
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you want to add a speaker to session, use ``add_device_to_session`. This command does not impact other speakers regardless of their status.
+
+``curl "http://192.168.1.192:8080/v1/add_device_to_session?SessionID=1000&DeviceID="34317244381360"``
+
+
+d. Get the media list
 ^^^^^^^^^^^^^^^^^^^^^^^
 ``curl "http://192.168.1.192:8080/v1/media_list?SessionID=1000"``
 
@@ -108,20 +126,33 @@ Here, SessionID should be the session id you got from ``init_session``. You will
 		"AlbumTitle":"Wordplay [SINGLE EP]"}
 	]}
 
-c. Choose a media item and play it by specifying PersistentID
+e. Play a media item listed in the hub app
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you want to play a media item listed in the hub app, use ``play_hub_media`` by specifying the media item with ``PersistentID``. The ``PersistentID`` is available by ``media_list`` command.
+
+.. note::
+
+	Note that, before doing this, at least a speaker must be selected (added to session) in advance. If not, then the playback will fail. 
+
 ``curl "http://192.168.1.192:8080/v1/play_hub_media?SessionID=1000&PersistentID=5829171347867182746"``
 
+f. Play a media item in the hub with speaker list
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+You can play a media item in the hub app by specifying the list of speakers.
 
-d. Play a HTTP streaming media
+``curl "http://192.168.1.192:8080/v1/play_hub_media_selected_speakers?SessionID=1000&PersistentID=5829171347867182746&DeviceIDList=34317244381360,129321920968880"``
+
+The list of speakers are listed by the parameter ``DeviceIDList`` with delimitor ",".
+
+g. Play a HTTP streaming media
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ``curl "http://192.168.1.192:8080/v1/play_web_media?SessionID=1000&MediaUrl=http://seonman.github.io/music/hyolyn.mp3"``
 
-e. Stop playing
+h. Stop playing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ``curl "http://192.168.1.192:8080/v1/stop_play?SessionID=1000"``
 
-f. Set Volume
+i. Set Volume
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ``curl "http://192.168.1.192:8080/v1/set_volume?SessionID=1000&Volume=30"``
 

@@ -132,12 +132,23 @@
 <h3>Use <code class="docutils literal"><span class="pre">curl</span></code> command or web browser to send REST requests<a class="headerlink" href="#use-curl-command-or-web-browser-to-send-rest-requests" title="Permalink to this headline">¶</a></h3>
 <p>Use <strong>curl</strong> command in your shell, or use your web browser to send  HTTP requests to the server URL. In this example, we will use <strong>curl</strong> commands.</p>
 <div class="section" id="a-init-session">
-<h4>a. Init Session<a class="headerlink" href="#a-init-session" title="Permalink to this headline">¶</a></h4>
+<h4>a. Init session<a class="headerlink" href="#a-init-session" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/init_session&quot;</span></code></p>
 <p>This returns the session id.</p>
 </div>
-<div class="section" id="b-get-the-media-list">
-<h4>b. Get the media list<a class="headerlink" href="#b-get-the-media-list" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="b-add-alls-speaker-to-session">
+<h4>b. Add alls speaker to session<a class="headerlink" href="#b-add-alls-speaker-to-session" title="Permalink to this headline">¶</a></h4>
+<p>By default, none of speakers is selected for playback at first. You need to add one or more speakers to play audio.
+To add all speakers to playback session, use <code class="docutils literal"><span class="pre">set_party_mode</span></code>. <strong>Party Mode</strong> means that all speakers are playing a same audio altogether.</p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/set_party_mode?SessionID=1000&quot;</span></code></p>
+</div>
+<div class="section" id="c-add-a-speaker-to-session">
+<h4>c. Add a speaker to session<a class="headerlink" href="#c-add-a-speaker-to-session" title="Permalink to this headline">¶</a></h4>
+<p>If you want to add a speaker to session, use <a href="#id1"><span class="problematic" id="id2">``</span></a>add_device_to_session`. This command does not impact other speakers regardless of their status.</p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/add_device_to_session?SessionID=1000&amp;DeviceID=&quot;34317244381360&quot;</span></code></p>
+</div>
+<div class="section" id="d-get-the-media-list">
+<h4>d. Get the media list<a class="headerlink" href="#d-get-the-media-list" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/media_list?SessionID=1000&quot;</span></code></p>
 <p>Here, SessionID should be the session id you got from <code class="docutils literal"><span class="pre">init_session</span></code>. You will get a list of media in JSON like below</p>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;MediaList&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -156,20 +167,31 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="c-choose-a-media-item-and-play-it-by-specifying-persistentid">
-<h4>c. Choose a media item and play it by specifying PersistentID<a class="headerlink" href="#c-choose-a-media-item-and-play-it-by-specifying-persistentid" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="e-play-a-media-item-listed-in-the-hub-app">
+<h4>e. Play a media item listed in the hub app<a class="headerlink" href="#e-play-a-media-item-listed-in-the-hub-app" title="Permalink to this headline">¶</a></h4>
+<p>If you want to play a media item listed in the hub app, use <code class="docutils literal"><span class="pre">play_hub_media</span></code> by specifying the media item with <code class="docutils literal"><span class="pre">PersistentID</span></code>. The <code class="docutils literal"><span class="pre">PersistentID</span></code> is available by <code class="docutils literal"><span class="pre">media_list</span></code> command.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that, before doing this, at least a speaker must be selected (added to session) in advance. If not, then the playback will fail.</p>
+</div>
 <p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/play_hub_media?SessionID=1000&amp;PersistentID=5829171347867182746&quot;</span></code></p>
 </div>
-<div class="section" id="d-play-a-http-streaming-media">
-<h4>d. Play a HTTP streaming media<a class="headerlink" href="#d-play-a-http-streaming-media" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="f-play-a-media-item-in-the-hub-with-speaker-list">
+<h4>f. Play a media item in the hub with speaker list<a class="headerlink" href="#f-play-a-media-item-in-the-hub-with-speaker-list" title="Permalink to this headline">¶</a></h4>
+<p>You can play a media item in the hub app by specifying the list of speakers.</p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/play_hub_media_selected_speakers?SessionID=1000&amp;PersistentID=5829171347867182746&amp;DeviceIDList=34317244381360,129321920968880&quot;</span></code></p>
+<p>The list of speakers are listed by the parameter <code class="docutils literal"><span class="pre">DeviceIDList</span></code> with delimitor &#8221;,&#8221;.</p>
+</div>
+<div class="section" id="g-play-a-http-streaming-media">
+<h4>g. Play a HTTP streaming media<a class="headerlink" href="#g-play-a-http-streaming-media" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/play_web_media?SessionID=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3&quot;</span></code></p>
 </div>
-<div class="section" id="e-stop-playing">
-<h4>e. Stop playing<a class="headerlink" href="#e-stop-playing" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="h-stop-playing">
+<h4>h. Stop playing<a class="headerlink" href="#h-stop-playing" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/stop_play?SessionID=1000&quot;</span></code></p>
 </div>
-<div class="section" id="f-set-volume">
-<h4>f. Set Volume<a class="headerlink" href="#f-set-volume" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="i-set-volume">
+<h4>i. Set Volume<a class="headerlink" href="#i-set-volume" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/set_volume?SessionID=1000&amp;Volume=30&quot;</span></code></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -275,8 +297,8 @@
 <h2>REST API Specification<a class="headerlink" href="#rest-api-specification" title="Permalink to this headline">¶</a></h2>
 <p>This specification describes the REST API for controlling HKWHub app remotely to control HK Omni speakers and stream audio to the speakers.</p>
 <p>All the APIS are in REST API protocol.</p>
-<div class="section" id="id1">
-<h3>Session Management<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Session Management<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="start-session">
 <h4>Start Session<a class="headerlink" href="#start-session" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -929,12 +951,15 @@
 <li><a class="reference internal" href="#quick-guide-to-hkwhub-app">Quick Guide to HKWHub App</a><ul>
 <li><a class="reference internal" href="#run-hkwhub-app-on-your-ios-device">Run HKWHub app on your iOS device</a></li>
 <li><a class="reference internal" href="#use-curl-command-or-web-browser-to-send-rest-requests">Use <code class="docutils literal"><span class="pre">curl</span></code> command or web browser to send REST requests</a><ul>
-<li><a class="reference internal" href="#a-init-session">a. Init Session</a></li>
-<li><a class="reference internal" href="#b-get-the-media-list">b. Get the media list</a></li>
-<li><a class="reference internal" href="#c-choose-a-media-item-and-play-it-by-specifying-persistentid">c. Choose a media item and play it by specifying PersistentID</a></li>
-<li><a class="reference internal" href="#d-play-a-http-streaming-media">d. Play a HTTP streaming media</a></li>
-<li><a class="reference internal" href="#e-stop-playing">e. Stop playing</a></li>
-<li><a class="reference internal" href="#f-set-volume">f. Set Volume</a></li>
+<li><a class="reference internal" href="#a-init-session">a. Init session</a></li>
+<li><a class="reference internal" href="#b-add-alls-speaker-to-session">b. Add alls speaker to session</a></li>
+<li><a class="reference internal" href="#c-add-a-speaker-to-session">c. Add a speaker to session</a></li>
+<li><a class="reference internal" href="#d-get-the-media-list">d. Get the media list</a></li>
+<li><a class="reference internal" href="#e-play-a-media-item-listed-in-the-hub-app">e. Play a media item listed in the hub app</a></li>
+<li><a class="reference internal" href="#f-play-a-media-item-in-the-hub-with-speaker-list">f. Play a media item in the hub with speaker list</a></li>
+<li><a class="reference internal" href="#g-play-a-http-streaming-media">g. Play a HTTP streaming media</a></li>
+<li><a class="reference internal" href="#h-stop-playing">h. Stop playing</a></li>
+<li><a class="reference internal" href="#i-set-volume">i. Set Volume</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#use-webhubwebapp-to-play-music">Use <code class="docutils literal"><span class="pre">WebHubWebApp</span></code> to play music</a></li>
@@ -947,7 +972,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#rest-api-specification">REST API Specification</a><ul>
-<li><a class="reference internal" href="#id1">Session Management</a><ul>
+<li><a class="reference internal" href="#id3">Session Management</a><ul>
 <li><a class="reference internal" href="#start-session">Start Session</a></li>
 <li><a class="reference internal" href="#close-session">Close Session</a></li>
 </ul>
