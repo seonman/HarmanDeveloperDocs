@@ -76,6 +76,7 @@ Documentations for Android SDK
 .. _Programming Guide (Android): Android/programming-guide.html
 .. _Version History (Android): Android/version-history.html
 
+----
 
 Contents
 --------
@@ -144,6 +145,7 @@ Version History (iOS)
 
 	Android/version-history
 
+----
 
 SDK Overview (Android)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -159,7 +161,7 @@ Getting Started Guide (Android)
 .. toctree::
 	:maxdepth: 2
 
-	Android/getting-started-iOS
+	Android/getting-started
 
 Programming Guide (Android)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

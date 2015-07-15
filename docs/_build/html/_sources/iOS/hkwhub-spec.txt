@@ -1,5 +1,5 @@
-HKWHub App - Making your Omni speakers connected from any devices (sensors) or services
-=========================================================================================
+HKWHub App - Making your Omni speakers connected from any devices (sensors) or services (iOS)
+==============================================================================================
 
 Overview of HWKHub
 ---------------------

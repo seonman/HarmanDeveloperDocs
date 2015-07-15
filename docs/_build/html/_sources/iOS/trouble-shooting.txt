@@ -1,5 +1,5 @@
-Troubleshooting
-====================
+Troubleshooting (iOS)
+=======================
 
 Handling of link error “undefined symbols for architecture armv7”
 ------------------------------------------------------------------
