@@ -22,12 +22,14 @@ Controlling HK Omni speakers are done by calling APIs provided by HKWControlHand
 
 Once you acquire the HKWControlHandler object, you need to initialize it by calling initializeHKWirelessController(). ``initializeHKWirelessController()`` takes a string of license key as parameter. Every developer who signs up for Harman developer community will receive a license key. If you have not received it yet, then just use the license key specified in the sample code for temporary use until your own license key is delivered to you.
 
+This API requires a boolean parameter that specifies if all speakers in the network will be added right after initialzation. If it is **true**, then all speakers will be added to session, so you can play music without adding speakers separately. If it is **false**, none of speakers will be added to playback session, so you need to add speakers separately to session to play music.
+
 .. code-block:: swift
 
 	if HKWControlHandler.sharedInstance().isInitialized() == false {
 		// HKWControlHandler has not been initialized before. Initialize it now.
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-			if HKWControlHandler.sharedInstance().initializeHKWirelessController(g_licenseKey) != 0 {
+			if HKWControlHandler.sharedInstance().initializeHKWirelessController(g_licenseKey, withSpeakersAdded:true) != 0 {
 				println("initializeHKWirelessControl failed")
 				return
 			}

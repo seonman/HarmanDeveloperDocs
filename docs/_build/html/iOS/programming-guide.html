@@ -23,7 +23,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" />
+    <link rel="next" title="Architecture Overview (iOS)" href="architecture-overview.html" />
+    <link rel="prev" title="Getting Started Guide (iOS)" href="getting-started-iOS.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -32,6 +34,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="architecture-overview.html" title="Architecture Overview (iOS)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="getting-started-iOS.html" title="Getting Started Guide (iOS)"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -53,10 +61,11 @@
 <h3>Initialize HKWirelessHD Control Handler and start the Wireless Audio<a class="headerlink" href="#initialize-hkwirelesshd-control-handler-and-start-the-wireless-audio" title="Permalink to this headline">¶</a></h3>
 <p>Controlling HK Omni speakers are done by calling APIs provided by HKWControlHandler. So, the first thing to do to use HKWirelessHD APIs is to acquire the singleton object of HKWControlHandler and initialize it.</p>
 <p>Once you acquire the HKWControlHandler object, you need to initialize it by calling initializeHKWirelessController(). <code class="docutils literal"><span class="pre">initializeHKWirelessController()</span></code> takes a string of license key as parameter. Every developer who signs up for Harman developer community will receive a license key. If you have not received it yet, then just use the license key specified in the sample code for temporary use until your own license key is delivered to you.</p>
+<p>This API requires a boolean parameter that specifies if all speakers in the network will be added right after initialzation. If it is <strong>true</strong>, then all speakers will be added to session, so you can play music without adding speakers separately. If it is <strong>false</strong>, none of speakers will be added to playback session, so you need to add speakers separately to session to play music.</p>
 <div class="highlight-swift"><div class="highlight"><pre><span class="k">if</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">isInitialized</span><span class="p">()</span> <span class="p">==</span> <span class="kc">false</span> <span class="p">{</span>
         <span class="c1">// HKWControlHandler has not been initialized before. Initialize it now.</span>
         <span class="n">dispatch_async</span><span class="p">(</span><span class="n">dispatch_get_global_queue</span><span class="p">(</span><span class="n">DISPATCH_QUEUE_PRIORITY_DEFAULT</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">initializeHKWirelessController</span><span class="p">(</span><span class="n">g_licenseKey</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="n">HKWControlHandler</span><span class="p">.</span><span class="n">sharedInstance</span><span class="p">().</span><span class="n">initializeHKWirelessController</span><span class="p">(</span><span class="n">g_licenseKey</span><span class="p">,</span> <span class="n">withSpeakersAdded</span><span class="p">:</span><span class="kc">true</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">{</span>
                         <span class="bp">println</span><span class="p">(</span><span class="s">&quot;initializeHKWirelessControl failed&quot;</span><span class="p">)</span>
                         <span class="k">return</span>
                 <span class="p">}</span>
@@ -698,6 +707,12 @@ This function is invoked when playback state is changed during the playback. The
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="getting-started-iOS.html"
+                        title="previous chapter">Getting Started Guide (iOS)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="architecture-overview.html"
+                        title="next chapter">Architecture Overview (iOS)</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -728,6 +743,12 @@ This function is invoked when playback state is changed during the playback. The
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="architecture-overview.html" title="Architecture Overview (iOS)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="getting-started-iOS.html" title="Getting Started Guide (iOS)"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
