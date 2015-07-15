@@ -132,47 +132,58 @@ For the project setup, please refer to the previous session of **Project Setup w
 2. Initialize HKWirelessHD Controller
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In HKWSimple app, the initialization of HKWirelessHD Controller is done in the first ViewController called MainVC. When the app is launched, if HKWControlHandler is not initialized, then the app shows a dialog saying it is about to initialize the HKWControlHandler. This is done in ``viewDidLoad()``. After that, in ``viewDidAppear()``, the app actually tries to initialize HKWControlHandler. And it is successful, it dismisses the dialog. If not, it keeps showing the dialog so that the user can take an action.
+In HKWSimple app, the initialization of HKWirelessHD Controller is done in the first ViewController called MainVC. When the app is launched, if HKWControlHandler is not initialized, then the app shows a dialog saying it is about to initialize the HKWControlHandler. This is done in ``viewDidLoad()``. After that, in ``viewDidAppear()``, the app actually tries to initialize HKWControlHandler. And it is successful, it dismisses the dialog. If not, it keeps showing the dialog so that the user can take an action. 
+
+As shown in the dialog message, if the app cannot initialize HKWControlHandler, then the reason would be one of the followings:
+
+- The phone is not in Wi-Fi network.
+- An app using HKWControlHandler is running on the same phone.
 
 .. code-block:: swift
 
 	class MainVC: UIViewController {
-		var g_alert: UIAlertController!
-		
-		override func viewDidLoad() {
-			super.viewDidLoad()
-			
-			if !HKWControlHandler.sharedInstance().isInitialized() {
-				// show the network initialization dialog
-				println("show dialog")
-				g_alert = UIAlertController(title: "Initializing", message: "If this dialog does not disappear, please check if any other HK WirelessHD App is running on the phone and kill it. Or, your phone is not in a Wifi network.", preferredStyle: .Alert)
-				self.presentViewController(g_alert, animated: true, completion: nil)
-			}
-		}
+	    var g_alert: UIAlertController!
 
-		override func viewDidAppear(animated: Bool) {
-			if !HKWControlHandler.sharedInstance().initializing() && !HKWControlHandler.sharedInstance().isInitialized() {
-				dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-					if HKWControlHandler.sharedInstance().initializeHKWirelessController(kLicenseKeyGlobal) != 0 {
-						println("initializeHKWirelessControl failed : invalid license key")
-                    	return
-                	}
-                	println("initializeHKWirelessControl - OK");
+	    override func viewDidLoad() {
+	        super.viewDidLoad()
+        
+	        if !HKWControlHandler.sharedInstance().isInitialized() {
+	            // show the network initialization dialog
+	            g_alert = UIAlertController(title: "Initializing", message: "If this dialog does not disappear, please check if any other HK WirelessHD App is running on the phone and kill it. Or, your phone is not in a Wifi network.", preferredStyle: .Alert)
+            
+	            self.presentViewController(g_alert, animated: true, completion: nil)
+	        }
+
+	    }
+
+	    override func viewDidAppear(animated: Bool) {
+        
+	        if !HKWControlHandler.sharedInstance().initializing() && !HKWControlHandler.sharedInstance().isInitialized() {
+            
+	            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+	                if HKWControlHandler.sharedInstance().initializeHKWirelessController(kLicenseKeyGlobal, withSpeakersAdded:false) != 0 {
+	                    println("initializeHKWirelessControl failed : invalid license key")
+	                    return
+	                }
+	                println("initializeHKWirelessControl - OK");
                 
-                	// dismiss the network initialization dialog
-                	if self.g_alert != nil {
-						self.g_alert.dismissViewControllerAnimated(true, completion: nil)
-                	}
-				})
-			}
-		}
+	                // dismiss the network initialization dialog
+	                if self.g_alert != nil {
+	                    self.g_alert.dismissViewControllerAnimated(true, completion: nil)
+	                }
+                
+	            })
+	        }
+	    }
 	}
 
 
 3. Get the list of available speakers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The list of speakers are presented in ``SpeakerSelectionTVC`` TableViewController. It should receive the event about the device status, so it should implement the functions of ``HKWDeviceEventHandelrDelegate``. First, the ``SpeakerSelectionTVC`` class should have ``HKWDeviceEventHandlerDelegate`` in its class declaration.
+The list of speakers are presented in ``SpeakerSelectionTVC`` TableViewController. In order to show the list of speakers with the latest status information, the ViewController should receive events about device status. So it implements the delegate functions defined in ``HKWDeviceEventHandelrDelegate``. 
+
+First, ``SpeakerSelectionTVC`` class should have ``HKWDeviceEventHandlerDelegate`` in its class declaration to be a delegate object of it.
 
 .. code-block:: swift
 
@@ -197,7 +208,7 @@ If the SpeakerSelectionTVC disappears, for example, by clicking **Back** button 
 			HKWControlHandler.sharedInstance().stopRefreshDeviceInfo()
 		}
 
-The follow codes are all about listing the speakers with their detailed information in the TableView. If a speaker is active, that is, the speaker belongs to the current session, then it checks the checkmark of the cell.
+The follow codes are all about listing the speakers with their detailed information in the TableView. If a speaker is active, that is, the speaker belongs to playback session, then it shows a checkmark in the cell.
 
 .. code-block:: swift
     
@@ -250,6 +261,7 @@ The follow codes are for handling events from Device Handler. In this example, i
 					
 		func hkwDeviceStateUpdated(deviceId: Int64, withReason reason: Int) {
 			self.tableView.reloadData()
+			nextBBI.enabled = !(HKWControlHandler.sharedInstance().getActiveDeviceCount() == 0)
 		}
 				
 		func hkwErrorOccurred(errorCode: Int, withErrorMessage errorMesg: String!) {
@@ -405,7 +417,9 @@ The following figure shows an example of the SongSelectionTVC screen.
 	    var curVolume:Int = 50
 	    var songUrl = ""
 	    var serverUrl = ""
+
 	    var g_alert: UIAlertController!
+
 	    @IBOutlet var labelSongTitle: UILabel!
 	    @IBOutlet var btnPlayStop: UIButton!
 	    @IBOutlet var labelAverageVolume: UILabel!
@@ -413,18 +427,55 @@ The following figure shows an example of the SongSelectionTVC screen.
 	    @IBOutlet var btnVolumeUp: UIButton!
 	    @IBOutlet var labelStatus: UILabel!
     
+	    @IBAction func playOrStop(sender: UIButton) {
+	        if HKWControlHandler.sharedInstance().isPlaying() {
+	            HKWControlHandler.sharedInstance().pause()
+	            labelStatus.text = "Play Stopped"
+
+	            btnPlayStop.setTitle("Play", forState: UIControlState.Normal)
+
+	        }
+	        else {
+	            playCurrentTitle()
+	            labelStatus.text = "Now Playing"
+	        }
+	    }
+    
+	    @IBAction func volumeUp(sender: UIButton) {
+	        curVolume += 5
+        
+	        if curVolume > 50 {
+	            curVolume = 50
+	        }
+	        HKWControlHandler.sharedInstance().setVolume(curVolume)
+
+	        labelAverageVolume.text = "Volume: \(curVolume)"
+
+	    }
+	    @IBAction func volumeDown(sender: UIButton) {
+	        curVolume -= 5
+        
+	        if curVolume < 0 {
+	            curVolume = 0
+	        }
+
+	        HKWControlHandler.sharedInstance().setVolume(curVolume)
+	        labelAverageVolume.text = "Volume: \(curVolume)"
+
+	    }
+    
 	    override func viewDidLoad() {
 	        super.viewDidLoad()
-    
+        
 	        HKWPlayerEventHandlerSingleton.sharedInstance().delegate = self
 
 	        labelSongTitle.text = songTitle
 	        curVolume = HKWControlHandler.sharedInstance().getVolume()
 	        labelAverageVolume.text = "Volume: \(curVolume)"
-    
+        
 	        if viewLoadByCellSelection {
 	            playCurrentTitle()
-        
+            
 	        } else {
 	            if HKWControlHandler.sharedInstance().isPlaying() {
 	                btnPlayStop.setTitle("Stop", forState: UIControlState.Normal)
@@ -435,43 +486,19 @@ The following figure shows an example of the SongSelectionTVC screen.
 	                labelStatus.text = "Play Stopped"
 	            }
 	        }
-	    }
-		
-	    @IBAction func playOrStop(sender: UIButton) {
-	        if HKWControlHandler.sharedInstance().isPlaying() {
-	            HKWControlHandler.sharedInstance().pause()
-	            labelStatus.text = "Play Stopped"
-	            btnPlayStop.setTitle("Play", forState: UIControlState.Normal)
-	        }
-	        else {
-	            playCurrentTitle()
-	            labelStatus.text = "Now Playing"
-	        }
-	    }
-    
-	    @IBAction func volumeUp(sender: UIButton) {
-	        curVolume += 5
-	        if curVolume > 50 {
-	            curVolume = 50
-	        }
-	        HKWControlHandler.sharedInstance().setVolume(curVolume)
-	        labelAverageVolume.text = "Volume: \(curVolume)"
+        
 	    }
 
-	    @IBAction func volumeDown(sender: UIButton) {
-	        curVolume -= 5
-	        if curVolume < 0 {
-	            curVolume = 0
-	        }
-	        HKWControlHandler.sharedInstance().setVolume(curVolume)
-	        labelAverageVolume.text = "Volume: \(curVolume)"
+	    override func didReceiveMemoryWarning() {
+	        super.didReceiveMemoryWarning()
+	        // Dispose of any resources that can be recreated.
 	    }
     
 	    func playCurrentTitle() {
+        
 	        // just to be sure that there is no running playback
 	        HKWControlHandler.sharedInstance().stop()
         
-	        println("nsWavPath: \(nsWavPath)")
 	        if section == 0 {
 	            if HKWControlHandler.sharedInstance().playWAV(nsWavPath) {
 	                // now playing, so change the icon to "STOP"
@@ -479,6 +506,7 @@ The following figure shows an example of the SongSelectionTVC screen.
 	            }
 	        } else if section == 1 {
 	            let assetUrl = NSURL(fileURLWithPath: nsWavPath)
+            
 	            if HKWControlHandler.sharedInstance().playCAF(assetUrl, songName: songTitle, resumeFlag: false) {
 	                // now playing, so change the icon to "STOP"
 	                btnPlayStop.setTitle("Stop", forState: UIControlState.Normal)
@@ -494,6 +522,7 @@ The following figure shows an example of the SongSelectionTVC screen.
 	            if result == false {
 	                println("playStreamingMedia: failed")
 	                self.btnPlayStop.selected = false
+                
 	                self.g_alert = UIAlertController(title: "Warning", message: "Playing streaming media failed. Please check the Internet connection or check if the meida URL is correct.", preferredStyle: .Alert)
 	                self.g_alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
 	                self.presentViewController(self.g_alert, animated: true, completion: nil)
@@ -514,3 +543,4 @@ The following figure shows an example of the SongSelectionTVC screen.
 	        curVolume = avgVolume
 	    }
 	}
+

@@ -13,7 +13,9 @@ Refer to HKWControlHandler.h in the SDK.
 initializeHKWirelessController()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Initializes and starts HKWirelessHD controller. This API requires a license key as string. If the input license key fails in key validation, then the API returns -1. If it is successful, return 0.
+Initializes and starts HKWirelessHD controller. This API requires a boolean parameter that specifies if all the speakers in the network will be added right after initialzation. If it is **true**, then all speakers will be added to session, so you can play music without adding speakers. If it is **false**, none of speakers will be added to playback session, so you need to add speakers separately to session to play music.
+
+This API also requires a license key as string. If the input license key fails in key validation, then the API returns -1. If it is successful, return 0.
 
 The license key will be delivered to you once you sign on to developer.harman.com. Until it is delivered, you may use the license key included in the sample apps.
 
@@ -24,11 +26,12 @@ The license key will be delivered to you once you sign on to developer.harman.co
 
 
 **Signature:**
-    ``- (NSInteger) initializeHKWirelessController:(NSString*)licenseKey;``
+	``- (NSInteger) initializeHKWirelessController:(NSString*)licenseKey withSpeakersAdded:(BOOL)withSpeakersAdded;``
 
 **Parameters:**
 
 - ``(NSString*) licenseKey`` - a string containing the license key
+- ``(BOOL) withSpeakersAdded`` - boolean value specifying if all speakers are added to session after initialization
 	
 **Returns:**
     ``NSInteger`` - an integer indicating success (0 or HKW_INIT_SUCCESS) or failure (-1 or HKW_INIT_FAILURE_LICENSE_INVALID)
