@@ -134,17 +134,16 @@
 <div class="section" id="a-init-session">
 <h4>a. Init session<a class="headerlink" href="#a-init-session" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/init_session&quot;</span></code></p>
-<p>This returns the session id.</p>
+<p>This returns the session id. The returned SessionID is used in all subsequent REST API commands.</p>
 </div>
 <div class="section" id="b-add-alls-speaker-to-session">
 <h4>b. Add alls speaker to session<a class="headerlink" href="#b-add-alls-speaker-to-session" title="Permalink to this headline">¶</a></h4>
-<p>By default, none of speakers is selected for playback at first. You need to add one or more speakers to play audio.
-To add all speakers to playback session, use <code class="docutils literal"><span class="pre">set_party_mode</span></code>. <strong>Party Mode</strong> means that all speakers are playing the same audio altogether. So, by <code class="docutils literal"><span class="pre">set_party_mode</span></code>, you can select all speakers to play.</p>
+<p>After HKWHub app is launched, none of speakers is selected for playback. You need to add one or more speakers to play audio. To add all speakers to playback session, use <code class="docutils literal"><span class="pre">set_party_mode</span></code>. <strong>Party Mode</strong> is the mode where all speakers are playing the same audio together with synchronization. So, by <code class="docutils literal"><span class="pre">set_party_mode</span></code>, you can select all speakers to play.</p>
 <p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/set_party_mode?SessionID=1000&quot;</span></code></p>
 </div>
 <div class="section" id="c-add-a-speaker-to-session">
 <h4>c. Add a speaker to session<a class="headerlink" href="#c-add-a-speaker-to-session" title="Permalink to this headline">¶</a></h4>
-<p>If you want to add a speaker to session, use <a href="#id1"><span class="problematic" id="id2">``</span></a>add_device_to_session`. This command does not impact other speakers regardless of their status.</p>
+<p>If you want to add a speaker to session, use <code class="docutils literal"><span class="pre">add_device_to_session`.</span> <span class="pre">It</span> <span class="pre">requires</span> <span class="pre">``DeviceID</span></code> parameter to identify a speaker to add. This command does not impact other speakers regardless of their status.</p>
 <p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/add_device_to_session?SessionID=1000&amp;DeviceID=&quot;34317244381360&quot;</span></code></p>
 </div>
 <div class="section" id="d-get-the-media-list">
@@ -297,10 +296,11 @@ To add all speakers to playback session, use <code class="docutils literal"><spa
 <h2>REST API Specification<a class="headerlink" href="#rest-api-specification" title="Permalink to this headline">¶</a></h2>
 <p>This specification describes the REST API for controlling HKWHub app remotely to control HK Omni speakers and stream audio to the speakers.</p>
 <p>All the APIS are in REST API protocol.</p>
-<div class="section" id="id3">
-<h3>Session Management<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Session Management<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="start-session">
 <h4>Start Session<a class="headerlink" href="#start-session" title="Permalink to this headline">¶</a></h4>
+<p>Starts a new session. A session expires after 60 minutes of the last commands used with the SessionID. That is, the timeout restarts as a new REST command is handled by the HKWHub app.</p>
 <ul>
 <li><p class="first">API: GET /v1/init_session?Priority=&lt;priority value&gt;</p>
 </li>
@@ -330,6 +330,7 @@ To add all speakers to playback session, use <code class="docutils literal"><spa
 <hr class="docutils" />
 <div class="section" id="close-session">
 <h4>Close Session<a class="headerlink" href="#close-session" title="Permalink to this headline">¶</a></h4>
+<p>Close the session. The SessionID information is removed from the session database.</p>
 <ul>
 <li><p class="first">API: GET /v1/close_session?SessionID=&lt;session id&gt;</p>
 </li>
@@ -359,8 +360,9 @@ To add all speakers to playback session, use <code class="docutils literal"><spa
 <hr class="docutils" />
 <div class="section" id="device-management">
 <h3>Device Management<a class="headerlink" href="#device-management" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="get-device-cound">
-<h4>Get device cound<a class="headerlink" href="#get-device-cound" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="get-the-device-count">
+<h4>Get the device count<a class="headerlink" href="#get-the-device-count" title="Permalink to this headline">¶</a></h4>
+<p>Returns the number of speakers.</p>
 <ul>
 <li><p class="first">API: GET /v1/device_count?SessionID=&lt;session id&gt;</p>
 </li>
@@ -388,7 +390,7 @@ To add all speakers to playback session, use <code class="docutils literal"><spa
 </div>
 <hr class="docutils" />
 <div class="section" id="get-the-list-of-devices-and-their-information">
-<h4>Get the list of Devices and their information<a class="headerlink" href="#get-the-list-of-devices-and-their-information" title="Permalink to this headline">¶</a></h4>
+<h4>Get the list of devices and their information<a class="headerlink" href="#get-the-list-of-devices-and-their-information" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p class="first">API: GET /v1/device_list?SessionID=&lt;session id&gt;</p>
 </li>
@@ -489,6 +491,7 @@ To add all speakers to playback session, use <code class="docutils literal"><spa
 <hr class="docutils" />
 <div class="section" id="add-a-device-to-session">
 <h4>Add a Device to Session<a class="headerlink" href="#add-a-device-to-session" title="Permalink to this headline">¶</a></h4>
+<p>Add a speaker to playback session. Once a speaker is added, then the speaker will play the music. There is no impact of this call to other speakers.</p>
 <ul>
 <li><p class="first">API: GET /v1/add_device_tosession?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
 </li>
@@ -517,6 +520,7 @@ To add all speakers to playback session, use <code class="docutils literal"><spa
 <hr class="docutils" />
 <div class="section" id="remove-a-device-from-session">
 <h4>Remove a Device from Session<a class="headerlink" href="#remove-a-device-from-session" title="Permalink to this headline">¶</a></h4>
+<p>Removes a speaker from playback session. Once a speaker is removed, then the speaker will not play the music. There is no impact of this call to other speakers.</p>
 <ul>
 <li><p class="first">API: GET /v1/remove_device_from_session?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
 </li>
@@ -542,12 +546,43 @@ To add all speakers to playback session, use <code class="docutils literal"><spa
 </pre></div>
 </div>
 </div>
+<div class="section" id="set-party-mode">
+<h4>Set party mode<a class="headerlink" href="#set-party-mode" title="Permalink to this headline">¶</a></h4>
+<p>Addes all speakers to playback session. Once it is done, all speakers will play music.</p>
+<ul>
+<li><p class="first">API: GET /v1/set_party_mode?SessionID=&lt;session id&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Returns true or false</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first last simple">
+<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10/v1/set_party_mode?SessionID=1000</span></code></li>
+<li>Response:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="media-playback-management">
 <h3>Media Playback Management<a class="headerlink" href="#media-playback-management" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="get-the-list-of-stored-media">
-<h4>Get the list of stored media<a class="headerlink" href="#get-the-list-of-stored-media" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="get-the-list-of-media-item-in-the-media-list-of-the-hkwhub-app">
+<h4>Get the list of media item in the Media List of the HKWHub app<a class="headerlink" href="#get-the-list-of-media-item-in-the-media-list-of-the-hkwhub-app" title="Permalink to this headline">¶</a></h4>
+<p>User can add music items to the <strong>Media List</strong> of the app.</p>
+<p>A music item downloaded from Apple Music is not supported. The music file from Apple music is DRM-enabled, and cannot be played with HKWirelessHD. Only music items purchased from iTunes Music or added from user&#8217;s own library are supported.</p>
+<p>To be added to the Media List, the music item must be located locally on the device. No streaming from iTunes or Apple Music are supported.</p>
 <ul>
 <li><p class="first">API: GET /v1/media_list?SessionID=&lt;session id&gt;</p>
 </li>
@@ -972,21 +1007,22 @@ To add all speakers to playback session, use <code class="docutils literal"><spa
 </ul>
 </li>
 <li><a class="reference internal" href="#rest-api-specification">REST API Specification</a><ul>
-<li><a class="reference internal" href="#id3">Session Management</a><ul>
+<li><a class="reference internal" href="#id1">Session Management</a><ul>
 <li><a class="reference internal" href="#start-session">Start Session</a></li>
 <li><a class="reference internal" href="#close-session">Close Session</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#device-management">Device Management</a><ul>
-<li><a class="reference internal" href="#get-device-cound">Get device cound</a></li>
-<li><a class="reference internal" href="#get-the-list-of-devices-and-their-information">Get the list of Devices and their information</a></li>
+<li><a class="reference internal" href="#get-the-device-count">Get the device count</a></li>
+<li><a class="reference internal" href="#get-the-list-of-devices-and-their-information">Get the list of devices and their information</a></li>
 <li><a class="reference internal" href="#get-the-device-information">Get the Device Information</a></li>
 <li><a class="reference internal" href="#add-a-device-to-session">Add a Device to Session</a></li>
 <li><a class="reference internal" href="#remove-a-device-from-session">Remove a Device from Session</a></li>
+<li><a class="reference internal" href="#set-party-mode">Set party mode</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#media-playback-management">Media Playback Management</a><ul>
-<li><a class="reference internal" href="#get-the-list-of-stored-media">Get the list of stored media</a></li>
+<li><a class="reference internal" href="#get-the-list-of-media-item-in-the-media-list-of-the-hkwhub-app">Get the list of media item in the Media List of the HKWHub app</a></li>
 <li><a class="reference internal" href="#play-a-song-in-the-hub-device">Play a Song in the Hub Device</a></li>
 <li><a class="reference internal" href="#play-a-song-from-web-server">Play a Song from Web Server</a></li>
 <li><a class="reference internal" href="#pause-the-current-playback">Pause the Current Playback</a></li>

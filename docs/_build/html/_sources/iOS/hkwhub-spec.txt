@@ -84,14 +84,13 @@ a. Init session
 ^^^^^^^^^^^^^^^
 ``curl "http://192.168.1.192:8080/v1/init_session"``
 
-This returns the session id. 
+This returns the session id. The returned SessionID is used in all subsequent REST API commands.
 
 
 b. Add alls speaker to session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-By default, none of speakers is selected for playback at first. You need to add one or more speakers to play audio.
-To add all speakers to playback session, use ``set_party_mode``. **Party Mode** means that all speakers are playing the same audio altogether. So, by ``set_party_mode``, you can select all speakers to play.
+After HKWHub app is launched, none of speakers is selected for playback. You need to add one or more speakers to play audio. To add all speakers to playback session, use ``set_party_mode``. **Party Mode** is the mode where all speakers are playing the same audio together with synchronization. So, by ``set_party_mode``, you can select all speakers to play.
 
 ``curl "http://192.168.1.192:8080/v1/set_party_mode?SessionID=1000"``
 
@@ -99,7 +98,7 @@ To add all speakers to playback session, use ``set_party_mode``. **Party Mode** 
 c. Add a speaker to session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you want to add a speaker to session, use ``add_device_to_session`. This command does not impact other speakers regardless of their status.
+If you want to add a speaker to session, use ``add_device_to_session`. It requires ``DeviceID`` parameter to identify a speaker to add. This command does not impact other speakers regardless of their status.
 
 ``curl "http://192.168.1.192:8080/v1/add_device_to_session?SessionID=1000&DeviceID="34317244381360"``
 
@@ -249,6 +248,7 @@ Session Management
 
 Start Session
 ^^^^^^^^^^^^^^
+Starts a new session. A session expires after 60 minutes of the last commands used with the SessionID. That is, the timeout restarts as a new REST command is handled by the HKWHub app. 
 
 - API: GET /v1/init_session?Priority=<priority value>
 - Response
@@ -266,6 +266,7 @@ Start Session
 
 Close Session
 ^^^^^^^^^^^^^^
+Close the session. The SessionID information is removed from the session database.
 
 - API: GET /v1/close_session?SessionID=<session id>
 - Response
@@ -283,8 +284,9 @@ Close Session
 Device Management
 ~~~~~~~~~~~~~~~~~~~~
 
-Get device cound
+Get the device count
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Returns the number of speakers.
 
 - API: GET /v1/device_count?SessionID=<session id>
 - Response
@@ -300,7 +302,7 @@ Get device cound
 ----
 
 
-Get the list of Devices and their information
+Get the list of devices and their information
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - API: GET /v1/device_list?SessionID=<session id>
@@ -378,6 +380,7 @@ Get the Device Information
 
 Add a Device to Session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Add a speaker to playback session. Once a speaker is added, then the speaker will play the music. There is no impact of this call to other speakers.
 
 - API: GET /v1/add_device_tosession?SessionID=<session id>&DeviceID=<device id>
 - Response
@@ -394,6 +397,7 @@ Add a Device to Session
 
 Remove a Device from Session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Removes a speaker from playback session. Once a speaker is removed, then the speaker will not play the music. There is no impact of this call to other speakers.
 
 - API: GET /v1/remove_device_from_session?SessionID=<session id>&DeviceID=<device id>
 - Response
@@ -407,13 +411,36 @@ Remove a Device from Session
 	{"Result":"true"}
 	
 
+Set party mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Addes all speakers to playback session. Once it is done, all speakers will play music.
+
+- API: GET /v1/set_party_mode?SessionID=<session id>
+- Response
+	- Returns true or false
+- Example:
+	- Request: ``http://192.168.1.10/v1/set_party_mode?SessionID=1000``
+	- Response: 
+
+.. code-block:: json
+
+	{"Result":"true"}
+	
 ----
 
 Media Playback Management
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Get the list of stored media
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Get the list of media item in the Media List of the HKWHub app
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+User can add music items to the **Media List** of the app. 
+
+.. Note::
+
+A music item downloaded from Apple Music is not supported. The music file from Apple music is DRM-enabled, and cannot be played with HKWirelessHD. Only music items purchased from iTunes Music or added from user's own library are supported.
+
+To be added to the Media List, the music item must be located locally on the device. No streaming from iTunes or Apple Music are supported.
+
 
 - API: GET /v1/media_list?SessionID=<session id>
 - Response
