@@ -60,3 +60,15 @@ With iOS8.4, MPMediaPicker does not show the items selected by user. This sympto
 But in iOS8.4, the picker does not show any change even the an item is selected.  It seems a bug.
 
 So, you need to be careful when you select items from MPMediaPicker. If you click on an item multiple times, the same iteam will appear on the Playlist the same multiple time as well.
+
+Creating a simple HTTP server for music streaming
+--------------------------------------------------
+For testing PlayStreamingMedia() in HKWirelessHD iOS SDK or play_web_media command in REST API, you just need to run a simple HTTP server on your local PC or Mac. The following is a quick example for setup a HTTP Server for music streaming.
+
+- Put your mp3 or wav files on a folder, e.g. **music**
+- Install python on your PC or Mac (Mac has already python installed.)
+- Run the followings:
+	- $ python -m SimpleHTTPServer
+	- Then, you will get some logs like this: Serving on 0.0.0.0 port 8000 ...
+- Find the IP address of your PC or Mac. Let's say it is 172.20.10.3.
+- Now you can access the musc file just like: http://172.20.10.3:8000/music/sample.mp3

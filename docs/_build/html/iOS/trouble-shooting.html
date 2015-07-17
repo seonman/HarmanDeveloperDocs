@@ -96,6 +96,29 @@ $ rm -rf [your-project-name]*
 But in iOS8.4, the picker does not show any change even the an item is selected.  It seems a bug.</p>
 <p>So, you need to be careful when you select items from MPMediaPicker. If you click on an item multiple times, the same iteam will appear on the Playlist the same multiple time as well.</p>
 </div>
+<div class="section" id="creating-a-simple-http-server-for-music-streaming">
+<h2>Creating a simple HTTP server for music streaming<a class="headerlink" href="#creating-a-simple-http-server-for-music-streaming" title="Permalink to this headline">¶</a></h2>
+<p>For testing PlayStreamingMedia() in HKWirelessHD iOS SDK or play_web_media command in REST API, you just need to run a simple HTTP server on your local PC or Mac. The following is a quick example for setup a HTTP Server for music streaming.</p>
+<ul>
+<li><p class="first">Put your mp3 or wav files on a folder, e.g. <strong>music</strong></p>
+</li>
+<li><p class="first">Install python on your PC or Mac (Mac has already python installed.)</p>
+</li>
+<li><dl class="first docutils">
+<dt>Run the followings:</dt>
+<dd><ul class="first last simple">
+<li>$ python -m SimpleHTTPServer</li>
+<li>Then, you will get some logs like this: Serving on 0.0.0.0 port 8000 ...</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Find the IP address of your PC or Mac. Let&#8217;s say it is 172.20.10.3.</p>
+</li>
+<li><p class="first">Now you can access the musc file just like: <a class="reference external" href="http://172.20.10.3:8000/music/sample.mp3">http://172.20.10.3:8000/music/sample.mp3</a></p>
+</li>
+</ul>
+</div>
 </div>
 
 
@@ -115,6 +138,7 @@ But in iOS8.4, the picker does not show any change even the an item is selected.
 <li><a class="reference internal" href="#playback-stops-when-the-app-turns-to-background-mode">Playback stops when the app turns to background mode</a></li>
 <li><a class="reference internal" href="#problem-with-itunes-match-and-apple-music">Problem with iTunes Match and Apple Music</a></li>
 <li><a class="reference internal" href="#mpmediapicker-not-showing-selection-of-items">MPMediaPicker not showing selection of items</a></li>
+<li><a class="reference internal" href="#creating-a-simple-http-server-for-music-streaming">Creating a simple HTTP server for music streaming</a></li>
 </ul>
 </li>
 </ul>
