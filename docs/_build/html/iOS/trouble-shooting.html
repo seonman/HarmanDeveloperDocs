@@ -123,12 +123,12 @@ But in iOS8.4, the picker does not show any change even the an item is selected.
 <h2>Compiling and Running HKWPlayer App<a class="headerlink" href="#compiling-and-running-hkwplayer-app" title="Permalink to this headline">¶</a></h2>
 <p>HKWPlayer app cotains Apple Watch extension app inside. So, you can run the Watch app version of HKWPlayer app on your Apple Watch within the HKWPlayer app. A watch app is a kind of <strong>Extension</strong> app, and so we need to define a <strong>App Group</strong> so the main app and extension (watch) app can communicate with each other.</p>
 <p><strong>App Groups</strong> is defined by following the Bundle ID. The Bundle ID of HKWPlayer app is currelty set as &#8220;com.harman.dev.hkwplayer&#8221;. So, App Group id should be set as &#8220;group.com.harman.dev.hkwplayer&#8221;, by adding &#8220;group&#8221; at the beginning. Currently, this bundle ID is used by Harman Developer Community team. So, you have to change this bundle ID for your use.</p>
-<p>The following is how to change the bundle ID of the HKWPlayer app. First, change the bundle ID defined in App Groups.</p>
+<p>The following is how to change the bundle ID of the HKWPlayer app. First, change the bundle ID defined in App Groups. As example, let&#8217;s say your bundle id is &#8220;com.myproject&#8221;.</p>
 <ul>
 <li><dl class="first docutils">
 <dt>Go to Targets &gt; HKWPlayer &gt; Capabilities &gt; App Groups</dt>
 <dd><ul class="first last simple">
-<li>Change the App Groups with &#8220;group.&lt;your bundle id&gt;&#8221;</li>
+<li>Change the App Groups with &#8220;group.com.myproject&#8221;</li>
 </ul>
 </dd>
 </dl>
@@ -136,7 +136,7 @@ But in iOS8.4, the picker does not show any change even the an item is selected.
 <li><dl class="first docutils">
 <dt>Go to Targets &gt; HKWPlayer WatchKit Extension &gt; Capabilities &gt; App Groups</dt>
 <dd><ul class="first last simple">
-<li>Change the App Groups with &#8220;group.&lt;your bundle id&gt;&#8221;</li>
+<li>Change the App Groups with &#8220;group.com.myproject&#8221;</li>
 </ul>
 </dd>
 </dl>
@@ -152,7 +152,7 @@ But in iOS8.4, the picker does not show any change even the an item is selected.
 </dd>
 </dl>
 </li>
-<li><p class="first">Click each item on the list, and then replace the stream with your own bundle ID, e.g. &#8220;com.myproject&#8221;</p>
+<li><p class="first">Click each item on the list, and then replace the stream with your own bundle ID, that is, &#8220;com.myproject&#8221;</p>
 </li>
 </ul>
 <p>The following is the screen capture of the list of the search.</p>

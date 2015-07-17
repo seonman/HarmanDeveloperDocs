@@ -79,18 +79,18 @@ HKWPlayer app cotains Apple Watch extension app inside. So, you can run the Watc
 
 **App Groups** is defined by following the Bundle ID. The Bundle ID of HKWPlayer app is currelty set as "com.harman.dev.hkwplayer". So, App Group id should be set as "group.com.harman.dev.hkwplayer", by adding "group" at the beginning. Currently, this bundle ID is used by Harman Developer Community team. So, you have to change this bundle ID for your use.
 
-The following is how to change the bundle ID of the HKWPlayer app. First, change the bundle ID defined in App Groups.
+The following is how to change the bundle ID of the HKWPlayer app. First, change the bundle ID defined in App Groups. As example, let's say your bundle id is "com.myproject".
 
 - Go to Targets > HKWPlayer > Capabilities > App Groups
-	- Change the App Groups with "group.<your bundle id>"
+	- Change the App Groups with "group.com.myproject"
 - Go to Targets > HKWPlayer WatchKit Extension > Capabilities > App Groups
-	- Change the App Groups with "group.<your bundle id>"
+	- Change the App Groups with "group.com.myproject"
 
 Now Change other parts of the codes that uses the bundle ID.
 
 - To go **Search** menu in project navigator, and type "com.harman.dev"
 	- You will see all the texts that contains the string.
-- Click each item on the list, and then replace the stream with your own bundle ID, e.g. "com.myproject"
+- Click each item on the list, and then replace the stream with your own bundle ID, that is, "com.myproject"
 
 The following is the screen capture of the list of the search.
 
