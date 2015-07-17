@@ -63,7 +63,7 @@ So, you need to be careful when you select items from MPMediaPicker. If you clic
 
 Creating a simple HTTP server for music streaming
 --------------------------------------------------
-For testing PlayStreamingMedia() in HKWirelessHD iOS SDK or play_web_media command in REST API, you just need to run a simple HTTP server on your local PC or Mac. The following is a quick example for setup a HTTP Server for music streaming.
+For testing ``PlayStreamingMedia()`` in HKWirelessHD iOS SDK or ``play_web_media`` command in REST API, you just need to run a simple HTTP server on your local PC or Mac. The following is a quick example for setup a HTTP Server for music streaming.
 
 - Put your mp3 or wav files on a folder, e.g. **music**
 - Install python on your PC or Mac (Mac has already python installed.)
@@ -72,3 +72,40 @@ For testing PlayStreamingMedia() in HKWirelessHD iOS SDK or play_web_media comma
 	- Then, you will get some logs like this: Serving on 0.0.0.0 port 8000 ...
 - Find the IP address of your PC or Mac. Let's say it is 172.20.10.3.
 - Now you can access the musc file just like: http://172.20.10.3:8000/music/sample.mp3
+
+Compiling and Running HKWPlayer App
+--------------------------------------
+HKWPlayer app cotains Apple Watch extension app inside. So, you can run the Watch app version of HKWPlayer app on your Apple Watch within the HKWPlayer app. A watch app is a kind of **Extension** app, and so we need to define a **App Group** so the main app and extension (watch) app can communicate with each other. 
+
+**App Groups** is defined by following the Bundle ID. The Bundle ID of HKWPlayer app is currelty set as "com.harman.dev.hkwplayer". So, App Group id should be set as "group.com.harman.dev.hkwplayer", by adding "group" at the beginning. Currently, this bundle ID is used by Harman Developer Community team. So, you have to change this bundle ID for your use.
+
+The following is how to change the bundle ID of the HKWPlayer app. First, change the bundle ID defined in App Groups.
+
+- Go to Targets > HKWPlayer > Capabilities > App Groups
+	- Change the App Groups with "group.<your bundle id>"
+- Go to Targets > HKWPlayer WatchKit Extension > Capabilities > App Groups
+	- Change the App Groups with "group.<your bundle id>"
+
+Now Change other parts of the codes that uses the bundle ID.
+
+- To go **Search** menu in project navigator, and type "com.harman.dev"
+	- You will see all the texts that contains the string.
+- Click each item on the list, and then replace the stream with your own bundle ID, e.g. "com.myproject"
+
+The following is the screen capture of the list of the search.
+.. figure:: img/troubleshooting/background-execution.png
+
+- 
+
+
+Please follow the instruction `Configuring App Groups`_ in iOS Developer Library for more information.
+
+.. _`Configuring App Groups`: https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW61
+
+
+
+
+
+The cur
+
+ To support the Watch App, you must specify a **App Groups** fo

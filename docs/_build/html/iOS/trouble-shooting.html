@@ -98,7 +98,7 @@ But in iOS8.4, the picker does not show any change even the an item is selected.
 </div>
 <div class="section" id="creating-a-simple-http-server-for-music-streaming">
 <h2>Creating a simple HTTP server for music streaming<a class="headerlink" href="#creating-a-simple-http-server-for-music-streaming" title="Permalink to this headline">¶</a></h2>
-<p>For testing PlayStreamingMedia() in HKWirelessHD iOS SDK or play_web_media command in REST API, you just need to run a simple HTTP server on your local PC or Mac. The following is a quick example for setup a HTTP Server for music streaming.</p>
+<p>For testing <code class="docutils literal"><span class="pre">PlayStreamingMedia()</span></code> in HKWirelessHD iOS SDK or <code class="docutils literal"><span class="pre">play_web_media</span></code> command in REST API, you just need to run a simple HTTP server on your local PC or Mac. The following is a quick example for setup a HTTP Server for music streaming.</p>
 <ul>
 <li><p class="first">Put your mp3 or wav files on a folder, e.g. <strong>music</strong></p>
 </li>
@@ -118,6 +118,52 @@ But in iOS8.4, the picker does not show any change even the an item is selected.
 <li><p class="first">Now you can access the musc file just like: <a class="reference external" href="http://172.20.10.3:8000/music/sample.mp3">http://172.20.10.3:8000/music/sample.mp3</a></p>
 </li>
 </ul>
+</div>
+<div class="section" id="compiling-and-running-hkwplayer-app">
+<h2>Compiling and Running HKWPlayer App<a class="headerlink" href="#compiling-and-running-hkwplayer-app" title="Permalink to this headline">¶</a></h2>
+<p>HKWPlayer app cotains Apple Watch extension app inside. So, you can run the Watch app version of HKWPlayer app on your Apple Watch within the HKWPlayer app. A watch app is a kind of <strong>Extension</strong> app, and so we need to define a <strong>App Group</strong> so the main app and extension (watch) app can communicate with each other.</p>
+<p><strong>App Groups</strong> is defined by following the Bundle ID. The Bundle ID of HKWPlayer app is currelty set as &#8220;com.harman.dev.hkwplayer&#8221;. So, App Group id should be set as &#8220;group.com.harman.dev.hkwplayer&#8221;, by adding &#8220;group&#8221; at the beginning. Currently, this bundle ID is used by Harman Developer Community team. So, you have to change this bundle ID for your use.</p>
+<p>The following is how to change the bundle ID of the HKWPlayer app. First, change the bundle ID defined in App Groups.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Go to Targets &gt; HKWPlayer &gt; Capabilities &gt; App Groups</dt>
+<dd><ul class="first last simple">
+<li>Change the App Groups with &#8220;group.&lt;your bundle id&gt;&#8221;</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Go to Targets &gt; HKWPlayer WatchKit Extension &gt; Capabilities &gt; App Groups</dt>
+<dd><ul class="first last simple">
+<li>Change the App Groups with &#8220;group.&lt;your bundle id&gt;&#8221;</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Now Change other parts of the codes that uses the bundle ID.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>To go <strong>Search</strong> menu in project navigator, and type &#8220;com.harman.dev&#8221;</dt>
+<dd><ul class="first last simple">
+<li>You will see all the texts that contains the string.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Click each item on the list, and then replace the stream with your own bundle ID, e.g. &#8220;com.myproject&#8221;</p>
+</li>
+</ul>
+<p>The following is the screen capture of the list of the search.
+.. figure:: img/troubleshooting/background-execution.png</p>
+<ul class="simple">
+<li></li>
+</ul>
+<p>Please follow the instruction <a class="reference external" href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW61">Configuring App Groups</a> in iOS Developer Library for more information.</p>
+<p>The cur</p>
+<blockquote>
+<div>To support the Watch App, you must specify a <strong>App Groups</strong> fo</div></blockquote>
 </div>
 </div>
 
@@ -139,6 +185,7 @@ But in iOS8.4, the picker does not show any change even the an item is selected.
 <li><a class="reference internal" href="#problem-with-itunes-match-and-apple-music">Problem with iTunes Match and Apple Music</a></li>
 <li><a class="reference internal" href="#mpmediapicker-not-showing-selection-of-items">MPMediaPicker not showing selection of items</a></li>
 <li><a class="reference internal" href="#creating-a-simple-http-server-for-music-streaming">Creating a simple HTTP server for music streaming</a></li>
+<li><a class="reference internal" href="#compiling-and-running-hkwplayer-app">Compiling and Running HKWPlayer App</a></li>
 </ul>
 </li>
 </ul>
