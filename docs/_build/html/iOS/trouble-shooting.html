@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" />
-    <link rel="next" title="Version History (Android)" href="../Android/version-history.html" />
+    <link rel="next" title="Version History (iOS)" href="version-history.html" />
     <link rel="prev" title="HKWHub App - Making your Omni speakers connected from any devices (sensors) or services (iOS)" href="hkwhub-spec.html" /> 
   </head>
   <body role="document">
@@ -35,7 +35,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../Android/version-history.html" title="Version History (Android)"
+          <a href="version-history.html" title="Version History (iOS)"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="hkwhub-spec.html" title="HKWHub App - Making your Omni speakers connected from any devices (sensors) or services (iOS)"
@@ -85,6 +85,11 @@ $ rm -rf [your-project-name]*
 </div>
 <p>You can stop the sleep preventer when the app becomes foregrounded (<code class="docutils literal"><span class="pre">applicationWillEnterForeground()</span></code>), and start it again just before the app becomes backgrounded (<code class="docutils literal"><span class="pre">applicationWillResignActive()</span></code>).</p>
 </div>
+<div class="section" id="problem-with-itunes-match-and-apple-music">
+<h2>Problem with iTunes Match and Apple Music<a class="headerlink" href="#problem-with-itunes-match-and-apple-music" title="Permalink to this headline">¶</a></h2>
+<p>Currently, HKWirelessHD SDK does not support Cloud-based streaming from iTunes Match or Apple Music. To play an audio file on Omni speakers, the audio file should be available on the device in advance.</p>
+<p>And, audio file from Apple Music is DRM-enabled. So, it is not supported by HKWirelessHD SDK either. Only the audio files that you purchased or uploaded to iTunes Match by matching can be played on Omni speakers after they are downloaded on the phone.</p>
+</div>
 </div>
 
 
@@ -102,6 +107,7 @@ $ rm -rf [your-project-name]*
 <li><a class="reference internal" href="#handling-of-link-error-undefined-symbols-for-architecture-armv7">Handling of link error “undefined symbols for architecture armv7”</a></li>
 <li><a class="reference internal" href="#unspecified-linking-parameter-is-added-in-link-command">Unspecified linking parameter is added in link command</a></li>
 <li><a class="reference internal" href="#playback-stops-when-the-app-turns-to-background-mode">Playback stops when the app turns to background mode</a></li>
+<li><a class="reference internal" href="#problem-with-itunes-match-and-apple-music">Problem with iTunes Match and Apple Music</a></li>
 </ul>
 </li>
 </ul>
@@ -110,8 +116,8 @@ $ rm -rf [your-project-name]*
   <p class="topless"><a href="hkwhub-spec.html"
                         title="previous chapter">HKWHub App - Making your Omni speakers connected from any devices (sensors) or services (iOS)</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../Android/version-history.html"
-                        title="next chapter">Version History (Android)</a></p>
+  <p class="topless"><a href="version-history.html"
+                        title="next chapter">Version History (iOS)</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -143,7 +149,7 @@ $ rm -rf [your-project-name]*
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../Android/version-history.html" title="Version History (Android)"
+          <a href="version-history.html" title="Version History (iOS)"
              >next</a> |</li>
         <li class="right" >
           <a href="hkwhub-spec.html" title="HKWHub App - Making your Omni speakers connected from any devices (sensors) or services (iOS)"

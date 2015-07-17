@@ -47,3 +47,8 @@ Then, just initialize and start DeepSleepPreventer in ``AppDeleget.application:d
 You can stop the sleep preventer when the app becomes foregrounded (``applicationWillEnterForeground()``), and start it again just before the app becomes backgrounded (``applicationWillResignActive()``).
 
 	
+Problem with iTunes Match and Apple Music
+-------------------------------------------
+Currently, HKWirelessHD SDK does not support Cloud-based streaming from iTunes Match or Apple Music. To play an audio file on Omni speakers, the audio file should be available on the device in advance.
+
+And, audio file from Apple Music is DRM-enabled. So, it is not supported by HKWirelessHD SDK either. Only the audio files that you purchased or uploaded to iTunes Match by matching can be played on Omni speakers after they are downloaded on the phone.
