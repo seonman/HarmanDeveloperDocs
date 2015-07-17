@@ -90,6 +90,12 @@ $ rm -rf [your-project-name]*
 <p>Currently, HKWirelessHD SDK does not support Cloud-based streaming from iTunes Match or Apple Music. To play an audio file on Omni speakers, the audio file should be available on the device in advance.</p>
 <p>And, audio file from Apple Music is DRM-enabled. So, it is not supported by HKWirelessHD SDK either. Only the audio files that you purchased or uploaded to iTunes Match by matching can be played on Omni speakers after they are downloaded on the phone.</p>
 </div>
+<div class="section" id="mpmediapicker-not-showing-selection-of-items">
+<h2>MPMediaPicker not showing selection of items<a class="headerlink" href="#mpmediapicker-not-showing-selection-of-items" title="Permalink to this headline">¶</a></h2>
+<p>With iOS8.4, MPMediaPicker does not show the items selected by user. This symptom apears only with iOS8.4.  With ealier iOS version, such as iOS8.3 or before, the selected items turn grey color.
+But in iOS8.4, the picker does not show any change even the an item is selected.  It seems a bug.</p>
+<p>So, you need to be careful when you select items from MPMediaPicker. If you click on an item multiple times, the same iteam will appear on the Playlist the same multiple time as well.</p>
+</div>
 </div>
 
 
@@ -108,6 +114,7 @@ $ rm -rf [your-project-name]*
 <li><a class="reference internal" href="#unspecified-linking-parameter-is-added-in-link-command">Unspecified linking parameter is added in link command</a></li>
 <li><a class="reference internal" href="#playback-stops-when-the-app-turns-to-background-mode">Playback stops when the app turns to background mode</a></li>
 <li><a class="reference internal" href="#problem-with-itunes-match-and-apple-music">Problem with iTunes Match and Apple Music</a></li>
+<li><a class="reference internal" href="#mpmediapicker-not-showing-selection-of-items">MPMediaPicker not showing selection of items</a></li>
 </ul>
 </li>
 </ul>

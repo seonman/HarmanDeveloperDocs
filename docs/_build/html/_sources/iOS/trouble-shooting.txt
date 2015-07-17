@@ -52,3 +52,11 @@ Problem with iTunes Match and Apple Music
 Currently, HKWirelessHD SDK does not support Cloud-based streaming from iTunes Match or Apple Music. To play an audio file on Omni speakers, the audio file should be available on the device in advance.
 
 And, audio file from Apple Music is DRM-enabled. So, it is not supported by HKWirelessHD SDK either. Only the audio files that you purchased or uploaded to iTunes Match by matching can be played on Omni speakers after they are downloaded on the phone.
+
+
+MPMediaPicker not showing selection of items
+---------------------------------------------
+With iOS8.4, MPMediaPicker does not show the items selected by user. This symptom apears only with iOS8.4.  With ealier iOS version, such as iOS8.3 or before, the selected items turn grey color.
+But in iOS8.4, the picker does not show any change even the an item is selected.  It seems a bug.
+
+So, you need to be careful when you select items from MPMediaPicker. If you click on an item multiple times, the same iteam will appear on the Playlist the same multiple time as well.

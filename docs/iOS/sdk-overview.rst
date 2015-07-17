@@ -23,9 +23,13 @@ What's Included
 Requirements
 ------------
 
-The HKWirelessHD SDK requires the lastest iOS (8.4 as of writing this) for iPhone or iPad devices.
-Xcode 6.4 (supporting iOS8.4) or later is required for building HKWirelessHD enabled iOS apps with Apple Watch app support.
+The HKWirelessHD SDK requires iOS 8.3 or later (8.4 as of writing this) for iPhone or iPad devices.
+Xcode 6.3 (supporting iOS8.3) or later is required for building HKWirelessHD enabled iOS apps with Apple Watch app support.
 
+.. Note::
+
+	If you have updated iOS to version 8.4, you need to install Xcode6.4.
+	
   
 Demo Applications
 -----------------
