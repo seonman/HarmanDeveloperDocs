@@ -86,6 +86,10 @@ a. Init session
 
 This returns the session id. The returned SessionID is used in all subsequent REST API commands.
 
+.. code:: json
+
+	{"SessionID":"1000"}
+
 
 b. Add alls speaker to session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -93,8 +97,8 @@ b. Add alls speaker to session
 After HKWHub app is launched, none of speakers is selected for playback. You need to add one or more speakers to play audio. To add all speakers to playback session, use ``set_party_mode``. **Party Mode** is the mode where all speakers are playing the same audio together with synchronization. So, by ``set_party_mode``, you can select all speakers to play.
 
 ``curl "http://192.168.1.192:8080/v1/set_party_mode?SessionID=1000"``
-
-
+	
+	
 c. Add a speaker to session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -135,6 +139,7 @@ If you want to play a media item listed in the HKWHub app, use ``play_hub_media`
 
 ``curl "http://192.168.1.192:8080/v1/play_hub_media?SessionID=1000&PersistentID=5829171347867182746"``
 
+	
 f. Play a media item in the HKWHub by specifying a speaker list to play
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 You can play a media item in the HKWHub app by specifying the list of speakers.
