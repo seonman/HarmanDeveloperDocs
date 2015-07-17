@@ -93,19 +93,11 @@ Now Change other parts of the codes that uses the bundle ID.
 - Click each item on the list, and then replace the stream with your own bundle ID, e.g. "com.myproject"
 
 The following is the screen capture of the list of the search.
-.. figure:: img/troubleshooting/background-execution.png
 
-- 
+.. figure:: img/troubleshooting/change-bundle-id.png
 
 
 Please follow the instruction `Configuring App Groups`_ in iOS Developer Library for more information.
 
 .. _`Configuring App Groups`: https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW61
 
-
-
-
-
-The cur
-
- To support the Watch App, you must specify a **App Groups** fo
