@@ -95,6 +95,7 @@ Now Change other parts of the codes that uses the bundle ID.
 The following is the screen capture of the list of the search.
 
 .. figure:: img/troubleshooting/change-bundle-id.png
+	:scale: 60
 
 
 Please follow the instruction `Configuring App Groups`_ in iOS Developer Library for more information.
