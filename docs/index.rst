@@ -186,6 +186,16 @@ Version History (Android)
 
 	Android/version-history
 
+----
+
+Demos and 3rd party integrations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	integration
+
 Search
 ======
 
