@@ -61,6 +61,11 @@ Documentations for Android SDK
 `Version History (Android)`_
     Version History
 	
+Demos and 3rd Party Integrations
+---------------------------------
+`Integration`_
+    Demos and 3rd party IoT platform and device integrations.
+	
 	
 .. _SDK Overview (iOS): iOS/sdk-overview.html
 .. _Getting Started (iOS): iOS/getting-started-iOS.html
@@ -76,6 +81,7 @@ Documentations for Android SDK
 .. _Programming Guide (Android): Android/programming-guide.html
 .. _Version History (Android): Android/version-history.html
 
+.. _Integration: integration.html
 ----
 
 Contents
