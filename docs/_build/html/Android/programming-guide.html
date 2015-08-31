@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" />
-    <link rel="next" title="Version History (Android)" href="version-history.html" />
+    <link rel="next" title="Version History" href="version-history.html" />
     <link rel="prev" title="Getting Started Guide (Android)" href="getting-started.html" /> 
   </head>
   <body role="document">
@@ -35,7 +35,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="version-history.html" title="Version History (Android)"
+          <a href="version-history.html" title="Version History"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="getting-started.html" title="Getting Started Guide (Android)"
@@ -51,7 +51,7 @@
             
   <div class="section" id="programming-guide-android">
 <h1>Programming Guide (Android)<a class="headerlink" href="#programming-guide-android" title="Permalink to this headline">¶</a></h1>
-<p>HKWirelessHD SDK is a set of header files, libraries and documentations to help developers create iOS apps that can control Harman Kardon Omni speakers to play audio wirelessly</p>
+<p>HKWirelessHD SDK is a set of header files, libraries and documentations to help developers create Android apps that can control Harman Kardon Omni speakers to play audio wirelessly.</p>
 <p>In this document, we describe only about Android version of HKWirelessHD SDK.</p>
 <p><strong>Key Features of HKWirelessHD</strong></p>
 <ul>
@@ -294,7 +294,7 @@ Device status information includes the status about the device availability and 
 <td>Int</td>
 <td>the balance value in stereo mode. -6 to 6, 0 is neutral</td>
 <td>Variable</td>
-<td>Yes</td>
+<td>No</td>
 </tr>
 <tr class="row-even"><td>isPlaying</td>
 <td>boolean</td>
@@ -306,13 +306,13 @@ Device status information includes the status about the device availability and 
 <td>Int</td>
 <td>the channel type: 1 is stereo.</td>
 <td>Variable</td>
-<td>Yes</td>
+<td>No</td>
 </tr>
 <tr class="row-even"><td>isMaster</td>
 <td>boolean</td>
 <td>indicates if it is the master in stereo or group mode</td>
 <td>Variable</td>
-<td>Yes</td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -369,8 +369,7 @@ If you already knows the deviceId (device unique identifier) of a speaker, then 
 <span class="n">hControlHandler</span><span class="o">.</span><span class="na">stopRefreshDeviceInfo</span><span class="o">()</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code> will refresh and update every 2 seconds the status of the devices in the current Wi-Fi network.
-...</p>
+<p><code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code> will refresh and update every 2 seconds the status of the devices in the current Wi-Fi network.</p>
 </div>
 <div class="section" id="add-or-remove-a-speaker-to-from-a-playback-session">
 <h3>Add or remove a speaker to/from a playback session<a class="headerlink" href="#add-or-remove-a-speaker-to-from-a-playback-session" title="Permalink to this headline">¶</a></h3>
@@ -429,7 +428,7 @@ Note that a speaker can be added to the current on-going playback session anytim
 <span class="n">hAudioControl</span><span class="o">.</span><span class="na">playCAF</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">songTitle</span><span class="o">,</span> <span class="kc">false</span><span class="o">)</span>
 </pre></div>
 </div>
-<p>Here, resumeFlag is false, if you start the song from the beginning. If you want to resume to play the current song, then resumeFlag should be true. ‘songTitle’ is a String, representing the song name. (This is only internally used as a file name to store converted PCM data in the memory temporarily.)</p>
+<p>Here, resumeFlag is false, if you start the song from the beginning. If you want to resume to play the current song, then resumeFlag should be true. The &#8220;songTitle&#8221; is a String, representing the song name. (This is only internally used as a file name to store converted PCM data in the memory temporarily.)</p>
 <p>If you want to specify a starting point of the audio stream, then you can use <code class="docutils literal"><span class="pre">playCAFFromCertainTime()</span></code> to start the playback from a specified time.</p>
 <p>boolean playCAFFromCertainTime(String url, String songName, int startTime);</p>
 <p>Here, startTime is in second.</p>
@@ -524,12 +523,12 @@ The group ID is determined by following the device ID of the initial member of a
 </div>
 <div class="section" id="change-speaker-name">
 <h3>Change speaker name<a class="headerlink" href="#change-speaker-name" title="Permalink to this headline">¶</a></h3>
-<p>Use <code class="docutils literal"><span class="pre">setDeviceName()</span></code> to change the speaker name. Note that you cannot set the device name by setting deviceName? property value directly. The property is read-only.</p>
+<p>Use <code class="docutils literal"><span class="pre">setDeviceName()</span></code> to change the speaker name. Note that you cannot set the device name by setting deviceName property value directly. The property is read-only.</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="kt">void</span> <span class="nf">setDeviceName</span><span class="o">(</span><span class="kt">long</span> <span class="n">deviceId</span><span class="o">,</span> <span class="n">String</span> <span class="n">deviceName</span><span class="o">);</span>
 </pre></div>
 </div>
 <p>For example,</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">hAudioControl</span><span class="o">.</span><span class="na">setDeviceName</span><span class="o">(</span><span class="n">deviceId</span><span class="o">,</span> <span class="s">&quot;??My Omni10&quot;</span><span class="o">??);</span>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">hAudioControl</span><span class="o">.</span><span class="na">setDeviceName</span><span class="o">(</span><span class="n">deviceId</span><span class="o">,</span> <span class="s">&quot;My Omni10&quot;</span><span class="o">);</span>
 </pre></div>
 </div>
 <p>Be careful that while a speaker is playing audio, if the name of the speaker is changed, then the current playback is interrupted (stopped) with error. The error code and message are returned by <code class="docutils literal"><span class="pre">onErrorOccurred()</span></code>, a delegate defined in HKWirelessListener interface.</p>
@@ -540,14 +539,14 @@ The group ID is determined by following the device ID of the initial member of a
 </pre></div>
 </div>
 <p>For example,</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="n">hAudioControl</span><span class="o">.</span><span class="na">setDeviceGroupName</span><span class="o">(</span><span class="n">deviceId</span><span class="o">,</span> <span class="s">&quot;??Living Room&quot;</span><span class="o">);</span>
+<div class="highlight-java"><div class="highlight"><pre><span class="n">hAudioControl</span><span class="o">.</span><span class="na">setDeviceGroupName</span><span class="o">(</span><span class="n">deviceId</span><span class="o">,</span> <span class="s">&quot;Living Room&quot;</span><span class="o">);</span>
 </pre></div>
 </div>
 <p>Note that if you change the group name of a speaker, then the list of speakers of the group automatically changes.</p>
 </div>
 <div class="section" id="remove-a-speaker-from-a-group">
 <h4>Remove a speaker from a group<a class="headerlink" href="#remove-a-speaker-from-a-group" title="Permalink to this headline">¶</a></h4>
-<p>Use removeDeviceFromGroup() to remove the speaker from the belonged group. After being removed from a group, the name of group of the speaker is set to &#8221;??harman&#8221;, which is a default group name implying that the speaker does not belong to any group.</p>
+<p>Use removeDeviceFromGroup() to remove the speaker from the belonged group. After being removed from a group, the name of group of the speaker is set to &#8220;harman&#8221;, which is a default group name implying that the speaker does not belong to any group.</p>
 <p>void removeDeviceFromGroup(long groupId, long deviceId);</p>
 <p>For example,</p>
 <p>hControlHandler.removeDeviceFromGroup(groupId, deviceId);</p>
@@ -555,7 +554,7 @@ The group ID is determined by following the device ID of the initial member of a
 </div>
 <div class="section" id="interface-apis-for-events-handling">
 <h3>Interface APIs for events handling<a class="headerlink" href="#interface-apis-for-events-handling" title="Permalink to this headline">¶</a></h3>
-<p>In HKWirelessHD, the communication between user’s phone and speakers are done in asynchronous way. Therefore, some API calls from HKWirelessHandler can take a little time to take effects on the speaker side. Similarity, any change of status on the speaker side are reported to the phone a little time later. For example, the status of availability of a speaker can be updated a few seconds later after a speaker turns on or off.</p>
+<p>In HKWirelessHD, the communication between user&#8217;s phone and speakers are done in asynchronous way. Therefore, some API calls from HKWirelessHandler can take a little time to take effects on the speaker side. Similarity, any change of status on the speaker side are reported to the phone a little time later. For example, the status of availability of a speaker can be updated a few seconds later after a speaker turns on or off.</p>
 <p>All the status update from the speaker side are reported to the phone via HKWirelessListener interface. So, your app needs to implement the interface accordingly to receive and handle the events from HKWirelessHandler.</p>
 <div class="section" id="ondevicestateupdated">
 <h4>onDeviceStateUpdated<a class="headerlink" href="#ondevicestateupdated" title="Permalink to this headline">¶</a></h4>
@@ -699,7 +698,7 @@ The group ID is determined by following the device ID of the initial member of a
                         title="previous chapter">Getting Started Guide (Android)</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="version-history.html"
-                        title="next chapter">Version History (Android)</a></p>
+                        title="next chapter">Version History</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -731,7 +730,7 @@ The group ID is determined by following the device ID of the initial member of a
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="version-history.html" title="Version History (Android)"
+          <a href="version-history.html" title="Version History"
              >next</a> |</li>
         <li class="right" >
           <a href="getting-started.html" title="Getting Started Guide (Android)"

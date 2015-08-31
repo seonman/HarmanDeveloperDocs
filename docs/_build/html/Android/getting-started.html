@@ -23,7 +23,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" />
+    <link rel="next" title="Programming Guide (Android)" href="programming-guide.html" />
+    <link rel="prev" title="Overview of HKWirelessHD SDK (Android)" href="sdk-overview.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -32,6 +34,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="programming-guide.html" title="Programming Guide (Android)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sdk-overview.html" title="Overview of HKWirelessHD SDK (Android)"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -43,10 +51,6 @@
             
   <div class="section" id="getting-started-guide-android">
 <h1>Getting Started Guide (Android)<a class="headerlink" href="#getting-started-guide-android" title="Permalink to this headline">¶</a></h1>
-<p>HKWirelessHD SDK supports both Objective-C and Swift. This document assumes that developer creates his/her app using the Swift language.</p>
-<p>There are two versions of SDK
-- a normal version: HKWirelessHDSDK
-- a lightweight version: HKWirelessHDSDKlw</p>
 <p>The Harman/Kardon WirelessHD SDK is provided for Android 3rd party developers to communicate with Harman/Kardon Omni Series audio/video devices. The intent of this SDK is to provide the tools and libraries necessary to build, test and deploy the latest audio applications on the Android platform.</p>
 <div class="section" id="project-setup-with-hkwirelesshdsdk">
 <h2>Project Setup with HKWirelessHDSDK<a class="headerlink" href="#project-setup-with-hkwirelesshdsdk" title="Permalink to this headline">¶</a></h2>
@@ -58,13 +62,17 @@
 <h3>Add Jar package and library in your project<a class="headerlink" href="#add-jar-package-and-library-in-your-project" title="Permalink to this headline">¶</a></h3>
 <p>Add the libHKWirelessHD.jar package and libHKWirelessHD.so library in your libs folder.</p>
 <p>In Android Studio
-Add the HKWirelessHD,jar to libs folder and add the libHKWirelessHD.so to jniLibs/armeabi folder. Then add the jar package as library.File-&gt;Project Structor-&gt;Modules-&gt;Dependencies, push +，then File dependency，select HKWirelessHD.jar.
-As following:</p>
+Add the HKWirelessHD.jar to libs folder and add the libHKWirelessHD.so to jniLibs/armeabi folder.</p>
+<p>File-&gt;Project Structor-&gt;Modules-&gt;Dependencies, push +，then File dependency，select HKWirelessHD.jar.</p>
+<p>Then add the jar package as library.</p>
+<p>The directory hierarchy as following:</p>
 <div class="figure">
 <img alt="../_images/1.png" src="../_images/1.png" />
 </div>
-<p>In Eclipse: Add the HKWirelessHD.jar to libs folder and add the libHKWirelessHD.so to libs/armeabi folder. Then add the jar package as external JARs.project property-&gt;Java Build Path-&gt;Libraries select “Add External JARs”，choose the HKWirelessHD.jar.
-As following</p>
+<p>In Eclipse: Add the HKWirelessHD.jar to libs folder and add the libHKWirelessHD.so to libs/armeabi folder.</p>
+<p>Project property-&gt;Java Build Path-&gt;Libraries select “Add External JARs”，choose the HKWirelessHD.jar.</p>
+<p>Then add the jar package as external JARs.</p>
+<p>The directory hierarchy as following:</p>
 <div class="figure">
 <img alt="../_images/2.png" src="../_images/2.png" />
 </div>
@@ -78,12 +86,35 @@ As following</p>
 </div>
 <div class="section" id="import-package-and-implement-interface">
 <h3>Import package and implement interface<a class="headerlink" href="#import-package-and-implement-interface" title="Permalink to this headline">¶</a></h3>
-<p>Add the import to your code.</p>
+<p>Add the package header to your code:</p>
 <div class="highlight-java"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">com.harman.hkwirelessapi.*</span>
 </pre></div>
 </div>
-<p>Implement the interface.</p>
-<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="kd">implements</span> <span class="n">HKWirelessListener</span>
+<p>Implement the interface like this:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">YourClass</span> <span class="kd">implements</span> <span class="n">HKWirelessListener</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The interfaces should be implemented:</p>
+<div class="highlight-java"><div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDeviceStateUpdated</span><span class="o">(</span><span class="kt">long</span> <span class="n">deviceId</span><span class="o">,</span> <span class="kt">int</span> <span class="n">reason</span><span class="o">){</span>
+
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onPlaybackStateChanged</span><span class="o">(</span><span class="kt">int</span> <span class="n">playState</span><span class="o">){</span>
+
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onVolumeLevelChanged</span><span class="o">(</span><span class="kt">long</span> <span class="n">deviceId</span><span class="o">,</span> <span class="kt">int</span> <span class="n">deviceVolume</span><span class="o">,</span> <span class="kt">int</span> <span class="n">avgVolume</span><span class="o">){</span>
+
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onPlayEnded</span><span class="o">(){</span>
+
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onPlaybackTimeChanged</span><span class="o">(</span><span class="kt">int</span> <span class="n">timeElapsed</span><span class="o">){</span>
+
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onErrorOccurred</span><span class="o">(</span><span class="kt">int</span> <span class="n">errorCode</span><span class="o">,</span> <span class="n">String</span> <span class="n">errorMesg</span><span class="o">){</span>
+
+<span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -91,8 +122,8 @@ As following</p>
 <div class="section" id="creating-a-sample-application">
 <h2>Creating a Sample Application<a class="headerlink" href="#creating-a-sample-application" title="Permalink to this headline">¶</a></h2>
 <p>All APIs can be accessed through the object pointer of HKWirelessHandler and AudioCodecHandler. Only you have to do is create a HKWirelessHandler object and  a AudioCodecHandler object use them to invoke the APIs you want to use.</p>
-<div class="section" id="create-hkwirelesshd-control-handler-and-start-the-wireless-audio">
-<h3>Create HKWirelessHD Control Handler and start the Wireless Audio<a class="headerlink" href="#create-hkwirelesshd-control-handler-and-start-the-wireless-audio" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="create-hkwirelesshd-control-handler-and-initialize-the-wireless-audio">
+<h3>Create HKWirelessHD Control Handler and initialize the Wireless Audio<a class="headerlink" href="#create-hkwirelesshd-control-handler-and-initialize-the-wireless-audio" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-java"><div class="highlight"><pre><span class="c1">// Create a HKWControlHandler instance</span>
 <span class="n">HKWirelessHandler</span> <span class="n">hControlHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HKWirelessHandler</span><span class="o">();</span>
 
@@ -102,7 +133,7 @@ As following</p>
 </div>
 <dl class="docutils">
 <dt>Note</dt>
-<dd><code class="docutils literal"><span class="pre">InitializeHKWirelessController()</span></code> is a blocking call. It waits until the call successfully initializes the wireless audio network. If the phone device does not belong to a Wi-Fi network or if other HKWirelessHD app is running on the same device, then it will keep blocked. It would be nice to present a dialog to user before calling <code class="docutils literal"><span class="pre">initializeHKWirelessController()</span></code> to notice that the app will wait until HWWirelessHD network is available.</dd>
+<dd><code class="docutils literal"><span class="pre">InitializeHKWirelessController()</span></code> is a blocking call. It waits until the call successfully initializes the wireless audio network. If the phone device does not belong to a Wi-Fi network or not have network permission or if other HKWirelessHD app is running on the same device, then it will keep blocked. It would be nice to present a dialog to user before calling <code class="docutils literal"><span class="pre">initializeHKWirelessController()</span></code> to notice that the app will wait until HWWirelessHD network is available.</dd>
 </dl>
 </div>
 <div class="section" id="discovery-and-refreshing-of-available-speakers-in-the-wi-fi-network">
@@ -391,7 +422,7 @@ The reason codes are defined in HKDeviceStatusReason.java.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#creating-a-sample-application">Creating a Sample Application</a><ul>
-<li><a class="reference internal" href="#create-hkwirelesshd-control-handler-and-start-the-wireless-audio">Create HKWirelessHD Control Handler and start the Wireless Audio</a></li>
+<li><a class="reference internal" href="#create-hkwirelesshd-control-handler-and-initialize-the-wireless-audio">Create HKWirelessHD Control Handler and initialize the Wireless Audio</a></li>
 <li><a class="reference internal" href="#discovery-and-refreshing-of-available-speakers-in-the-wi-fi-network">Discovery and refreshing of available speakers in the Wi-Fi network</a></li>
 <li><a class="reference internal" href="#speakers-and-groups">Speakers and Groups</a><ul>
 <li><a class="reference internal" href="#selecting-a-speaker-individually">Selecting a speaker individually</a></li>
@@ -437,6 +468,12 @@ The reason codes are defined in HKDeviceStatusReason.java.</p>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sdk-overview.html"
+                        title="previous chapter">Overview of HKWirelessHD SDK (Android)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="programming-guide.html"
+                        title="next chapter">Programming Guide (Android)</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -467,6 +504,12 @@ The reason codes are defined in HKDeviceStatusReason.java.</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="programming-guide.html" title="Programming Guide (Android)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sdk-overview.html" title="Overview of HKWirelessHD SDK (Android)"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>

@@ -1,14 +1,7 @@
 Getting Started Guide (Android)
 ===============================
 
-HKWirelessHD SDK supports both Objective-C and Swift. This document assumes that developer creates his/her app using the Swift language.
-
-There are two versions of SDK
-- a normal version: HKWirelessHDSDK
-- a lightweight version: HKWirelessHDSDKlw
-
 The Harman/Kardon WirelessHD SDK is provided for Android 3rd party developers to communicate with Harman/Kardon Omni Series audio/video devices. The intent of this SDK is to provide the tools and libraries necessary to build, test and deploy the latest audio applications on the Android platform.
-
 
 Project Setup with HKWirelessHDSDK
 -----------------------------------------------------------
@@ -24,13 +17,23 @@ Add Jar package and library in your project
 Add the libHKWirelessHD.jar package and libHKWirelessHD.so library in your libs folder.
 
 In Android Studio
-Add the HKWirelessHD,jar to libs folder and add the libHKWirelessHD.so to jniLibs/armeabi folder. Then add the jar package as library.File->Project Structor->Modules->Dependencies, push +，then File dependency，select HKWirelessHD.jar.
-As following:
+Add the HKWirelessHD.jar to libs folder and add the libHKWirelessHD.so to jniLibs/armeabi folder. 
+
+File->Project Structor->Modules->Dependencies, push +，then File dependency，select HKWirelessHD.jar.
+
+Then add the jar package as library.
+
+The directory hierarchy as following:
 
 .. figure:: img/1.png
 
-In Eclipse: Add the HKWirelessHD.jar to libs folder and add the libHKWirelessHD.so to libs/armeabi folder. Then add the jar package as external JARs.project property->Java Build Path->Libraries select “Add External JARs”，choose the HKWirelessHD.jar.
-As following
+In Eclipse: Add the HKWirelessHD.jar to libs folder and add the libHKWirelessHD.so to libs/armeabi folder. 
+
+Project property->Java Build Path->Libraries select “Add External JARs”，choose the HKWirelessHD.jar.
+
+Then add the jar package as external JARs.
+
+The directory hierarchy as following:
 
 .. figure:: img/2.png
 
@@ -46,17 +49,43 @@ Add Permission in AndroidManifest.xml file
 Import package and implement interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Add the import to your code.
+Add the package header to your code:
 
 .. code-block:: java
 
 	import com.harman.hkwirelessapi.*
 
-Implement the interface.
+Implement the interface like this:
 
 .. code-block:: java
 
-	public class MainActivity extends Activity implements HKWirelessListener
+	public class YourClass implements HKWirelessListener {
+
+	}
+
+
+The interfaces should be implemented:
+
+.. code-block:: java
+
+	public void onDeviceStateUpdated(long deviceId, int reason){
+
+	}
+	public void onPlaybackStateChanged(int playState){
+
+	}
+	public void onVolumeLevelChanged(long deviceId, int deviceVolume, int avgVolume){
+
+	}
+	public void onPlayEnded(){
+
+	}
+	public void onPlaybackTimeChanged(int timeElapsed){
+
+	}
+	public void onErrorOccurred(int errorCode, String errorMesg){
+
+	}
 
 
 Creating a Sample Application
@@ -64,7 +93,7 @@ Creating a Sample Application
 
 All APIs can be accessed through the object pointer of HKWirelessHandler and AudioCodecHandler. Only you have to do is create a HKWirelessHandler object and  a AudioCodecHandler object use them to invoke the APIs you want to use.
 
-Create HKWirelessHD Control Handler and start the Wireless Audio
+Create HKWirelessHD Control Handler and initialize the Wireless Audio
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: java
@@ -76,7 +105,7 @@ Create HKWirelessHD Control Handler and start the Wireless Audio
 	hControlHandler.initializeHKWirelessController("");
 
 Note 
-	``InitializeHKWirelessController()`` is a blocking call. It waits until the call successfully initializes the wireless audio network. If the phone device does not belong to a Wi-Fi network or if other HKWirelessHD app is running on the same device, then it will keep blocked. It would be nice to present a dialog to user before calling ``initializeHKWirelessController()`` to notice that the app will wait until HWWirelessHD network is available. 
+	``InitializeHKWirelessController()`` is a blocking call. It waits until the call successfully initializes the wireless audio network. If the phone device does not belong to a Wi-Fi network or not have network permission or if other HKWirelessHD app is running on the same device, then it will keep blocked. It would be nice to present a dialog to user before calling ``initializeHKWirelessController()`` to notice that the app will wait until HWWirelessHD network is available. 
 
 Discovery and refreshing of available speakers in the Wi-Fi network
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

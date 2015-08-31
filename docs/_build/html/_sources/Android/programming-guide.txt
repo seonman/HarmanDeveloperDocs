@@ -1,7 +1,7 @@
 Programming Guide (Android)
 =============================
 
-HKWirelessHD SDK is a set of header files, libraries and documentations to help developers create iOS apps that can control Harman Kardon Omni speakers to play audio wirelessly
+HKWirelessHD SDK is a set of header files, libraries and documentations to help developers create Android apps that can control Harman Kardon Omni speakers to play audio wirelessly.
 
 In this document, we describe only about Android version of HKWirelessHD SDK.
 
@@ -173,10 +173,10 @@ active             boolean         indicates if added to the current playback se
 wifiSignalStrength Int             Wi-Fi strength in dBm scale, -100 (low) to 0 (high)     Variable                               No
 role               Int             the role definition (stereo or 5.1 channel)             Variable                               Yes
 version            String          the firmware version number as String                   Fixed (when firmware update)           No
-balance            Int             the balance value in stereo mode. -6 to 6, 0 is neutral Variable                               Yes
+balance            Int             the balance value in stereo mode. -6 to 6, 0 is neutral Variable                               No
 isPlaying          boolean         indicates whether the speaker is playing or not         Variable                               No
-channelType        Int             the channel type: 1 is stereo.                          Variable                               Yes
-isMaster           boolean         indicates if it is the master in stereo or group mode   Variable                               Yes
+channelType        Int             the channel type: 1 is stereo.                          Variable                               No
+isMaster           boolean         indicates if it is the master in stereo or group mode   Variable                               No
 ================== ==============  ======================================================= ====================================== ============
 
 
@@ -255,7 +255,6 @@ To discover and update the status of speakers immediately, you can use the follo
 	hControlHandler.stopRefreshDeviceInfo()  
 	
 ``startRefreshDeviceInfo()`` will refresh and update every 2 seconds the status of the devices in the current Wi-Fi network.
-...
 
 
 Add or remove a speaker to/from a playback session
@@ -332,7 +331,7 @@ To play a song, you should prepare a url using String first. Here is an example:
 	String songTitle = ...
 	hAudioControl.playCAF(url, songTitle, false)
 
-Here, resumeFlag is false, if you start the song from the beginning. If you want to resume to play the current song, then resumeFlag should be true. ‚ÄòsongTitle‚Äô is a String, representing the song name. (This is only internally used as a file name to store converted PCM data in the memory temporarily.)
+Here, resumeFlag is false, if you start the song from the beginning. If you want to resume to play the current song, then resumeFlag should be true. The "songTitle" is a String, representing the song name. (This is only internally used as a file name to store converted PCM data in the memory temporarily.)
 
 If you want to specify a starting point of the audio stream, then you can use ``playCAFFromCertainTime()`` to start the playback from a specified time.
 
@@ -446,7 +445,7 @@ Use ``getDeviceVolume()`` to get the volume level of a particular speaker.
 	int volume = hAudioControl.getDeviceVolume(deviceId);
 
 Speakers and Groups
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
 In HKWirelessHD SDK, a group is a collection of speakers. A group is defined as below:
 
 The group of a speaker is defined by specifying a group name in the speaker information as attribute.
@@ -456,7 +455,7 @@ The group ID is determined by following the device ID of the initial member of a
 
 Change speaker name
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Use ``setDeviceName()`` to change the speaker name. Note that you cannot set the device name by setting deviceNameÄ property value directly. The property is read-only.
+Use ``setDeviceName()`` to change the speaker name. Note that you cannot set the device name by setting deviceName property value directly. The property is read-only.
 
 .. code-block:: java
 
@@ -466,7 +465,7 @@ For example,
 
 .. code-block:: java
 
-	hAudioControl.setDeviceName(deviceId, "ÄùMy Omni10"Äù);
+	hAudioControl.setDeviceName(deviceId, "My Omni10");
 
 Be careful that while a speaker is playing audio, if the name of the speaker is changed, then the current playback is interrupted (stopped) with error. The error code and message are returned by ``onErrorOccurred()``, a delegate defined in HKWirelessListener interface.
 
@@ -483,14 +482,14 @@ For example,
 
 .. code-block:: java
 
-	hAudioControl.setDeviceGroupName(deviceId, "ÄùLiving Room");
+	hAudioControl.setDeviceGroupName(deviceId, "Living Room");
 
 Note that if you change the group name of a speaker, then the list of speakers of the group automatically changes.
 
 Remove a speaker from a group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use removeDeviceFromGroup() to remove the speaker from the belonged group. After being removed from a group, the name of group of the speaker is set to "Äúharman", which is a default group name implying that the speaker does not belong to any group.
+Use removeDeviceFromGroup() to remove the speaker from the belonged group. After being removed from a group, the name of group of the speaker is set to "harman", which is a default group name implying that the speaker does not belong to any group.
 
 void removeDeviceFromGroup(long groupId, long deviceId);
 
@@ -502,7 +501,7 @@ hControlHandler.removeDeviceFromGroup(groupId, deviceId);
 Interface APIs for events handling
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  
-In HKWirelessHD, the communication between user‚Äôs phone and speakers are done in asynchronous way. Therefore, some API calls from HKWirelessHandler can take a little time to take effects on the speaker side. Similarity, any change of status on the speaker side are reported to the phone a little time later. For example, the status of availability of a speaker can be updated a few seconds later after a speaker turns on or off. 
+In HKWirelessHD, the communication between user's phone and speakers are done in asynchronous way. Therefore, some API calls from HKWirelessHandler can take a little time to take effects on the speaker side. Similarity, any change of status on the speaker side are reported to the phone a little time later. For example, the status of availability of a speaker can be updated a few seconds later after a speaker turns on or off. 
 
 All the status update from the speaker side are reported to the phone via HKWirelessListener interface. So, your app needs to implement the interface accordingly to receive and handle the events from HKWirelessHandler.
 
