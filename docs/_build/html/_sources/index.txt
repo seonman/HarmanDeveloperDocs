@@ -182,6 +182,14 @@ Programming Guide (Android)
 
 	Android/programming-guide
 
+API Documentation (Android)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	Android/api-documentation
+	
 Version History (Android)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
