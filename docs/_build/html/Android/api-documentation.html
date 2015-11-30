@@ -1,0 +1,641 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API Documentation (Android) &mdash; Harman Developer 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api-documentation-android">
+<h1>API Documentation (Android)<a class="headerlink" href="#api-documentation-android" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="initializehkwirelesscontroller">
+<h3>initializeHKWirelessController()<a class="headerlink" href="#initializehkwirelesscontroller" title="Permalink to this headline">¶</a></h3>
+<p>Initializes and starts HKWirelessHD controller. This API requires a license key as string. If the input license key fails in key validation, then the API returns -1. If it is successful, return 0.</p>
+<p>The license key will be delivered to you once you register on developer.harman.com. Until it is delivered, you may use the license key included in the sample apps.</p>
+<p>Note</p>
+<p>This is a blocking call, and it will not return until HKWireless controller initialized. If the phone is not connected to a Wi-Fi network, or any other app in the same phone is using the HKWireless controller, it waits until the other app releases the controller.</p>
+<p>If you need non-blocking behavior, you should call this API asynchronously using other thread.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">initializeHKWirelessController(String</span> <span class="pre">key)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">String</span> <span class="pre">key</span></code> - the license key</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span></code> - success (0 or HKW_INIT_SUCCESS) or failure (-1 or HKW_INIT_FAILURE_LICENSE_INVALID)</p>
+</div>
+<div class="section" id="isinitialized">
+<h3>isInitialized()<a class="headerlink" href="#isinitialized" title="Permalink to this headline">¶</a></h3>
+<p>Checks if HKWirelessHD controller is initialied.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span> <span class="pre">isInitialized()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span></code> -  True if HKWirelessController has been initialized, false not intialized.</p>
+</div>
+</div>
+<div class="section" id="refreshing-speaker-information">
+<h2>Refreshing Speaker Information<a class="headerlink" href="#refreshing-speaker-information" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="refreshdeviceinfoonce">
+<h3>refreshDeviceInfoOnce()<a class="headerlink" href="#refreshdeviceinfoonce" title="Permalink to this headline">¶</a></h3>
+<p>Refresh the devices one time. The device information will be refreshed and updated to DeviceInfo objects. If there is any update the onDeviceStateUpdated function will be called. you can find which device has been updated and what was the reason.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">refreshDeviceInfoOnce()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="startrefreshdeviceinfo">
+<h3>startRefreshDeviceInfo()<a class="headerlink" href="#startrefreshdeviceinfo" title="Permalink to this headline">¶</a></h3>
+<p>Start to refresh DeviceInfo every two seconds, until <code class="docutils literal"><span class="pre">stopRefreshDeviceInfo()</span></code> is called.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">startRefreshDeviceInfo()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="stoprefreshdeviceinfo">
+<h3>stopRefreshDeviceInfo()<a class="headerlink" href="#stoprefreshdeviceinfo" title="Permalink to this headline">¶</a></h3>
+<p>Stop refreshing DeviceInfo, which was started by <code class="docutils literal"><span class="pre">startRefreshDeviceInfo()</span></code>.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">stopRefreshDeviceInfo()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+</div>
+<div class="section" id="playback-control">
+<h2>Playback Control<a class="headerlink" href="#playback-control" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="playcaf">
+<h3>playCAF()<a class="headerlink" href="#playcaf" title="Permalink to this headline">¶</a></h3>
+<p>Play an audio file in local storage. If it is successful, <code class="docutils literal"><span class="pre">onPlaybackStateChanged()</span></code> function will be called and return the status value of HKPlayerState.EPlayerState_Play.</p>
+<p>Currently, it supports formats of mp3, wav, flac, sac, m4a and ogg, and the sample rate must be 44100 and above. playCAF is used to play mp3, wav, flac, sac, m4a or ogg file, and playWAV is only for WAV file.
+<strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span> <span class="pre">playCAF(String</span> <span class="pre">url,</span> <span class="pre">String</span> <span class="pre">songName,</span> <span class="pre">boolean</span> <span class="pre">resumeFlag)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">String</span> <span class="pre">url</span></code> - Path of audio file</p>
+<p><code class="docutils literal"><span class="pre">String</span> <span class="pre">songName</span></code> - the song name is used internally to save the temporary PCM file generated from the original audio file.</p>
+<p><code class="docutils literal"><span class="pre">boolean</span> <span class="pre">resumeFlag</span></code> -  If the playback should resume from the paused point . ResumeFlag should be false if start the song from the beginning, and if the playback was stopped, then the playback will start from the beginning even with resumeFlag true.</p>
+<p>Returns:</p>
+<p><code class="docutils literal"><span class="pre">boolean</span></code> - Success or failure</p>
+</div>
+<div class="section" id="playcaffromcertaintime">
+<h3>playCAFFromCertainTime()<a class="headerlink" href="#playcaffromcertaintime" title="Permalink to this headline">¶</a></h3>
+<p>Play an audio file from a certain time specified by startTime. For example, you can start a song from the point of 10 seconds of the song. <code class="docutils literal"><span class="pre">onPlaybackStateChanged()</span></code> function will be called and return the status value of HKPlayerState.EPlayerState_Play.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span> <span class="pre">playCAFFromCertainTime(String</span> <span class="pre">url,</span> <span class="pre">String</span> <span class="pre">songName,</span> <span class="pre">int</span> <span class="pre">startTime)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">String</span> <span class="pre">url</span></code> - Path of audio file.</p>
+<p><code class="docutils literal"><span class="pre">String</span> <span class="pre">songName</span></code> - the song name is used internally to save the temporary PCM file generated from the original audio file.
+int startTime - time in seconds that specifies the start time.</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span></code> - Success or failure</p>
+</div>
+<div class="section" id="playwav">
+<h3>playWAV()<a class="headerlink" href="#playwav" title="Permalink to this headline">¶</a></h3>
+<p>Play a WAV file. onPlaybackStateChanged function will be called and return the status of HKPlayerState.EPlayerState_Play.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span> <span class="pre">playWAV(String</span> <span class="pre">url)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">String</span> <span class="pre">url</span></code> - Path of the wav file</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span></code> - Success or failure</p>
+</div>
+<div class="section" id="playstreamingmedia">
+<h3>playStreamingMedia()<a class="headerlink" href="#playstreamingmedia" title="Permalink to this headline">¶</a></h3>
+<p>Plays a streaming media from web server. The API is a synchronous call. It will not return until the caller succeeds or fails. You can find the error message from the function of <code class="docutils literal"><span class="pre">onErrorOccurred()</span></code></p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">playStreamingMedia(String</span> <span class="pre">streamingMediaUrl)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">String</span> <span class="pre">streamingMediaUrl</span></code> - The URL of the streaming media source. It starts with a protocol name, such as http://. Currently, only http is supported.</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="pause">
+<h3>pause()<a class="headerlink" href="#pause" title="Permalink to this headline">¶</a></h3>
+<p>Pause current playing. <code class="docutils literal"><span class="pre">onPlaybackStateChanged()</span></code> function will be called and return the status of HKPlayerState.EPlayerState_Pause. Once the playback is paused, it can be resumed by <code class="docutils literal"><span class="pre">playCAF()</span></code> with resumeFlag to be true and the same songName. the playback is stopped by pause, if it was played by <code class="docutils literal"><span class="pre">playStreamingMedia()</span></code>.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">pause()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="stop">
+<h3>stop()<a class="headerlink" href="#stop" title="Permalink to this headline">¶</a></h3>
+<p>Stop playing. <code class="docutils literal"><span class="pre">onPlaybackStateChanged()</span></code> function will be called and return the status of HKPlayerState.EPlayerState_Stop.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">stop()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="isplaying">
+<h3>isPlaying()<a class="headerlink" href="#isplaying" title="Permalink to this headline">¶</a></h3>
+<p>Check if the player is playing or not.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span> <span class="pre">isPlaying()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span></code> - boolean value indicating if the player is playing or not.</p>
+</div>
+<div class="section" id="getplayerstate">
+<h3>getPlayerState()<a class="headerlink" href="#getplayerstate" title="Permalink to this headline">¶</a></h3>
+<p>Get current state of playback.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">HKPlayerState</span> <span class="pre">getPlayerState()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">HKPlayerState</span></code> - Current player state.</p>
+</div>
+</div>
+<div class="section" id="volume-control">
+<h2>Volume Control<a class="headerlink" href="#volume-control" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setvolumeall">
+<h3>setVolumeAll()<a class="headerlink" href="#setvolumeall" title="Permalink to this headline">¶</a></h3>
+<p>Set a volume level to all speakers.</p>
+<p>The range of volume level is 0 to the maximumVolumeLevel (currently, 50) by <code class="docutils literal"><span class="pre">getMaximumVolumeLevel()</span></code>.</p>
+<p>It is asynchronous call. The volume will be set within a few milliseconds. The <code class="docutils literal"><span class="pre">onVolumeLevelChanged()</span></code> function defined in HKWirelessListener will be called when volume of specified speaker has been changed.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">setVolumeAll(int</span> <span class="pre">volume)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">volume</span></code> - the volume level</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="setvolumedevice">
+<h3>setVolumeDevice()<a class="headerlink" href="#setvolumedevice" title="Permalink to this headline">¶</a></h3>
+<p>Set a volume level to a speaker specified by device ID. The range of volume level is 0 to the maximumVolumeLevel (currently, 50) by <code class="docutils literal"><span class="pre">getMaximumVolumeLevel()</span></code>. It is asynchronous call. The effect of the API call will occur after a few milliseconds. The <code class="docutils literal"><span class="pre">onVolumeLevelChanged()</span></code> function will be called when volume of specified speaker has been changed.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">setVolumeDevice(long</span> <span class="pre">deviceId,</span> <span class="pre">int</span> <span class="pre">volume)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - Device ID of the speaker</p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">volume</span></code> - Volume level</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="getvolume">
+<h3>getVolume()<a class="headerlink" href="#getvolume" title="Permalink to this headline">¶</a></h3>
+<p>Get the average volume level for all devices.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">getVolume()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span></code> - the average volume level of all speakers</p>
+</div>
+<div class="section" id="getdevicevolume">
+<h3>getDeviceVolume()<a class="headerlink" href="#getdevicevolume" title="Permalink to this headline">¶</a></h3>
+<p>Get the volume level of the specified speaker.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">getDeviceVolume(long</span> <span class="pre">deviceId)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - Device Id of the speaker.</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span></code> - Volume level</p>
+</div>
+<div class="section" id="getmaximumvolumelevel">
+<h3>getMaximumVolumeLevel()<a class="headerlink" href="#getmaximumvolumelevel" title="Permalink to this headline">¶</a></h3>
+<p>Return the maximum volume level that the system provides. Currently, it is 50.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">getMaximumVolumeLevel()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span></code> - the maximum volume level</p>
+</div>
+</div>
+<div class="section" id="device-speaker-management">
+<h2>Device (Speaker) Management<a class="headerlink" href="#device-speaker-management" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="adddevicetosession">
+<h3>addDeviceToSession()<a class="headerlink" href="#adddevicetosession" title="Permalink to this headline">¶</a></h3>
+<p>Add a speaker to the current playback session. The added speaker will start playing. This can be called during playing.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span> <span class="pre">addDeviceToSession(long</span> <span class="pre">id)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - Device Id of the speaker.</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span></code> - Whether the addition is successful or not.</p>
+</div>
+<div class="section" id="removedevicefromsession">
+<h3>removeDeviceFromSession()<a class="headerlink" href="#removedevicefromsession" title="Permalink to this headline">¶</a></h3>
+<p>Remove a speaker from the current playback session. The removed speaker will stop playing. This can be called during playing.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span> <span class="pre">removeDeviceFromSession(long</span> <span class="pre">deviceid)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - Device Id of the speaker.</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span></code> - Whether the removal is successful or not.</p>
+</div>
+<div class="section" id="getdevicecount">
+<h3>getDeviceCount()<a class="headerlink" href="#getdevicecount" title="Permalink to this headline">¶</a></h3>
+<p>Get the number of speakers in the HKWirelessHD network.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">getDeviceCount()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span></code> - the number of speakers.</p>
+</div>
+<div class="section" id="getgroupcount">
+<h3>getGroupCount()<a class="headerlink" href="#getgroupcount" title="Permalink to this headline">¶</a></h3>
+<p>Get the number of groups.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">getGroupCount()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span></code> - the number of groups</p>
+</div>
+<div class="section" id="getdevicecountingroupindex">
+<h3>getDeviceCountInGroupIndex()<a class="headerlink" href="#getdevicecountingroupindex" title="Permalink to this headline">¶</a></h3>
+<p>Get the number of speakers in the group specified by the index.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">getDeviceCountInGroupIndex(int</span> <span class="pre">groupIndex)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">groupIndex</span></code> - the index of the group looking for. It starts from 0 to (GroupCount-1).</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span></code> - the number of speakers</p>
+</div>
+<div class="section" id="getdeviceinfofromtable">
+<h3>getDeviceInfoFromTable()<a class="headerlink" href="#getdeviceinfofromtable" title="Permalink to this headline">¶</a></h3>
+<p>Return the DeviceInfo of specified device in specified group.</p>
+<p><strong>Signature:</strong></p>
+<p>DeviceObj getDeviceInfoFromTable(int groupIndex, int deviceIndex)</p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">groupIndex</span></code> - group index in the group list.</p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">deviceIndex</span></code> - The index of the speaker in the group.</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">DeviceObj</span></code> - the device information</p>
+</div>
+<div class="section" id="getdeviceinfobyindex">
+<h3>getDeviceInfoByIndex()<a class="headerlink" href="#getdeviceinfobyindex" title="Permalink to this headline">¶</a></h3>
+<p>Return the DeviceInfo of specified device from the global table from 0 to (deviceCount - 1).</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">DeviceObj</span> <span class="pre">getDeviceInfoByIndex(int</span> <span class="pre">deviceIndex)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">deviceIndex</span></code> - The index of the device from the table with all devices.</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">DeviceObj</span></code> - the device information</p>
+</div>
+<div class="section" id="getdevicegroupbydeviceid">
+<h3>getDeviceGroupByDeviceId()<a class="headerlink" href="#getdevicegroupbydeviceid" title="Permalink to this headline">¶</a></h3>
+<p>Return the DeviceGroup the speaker belongs to.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">GroupObj</span> <span class="pre">findDeviceGroupWithDeviceId(long</span> <span class="pre">deviceId)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - the device ID</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">GroupObj</span></code> - the group information</p>
+</div>
+<div class="section" id="getdeviceinfobyid">
+<h3>getDeviceInfoById()<a class="headerlink" href="#getdeviceinfobyid" title="Permalink to this headline">¶</a></h3>
+<p>Find the a DeviceInfo by device Id. It is used to retrieve the DeviceInfo of specified device.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">DeviceObj</span> <span class="pre">getDeviceInfoById(long</span> <span class="pre">deviceId)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - the device ID.</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">DeviceObj</span></code> - the device information</p>
+</div>
+<div class="section" id="isdeviceavailable">
+<h3>isDeviceAvailable()<a class="headerlink" href="#isdeviceavailable" title="Permalink to this headline">¶</a></h3>
+<p>Check whether the specified speaker is available or not.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span> <span class="pre">isDeviceAvailable(long</span> <span class="pre">deviceId)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - the device ID.</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span></code> - the speaker is available or not.</p>
+</div>
+<div class="section" id="isdeviceactive">
+<h3>isDeviceActive()<a class="headerlink" href="#isdeviceactive" title="Permalink to this headline">¶</a></h3>
+<p>Check whether the speaker is active (added to the current playback session) or not.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span> <span class="pre">isDeviceActive(long</span> <span class="pre">deviceId)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - The ID of the speaker</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">boolean</span></code> - if the speaker is active or not.</p>
+</div>
+<div class="section" id="removedevicefromgroup">
+<h3>removeDeviceFromGroup()<a class="headerlink" href="#removedevicefromgroup" title="Permalink to this headline">¶</a></h3>
+<p>Remove the specified speaker from its group.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">removeDeviceFromGroup(long</span> <span class="pre">groupId,</span> <span class="pre">long</span> <span class="pre">deviceId)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">groupId</span></code> - group ID</p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - device ID</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="getdevicegroupbyindex">
+<h3>getDeviceGroupByIndex()<a class="headerlink" href="#getdevicegroupbyindex" title="Permalink to this headline">¶</a></h3>
+<p>Get the group information.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">GroupObj</span> <span class="pre">getDeviceGroupByIndex(int</span> <span class="pre">groupIndex)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">groupIndex</span></code> - group index</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">GroupObj</span></code> - the group information</p>
+</div>
+<div class="section" id="getdevicegroupbyid">
+<h3>getDeviceGroupById()<a class="headerlink" href="#getdevicegroupbyid" title="Permalink to this headline">¶</a></h3>
+<p>Get the group information by group ID.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">GroupObj</span> <span class="pre">getDeviceGroupById(long</span> <span class="pre">groupId)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">groupId</span></code> - the ID of the group</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">GroupObj</span></code> - the group information</p>
+</div>
+<div class="section" id="getdevicegroupnamebyindex">
+<h3>getDeviceGroupNameByIndex()<a class="headerlink" href="#getdevicegroupnamebyindex" title="Permalink to this headline">¶</a></h3>
+<p>Get the name of the DeviceGroup by index.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">String</span> <span class="pre">getDeviceGroupNameByIndex(int</span> <span class="pre">groupIndex)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">groupIndex</span></code> - the index of the group in the group table.</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">String</span></code> - the string of group name</p>
+</div>
+<div class="section" id="getdevicegroupidbyindex">
+<h3>getDeviceGroupIdByIndex()<a class="headerlink" href="#getdevicegroupidbyindex" title="Permalink to this headline">¶</a></h3>
+<p>Gets the ID of the DeviceGroup by index.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">getDeviceGroupIdByIndex(int</span> <span class="pre">groupIndex)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">groupIndex</span></code> - the index of the group in the table</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span></code> - the group id</p>
+</div>
+<div class="section" id="setdevicename">
+<h3>setDeviceName()<a class="headerlink" href="#setdevicename" title="Permalink to this headline">¶</a></h3>
+<p>Set device name.</p>
+<p>Note</p>
+<p>If you set a device name while it is playing, the speaker will stop playing and return error.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">setDeviceName(long</span> <span class="pre">deviceId,</span> <span class="pre">String</span> <span class="pre">deviceName)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - The ID of the device</p>
+<p><code class="docutils literal"><span class="pre">String</span> <span class="pre">deviceName</span></code> - The name of the device to set</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="setdevicegroupname">
+<h3>setDeviceGroupName()<a class="headerlink" href="#setdevicegroupname" title="Permalink to this headline">¶</a></h3>
+<p>Set group name.</p>
+<p>Note</p>
+<p>If you set a group name while the a playback is running, the speaker stops playing and return error.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">setDeviceGroupName(long</span> <span class="pre">deviceId,</span> <span class="pre">String</span> <span class="pre">groupName)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - The device ID within a group</p>
+<p><code class="docutils literal"><span class="pre">String</span> <span class="pre">groupName</span></code> - the group name</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="getactivedevicecount">
+<h3>getActiveDeviceCount()<a class="headerlink" href="#getactivedevicecount" title="Permalink to this headline">¶</a></h3>
+<p>Get the number of active speakers (the speakers that are added to the current playback session.)</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">getActiveDeviceCount()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span></code> - the number of active devices</p>
+</div>
+<div class="section" id="getactivegroupcount">
+<h3>getActiveGroupCount()<a class="headerlink" href="#getactivegroupcount" title="Permalink to this headline">¶</a></h3>
+<p>Get the number of active groups. An active group is the one that all the speakers in the group are active.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">getActiveGroupCount()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span></code> - the number of active groups</p>
+</div>
+<div class="section" id="refreshdevicewifisignal">
+<h3>refreshDeviceWiFiSignal()<a class="headerlink" href="#refreshdevicewifisignal" title="Permalink to this headline">¶</a></h3>
+<p>Refresh the devices Wifi Signal strength value. This is asynchronous call, and the result of refreshing will come a few milliseconds later. The new WiFi signal strength value will be reported by <code class="docutils literal"><span class="pre">onDeviceStateUpdated()</span></code>. You should get the wifi signal value by getting wifiSignalStrength attribute of DeviceInfo object.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">refreshDeviceWiFiSignal(long</span> <span class="pre">deviceId)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - the device ID</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="getwifisignalstrengthtype">
+<h3>getWifiSignalStrengthType()<a class="headerlink" href="#getwifisignalstrengthtype" title="Permalink to this headline">¶</a></h3>
+<p>Get Wifi signal strength type by signal value.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">HKWifiSingalStrength</span> <span class="pre">getWifiSignalStrengthType(int</span> <span class="pre">wifiSignal)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">wifiSignal</span></code> - the wifi signal value</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">HKWifiSingalStrength</span></code> - Wifi signal strength type</p>
+</div>
+</div>
+<div class="section" id="apis-for-events-handling">
+<h2>APIs for events handling<a class="headerlink" href="#apis-for-events-handling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ondevicestateupdated">
+<h3>onDeviceStateUpdated()<a class="headerlink" href="#ondevicestateupdated" title="Permalink to this headline">¶</a></h3>
+<p>The function is called when devices status is changed, including active or inactive, model name, group name, wifi strength, etc.</p>
+<p>Note if the volume level changed, VolumeLevelChanged function would be called instead.</p>
+<p>This function is essential to retrieve and update speaker information in timely manner. If you want to show the available speakers and its latest information, you could get from the function in timely manner.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">onDeviceStateUpdated(long</span> <span class="pre">deviceId,</span> <span class="pre">int</span> <span class="pre">reason)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - the device ID</p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">reason</span></code> - the reason code</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="onerroroccurred">
+<h3>onErrorOccurred()<a class="headerlink" href="#onerroroccurred" title="Permalink to this headline">¶</a></h3>
+<p>The function is invoked when an error occurs. The function returns the error code and error message.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">onErrorOccurred(int</span> <span class="pre">errorCode,</span> <span class="pre">String</span> <span class="pre">errorMesg)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">errorCode</span></code> - error code</p>
+<p><code class="docutils literal"><span class="pre">String</span> <span class="pre">errorMesg</span></code> - error description</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="onplayended">
+<h3>onPlayEnded<a class="headerlink" href="#onplayended" title="Permalink to this headline">¶</a></h3>
+<p>This function is invoked when the current playback has ended.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">onPlayEnded()</span></code></p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="onvolumelevelchanged">
+<h3>onVolumeLevelChanged()<a class="headerlink" href="#onvolumelevelchanged" title="Permalink to this headline">¶</a></h3>
+<p>This function is invoked when volume level is changed.</p>
+<p>The function delivers the device ID device volume level, and average volume level.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">onVolumeLevelChanged(long</span> <span class="pre">deviceId,</span> <span class="pre">int</span> <span class="pre">deviceVolume,</span> <span class="pre">int</span> <span class="pre">avgVolume)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">long</span> <span class="pre">deviceId</span></code> - the device ID</p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">deviceVolume</span></code> - the volume level</p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">avgVolume</span></code> - the average volume level</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="onplaybackstatechanged">
+<h3>onPlaybackStateChanged()<a class="headerlink" href="#onplaybackstatechanged" title="Permalink to this headline">¶</a></h3>
+<p>This function is invoked when playback state is changed. The function delivers the playState.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">onPlaybackStateChanged(int</span> <span class="pre">playState)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">playState</span></code> - The player state</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+<div class="section" id="onplaybacktimechanged">
+<h3>onPlaybackTimeChanged()<a class="headerlink" href="#onplaybacktimechanged" title="Permalink to this headline">¶</a></h3>
+<p>This function is invoked when current playback time is changed. It is called every second. The function parameter timeElapsed returns the time (in seconds) elapsed since the start. It is useful when you update the progress bar.</p>
+<p><strong>Signature:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span> <span class="pre">onPlaybackTimeChanged(int</span> <span class="pre">timeElapsed)</span></code></p>
+<p><strong>Parameters:</strong></p>
+<p><code class="docutils literal"><span class="pre">int</span> <span class="pre">timeElapsed</span></code> - the time (in second) passed since the beginning of the playback.</p>
+<p><strong>Returns:</strong></p>
+<p><code class="docutils literal"><span class="pre">void</span></code></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/HarmanDeveloperLogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API Documentation (Android)</a><ul>
+<li><a class="reference internal" href="#initialization">Initialization</a><ul>
+<li><a class="reference internal" href="#initializehkwirelesscontroller">initializeHKWirelessController()</a></li>
+<li><a class="reference internal" href="#isinitialized">isInitialized()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#refreshing-speaker-information">Refreshing Speaker Information</a><ul>
+<li><a class="reference internal" href="#refreshdeviceinfoonce">refreshDeviceInfoOnce()</a></li>
+<li><a class="reference internal" href="#startrefreshdeviceinfo">startRefreshDeviceInfo()</a></li>
+<li><a class="reference internal" href="#stoprefreshdeviceinfo">stopRefreshDeviceInfo()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#playback-control">Playback Control</a><ul>
+<li><a class="reference internal" href="#playcaf">playCAF()</a></li>
+<li><a class="reference internal" href="#playcaffromcertaintime">playCAFFromCertainTime()</a></li>
+<li><a class="reference internal" href="#playwav">playWAV()</a></li>
+<li><a class="reference internal" href="#playstreamingmedia">playStreamingMedia()</a></li>
+<li><a class="reference internal" href="#pause">pause()</a></li>
+<li><a class="reference internal" href="#stop">stop()</a></li>
+<li><a class="reference internal" href="#isplaying">isPlaying()</a></li>
+<li><a class="reference internal" href="#getplayerstate">getPlayerState()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#volume-control">Volume Control</a><ul>
+<li><a class="reference internal" href="#setvolumeall">setVolumeAll()</a></li>
+<li><a class="reference internal" href="#setvolumedevice">setVolumeDevice()</a></li>
+<li><a class="reference internal" href="#getvolume">getVolume()</a></li>
+<li><a class="reference internal" href="#getdevicevolume">getDeviceVolume()</a></li>
+<li><a class="reference internal" href="#getmaximumvolumelevel">getMaximumVolumeLevel()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#device-speaker-management">Device (Speaker) Management</a><ul>
+<li><a class="reference internal" href="#adddevicetosession">addDeviceToSession()</a></li>
+<li><a class="reference internal" href="#removedevicefromsession">removeDeviceFromSession()</a></li>
+<li><a class="reference internal" href="#getdevicecount">getDeviceCount()</a></li>
+<li><a class="reference internal" href="#getgroupcount">getGroupCount()</a></li>
+<li><a class="reference internal" href="#getdevicecountingroupindex">getDeviceCountInGroupIndex()</a></li>
+<li><a class="reference internal" href="#getdeviceinfofromtable">getDeviceInfoFromTable()</a></li>
+<li><a class="reference internal" href="#getdeviceinfobyindex">getDeviceInfoByIndex()</a></li>
+<li><a class="reference internal" href="#getdevicegroupbydeviceid">getDeviceGroupByDeviceId()</a></li>
+<li><a class="reference internal" href="#getdeviceinfobyid">getDeviceInfoById()</a></li>
+<li><a class="reference internal" href="#isdeviceavailable">isDeviceAvailable()</a></li>
+<li><a class="reference internal" href="#isdeviceactive">isDeviceActive()</a></li>
+<li><a class="reference internal" href="#removedevicefromgroup">removeDeviceFromGroup()</a></li>
+<li><a class="reference internal" href="#getdevicegroupbyindex">getDeviceGroupByIndex()</a></li>
+<li><a class="reference internal" href="#getdevicegroupbyid">getDeviceGroupById()</a></li>
+<li><a class="reference internal" href="#getdevicegroupnamebyindex">getDeviceGroupNameByIndex()</a></li>
+<li><a class="reference internal" href="#getdevicegroupidbyindex">getDeviceGroupIdByIndex()</a></li>
+<li><a class="reference internal" href="#setdevicename">setDeviceName()</a></li>
+<li><a class="reference internal" href="#setdevicegroupname">setDeviceGroupName()</a></li>
+<li><a class="reference internal" href="#getactivedevicecount">getActiveDeviceCount()</a></li>
+<li><a class="reference internal" href="#getactivegroupcount">getActiveGroupCount()</a></li>
+<li><a class="reference internal" href="#refreshdevicewifisignal">refreshDeviceWiFiSignal()</a></li>
+<li><a class="reference internal" href="#getwifisignalstrengthtype">getWifiSignalStrengthType()</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#apis-for-events-handling">APIs for events handling</a><ul>
+<li><a class="reference internal" href="#ondevicestateupdated">onDeviceStateUpdated()</a></li>
+<li><a class="reference internal" href="#onerroroccurred">onErrorOccurred()</a></li>
+<li><a class="reference internal" href="#onplayended">onPlayEnded</a></li>
+<li><a class="reference internal" href="#onvolumelevelchanged">onVolumeLevelChanged()</a></li>
+<li><a class="reference internal" href="#onplaybackstatechanged">onPlaybackStateChanged()</a></li>
+<li><a class="reference internal" href="#onplaybacktimechanged">onPlaybackTimeChanged()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Android/api-documentation.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Harman International.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

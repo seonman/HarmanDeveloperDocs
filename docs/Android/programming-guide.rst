@@ -1,9 +1,9 @@
 Programming Guide (Android)
 =============================
 
-HKWirelessHD SDK is a set of header files, libraries and documentations to help developers create Android apps that can control Harman Kardon Omni speakers to play audio wirelessly.
+HKWirelessHD SDK is a set of header files, libraries and documentation to help developers create Android apps that can control Harman Kardon Omni speakers to play audio wirelessly.
 
-In this document, we describe only about Android version of HKWirelessHD SDK.
+In this document, we describe the Android version of HKWirelessHD SDK.
 
 
 **Key Features of HKWirelessHD**
@@ -12,13 +12,13 @@ In this document, we describe only about Android version of HKWirelessHD SDK.
 	Omni speakers are attached to a WiFi network. You can can manage and control speakers in the same WiFi network to play audio wirelessly.
 
 - Support multi-room audio streaming
-	You can play audio with multiple Omni speakers with synchronization.
+	You can play audio to multiple Omni speakers with synchronization.
 
 - Support party mode audio streaming
 	You can switch the speakers from a room (a set of speakers) to party mode (all speakers in all rooms), or vice versa.
 
 - Support multi-channel audio streaming
-	If you have two Omni speakers, then you can send different channel of a single audio stream to speakers. For example, to play a music in stereo mode, you can assign a speaker for left channel, and assign the other for right channel.
+	If you have two Omni speakers, you can send different channels of a single audio stream to different speakers. For example, to play music in stereo mode, you can assign a speaker for left channel, and assign the other for right channel.
 	Currently, stereo (2 channel) mode is supported. 5.1 channel mode is on schedule.
 
 - Support mp3, wav, flac, sac, m4a and ogg formats, and the sample rate above 44100.
@@ -30,7 +30,7 @@ SDK information
 Overview
 ^^^^^^^^^^
 
-There are two kind of entities in HKWirelessHD audio streaming - one source device and one or more destination devices. Source device sends audio stream to destination devices (speakers), and destination devices receive the audio stream from source and play it. Therefore, audio streaming is done in one-to-many way. That is, there is one single source device streaming an audio file, and multiple destination devices receive the audio stream with synchronization with each other. 
+There are two kinds of entities in HKWirelessHD audio streaming - one source device and one or more destination devices. Source device sends audio stream to destination devices (speakers), and destination devices receive the audio stream from source and play it. Therefore, audio streaming is done in a one-to-many way. That is, there is one single source device streaming an audio file, and multiple destination devices receiving the audio stream with synchronization with each other. 
 
 In case of multi-channel streaming, each speaker is assigned with a role to process a dedicated audio channel. For example, a speaker can take left channel or right channel in stereo mode.
 
@@ -39,26 +39,26 @@ Source device can be Android device and destination devices are Harman Kardon Om
 
 **Use of HKWirelessHD API to stream audio to Omni Speakers**
 
-To send audio stream to destination devices, an App in Android device should use HKWirelessHD API. HKWirelessHD SDK provides the library of the APIs for arm32/64bit architecture. The version is must  above Android 4.1(API 16) or later.
+To send an audio stream to destination devices, an App on an Android device should use HKWirelessHD API. HKWirelessHD SDK provides the library of the APIs for arm32/64bit architecture. The version requires Android 4.1(API 16) or later.
 
 **Communication channels between source and destinations**
 
-As shown in the figure above, there are two kind of communications between source device and (multiple) destination devices.
+As shown in the figure above, there are two kind of communications between the source device and (multiple) destination devices.
 
 - Channel for audio streaming (one way communication from a source to multiple destinations)
 	This channel is used for transmitting audio data to destination speakers
 
 - Channel for control commands and device status (bidirectional communication)
 	This channel is used to send command from source to destinations to control the device, like volume, etc.
-	A destination device can also send command to the source device in some cases. For example, a speaker which is not belonging to the current playback session can send a command to the source to add itself to the current playback session and play audio on it.
+	A destination device can also send command to the source device in some cases. For example, a speaker which does not belong to the current playback session can send a command to the source to add itself to the current playback session and play audio on it.
 	User can add Omni 10 or Omni 20 speaker to the on-going playback session by long-pressing the Home button on the control panel. Please refer to Omni 10 or 20 User's manual for more information.
 	This channel is also used to send device information and status data of destination speakers to the source device.
 	Device information includes the speaker name, the group name, IP address and port number, firmware version, etc.
-	Device status information includes the status about the device availability and change of its attributes, whether or not it is playing music, the Wi-Fi signal strength, volume change, etc.
+	Device status information includes the status about device availability and change of its attributes, whether or not it is playing music, the Wi-Fi signal strength, volume change, etc.
 
 **Asynchronous Communication**
 
-The communication between the source device and the destination speakers are done in asynchronous way. Asynchronous behavior is expected because all the commands and status updates are executed in a way like RPC (Remote Procedure Call) or something similar. Even more, audio streaming always involves some amount of buffering of audio data, so, the timing gap between the source and the destinations can be larger.
+The communication between the source device and the destination speakers is done in an asynchronous way. Asynchronous behavior is expected because all the commands and status updates are executed in like RPC (Remote Procedure Call) or something similar. Even more, audio streaming always involves some amount of buffering of audio data, so, the timing gap between the source and the destinations can be larger.
 
 Below are some examples of asynchronous communications.
 
@@ -66,17 +66,17 @@ Below are some examples of asynchronous communications.
 	When a speaker is turned on, the availability of the speaker is reflected to the source device a few second later. Likewise, if a speaker is turned off or disconnected from the network, its unavailability is reflected to the source device a few second later.
 
 - Playback control
-	When the source starts music playback to destination speakers, actual playback in destination speakers starts a few hundreds milliseconds later. Similar things occur when the source pauses or stops the current audio streaming, although stop or pause requires much less time.
+	When the source starts music playback to destination speakers, actual playback in destination speakers starts a few hundred milliseconds later. Similar things occur when the source pauses or stops the current audio streaming, although stop or pause requires much less time.
 
 - Volume Control
-	When the source changes the volume level of all speakers or selected individual speakers, actual volume changes occur a few millisecond later.
+	When the source changes the volume level of all speakers or selected individual speakers, actual volume changes occur a few milliseconds later.
 
 
 **Speaker Management**
 
 Whenever a speaker updates its status, the latest status information should be updated on the source device side as well. HKWirelessHD API manages the latest device status information inside of DeviceInfo instances. HKWControlHandler instance maintains a list (table) of DeviceInfo objects, each of which corresponds to a speaker found in the network.
 
-The detailed description on each attribute in the device are described in DeviceObj.java.
+The detailed description of each attribute in the device are described in DeviceObj.java.
 
 Visibility of Speakers
 -----------------------
@@ -114,17 +114,17 @@ To register an object as the listener, do as below
 
 **Programming Guide**
 
-In this document, we explain how to use HKWirelessHD APIs to create an app controlling HK Omni speakers. The sample codes explained in this section are copied from WirelessOmni app.
+In this document, we explain how to use HKWirelessHD APIs to create an app controlling HK Omni speakers. The sample code explained in this section is copied from WirelessOmni app.
 
-All APIs can be accessed through the object pointer of HKWirelessHandler and AudioCodecHandler. Only you have to do is create a HKWirelessHandler object and a AudioCodecHandler object use them to invoke the APIs you want to use.
+All APIs can be accessed through the object pointer of HKWirelessHandler and AudioCodecHandler. All you have to do is create a HKWirelessHandler object and a AudioCodecHandler object use them to invoke the APIs you want to use.
 
 For setting up a project with HKWirelessHD SDK, please refer to Getting Started Guide.
 
 **Initialization**
 
-Controlling HK Omni speakers are done by calling APIs provided by HKWControlHandler. So, the first thing to do to use HKWirelessHD APIs is to acquire the singleton object of HKWControlHandler and initialize it. 
+Controlling HK Omni speakers is done by calling APIs provided by HKWControlHandler. So, the first thing to do to use HKWirelessHD APIs is to acquire the object of HKWControlHandler and initialize it. 
 
-Once you acquire the HKWControlHandler object, you need to initialize it by calling ``initializeHKWirelessController()`` with a license key value as parameter. Every developer who signed up to Harman developer web site will receive a license key code.
+Once you acquire the HKWControlHandler object, you need to initialize it by calling ``initializeHKWirelessController()`` with a license key value as parameter. Every developer who signed up to Harman developer web site will receive a license key code. In the event you have not received a license key code yet you should use the key code in the sample app.
 
 .. code-block:: java
 
@@ -152,7 +152,7 @@ Each speaker information contains a list of attributes that specify its static i
 
 You can retrieve all the attributes of device (speaker) information through DeviceObj object, and it is specified in DeviceObj.java. The following table shows the list of information that DeviceObj provides. 
 
-In the table, "Fixed/Variable" column means if the attribute value is a fixed value during the execution, or can be changed by itself or by calling APIs. "Set by API" column means whether the value of the attribute can be changed by API calls. 
+In the table, "Fixed/Variable" column means the attribute value is a fixed value during the execution, or can be changed by itself or by calling APIs. "Set by API" column means whether the value of the attribute can be changed by API calls. 
 
 Note
 	All the attributes in DeviceObj.java are "readonly". So, you can only read the value of each attribute. You need to use corresponding API functions to change the values of the attributes.
@@ -204,11 +204,11 @@ The following is an example of retrieving some of attributes of a speaker inform
 
 **Getting a speaker (device) information**
 
-HKWControlHandler maintains the list of speaker internally. Each speaker information can be retrieved by specifying the index in the table, or by specifying the index of group and the index of member inside of the group.
+HKWControlHandler maintains the list of speakers internally. Speaker information can be retrieved by specifying the index in the table, or by specifying the index of group and the index of member inside of the group.
 
 **Get the speaker information from the table**
 
-You can retrieve a speaker information (as DeviceInfo object) by specifying the index in the table.
+You can retrieve speaker information (as DeviceInfo object) by specifying the index in the table.
 
 .. code-block:: java
 
@@ -218,9 +218,9 @@ Here, the range of deviceIndex is 0 to the number of speakers (deviceCount) minu
 
 This function is useful when you need to show all the speakers in ordered list in list.
 
-**Get a speaker information from the group list**
+**Get speaker information from the group list**
 
-You can retrieve a speaker information by specifying a group index and the index of the speaker in the group.
+You can retrieve speaker information by specifying a group index and the index of the speaker in the group.
 
 .. code-block:: java
 	
@@ -228,8 +228,8 @@ You can retrieve a speaker information by specifying a group index and the index
 
 Here, groupIndex represents the index of the group where the device belong to. deviceIndex means the index of the device in the group.
 
-This function is useful to find the device information (DeviceInfo object) that will be shown in a ListView. For example, to show a speaker information in two section ListView, the groupIndex can correspond to the section number, and deviceIndex can correspond to the row number.
-Get a speaker information with deviceId
+This function is useful to find the device information (DeviceInfo object) that will be shown in a ListView. For example, to show speaker information in two section ListView, the groupIndex can correspond to the section number, and deviceIndex can correspond to the row number.
+Get speaker information with deviceId
 If you already knows the deviceId (device unique identifier) of a speaker, then you can retrieve the deviceInfo object with the following function.
 
 .. code-block:: java
@@ -370,6 +370,19 @@ If you just want to check if the player is playing audio now, then use isPlaying
 
 	boolean isPlaying();
 
+
+Play a streaming media
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: java
+
+	void playStreamingMedia(String url)
+	
+Plays a streaming media from web server. Because this API takes a little while to get the result of play because of all networking stuffs, the API is a block call. So, it will not return until the caller successfully or fail.
+
+``String playStreamingMedia`` - a string that specifies the URL of the streaming media source. It starts with a protocol name, such as http://. Currently, only http is supported. The supported file format is mp3, wav, flac, sac, m4a or ogg.
+
+
 Playback controls
 ^^^^^^^^^^^^^^^^^^^
 
@@ -395,9 +408,9 @@ To pause the current play, use ``pause()``. As a result, the playback status is 
 Volume Control
 ~~~~~~~~~~~~~~~
 
-You can set volumes in two way. One is set volume for an individual speaker, and the other is set volume for all speakers with the same volume level. The volume level ranges from 0 (mute) to 50 (max).
+You can set volume in two ways. One is set volume for an individual speaker, and the other is set volume for all speakers with the same volume level. The volume level ranges from 0 (mute) to 50 (max).
 
-Note that volume change functions are all asynchronous call. That is, it takes a little time (a few milli second) for a volume change to take effect on the speakers.
+Note that volume change functions are all asynchronous call. That is, it takes a little time (a few milliseconds) for a volume change to take effect on the speakers.
 
 Note also that when ``setVolumeDevice()`` is called, the average volume can be also changed. So, it is safe to retrieve the speaker volumes using VolumeLevelChanged callback (explained later) when your app calls volume control APIs.
 
@@ -559,7 +572,7 @@ This function is invoked when playback state is changed during the playback. The
 onPlaybackTimeChanged
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-This function is invoked when the current playback time is changed. It is called every one second. The function parameter timeElapsed returns the time (in second) elapsed since the start of the playback. This function is useful when your app update the progress bar of the current playback.
+This function is invoked when the current playback time is changed. It is called every one second. The function parameter timeElapsed returns the time (in seconds) elapsed since the start of the playback. This function is useful when your app update the progress bar of the current playback.
 
 .. code-block:: java
 

@@ -57,6 +57,9 @@ Documentations for Android SDK
 
 `Programming Guide (Android)`_
     This chatper explains the APIs of HKWirelessHD SDK.
+
+`API Documentation (Android)`_
+    This chapter explains the APIs of HKWirelessHD SDK.
 	
 `Version History (Android)`_
     Version History
@@ -78,6 +81,7 @@ Demos and 3rd Party Integrations
 
 .. _SDK Overview (Android): Android/sdk-overview.html	
 .. _Getting Started (Android): Android/getting-started.html
+.. _API Documentation (Android): Android/api-documentation.html
 .. _Programming Guide (Android): Android/programming-guide.html
 .. _Version History (Android): Android/version-history.html
 
