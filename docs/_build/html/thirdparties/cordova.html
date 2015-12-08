@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Overview of HKAudio &mdash; Harman Developer 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="overview-of-hkaudio">
+<h1>Overview of HKAudio<a class="headerlink" href="#overview-of-hkaudio" title="Permalink to this headline">¶</a></h1>
+<p>HKAudio - A Harman Kardon Cordova plugin for Harman Kardon SDK to be used in iOS.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>This requires Cordova 5.0+ ( current stable 1.0.0 )</p>
+<p><code class="docutils literal"><span class="pre">cordova</span> <span class="pre">plugin</span> <span class="pre">add</span> <span class="pre">https://github.com/JadisInteractive/harman-kardon-cordova</span></code></p>
+<p>Change the deployment target in Xcode to be 8.4, otherwise you may get linking errors.</p>
+</div>
+<div class="section" id="remove-plugin">
+<h2>Remove Plugin<a class="headerlink" href="#remove-plugin" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">cordova</span> <span class="pre">plugin</span> <span class="pre">rm</span> <span class="pre">com.jadisinteractive.hkaudio</span></code></p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">hkaudio.initialize(success,</span> <span class="pre">error);</span></code></p>
+<p>This method initializes the HK Wireless HD SDK.</p>
+<ul class="simple">
+<li>success: Callback function if the SDK is successfully initialized and ready for use</li>
+<li>error: Callback function if there was an error trying to initialze the SDK</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">hkaudio.startRefreshDeviceInfo(success,</span> <span class="pre">error);</span></code></p>
+<p>This method starts to keep refreshing device info every two seconds. It continues until hkaudio.stopRefreshDeviceInfo method is called.
+- success: Callback function on successful
+- error: Callback function</p>
+<p><code class="docutils literal"><span class="pre">hkaudio.stopRefreshDeviceInfo(success,</span> <span class="pre">error);</span></code></p>
+<p>This method stops refreshing the device info started by hkaudio.startRefreshDeviceInfo.</p>
+<ul class="simple">
+<li>success: Callback function</li>
+<li>error: Callback function</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">hkaudio.getGroupCount(success,</span> <span class="pre">error);</span></code></p>
+<p>This method gets the total number of available groups of speakers on the network.</p>
+<ul class="simple">
+<li>success: Callback function</li>
+<li>error: Callback function</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">hkaudio.getActiveDeviceCount(success,</span> <span class="pre">error);</span></code></p>
+<p>This method gets the number of active speakers</p>
+<ul class="simple">
+<li>success: Callback function</li>
+<li>error: Callback function</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">hkaudio.removeDeviceFromSession(success,</span> <span class="pre">error,</span> <span class="pre">deviceId);</span></code></p>
+<p>This method removes a speaker from the current playback session. The removed speaker will stop playing audio.</p>
+<ul class="simple">
+<li>success: Callback function</li>
+<li>error: Callback function</li>
+<li>deviceId: Integer. The ID of the device to remove</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">hkaudio.addDeviceToSession(success,</span> <span class="pre">error,</span> <span class="pre">deviceId);</span></code></p>
+<p>This method adds a speaker to the current playback session. The added speaker will start playing audio. This can be done during the audio playback.</p>
+<ul class="simple">
+<li>success: Callback function</li>
+<li>error: Callback function</li>
+<li>deviceId: Integer. The ID of the device to remove</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">hkaudio.getDeviceCount(success,</span> <span class="pre">error);</span></code></p>
+<p>This method gets the number of all speakers in the HKWirelessHD network.</p>
+<p><code class="docutils literal"><span class="pre">hkaudio.isPlaying(success,</span> <span class="pre">error);</span></code></p>
+<p>This method checks if the player is playing some audio or not.</p>
+<ul class="simple">
+<li>success: Callback function</li>
+<li>error: Callback function</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">hkaudio.playCAF(success,</span> <span class="pre">error,</span> <span class="pre">URL,</span> <span class="pre">songName,</span> <span class="pre">resumeFlag);</span></code></p>
+<p>This method plays a CAF audio file in local storage.</p>
+<ul class="simple">
+<li>success: Callback function</li>
+<li>error: Callback function</li>
+<li>URL: String.</li>
+<li>songName: String.</li>
+<li>resumeFlag: Boolean.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">hkaudio.stop(success,</span> <span class="pre">error);</span></code></p>
+<p>This method stops the current playback.</p>
+<ul class="simple">
+<li>success: Callback function</li>
+<li>error: Callback function</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">hkaudio.pause(success,</span> <span class="pre">error);</span></code></p>
+<p>This method pauses the current playback.</p>
+<ul class="simple">
+<li>success: Callback function</li>
+<li>error: Callback function</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">hkaudio.setVolume(success,</span> <span class="pre">error,</span> <span class="pre">volume);</span></code></p>
+<p>This method sets a volume level to all speakers. The same volume level is set to all speakers. The range is 0 to 50.</p>
+<ul class="simple">
+<li>success: Callback function</li>
+<li>error: Callback function</li>
+<li>volume: Integer</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">hkaudio.mute(success,</span> <span class="pre">error);</span></code></p>
+<p>This method mutes the current volume of all speakers.</p>
+<ul class="simple">
+<li>success: Callback function</li>
+<li>error: Callback function</li>
+</ul>
+<hr class="docutils" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/HarmanDeveloperLogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Overview of HKAudio</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#remove-plugin">Remove Plugin</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/thirdparties/cordova.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Harman International.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

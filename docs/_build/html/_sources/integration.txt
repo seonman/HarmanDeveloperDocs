@@ -1,6 +1,16 @@
 Demos and 3rd Party Integrations
 =================================
 
+Cordova Integration
+--------------------------
+
+`HKAudio - A Harman Kardon Cordova Plugin`_
+
+HKAudio - A Harman Kardon Cordova plugin for Harman Kardon SDK
+
+.. _HKAudio - A Harman Kardon Cordova Plugin: thirdparties/cordova.html
+
+
 SmartThings Integration
 --------------------------
 
