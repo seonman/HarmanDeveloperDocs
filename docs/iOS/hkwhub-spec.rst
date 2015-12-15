@@ -80,6 +80,7 @@ Main Screen
 ^^^^^^^^^^^^^
 
 .. figure:: img/hub/hubappv2-main.jpg
+	:scale: 30
 
 
 .. Note::
