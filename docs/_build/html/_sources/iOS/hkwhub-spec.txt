@@ -279,7 +279,7 @@ Once you download the app, unzip it. You will see the following sub directories.
 
 .. code-block:: shell
 
-	$ cd WebHubWebApp
+	$ cd WebHubPubNubApp
 	$ python -m SimpleHTTPServer
 	
 You will get some log messages like "Serving HTTP on 0.0.0.0 port 8000 ..."
