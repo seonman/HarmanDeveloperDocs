@@ -275,6 +275,19 @@
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/cloudapp-speakers.png"><img alt="../_images/cloudapp-speakers.png" src="../_images/cloudapp-speakers.png" /></a>
 </div>
+</div>
+</div>
+<div class="section" id="local-server-mode">
+<h3>Local Server Mode<a class="headerlink" href="#local-server-mode" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="running-local-server">
+<h4>Running Local Server<a class="headerlink" href="#running-local-server" title="Permalink to this headline">¶</a></h4>
+<p>Loca Server Mode is almost the same as HKIoTCloud, except that HKWHub app runs a web server inside, instead connecting to HKIoTCloud. Therefore, HKWHub app can receive REST requests directly from clients in the same network. If you want to connect speakers from any type of devices in the same local network, then Local Server mode can be easier solution.</p>
+<p>Once you click <strong>Run Local Web Server</strong> menu, then you will see the following screen. From the screen, you can see a URL indicating where a client should connect to. In this example, the client should enter the URL <strong>http://10.0.1.37:8080/</strong>  followed by REST command and parameters.</p>
+<p>The RESI APIs are almost the same as the ones of HKIoTCloud mode.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hubappv2-localserver.jpg"><img alt="../_images/hubappv2-localserver.jpg" src="../_images/hubappv2-localserver.jpg" /></a>
+</div>
+<p>For a sample client app, you can use <strong>WebHubWebApp</strong> that you can download from Harman Developer web site (<a class="reference external" href="http://developer.harman.com">http://developer.harman.com</a>).</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Please check out <a class="reference external" href="https://www.youtube.com/watch?v=_ljpReAvk0g&amp;feature=youtu.be">HKWHub app demo video</a>.</p>
@@ -1363,6 +1376,10 @@
 <li><a class="reference internal" href="#hkiotcloud-mode">HKIoTCloud Mode</a><ul>
 <li><a class="reference internal" href="#connecting-to-hkiotcloud">Connecting to HKIoTCloud</a></li>
 <li><a class="reference internal" href="#sending-rest-request-to-hkiotcloud">Sending REST Request to HKIoTCloud</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#local-server-mode">Local Server Mode</a><ul>
+<li><a class="reference internal" href="#running-local-server">Running Local Server</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#run-hkwhub-app-on-your-ios-device">Run HKWHub app on your iOS device</a></li>

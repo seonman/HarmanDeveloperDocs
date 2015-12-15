@@ -179,6 +179,28 @@ If you click **Speaker List** menu on the left, you can see more detailed inform
 .. figure:: img/hub/cloudapp-speakers.png
 	:scale: 70
 	
+
+
+Local Server Mode
+~~~~~~~~~~~~~~~~~~~
+
+Running Local Server
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Loca Server Mode is almost the same as HKIoTCloud, except that HKWHub app runs a web server inside, instead connecting to HKIoTCloud. Therefore, HKWHub app can receive REST requests directly from clients in the same network. If you want to connect speakers from any type of devices in the same local network, then Local Server mode can be easier solution.
+
+Once you click **Run Local Web Server** menu, then you will see the following screen. From the screen, you can see a URL indicating where a client should connect to. In this example, the client should enter the URL **http://10.0.1.37:8080/**  followed by REST command and parameters.
+
+The RESI APIs are almost the same as the ones of HKIoTCloud mode.
+
+.. figure:: img/hub/hubappv2-localserver.jpg
+	:scale: 30
+
+
+For a sample client app, you can use **WebHubWebApp** that you can download from Harman Developer web site (http://developer.harman.com).
+
+
+
 .. Note::
 
 	Please check out `HKWHub app demo video`_.
