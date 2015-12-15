@@ -822,17 +822,19 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=129321920968880</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="remove-a-device-from-session">
@@ -854,7 +856,7 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <dd><ul class="first simple">
 <li>Request:</li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre>http://hkiotcloud.herokuapp.com/api/v1/remove_device_from_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=129321920968880
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/remove_device_from_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=129321920968880
 </pre></div>
 </div>
 <ul class="simple">
@@ -887,7 +889,7 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <dd><ul class="first simple">
 <li>Request:</li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre>http://hkiotcloud.herokuapp.com/api/v1/set_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/set_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F
 </pre></div>
 </div>
 <ul class="simple">
@@ -926,29 +928,34 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/media_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
-</dd>
-</dl>
-</li>
-</ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;MediaList&quot;</span><span class="p">:</span> <span class="p">[</span>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;MediaList&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;7387446959931482519&quot;</span><span class="p">,</span>
         <span class="nt">&quot;Title&quot;</span><span class="p">:</span><span class="s2">&quot;I Will Run To You&quot;</span><span class="p">,</span>
         <span class="nt">&quot;Artist&quot;</span><span class="p">:</span><span class="s2">&quot;Hillsong&quot;</span><span class="p">,</span>
         <span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="mi">436</span><span class="p">,</span>
         <span class="nt">&quot;AlbumTitle&quot;</span><span class="p">:</span><span class="s2">&quot;Simply Worship&quot;</span>
-        <span class="p">},</span>
+<span class="p">},</span>
         <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;5829171347867182746&quot;</span><span class="p">,</span>
         <span class="nt">&quot;Title&quot;</span><span class="p">:</span><span class="s2">&quot;I&#39;m Yours [ORIGINAL DEMO]&quot;</span><span class="p">,</span>
         <span class="nt">&quot;Artist&quot;</span><span class="p">:</span><span class="s2">&quot;Jason Mraz&quot;</span><span class="p">,</span>
         <span class="nt">&quot;Duration&quot;</span><span class="p">:</span><span class="mi">257</span><span class="p">,</span>
         <span class="nt">&quot;AlbumTitle&quot;</span><span class="p">:</span><span class="s2">&quot;Wordplay [SINGLE EP]&quot;</span><span class="p">}</span>
-<span class="p">]}</span>
+        <span class="p">]}</span>
 </pre></div>
 </div>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 <hr class="docutils" />
 <div class="section" id="play-a-song-in-the-media-list-of-the-hkwhub-app">
@@ -971,17 +978,19 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/play_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;PersistentID=7387446959931482519</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="play-a-song-in-the-media-list-as-party-mode">
@@ -1000,17 +1009,22 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/play_hub_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;PersistentID=7387446959931482519</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/play_hub_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;PersistentID=7387446959931482519
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="play-a-song-in-the-media-list-with-selected-speakers">
@@ -1029,17 +1043,19 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/play_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;PersistentID=7387446959931482519&amp;DeviceIDList=34317244381360,129321920968880</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="play-a-song-from-web-server">
@@ -1066,17 +1082,19 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://&lt;server_host_name&gt;/api/v1/play_web_media?SessionToken=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This API call takes several hundreds millisecond to return the response.</p>
@@ -1091,7 +1109,7 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <p class="last"><code class="docutils literal"><span class="pre">play_web_media</span></code> cannot be resumed. If it is paused by calling <code class="docutils literal"><span class="pre">pause</span></code>, then it just stops playing music, and cannot resume.</p>
 </div>
 <ul>
-<li><p class="first">API: GET /v1/play_web_media_party_mode?SessionID=&lt;session id&gt;&amp;MediaUrl=&lt;URL of the song&gt;</p>
+<li><p class="first">API: GET /api/v1/play_web_media_party_mode?SessionToken=&lt;session token&gt;&amp;MediaUrl=&lt;URL of the song&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1103,17 +1121,19 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/play_web_media_party_mode?SessionID=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This API call takes several hundreds millisecond to return the response.</p>
@@ -1128,7 +1148,7 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <p class="last"><code class="docutils literal"><span class="pre">play_web_media</span></code> cannot be resumed. If it is paused by calling <code class="docutils literal"><span class="pre">pause</span></code>, then it just stops playing music, and cannot resume.</p>
 </div>
 <ul>
-<li><p class="first">API: GET /v1/play_web_media_selected_speakers?SessionID=&lt;session id&gt;&amp;MediaUrl=&lt;URL of the song&gt;&amp;DeviceIDList=&lt;xxx,xxx,...&gt;</p>
+<li><p class="first">API: GET /api/v1/play_web_media_selected_speakers?SessionToken=&lt;session Token&gt;&amp;MediaUrl=&lt;URL of the song&gt;&amp;DeviceIDList=&lt;xxx,xxx,...&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1140,17 +1160,19 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/play_web_media_selected_speakers?SessionID=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3&amp;DeviceIDList=34317244381360,129321920968880&quot;&quot;</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This API call takes several hundreds millisecond to return the response.</p>
@@ -1160,7 +1182,7 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <div class="section" id="pause-the-current-playback">
 <h4>Pause the Current Playback<a class="headerlink" href="#pause-the-current-playback" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/pause_play?SessionID=&lt;session id&gt;</p>
+<li><p class="first">API: GET /api/v1/pause_play?SessionToken=&lt;session token&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1173,23 +1195,28 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/pause_play?SessionID=1000</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/pause_play?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="resume-the-current-playback-with-hub-media">
 <h4>Resume the Current Playback with Hub Media<a class="headerlink" href="#resume-the-current-playback-with-hub-media" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/resume_hub_media?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
+<li><p class="first">API: GET /api/v1/resume_hub_media?SessionToken=&lt;session token&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1201,23 +1228,28 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/resume_hub_media?SessionID=1000&amp;PersistentID=7387446959931482519</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/resume_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;PersistentID=7387446959931482519
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="resume-the-current-playback-with-hub-media-as-party-mode">
 <h4>Resume the Current Playback with Hub Media as Party Mode<a class="headerlink" href="#resume-the-current-playback-with-hub-media-as-party-mode" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/resume_hub_media_party_mode?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
+<li><p class="first">API: GET /api/v1/resume_hub_media_party_mode?SessionToken=&lt;session token&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1229,23 +1261,25 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/resume_hub_media_party_mode?SessionID=1000&amp;PersistentID=7387446959931482519</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="resume-the-current-playback-with-hub-media-with-selected-speakers">
 <h4>Resume the Current Playback with Hub Media with selected speakers<a class="headerlink" href="#resume-the-current-playback-with-hub-media-with-selected-speakers" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/resume_hub_media_selected_speakers?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;&amp;DeviceIDList=&lt;xxx,xxx,...&gt;</p>
+<li><p class="first">API: GET /api/v1/resume_hub_media_selected_speakers?SessionToken=&lt;session token&gt;&amp;PersistentID=&lt;persistent id&gt;&amp;DeviceIDList=&lt;xxx,xxx,...&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1257,23 +1291,25 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/resume_hub_media_selected_speakers?SessionID=1000&amp;PersistentID=7387446959931482519&amp;DeviceIDList=34317244381360,129321920968880</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="stop-the-current-playback">
 <h4>Stop the Current Playback<a class="headerlink" href="#stop-the-current-playback" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/stop_play?SessionID=&lt;session id&gt;</p>
+<li><p class="first">API: GET /api/v1/stop_play?SessionToken=&lt;session token&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1284,25 +1320,29 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/stop_play?SessionID=1000</span></code></li>
-<li>Response:</li>
+<li><p class="first">Example:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Request:</li>
 </ul>
-</dd>
-</dl>
-</li>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/stop_play?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F
+</pre></div>
+</div>
+<ul class="simple">
+<li>Response:</li>
 </ul>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
+</div></blockquote>
+</li>
+</ul>
 </div>
 <hr class="docutils" />
 <div class="section" id="get-the-playback-status-current-playback-state-and-elapsed-time">
 <h4>Get the Playback Status (Current Playback State and Elapsed Time)<a class="headerlink" href="#get-the-playback-status-current-playback-state-and-elapsed-time" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/playback_status?SessionID=&lt;session id&gt;</p>
+<li><p class="first">API: GET /api/v1/playback_status?SessionToken=&lt;session token&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1314,7 +1354,6 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <li><dl class="first docutils">
 <dt>The following is the value of each playback state:</dt>
 <dd><ul class="first last simple">
-<li>PlayerStateInitialized : Play is ready</li>
 <li>PlayerStatePlaying : Now playing audio</li>
 <li>PlayerStatePaused : Playing is paused. It can resume.</li>
 <li>PlayerStateStopped : Playing is stopped. It cannot resume.</li>
@@ -1332,24 +1371,29 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/playback_status?SessionID=1000</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/playback_status?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;PlaybackState&quot;</span><span class="p">:</span><span class="s2">&quot;PlayerStatePlaying&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;TimeElapsed&quot;</span><span class="p">:</span><span class="s2">&quot;15&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;PlaybackState&quot;</span><span class="p">:</span><span class="s2">&quot;PlayerStatePlaying&quot;</span><span class="p">,</span>
- <span class="nt">&quot;TimeElapsed&quot;</span><span class="p">:</span><span class="s2">&quot;15&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="check-if-the-hub-is-playing-audio">
 <h4>Check if the Hub is playing audio<a class="headerlink" href="#check-if-the-hub-is-playing-audio" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/is_playing?SessionID=&lt;session id&gt;</p>
+<li><p class="first">API: GET /api/v1/is_playing?SessionToken=&lt;session token&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1361,17 +1405,22 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/is_playing?SessionID=1000</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/is_playing?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="section" id="volume-control">
@@ -1379,7 +1428,7 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <div class="section" id="get-volume-for-all-devices">
 <h4>Get Volume for all Devices<a class="headerlink" href="#get-volume-for-all-devices" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/get_volume?SessionID=&lt;session id&gt;</p>
+<li><p class="first">API: GET /api/v1/get_volume?SessionToken=&lt;session token&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1392,23 +1441,28 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/get_volume?SessionID=1000</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/get_volume?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="s2">&quot;10&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="s2">&quot;10&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="get-volume-for-a-particular-device">
 <h4>Get Volume for a particular device<a class="headerlink" href="#get-volume-for-a-particular-device" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/get_volume_device?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
+<li><p class="first">API: GET /api/v1/get_volume_device?SessionToken=&lt;session token&gt;&amp;DeviceID=&lt;device id&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1421,23 +1475,28 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/get_volume_device?SessionID=1000&amp;DeviceID=1234567</span></code></li>
-<li>Response:</li>
+<dd><ul class="first">
+<li><p class="first">Request:</p>
+<blockquote>
+<div><p><a class="reference external" href="http:/">http:/</a>/&lt;server_host&gt;/api/v1/get_volume_device?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;DeviceID=1234567</p>
+</div></blockquote>
+</li>
+<li><p class="first">Response:</p>
+</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="s2">&quot;10&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="s2">&quot;10&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="set-volume-for-all-devices">
 <h4>Set Volume for all devices<a class="headerlink" href="#set-volume-for-all-devices" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/set_volume?SessionID=&lt;session id&gt;&amp;Volume=&lt;volume&gt;</p>
+<li><p class="first">API: GET /api/v1/set_volume?SessionToken=&lt;session token&gt;&amp;Volume=&lt;volume&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1449,23 +1508,28 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/set_volume?SessionID=1000&amp;Volume=10</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/set_volume?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;Volume=10
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="set-volume-for-a-particular-device">
 <h4>Set Volume for a particular device<a class="headerlink" href="#set-volume-for-a-particular-device" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/set_volume_device?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;&amp;Volume=&lt;volume&gt;</p>
+<li><p class="first">API: GET /api/v1/set_volume_device?SessionToken=&lt;session token&gt;&amp;DeviceID=&lt;device id&gt;&amp;Volume=&lt;volume&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1477,17 +1541,22 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/set_volume_device?SessionID=1000&amp;DeviceID=1234567&amp;Volume=10</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/set_volume_device?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;DeviceID=1234567&amp;Volume=10
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 </div>
 </div>
