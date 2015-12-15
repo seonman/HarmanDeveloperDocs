@@ -81,6 +81,13 @@ Main Screen
 
 .. figure:: img/hub/hubappv2-main.jpg
 	:scale: 30
+	
+The main screen is composed of two parts - 'Select Server mode' (amonng HKIoTCloud, Local Server and PubNub Cloud), and 'Settings'.
+
+The 'Select Server mode' has three options:
+
+- Connect to HK IoT Cloud
+	- kjdaskdja
 
 
 .. Note::
