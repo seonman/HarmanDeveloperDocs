@@ -536,8 +536,6 @@ Start Session
 Starts a new session.
 
 - API: **POST** /api/v1/init_session
-
-
 		
 - Body
 	- username: the username
@@ -822,7 +820,7 @@ Plays a song in the Media List of the Hub app. Each music item is identified wit
 	
 	.. code-block:: json
 	 		http://<server_host>/api/v1/play_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519
-			
+
 	- Response: 
 
 	.. code-block:: json
