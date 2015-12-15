@@ -539,7 +539,7 @@ Starts a new session.
 
 	.. Note::
 		
-		For Local Server mode, the REST request should be sent as **GET** request, instead of **POST**.
+		For Local Server mode, the REST request should be sent as **GET** request, instead of **POST**. And the request does not need to include **username**, and **password** parameters.
 		
 - Body
 	- username: the username
