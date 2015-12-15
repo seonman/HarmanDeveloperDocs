@@ -145,10 +145,11 @@ Once the HKWHub app successfully signs in to HKIoTCloud, the screen will be swit
 
 The same username and password are required from the client side. For example, HKIoTCloud also hosts a Web-based client app, at http://hkiotcloud.herokuapp.com/webapp/. The following is a screenshot of the web app.
 
-.. figure:: img/hub/hubappv2-hkiotcloud.png
+.. figure:: img/hub/hubappv2-hkiotcloud.jpg
 	:scale: 30
 
-	
+If you want to disconnect the server and return to the main screen, press **Disconnect** button on the top righthand corner.
+
 .. Note::
 		
 	To use this mode, user needs to sign up to HKIoTCloud with username, email, and password. 
