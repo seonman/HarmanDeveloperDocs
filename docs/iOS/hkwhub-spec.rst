@@ -137,16 +137,19 @@ In HKIoTCloud demo, 3rd party clients can connect to HKIoTCloud (http://hkiotclo
 .. figure:: img/hub/hubappv2-signin.jpg
 	:scale: 30
 
-Once the HKWHub app successfully signs in to HKIoTCloud, the screen will be switched to Log screen, like shown as below. You can see all the message logs received from or sent to the cloud. Each log shows the JSON data, so you can see what information is being sent and received with the server.
-
-.. figure:: img/hub/hubappv2-signin.jpg
-	:scale: 30
-	
-
-The same username and password are required from the client side. For example, HKIoTCloud also hosts a Web-based client app, at http://hkiotcloud.herokuapp.com/webapp/. The following is a screenshot of the web app.
+Once the HKWHub app successfully signs in to HKIoTCloud, the screen will be switched to Log screen, like shown as below. You can see all the message logs received from or sent to the cloud. Each log contains a JSON data, so you can see what information is being sent and received between the server.
 
 .. figure:: img/hub/hubappv2-hkiotcloud.jpg
 	:scale: 30
+	
+Once the HKWHub App is running, you can now connect a client to HKIoTCloud and send REST requests to the server. We will explain all the REST APIs supported in the next section.
+
+For a client tyring to connect to HKIoTCloud, the same username and password are required from the client side. 
+
+As an example of client, HKIoTCloud hosts a Web-based client app, at http://hkiotcloud.herokuapp.com/webapp/. The following is a screenshot of the web app.
+
+.. figure:: img/hub/cloudapp-login.png
+	:scale: 70
 
 If you want to disconnect the server and return to the main screen, press **Disconnect** button on the top righthand corner.
 
