@@ -821,7 +821,8 @@ Plays a song in the Media List of the Hub app. Each music item is identified wit
 	- Request:
 	
 	.. code-block:: json
-	 		http://<server_host>/api/v1/play_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519
+	
+		http://<server_host>/api/v1/play_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519
 
 	- Response: 
 
@@ -864,7 +865,8 @@ Plays a song in the Media List with selected speakers. The selected speakers are
 	- Request:
 	
 	.. code-block:: json
-	 		http://<server_host>/api/v1/play_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519&DeviceIDList=34317244381360,129321920968880
+	
+		http://<server_host>/api/v1/play_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519&DeviceIDList=34317244381360,129321920968880
 	- Response: 
 
 	.. code-block:: json
@@ -893,7 +895,8 @@ Plays a song from Web (http:) or rstp (rstp:) or mms (mms:) server. The URL of t
 	- Request:
 	
 	.. code-block:: json
-	 		http://<server_host_name>/api/v1/play_web_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&MediaUrl=http://seonman.github.io/music/hyolyn.mp3
+	
+		http://<server_host_name>/api/v1/play_web_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&MediaUrl=http://seonman.github.io/music/hyolyn.mp3
 			
 	- Response: 
 
@@ -922,7 +925,8 @@ Plays a song from Web server with all speakers. The URL of the song to play is s
 	- Request:
 	
 	.. code-block:: json
-	 		http://<server_host>/api/v1/play_web_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&MediaUrl=http://seonman.github.io/music/hyolyn.mp3
+	
+		http://<server_host>/api/v1/play_web_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&MediaUrl=http://seonman.github.io/music/hyolyn.mp3
 			
 	- Response: 
 
@@ -950,7 +954,8 @@ Plays a song from Web server with selected speakers. The URL of the song to play
 	- Request:
 	
 	.. code-block:: json
-	 		http://<server_host>/api/v1/play_web_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&MediaUrl=http://seonman.github.io/music/hyolyn.mp3&DeviceIDList=34317244381360,129321920968880""``
+	
+		http://<server_host>/api/v1/play_web_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&MediaUrl=http://seonman.github.io/music/hyolyn.mp3&DeviceIDList=34317244381360,129321920968880""``
 
 	- Response: 
 
@@ -973,8 +978,8 @@ Pause the Current Playback
 - Example:
 	- Request: 
 	
-	.. code-block:: json	
-
+	.. code-block:: json
+	
 		http://<server_host>/api/v1/pause_play?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F
 	- Response: 
 
@@ -1015,7 +1020,8 @@ Resume the Current Playback with Hub Media as Party Mode
 	- Request:
 	
 	.. code-block:: json
-	 		http://<server_host>/api/v1/resume_hub_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519
+	
+		http://<server_host>/api/v1/resume_hub_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519
 	- Response: 
 
 	.. code-block:: json
