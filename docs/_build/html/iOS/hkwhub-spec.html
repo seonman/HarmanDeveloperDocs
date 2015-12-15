@@ -519,61 +519,16 @@
 </div>
 </div>
 </div>
-<div class="section" id="use-webhubwebapp-to-play-music">
-<h3>Use <code class="docutils literal"><span class="pre">WebHubWebApp</span></code> to play music<a class="headerlink" href="#use-webhubwebapp-to-play-music" title="Permalink to this headline">¶</a></h3>
-<p>The source code of HKWHub app also contains a Web app to test the Hub app. The UI is created using Polymer v0.5 (<a class="reference external" href="https://www.polymer-project.org/0.5/">https://www.polymer-project.org/0.5/</a>).</p>
-<ul>
-<li><dl class="first docutils">
-<dt>Unzip WebHubWebApp.zip. You will see the following sub directories.</dt>
-<dd><ul class="first last simple">
-<li>bower_components : This is the folder for polymer library</li>
-<li>hkwhub : this is the folder containing the WebHubApp that we will run.</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<div class="highlight-shell"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>WebHubWebApp
-<span class="nv">$ </span>python -m SimpleHTTPServer
-</pre></div>
 </div>
-<p>You will get some log messages like &#8220;Serving HTTP on 0.0.0.0 port 8000 ...&#8221;</p>
-<p>Next, launch your web browser (Chrome, Safari, ...) and go to <a class="reference external" href="http://localhost:8000/hkwhub/">http://localhost:8000/hkwhub/</a></p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Your iOS device running HKWHub app and your Desktop PC running web browser should be in the same network.</p>
-</div>
-<p>At the fist screen looking like this:</p>
-<div class="figure">
-<img alt="../_images/hub-first-screen.png" src="../_images/hub-first-screen.png" />
-</div>
-<p>Enter the URL that the HKWHub app says: <a class="reference external" href="http://192.168.1.192:8080/">http://192.168.1.192:8080/</a>, like this:</p>
-<div class="figure">
-<img alt="../_images/hub-enter-url.png" src="../_images/hub-enter-url.png" />
-</div>
-<p>If you press <strong>Submit</strong>, then you will see the first screen like below. This is the list of media items available at the HKWHub app.</p>
-<div class="figure">
-<img alt="../_images/hub-playlist.png" src="../_images/hub-playlist.png" />
-</div>
-<p>Now you can click one of items to play audio, and then move to <strong>Media Player</strong> tab to control playback (pause/resume/stop) and control volume.</p>
-<div class="figure">
-<img alt="../_images/hub-media-player.png" src="../_images/hub-media-player.png" />
-</div>
-<p>In <strong>Speaker List</strong> tab, you can select and turn on/off speaker.</p>
-<div class="figure">
-<img alt="../_images/hub-speaker-list.png" src="../_images/hub-speaker-list.png" />
-</div>
-</div>
-</div>
-<div class="section" id="session-management">
-<h2>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h2>
-<p>Since the HKWHub app should be able to handle REST HTTP requests from more than one clients at the same time, the HKWHub app manages the requests with session information associated with the priority when the session is initialized.</p>
+<div class="section" id="playback-session-management">
+<h2>Playback Session Management<a class="headerlink" href="#playback-session-management" title="Permalink to this headline">¶</a></h2>
+<p>Since the HKWHub app should be able to handle REST HTTP requests from more than one clients at the same time, the HKWHub app manages the requests with session information associated with the priority when a new playback is initiated.</p>
 <p>The following is the policy of the session management:</p>
-<div class="section" id="session-creation">
-<h3>Session Creation<a class="headerlink" href="#session-creation" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="playback-session-creation">
+<h3>Playback Session Creation<a class="headerlink" href="#playback-session-creation" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>When a client wants to access speakers through the HKWHub app, it must create a session first. (Use <code class="docutils literal"><span class="pre">init_session</span></code> command.)</li>
-<li>When a client initializes session, it also sets the priority of the session (using <code class="docutils literal"><span class="pre">Priority=&lt;priority</span> <span class="pre">value&gt;</span></code> parameter).</li>
+<li>When a client wants to start a playback, it sets the priority of the session (using <code class="docutils literal"><span class="pre">Priority=&lt;priority</span> <span class="pre">value&gt;</span></code> parameter).</li>
+<li>If Priority parameter is not specified, HKWHub app assumes it as default value, that is, 100.</li>
 </ul>
 </div>
 <div class="section" id="priority-of-session">
@@ -582,7 +537,7 @@
 <li><p class="first">Each session is associated with a priority value which will be used to determine which request can override the current on-going playback session.</p>
 </li>
 <li><dl class="first docutils">
-<dt>The priority value is specified as parameter (<code class="docutils literal"><span class="pre">Priority</span></code>) when the client calls <code class="docutils literal"><span class="pre">init_session</span></code>.</dt>
+<dt>The priority value is specified as parameter (<code class="docutils literal"><span class="pre">Priority</span></code>) when the client calls <code class="docutils literal"><span class="pre">play_xxx</span></code>.</dt>
 <dd><ul class="first last simple">
 <li>If the command does not specify the Priority parameter, 100 is set as default value.</li>
 </ul>
@@ -590,10 +545,9 @@
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>If the priority of the session of a new playback request, such as <code class="docutils literal"><span class="pre">play_hub_media</span></code> or <code class="docutils literal"><span class="pre">play_web_media</span></code>, and so on, is greater than or equal to the priority of the current session, then it interrupts the current playback session, that is, stops the current playback session and start a new playback for itself.</dt>
+<dt>If the priority of a new playback request, such as <code class="docutils literal"><span class="pre">play_hub_media</span></code> or <code class="docutils literal"><span class="pre">play_web_media</span></code>, and so on, is greater than or equal to the priority of the current playback session, then it interrupts the current playback session, that is, stops the current playback session and start a new playback for itself.</dt>
 <dd><ul class="first last simple">
 <li>The playback status of the interrupted session becomes <code class="docutils literal"><span class="pre">PlayerStateStopped</span></code>. (see the related API in the next section)</li>
-<li>Even if a session is interrupted by a higher or equal priority playback request, the session is still valid. So, it can continue to send requests with the session id.</li>
 </ul>
 </dd>
 </dl>
@@ -617,8 +571,8 @@
 <h2>REST API Specification<a class="headerlink" href="#rest-api-specification" title="Permalink to this headline">¶</a></h2>
 <p>This specification describes the REST API for controlling HKWHub app remotely to control HK Omni speakers and stream audio to the speakers.</p>
 <p>All the APIS are in REST API protocol.</p>
-<div class="section" id="id1">
-<h3>Session Management<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="session-management">
+<h3>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="start-session">
 <h4>Start Session<a class="headerlink" href="#start-session" title="Permalink to this headline">¶</a></h4>
 <p>Starts a new session. A session expires after 60 minutes of the last commands used with the SessionID. That is, the timeout restarts as a new REST command is handled by the HKWHub app.</p>
@@ -1543,17 +1497,16 @@
 <li><a class="reference internal" href="#i-set-volume">i. Set Volume</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#use-webhubwebapp-to-play-music">Use <code class="docutils literal"><span class="pre">WebHubWebApp</span></code> to play music</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#session-management">Session Management</a><ul>
-<li><a class="reference internal" href="#session-creation">Session Creation</a></li>
+<li><a class="reference internal" href="#playback-session-management">Playback Session Management</a><ul>
+<li><a class="reference internal" href="#playback-session-creation">Playback Session Creation</a></li>
 <li><a class="reference internal" href="#priority-of-session">Priority of Session</a></li>
 <li><a class="reference internal" href="#session-timeout">Session Timeout</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#rest-api-specification">REST API Specification</a><ul>
-<li><a class="reference internal" href="#id1">Session Management</a><ul>
+<li><a class="reference internal" href="#session-management">Session Management</a><ul>
 <li><a class="reference internal" href="#start-session">Start Session</a></li>
 <li><a class="reference internal" href="#close-session">Close Session</a></li>
 </ul>

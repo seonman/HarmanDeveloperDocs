@@ -480,68 +480,26 @@ i. Set Volume
 
 	Please see the REST API specification for more information and examples.
 
-Use ``WebHubWebApp`` to play music
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The source code of HKWHub app also contains a Web app to test the Hub app. The UI is created using Polymer v0.5 (https://www.polymer-project.org/0.5/). 
 
-- Unzip WebHubWebApp.zip. You will see the following sub directories.
-	- bower_components : This is the folder for polymer library
-	- hkwhub : this is the folder containing the WebHubApp that we will run.
+Playback Session Management
+-----------------------------
 
-.. code-block:: shell
-
-	$ cd WebHubWebApp
-	$ python -m SimpleHTTPServer
-	
-You will get some log messages like "Serving HTTP on 0.0.0.0 port 8000 ..."
-
-Next, launch your web browser (Chrome, Safari, ...) and go to http://localhost:8000/hkwhub/
-
-.. note::
-
-	Your iOS device running HKWHub app and your Desktop PC running web browser should be in the same network.
-
-At the fist screen looking like this:
-
-.. figure:: img/hub/hub-first-screen.png
-
-Enter the URL that the HKWHub app says: http://192.168.1.192:8080/, like this:
-
-.. figure:: img/hub/hub-enter-url.png
-
-If you press **Submit**, then you will see the first screen like below. This is the list of media items available at the HKWHub app. 
-
-.. figure:: img/hub/hub-playlist.png
-
-Now you can click one of items to play audio, and then move to **Media Player** tab to control playback (pause/resume/stop) and control volume. 
-
-.. figure:: img/hub/hub-media-player.png
-
-In **Speaker List** tab, you can select and turn on/off speaker.
-
-.. figure:: img/hub/hub-speaker-list.png
-
-
-Session Management
--------------------
-
-Since the HKWHub app should be able to handle REST HTTP requests from more than one clients at the same time, the HKWHub app manages the requests with session information associated with the priority when the session is initialized.
+Since the HKWHub app should be able to handle REST HTTP requests from more than one clients at the same time, the HKWHub app manages the requests with session information associated with the priority when a new playback is initiated.
 
 The following is the policy of the session management:
 
-Session Creation
-~~~~~~~~~~~~~~~~~
-- When a client wants to access speakers through the HKWHub app, it must create a session first. (Use ``init_session`` command.)
-- When a client initializes session, it also sets the priority of the session (using ``Priority=<priority value>`` parameter).
+Playback Session Creation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- When a client wants to start a playback, it sets the priority of the session (using ``Priority=<priority value>`` parameter).
+- If Priority parameter is not specified, HKWHub app assumes it as default value, that is, 100.
 
 Priority of Session
 ~~~~~~~~~~~~~~~~~~~~~
 - Each session is associated with a priority value which will be used to determine which request can override the current on-going playback session.
-- The priority value is specified as parameter (``Priority``) when the client calls ``init_session``.
+- The priority value is specified as parameter (``Priority``) when the client calls ``play_xxx``.
 	- If the command does not specify the Priority parameter, 100 is set as default value.
-- If the priority of the session of a new playback request, such as ``play_hub_media`` or ``play_web_media``, and so on, is greater than or equal to the priority of the current session, then it interrupts the current playback session, that is, stops the current playback session and start a new playback for itself.
+- If the priority of a new playback request, such as ``play_hub_media`` or ``play_web_media``, and so on, is greater than or equal to the priority of the current playback session, then it interrupts the current playback session, that is, stops the current playback session and start a new playback for itself.
 	- The playback status of the interrupted session becomes ``PlayerStateStopped``. (see the related API in the next section)
-	- Even if a session is interrupted by a higher or equal priority playback request, the session is still valid. So, it can continue to send requests with the session id.
 	
 The following diagrams show how HKWHub app handles incoming playback request based on the session priorities.
 
