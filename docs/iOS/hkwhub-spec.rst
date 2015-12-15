@@ -101,13 +101,25 @@ The **Select Server mode** has three options:
 		.. Note::
 		
 			Note that only the media file available offline and not from Apple Musica can be added. The music file that came from Apple Music cannot be added by DRM issue.
+			
+		.. figure:: img/hub/hubappv2-medialist.jpg
+			:scale: 30
+		
 
 	- Set API Keys
 		- To use PubNub mode, user needs to enter PubNub API keys. It requires Publish Key and Subscribe Key.
 		- If user (or developer) wants to use TTS APIs such as **play_tts**, then user needs to enter VoiceRSS (http://www.voicerss.org) API keys. You can get a free API key.
+		
+		.. figure:: img/hub/hubappv2-apikeys.jpg
+			:scale: 30
+		
 	- Speaker List
 		- You can see the list of speakers available in the current local network.
 		- You can also change the device name or group name from this screen.
+		
+		.. figure:: img/hub/hubappv2-speakers.jpg
+			:scale: 30
+			
 	- About
 		- The information of the app and the links to Harman developer documentation site.
 
