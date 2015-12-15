@@ -196,7 +196,7 @@
 <p class="last">Note that only the media file available offline and not from Apple Musica can be added. The music file that came from Apple Music cannot be added by DRM issue.</p>
 </div>
 <div class="last figure">
-<a class="reference internal image-reference" href="iOS/img/hub/hubappv2-medialist.jpg"><img alt="iOS/img/hub/hubappv2-medialist.jpg" src="iOS/img/hub/hubappv2-medialist.jpg" /></a>
+<a class="reference internal image-reference" href="../_images/hubappv2-medialist.jpg"><img alt="../_images/hubappv2-medialist.jpg" src="../_images/hubappv2-medialist.jpg" /></a>
 </div>
 </dd>
 </dl>
@@ -204,11 +204,11 @@
 <li><dl class="first docutils">
 <dt>Set API Keys</dt>
 <dd><ul class="first simple">
-<li>To use PubNub mode, user needs to enter PubNub API keys. It requires Publish Key and Subscribe Key.</li>
+<li>To use PubNub mode, user needs to enter PubNub API keys. It requires Publish Key and Subscribe Key. And also, user needs to set the channel where it exchanges the command and events with other clients.</li>
 <li>If user (or developer) wants to use TTS APIs such as <strong>play_tts</strong>, then user needs to enter VoiceRSS (<a class="reference external" href="http://www.voicerss.org">http://www.voicerss.org</a>) API keys. You can get a free API key.</li>
 </ul>
 <div class="last figure">
-<a class="reference internal image-reference" href="iOS/img/hub/hubappv2-apikeys.jpg"><img alt="iOS/img/hub/hubappv2-apikeys.jpg" src="iOS/img/hub/hubappv2-apikeys.jpg" /></a>
+<a class="reference internal image-reference" href="../_images/hubappv2-apikeys.jpg"><img alt="../_images/hubappv2-apikeys.jpg" src="../_images/hubappv2-apikeys.jpg" /></a>
 </div>
 </dd>
 </dl>
@@ -227,25 +227,29 @@
 </li>
 <li><dl class="first docutils">
 <dt>About</dt>
-<dd><ul class="first simple">
+<dd><ul class="first last simple">
 <li>The information of the app and the links to Harman developer documentation site.</li>
-<li>To use this mode, user needs to sign up to HKIoTCloud with username, email address and password. Once sign up is done, user need to sign in to the server. User sign-up and sign-in can be done within the HKWHub app, as shown below.</li>
 </ul>
-<div class="figure">
-<a class="reference internal image-reference" href="../_images/hubappv2-signin.jpg"><img alt="../_images/hubappv2-signin.jpg" src="../_images/hubappv2-signin.jpg" /></a>
-</div>
-<ul class="simple">
-<li>The same username and password are required from the client side.</li>
-<li>The clinet needs to</li>
-</ul>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">To use this mode, user needs to sign up to HKIoTCloud with username, email, and password.</p>
-</div>
 </dd>
 </dl>
 </li>
 </ul>
+<p>From now on, we will explain a little more detail about each server mode.</p>
+</div>
+<div class="section" id="hkiotcloud-mode">
+<h4>HKIoTCloud Mode<a class="headerlink" href="#hkiotcloud-mode" title="Permalink to this headline">¶</a></h4>
+<p>In HKIoTCloud demo, 3rd party clients can connect to HKIoTCloud (<a class="reference external" href="http://hkiotcloud.herokuapp.com">http://hkiotcloud.herokuapp.com</a>) and send REST requests to control speakers and play audio. In order to use HKIoTCloud mode, user needs to sign up to the cloud with username, emaill address and password. Once sign up is done, user need to sign in to the server. User sign-up and sign-in can be done within the HKWHub app, as shown below.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hubappv2-signin.jpg"><img alt="../_images/hubappv2-signin.jpg" src="../_images/hubappv2-signin.jpg" /></a>
+</div>
+<p>The same username and password are required from the client side. For example, HKIoTCloud also hosts a Web-based client app, at <a class="reference external" href="http://hkiotcloud.herokuapp.com/webapp/">http://hkiotcloud.herokuapp.com/webapp/</a>. The following is a screenshot of the web app.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="iOS/img/hub/cloudapp-login"><img alt="iOS/img/hub/cloudapp-login" src="iOS/img/hub/cloudapp-login" /></a>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To use this mode, user needs to sign up to HKIoTCloud with username, email, and password.</p>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Please check out <a class="reference external" href="https://www.youtube.com/watch?v=_ljpReAvk0g&amp;feature=youtu.be">HKWHub app demo video</a>.</p>
@@ -1329,6 +1333,7 @@
 <li><a class="reference internal" href="#quick-getting-started-guide-to-hkwhub-app">Quick Getting Started Guide to HKWHub App</a><ul>
 <li><a class="reference internal" href="#overview-of-hkwhubapp">Overview of HKWHubApp</a><ul>
 <li><a class="reference internal" href="#main-screen">Main Screen</a></li>
+<li><a class="reference internal" href="#hkiotcloud-mode">HKIoTCloud Mode</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#run-hkwhub-app-on-your-ios-device">Run HKWHub app on your iOS device</a></li>

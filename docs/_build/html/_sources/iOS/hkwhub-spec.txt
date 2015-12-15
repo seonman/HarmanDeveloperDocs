@@ -108,7 +108,7 @@ The **Settings** menu has four sub menus:
 		
 
 - Set API Keys
-	- To use PubNub mode, user needs to enter PubNub API keys. It requires Publish Key and Subscribe Key.
+	- To use PubNub mode, user needs to enter PubNub API keys. It requires Publish Key and Subscribe Key. And also, user needs to set the channel where it exchanges the command and events with other clients.
 	- If user (or developer) wants to use TTS APIs such as **play_tts**, then user needs to enter VoiceRSS (http://www.voicerss.org) API keys. You can get a free API key.
 		
 	.. figure:: img/hub/hubappv2-apikeys.jpg
@@ -125,17 +125,27 @@ The **Settings** menu has four sub menus:
 	- The information of the app and the links to Harman developer documentation site.
 
 
-	- To use this mode, user needs to sign up to HKIoTCloud with username, email address and password. Once sign up is done, user need to sign in to the server. User sign-up and sign-in can be done within the HKWHub app, as shown below.
+
 	
-	.. figure:: img/hub/hubappv2-signin.jpg
-		:scale: 30
+From now on, we will explain a little more detail about each server mode.
+
+HKIoTCloud Mode
+^^^^^^^^^^^^^^^^^^
+
+In HKIoTCloud demo, 3rd party clients can connect to HKIoTCloud (http://hkiotcloud.herokuapp.com) and send REST requests to control speakers and play audio. In order to use HKIoTCloud mode, user needs to sign up to the cloud with username, emaill address and password. Once sign up is done, user need to sign in to the server. User sign-up and sign-in can be done within the HKWHub app, as shown below.
 	
-	- The same username and password are required from the client side. 
-	- The clinet needs to 
+.. figure:: img/hub/hubappv2-signin.jpg
+	:scale: 30
+
+The same username and password are required from the client side. For example, HKIoTCloud also hosts a Web-based client app, at http://hkiotcloud.herokuapp.com/webapp/. The following is a screenshot of the web app.
+
+.. figure:: img/hub/cloudapp-login
+	:scale: 30
+
 	
-	.. Note::
+.. Note::
 		
-		To use this mode, user needs to sign up to HKIoTCloud with username, email, and password. 
+	To use this mode, user needs to sign up to HKIoTCloud with username, email, and password. 
 
 
 .. Note::
