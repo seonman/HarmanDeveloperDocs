@@ -591,12 +591,17 @@ Returns the number of speakers.
 - Response
 	- Returns the number of devices connected to the network
 - Example:
-	- Request: ``http://<server_host>/api/v1/device_count?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh``
+	- Request: 
+	
+	.. code-block:: json
+	
+		http://<server_host>/api/v1/device_count?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh
+		
 	- Response: 
 
-.. code-block:: json
+	.. code-block:: json
 
-	{"DeviceCount":"2"}
+		{"DeviceCount":"2"}
 
 ----
 
@@ -608,43 +613,48 @@ Get the list of devices and their information
 - Response
 	- Returns the list of devices with all the device information
 - Example:
-	- Request: ``http://<server_host>/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh``
+	- Request: 
+	
+	.. code-block:: json	
+	
+		http://<server_host>/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh
+	
 	- Response: 
 
-.. code-block:: json
+ .. code-block:: json
 
-	{"DeviceList":
-		[{"GroupName":"Bathroom", 
-		"Role":21, 
-		"MacAddress":"b0:38:29:1b:36:1f", 
-		"WifiSignalStrength":-47, 
-		"Port":44055, 
-		"Active":true, 
-		"DeviceName":"Adapt1", 
-		"Version":"0.1.6.2", 
-		"ModelName":"Omni Adapt", 
-		"IPAddress":"192.168.1.40", 
-		"GroupID":"3431724438", 
-		"Volume":47, 
-		"IsPlaying":false, 
-		"DeviceID":"34317244381360"
-		},
+ 	   {"DeviceList":
+			[{"GroupName":"Bathroom", 
+			"Role":21, 
+			"MacAddress":"b0:38:29:1b:36:1f", 
+			"WifiSignalStrength":-47, 
+			"Port":44055, 
+			"Active":true, 
+			"DeviceName":"Adapt1", 
+			"Version":"0.1.6.2", 
+			"ModelName":"Omni Adapt", 
+			"IPAddress":"192.168.1.40", 
+			"GroupID":"3431724438", 
+			"Volume":47, 
+			"IsPlaying":false, 
+			"DeviceID":"34317244381360"
+			},
 		{"GroupName":"Temp", 
-		"Role":21, 
-		"MacAddress":"b0:38:29:1b:9e:75", 
-		"WifiSignalStrength":-53, 
-		"Port":44055, 
-		"Active":true, 
-		"DeviceName":"Adapt", 
-		"Version":"0.1.6.2", 
-		"ModelName":"Omni Adapt", 
-		"IPAddress":"192.168.1.39", 
-		"GroupID":"1293219209", 
-		"Volume":47, 
-		"IsPlaying":false, 
-		"DeviceID":"129321920968880"
-		}]
-	}
+			"Role":21, 
+			"MacAddress":"b0:38:29:1b:9e:75", 
+			"WifiSignalStrength":-53, 
+			"Port":44055, 
+			"Active":true, 
+			"DeviceName":"Adapt", 
+			"Version":"0.1.6.2", 
+			"ModelName":"Omni Adapt", 
+			"IPAddress":"192.168.1.39", 
+			"GroupID":"1293219209", 
+			"Volume":47, 
+			"IsPlaying":false, 
+			"DeviceID":"129321920968880"
+			}]
+		}
 
 ----
 

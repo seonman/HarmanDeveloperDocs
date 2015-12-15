@@ -676,17 +676,22 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://&lt;server_host&gt;/api/v1/device_count?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/device_count?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;DeviceCount&quot;</span><span class="p">:</span><span class="s2">&quot;2&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;DeviceCount&quot;</span><span class="p">:</span><span class="s2">&quot;2&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="get-the-list-of-devices-and-their-information">
@@ -704,48 +709,55 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://&lt;server_host&gt;/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh
+</pre></div>
+</div>
+<ul class="last simple">
 <li>Response:</li>
 </ul>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;DeviceList&quot;</span><span class="p">:</span>
-        <span class="p">[{</span><span class="nt">&quot;GroupName&quot;</span><span class="p">:</span><span class="s2">&quot;Bathroom&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;Role&quot;</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span>
-        <span class="nt">&quot;MacAddress&quot;</span><span class="p">:</span><span class="s2">&quot;b0:38:29:1b:36:1f&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;WifiSignalStrength&quot;</span><span class="p">:</span><span class="mi">-47</span><span class="p">,</span>
-        <span class="nt">&quot;Port&quot;</span><span class="p">:</span><span class="mi">44055</span><span class="p">,</span>
-        <span class="nt">&quot;Active&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
-        <span class="nt">&quot;DeviceName&quot;</span><span class="p">:</span><span class="s2">&quot;Adapt1&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="s2">&quot;0.1.6.2&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;ModelName&quot;</span><span class="p">:</span><span class="s2">&quot;Omni Adapt&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;IPAddress&quot;</span><span class="p">:</span><span class="s2">&quot;192.168.1.40&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="s2">&quot;3431724438&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="mi">47</span><span class="p">,</span>
-        <span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-        <span class="nt">&quot;DeviceID&quot;</span><span class="p">:</span><span class="s2">&quot;34317244381360&quot;</span>
-        <span class="p">},</span>
-        <span class="p">{</span><span class="nt">&quot;GroupName&quot;</span><span class="p">:</span><span class="s2">&quot;Temp&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;Role&quot;</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span>
-        <span class="nt">&quot;MacAddress&quot;</span><span class="p">:</span><span class="s2">&quot;b0:38:29:1b:9e:75&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;WifiSignalStrength&quot;</span><span class="p">:</span><span class="mi">-53</span><span class="p">,</span>
-        <span class="nt">&quot;Port&quot;</span><span class="p">:</span><span class="mi">44055</span><span class="p">,</span>
-        <span class="nt">&quot;Active&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
-        <span class="nt">&quot;DeviceName&quot;</span><span class="p">:</span><span class="s2">&quot;Adapt&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="s2">&quot;0.1.6.2&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;ModelName&quot;</span><span class="p">:</span><span class="s2">&quot;Omni Adapt&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;IPAddress&quot;</span><span class="p">:</span><span class="s2">&quot;192.168.1.39&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="s2">&quot;1293219209&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="mi">47</span><span class="p">,</span>
-        <span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-        <span class="nt">&quot;DeviceID&quot;</span><span class="p">:</span><span class="s2">&quot;129321920968880&quot;</span>
-        <span class="p">}]</span>
-<span class="p">}</span>
+<blockquote>
+<div><div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;DeviceList&quot;</span><span class="p">:</span>
+             <span class="p">[{</span><span class="nt">&quot;GroupName&quot;</span><span class="p">:</span><span class="s2">&quot;Bathroom&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;Role&quot;</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span>
+             <span class="nt">&quot;MacAddress&quot;</span><span class="p">:</span><span class="s2">&quot;b0:38:29:1b:36:1f&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;WifiSignalStrength&quot;</span><span class="p">:</span><span class="mi">-47</span><span class="p">,</span>
+             <span class="nt">&quot;Port&quot;</span><span class="p">:</span><span class="mi">44055</span><span class="p">,</span>
+             <span class="nt">&quot;Active&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+             <span class="nt">&quot;DeviceName&quot;</span><span class="p">:</span><span class="s2">&quot;Adapt1&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="s2">&quot;0.1.6.2&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;ModelName&quot;</span><span class="p">:</span><span class="s2">&quot;Omni Adapt&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;IPAddress&quot;</span><span class="p">:</span><span class="s2">&quot;192.168.1.40&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="s2">&quot;3431724438&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="mi">47</span><span class="p">,</span>
+             <span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+             <span class="nt">&quot;DeviceID&quot;</span><span class="p">:</span><span class="s2">&quot;34317244381360&quot;</span>
+             <span class="p">},</span>
+     <span class="p">{</span><span class="nt">&quot;GroupName&quot;</span><span class="p">:</span><span class="s2">&quot;Temp&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;Role&quot;</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span>
+             <span class="nt">&quot;MacAddress&quot;</span><span class="p">:</span><span class="s2">&quot;b0:38:29:1b:9e:75&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;WifiSignalStrength&quot;</span><span class="p">:</span><span class="mi">-53</span><span class="p">,</span>
+             <span class="nt">&quot;Port&quot;</span><span class="p">:</span><span class="mi">44055</span><span class="p">,</span>
+             <span class="nt">&quot;Active&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+             <span class="nt">&quot;DeviceName&quot;</span><span class="p">:</span><span class="s2">&quot;Adapt&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="s2">&quot;0.1.6.2&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;ModelName&quot;</span><span class="p">:</span><span class="s2">&quot;Omni Adapt&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;IPAddress&quot;</span><span class="p">:</span><span class="s2">&quot;192.168.1.39&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;GroupID&quot;</span><span class="p">:</span><span class="s2">&quot;1293219209&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="mi">47</span><span class="p">,</span>
+             <span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+             <span class="nt">&quot;DeviceID&quot;</span><span class="p">:</span><span class="s2">&quot;129321920968880&quot;</span>
+             <span class="p">}]</span>
+     <span class="p">}</span>
 </pre></div>
 </div>
+</div></blockquote>
 </div>
 <hr class="docutils" />
 <div class="section" id="get-the-device-information">
