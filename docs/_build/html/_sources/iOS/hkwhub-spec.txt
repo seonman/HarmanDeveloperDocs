@@ -326,13 +326,13 @@ We will use **curl** command in your shell. In this example, we will use **curl*
 
 a. Init session
 ^^^^^^^^^^^^^^^
-``curl "http://192.168.1.192:8080/v1/init_session"``
+``curl -X POST -d "username=seonman&password=xxx" http://hkiotcloud.herokuapp.com/api/v1/init_session``
 
-This returns the session id. The returned SessionID is used in all subsequent REST API commands.
+This returns the SessionToken. The returned SessionToken is used by all subsequent REST API commands.
 
 .. code:: json
 
-	{"SessionID":"1000"}
+	{"ResponseOf":"init_session","SessionToken":"r:abciKaTbUgdpQFuvYtgMm0FRh"}
 
 
 b. Add alls speaker to session
@@ -340,8 +340,57 @@ b. Add alls speaker to session
 
 After HKWHub app is launched, none of speakers is selected for playback. You need to add one or more speakers to play audio. To add all speakers to playback session, use ``set_party_mode``. **Party Mode** is the mode where all speakers are playing the same audio together with synchronization. So, by ``set_party_mode``, you can select all speakers to play.
 
-``curl "http://192.168.1.192:8080/v1/set_party_mode?SessionID=1000"``
+``curl "http://hkiotcloud.herokuapp.com/api/v1/set_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh"``
 	
+.. code:: json
+
+	{"Result":"true","ResponseOf":"set_party_mode"}
+
+c. Get the list of speakers available
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To control speakers individually, you can get the list of speakers available by using **device_list** command.
+
+``curl "http://hkiotcloud.herokuapp.com/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh"``
+
+.. code:: json
+
+	{"DeviceList":[
+		{
+			"IsPlaying":false,
+			"MacAddress":"",
+			"GroupName":"Garage",
+			"Role":21,
+			"Version":"0.1.6.2",
+			"Port":44055,
+			"Active":true,
+			"GroupID":"4625984469",
+			"ModelName":"Omni Adapt",
+			"DeviceID":"4625984469168",
+			"IPAddress":"10.0.1.6",
+			"Volume":17,
+			"DeviceName":"Adapt",
+			"WifiSignalStrength":-62
+		},
+		{
+			"IsPlaying":false,
+			"MacAddress":"b0:38:29:11:19:54",
+			"GroupName":"Living Room",
+			"Role":21,
+			"Version":"0.1.6.2",
+			"Port":44055,
+			"Active":true,
+			"GroupID":"9246663882",
+			"ModelName":"Omni 10",
+			"DeviceID":"92466638829744",
+			"IPAddress":"10.0.1.9",
+			"Volume":17,
+			"DeviceName":"Omni Left",
+			"WifiSignalStrength":-67
+		}
+	],
+	"ResponseOf":"device_list"
+	}
+
 	
 c. Add a speaker to session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -387,16 +387,62 @@
 </div>
 <div class="section" id="a-init-session">
 <h4>a. Init session<a class="headerlink" href="#a-init-session" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/init_session&quot;</span></code></p>
-<p>This returns the session id. The returned SessionID is used in all subsequent REST API commands.</p>
-<div class="code json highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;SessionID&quot;</span><span class="p">:</span><span class="s">&quot;1000&quot;</span><span class="p">}</span>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">-d</span> <span class="pre">&quot;username=seonman&amp;password=xxx&quot;</span> <span class="pre">http://hkiotcloud.herokuapp.com/api/v1/init_session</span></code></p>
+<p>This returns the SessionToken. The returned SessionToken is used by all subsequent REST API commands.</p>
+<div class="code json highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s">&quot;init_session&quot;</span><span class="p">,</span><span class="s">&quot;SessionToken&quot;</span><span class="p">:</span><span class="s">&quot;r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="b-add-alls-speaker-to-session">
 <h4>b. Add alls speaker to session<a class="headerlink" href="#b-add-alls-speaker-to-session" title="Permalink to this headline">¶</a></h4>
 <p>After HKWHub app is launched, none of speakers is selected for playback. You need to add one or more speakers to play audio. To add all speakers to playback session, use <code class="docutils literal"><span class="pre">set_party_mode</span></code>. <strong>Party Mode</strong> is the mode where all speakers are playing the same audio together with synchronization. So, by <code class="docutils literal"><span class="pre">set_party_mode</span></code>, you can select all speakers to play.</p>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/set_party_mode?SessionID=1000&quot;</span></code></p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/set_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span></code></p>
+<div class="code json highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;Result&quot;</span><span class="p">:</span><span class="s">&quot;true&quot;</span><span class="p">,</span><span class="s">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s">&quot;set_party_mode&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="c-get-the-list-of-speakers-available">
+<h4>c. Get the list of speakers available<a class="headerlink" href="#c-get-the-list-of-speakers-available" title="Permalink to this headline">¶</a></h4>
+<p>To control speakers individually, you can get the list of speakers available by using <strong>device_list</strong> command.</p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span></code></p>
+<div class="code json highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;DeviceList&quot;</span><span class="p">:[</span>
+        <span class="p">{</span>
+                <span class="s">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+                <span class="s">&quot;MacAddress&quot;</span><span class="p">:</span><span class="s">&quot;&quot;</span><span class="p">,</span>
+                <span class="s">&quot;GroupName&quot;</span><span class="p">:</span><span class="s">&quot;Garage&quot;</span><span class="p">,</span>
+                <span class="s">&quot;Role&quot;</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span>
+                <span class="s">&quot;Version&quot;</span><span class="p">:</span><span class="s">&quot;0.1.6.2&quot;</span><span class="p">,</span>
+                <span class="s">&quot;Port&quot;</span><span class="p">:</span><span class="mi">44055</span><span class="p">,</span>
+                <span class="s">&quot;Active&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+                <span class="s">&quot;GroupID&quot;</span><span class="p">:</span><span class="s">&quot;4625984469&quot;</span><span class="p">,</span>
+                <span class="s">&quot;ModelName&quot;</span><span class="p">:</span><span class="s">&quot;Omni Adapt&quot;</span><span class="p">,</span>
+                <span class="s">&quot;DeviceID&quot;</span><span class="p">:</span><span class="s">&quot;4625984469168&quot;</span><span class="p">,</span>
+                <span class="s">&quot;IPAddress&quot;</span><span class="p">:</span><span class="s">&quot;10.0.1.6&quot;</span><span class="p">,</span>
+                <span class="s">&quot;Volume&quot;</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span>
+                <span class="s">&quot;DeviceName&quot;</span><span class="p">:</span><span class="s">&quot;Adapt&quot;</span><span class="p">,</span>
+                <span class="s">&quot;WifiSignalStrength&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">62</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+                <span class="s">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
+                <span class="s">&quot;MacAddress&quot;</span><span class="p">:</span><span class="s">&quot;b0:38:29:11:19:54&quot;</span><span class="p">,</span>
+                <span class="s">&quot;GroupName&quot;</span><span class="p">:</span><span class="s">&quot;Living Room&quot;</span><span class="p">,</span>
+                <span class="s">&quot;Role&quot;</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span>
+                <span class="s">&quot;Version&quot;</span><span class="p">:</span><span class="s">&quot;0.1.6.2&quot;</span><span class="p">,</span>
+                <span class="s">&quot;Port&quot;</span><span class="p">:</span><span class="mi">44055</span><span class="p">,</span>
+                <span class="s">&quot;Active&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+                <span class="s">&quot;GroupID&quot;</span><span class="p">:</span><span class="s">&quot;9246663882&quot;</span><span class="p">,</span>
+                <span class="s">&quot;ModelName&quot;</span><span class="p">:</span><span class="s">&quot;Omni 10&quot;</span><span class="p">,</span>
+                <span class="s">&quot;DeviceID&quot;</span><span class="p">:</span><span class="s">&quot;92466638829744&quot;</span><span class="p">,</span>
+                <span class="s">&quot;IPAddress&quot;</span><span class="p">:</span><span class="s">&quot;10.0.1.9&quot;</span><span class="p">,</span>
+                <span class="s">&quot;Volume&quot;</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span>
+                <span class="s">&quot;DeviceName&quot;</span><span class="p">:</span><span class="s">&quot;Omni Left&quot;</span><span class="p">,</span>
+                <span class="s">&quot;WifiSignalStrength&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">67</span>
+        <span class="p">}</span>
+<span class="p">],</span>
+<span class="s">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s">&quot;device_list&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="c-add-a-speaker-to-session">
 <h4>c. Add a speaker to session<a class="headerlink" href="#c-add-a-speaker-to-session" title="Permalink to this headline">¶</a></h4>
@@ -1469,6 +1515,7 @@
 <li><a class="reference internal" href="#use-curl-command-to-send-rest-requests">Use <code class="docutils literal"><span class="pre">curl</span></code> command to send REST requests</a><ul>
 <li><a class="reference internal" href="#a-init-session">a. Init session</a></li>
 <li><a class="reference internal" href="#b-add-alls-speaker-to-session">b. Add alls speaker to session</a></li>
+<li><a class="reference internal" href="#c-get-the-list-of-speakers-available">c. Get the list of speakers available</a></li>
 <li><a class="reference internal" href="#c-add-a-speaker-to-session">c. Add a speaker to session</a></li>
 <li><a class="reference internal" href="#d-get-the-media-list">d. Get the media list</a></li>
 <li><a class="reference internal" href="#e-play-a-media-item-listed-in-the-hkwhub-app">e. Play a media item listed in the HKWHub app</a></li>
