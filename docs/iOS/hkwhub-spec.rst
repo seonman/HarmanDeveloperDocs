@@ -687,7 +687,8 @@ Removes a speaker from playback session. Once a speaker is removed, then the spe
 - Response
 	- Returns true or false
 - Example:
-	- Request: http://hkiotcloud.herokuapp.com/api/v1/remove_device_from_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880
+	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/remove_device_from_session?
+	SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880``
 	- Response: 
 
 .. code-block:: json
