@@ -706,9 +706,10 @@ Add a speaker to playback session. Once a speaker is added, then the speaker wil
 	- Returns true or false
 - Example:
 	- Request:
-
+	
 	.. code-block:: json
- 		http://<server_host>/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880
+	
+		http://<server_host>/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880
 
 	- Response: 
 
