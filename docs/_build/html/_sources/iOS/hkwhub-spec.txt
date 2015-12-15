@@ -536,6 +536,11 @@ Start Session
 Starts a new session.
 
 - API: **POST** /api/v1/init_session
+
+	.. Note::
+		
+		For Local Server mode, the REST request should be sent as **GET** request, instead of **POST**.
+		
 - Body
 	- username: the username
 	- password: the password 
