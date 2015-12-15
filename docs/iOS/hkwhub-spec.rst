@@ -82,12 +82,17 @@ Main Screen
 .. figure:: img/hub/hubappv2-main.jpg
 	:scale: 30
 	
-The main screen is composed of two parts - 'Select Server mode' (amonng HKIoTCloud, Local Server and PubNub Cloud), and 'Settings'.
+The main screen is composed of two parts - **Select Server mode** (amonng HKIoTCloud, Local Server and PubNub Cloud), and **Settings**.
 
 The 'Select Server mode' has three options:
 
 - Connect to HK IoT Cloud
-	- kjdaskdja
+	- HKWHub app connects to HKIotCloud, and communicate with it with WebSocket to receive REST API commands from and send back the responses to the Cloud.
+	- HKIoTCloud handles the REST API request from clients in the Internet. The clients can be 3rd party apps or services or devices like smartphone or sensors.
+	
+	.. Note::
+		
+		To use this mode, user needs to sign up to HKIoTCloud with username, email, and password. 
 
 
 .. Note::
