@@ -169,6 +169,16 @@ Once user authentication is done successfully, the Web app will switch the scree
 .. figure:: img/hub/cloudapp-medialist.png
 	:scale: 70
 
+Now, you can click one of the titles in the list, and see how the web app is playing the title, showing the information of the title, volume, and playback time, and so on.
+
+.. figure:: img/hub/cloudapp-mediaplayer.png
+	:scale: 70
+
+If you click **Speaker List** menu on the left, you can see more detailed information of speakers like below, and can control speakers, like remove a speaker from the current playback session or add a speaker to playback. 
+
+.. figure:: img/hub/cloudapp-speakers.png
+	:scale: 70
+	
 .. Note::
 
 	Please check out `HKWHub app demo video`_.
