@@ -102,8 +102,14 @@ The **Select Server mode** has three options:
 		
 			Note that only the media file available offline and not from Apple Musica can be added. The music file that came from Apple Music cannot be added by DRM issue.
 
-
-
+	- Set API Keys
+		- To use PubNub mode, user needs to enter PubNub API keys. It requires Publish Key and Subscribe Key.
+		- If user (or developer) wants to use TTS APIs such as **play_tts**, then user needs to enter VoiceRSS (http://www.voicerss.org) API keys. You can get a free API key.
+	- Speaker List
+		- You can see the list of speakers available in the current local network.
+		- You can also change the device name or group name from this screen.
+	- About
+		- The information of the app and the links to Harman developer documentation site.
 
 
 	- To use this mode, user needs to sign up to HKIoTCloud with username, email address and password. Once sign up is done, user need to sign in to the server. User sign-up and sign-in can be done within the HKWHub app, as shown below.
