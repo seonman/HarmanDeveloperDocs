@@ -392,19 +392,22 @@ To control speakers individually, you can get the list of speakers available by 
 	}
 
 	
-c. Add a speaker to session
+d. Add a speaker to session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you want to add a speaker to session, use ``add_device_to_session`. It requires ``DeviceID`` parameter to identify a speaker to add. This command does not impact other speakers regardless of their status.
 
-``curl "http://192.168.1.192:8080/v1/add_device_to_session?SessionID=1000&DeviceID="34317244381360"``
+``curl "http://hkiotcloud.herokuapp.com/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=4625984469168"``
 
+.. code:: json
 
-d. Get the media list
+	{"Result":"true","ResponseOf":"add_device_to_session"}
+
+e. Get the media list
 ^^^^^^^^^^^^^^^^^^^^^^^
-``curl "http://192.168.1.192:8080/v1/media_list?SessionID=1000"``
+``curl "http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh"``
 
-Here, SessionID should be the session id you got from ``init_session``. You will get a list of media in JSON like below
+Here, SessionToken should be the session token you got from ``init_session``. You will get a list of media in JSON like below
 
 .. code-block:: json
 
@@ -422,7 +425,7 @@ Here, SessionID should be the session id you got from ``init_session``. You will
 		"AlbumTitle":"Wordplay [SINGLE EP]"}
 	]}
 
-e. Play a media item listed in the HKWHub app
+f. Play a media item listed in the HKWHub app
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you want to play a media item listed in the HKWHub app, use ``play_hub_media`` by specifying the media item with ``PersistentID``. The ``PersistentID`` is available from the response of ``media_list`` command.
 
@@ -430,28 +433,48 @@ If you want to play a media item listed in the HKWHub app, use ``play_hub_media`
 
 	Note that, before calling ``play_hub_media``, at least one or more speakers must be selected (added to session) in advance. If not, then the playback will fail. 
 
-``curl "http://192.168.1.192:8080/v1/play_hub_media?SessionID=1000&PersistentID=5829171347867182746"``
+``curl "http://hkiotcloud.herokuapp.com/api/v1/play_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&PersistentID=1062764963669236741"``
 
-	
+.. code-block:: json
+
+	{"Result":"true","ResponseOf":"play_hub_media"}
+
+
 f. Play a media item in the HKWHub by specifying a speaker list to play
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 You can play a media item in the HKWHub app by specifying the list of speakers.
 
-``curl "http://192.168.1.192:8080/v1/play_hub_media_selected_speakers?SessionID=1000&PersistentID=5829171347867182746&DeviceIDList=34317244381360,129321920968880"``
+``curl "http://hkiotcloud.herokuapp.com/api/v1/play_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&PersistentID=1062764963669236741&DeviceIDList=34317244381360,129321920968880"``
 
 The list of speakers are listed by the parameter ``DeviceIDList`` with delimitor ",".
 
-g. Play a HTTP streaming media
+.. code-block:: json
+
+	{"Result":"true","ResponseOf":"play_hub_media_selected_speakers"}
+
+g. Play a HTTP streaming media as party mode
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-``curl "http://192.168.1.192:8080/v1/play_web_media?SessionID=1000&MediaUrl=http://seonman.github.io/music/hyolyn.mp3"``
+``curl "http://hkiotcloud.herokuapp.com/api/v1/play_web_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&MediaUrl=http://seonman.github.io/music/hyolyn.mp3"``
+
+.. code-block:: json
+
+	{"Result":"true","ResponseOf":"play_web_media_party_mode"}
 
 h. Stop playing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-``curl "http://192.168.1.192:8080/v1/stop_play?SessionID=1000"``
+``curl "http://hkiotcloud.herokuapp.com/api/v1/stop_play?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh"``
+
+.. code-block:: json
+
+	{"Result":"true","ResponseOf":"stop_play"}
 
 i. Set Volume
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-``curl "http://192.168.1.192:8080/v1/set_volume?SessionID=1000&Volume=30"``
+``curl "http://hkiotcloud.herokuapp.com/api/v1/set_volume?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&Volume=30"``
+
+.. code-block:: json
+
+	{"Result":"true","ResponseOf":"set_volume"}
 
 .. note::
 

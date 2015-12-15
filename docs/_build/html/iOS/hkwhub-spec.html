@@ -444,15 +444,18 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="c-add-a-speaker-to-session">
-<h4>c. Add a speaker to session<a class="headerlink" href="#c-add-a-speaker-to-session" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="d-add-a-speaker-to-session">
+<h4>d. Add a speaker to session<a class="headerlink" href="#d-add-a-speaker-to-session" title="Permalink to this headline">¶</a></h4>
 <p>If you want to add a speaker to session, use <code class="docutils literal"><span class="pre">add_device_to_session`.</span> <span class="pre">It</span> <span class="pre">requires</span> <span class="pre">``DeviceID</span></code> parameter to identify a speaker to add. This command does not impact other speakers regardless of their status.</p>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/add_device_to_session?SessionID=1000&amp;DeviceID=&quot;34317244381360&quot;</span></code></p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=4625984469168&quot;</span></code></p>
+<div class="code json highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;Result&quot;</span><span class="p">:</span><span class="s">&quot;true&quot;</span><span class="p">,</span><span class="s">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s">&quot;add_device_to_session&quot;</span><span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="d-get-the-media-list">
-<h4>d. Get the media list<a class="headerlink" href="#d-get-the-media-list" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/media_list?SessionID=1000&quot;</span></code></p>
-<p>Here, SessionID should be the session id you got from <code class="docutils literal"><span class="pre">init_session</span></code>. You will get a list of media in JSON like below</p>
+</div>
+<div class="section" id="e-get-the-media-list">
+<h4>e. Get the media list<a class="headerlink" href="#e-get-the-media-list" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span></code></p>
+<p>Here, SessionToken should be the session token you got from <code class="docutils literal"><span class="pre">init_session</span></code>. You will get a list of media in JSON like below</p>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;MediaList&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;7387446959931482519&quot;</span><span class="p">,</span>
         <span class="nt">&quot;Title&quot;</span><span class="p">:</span><span class="s2">&quot;I Will Run To You&quot;</span><span class="p">,</span>
@@ -469,32 +472,47 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="e-play-a-media-item-listed-in-the-hkwhub-app">
-<h4>e. Play a media item listed in the HKWHub app<a class="headerlink" href="#e-play-a-media-item-listed-in-the-hkwhub-app" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="f-play-a-media-item-listed-in-the-hkwhub-app">
+<h4>f. Play a media item listed in the HKWHub app<a class="headerlink" href="#f-play-a-media-item-listed-in-the-hkwhub-app" title="Permalink to this headline">¶</a></h4>
 <p>If you want to play a media item listed in the HKWHub app, use <code class="docutils literal"><span class="pre">play_hub_media</span></code> by specifying the media item with <code class="docutils literal"><span class="pre">PersistentID</span></code>. The <code class="docutils literal"><span class="pre">PersistentID</span></code> is available from the response of <code class="docutils literal"><span class="pre">media_list</span></code> command.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Note that, before calling <code class="docutils literal"><span class="pre">play_hub_media</span></code>, at least one or more speakers must be selected (added to session) in advance. If not, then the playback will fail.</p>
 </div>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/play_hub_media?SessionID=1000&amp;PersistentID=5829171347867182746&quot;</span></code></p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/play_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;PersistentID=1062764963669236741&quot;</span></code></p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;play_hub_media&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="f-play-a-media-item-in-the-hkwhub-by-specifying-a-speaker-list-to-play">
 <h4>f. Play a media item in the HKWHub by specifying a speaker list to play<a class="headerlink" href="#f-play-a-media-item-in-the-hkwhub-by-specifying-a-speaker-list-to-play" title="Permalink to this headline">¶</a></h4>
 <p>You can play a media item in the HKWHub app by specifying the list of speakers.</p>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/play_hub_media_selected_speakers?SessionID=1000&amp;PersistentID=5829171347867182746&amp;DeviceIDList=34317244381360,129321920968880&quot;</span></code></p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/play_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;PersistentID=1062764963669236741&amp;DeviceIDList=34317244381360,129321920968880&quot;</span></code></p>
 <p>The list of speakers are listed by the parameter <code class="docutils literal"><span class="pre">DeviceIDList</span></code> with delimitor &#8221;,&#8221;.</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;play_hub_media_selected_speakers&quot;</span><span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="g-play-a-http-streaming-media">
-<h4>g. Play a HTTP streaming media<a class="headerlink" href="#g-play-a-http-streaming-media" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/play_web_media?SessionID=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3&quot;</span></code></p>
+</div>
+<div class="section" id="g-play-a-http-streaming-media-as-party-mode">
+<h4>g. Play a HTTP streaming media as party mode<a class="headerlink" href="#g-play-a-http-streaming-media-as-party-mode" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/play_web_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3&quot;</span></code></p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;play_web_media_party_mode&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="h-stop-playing">
 <h4>h. Stop playing<a class="headerlink" href="#h-stop-playing" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/stop_play?SessionID=1000&quot;</span></code></p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/stop_play?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span></code></p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;stop_play&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="i-set-volume">
 <h4>i. Set Volume<a class="headerlink" href="#i-set-volume" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/set_volume?SessionID=1000&amp;Volume=30&quot;</span></code></p>
+<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/set_volume?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;Volume=30&quot;</span></code></p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;set_volume&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Please see the REST API specification for more information and examples.</p>
@@ -1516,11 +1534,11 @@
 <li><a class="reference internal" href="#a-init-session">a. Init session</a></li>
 <li><a class="reference internal" href="#b-add-alls-speaker-to-session">b. Add alls speaker to session</a></li>
 <li><a class="reference internal" href="#c-get-the-list-of-speakers-available">c. Get the list of speakers available</a></li>
-<li><a class="reference internal" href="#c-add-a-speaker-to-session">c. Add a speaker to session</a></li>
-<li><a class="reference internal" href="#d-get-the-media-list">d. Get the media list</a></li>
-<li><a class="reference internal" href="#e-play-a-media-item-listed-in-the-hkwhub-app">e. Play a media item listed in the HKWHub app</a></li>
+<li><a class="reference internal" href="#d-add-a-speaker-to-session">d. Add a speaker to session</a></li>
+<li><a class="reference internal" href="#e-get-the-media-list">e. Get the media list</a></li>
+<li><a class="reference internal" href="#f-play-a-media-item-listed-in-the-hkwhub-app">f. Play a media item listed in the HKWHub app</a></li>
 <li><a class="reference internal" href="#f-play-a-media-item-in-the-hkwhub-by-specifying-a-speaker-list-to-play">f. Play a media item in the HKWHub by specifying a speaker list to play</a></li>
-<li><a class="reference internal" href="#g-play-a-http-streaming-media">g. Play a HTTP streaming media</a></li>
+<li><a class="reference internal" href="#g-play-a-http-streaming-media-as-party-mode">g. Play a HTTP streaming media as party mode</a></li>
 <li><a class="reference internal" href="#h-stop-playing">h. Stop playing</a></li>
 <li><a class="reference internal" href="#i-set-volume">i. Set Volume</a></li>
 </ul>
