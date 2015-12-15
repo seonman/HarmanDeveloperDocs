@@ -197,7 +197,48 @@ The RESI APIs are almost the same as the ones of HKIoTCloud mode.
 	:scale: 30
 
 
-For a sample client app, you can use **WebHubWebApp** that you can download from Harman Developer web site (http://developer.harman.com).
+Sending REST Requests to LocalServer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As a sample client app, you can use **WebHubWebApp** that you can download from Harman Developer web site (http://developer.harman.com). The Web app is created using Polymer v0.5 (https://www.polymer-project.org/0.5/).
+
+Once you download the app, unzip it. You will see the following sub directories.
+
+- bower_components: THis is the folder where polymer libraries are located.
+- hkwhub: this is the folder containing the WebHubApp source code.
+
+.. code-block:: shell
+
+	$ cd WebHubWebApp
+	$ python -m SimpleHTTPServer
+	
+You will get some log messages like "Serving HTTP on 0.0.0.0 port 8000 ..."
+
+Next, launch your web browser (Chrome, Safari, ...) and go to http://localhost:8000/hkwhub/
+
+.. note::
+
+	Your iOS device running HKWHub app and your Desktop PC running web browser should be in the same network.
+
+At the fist screen looking like this:
+
+.. figure:: img/hub/webapp-initial.png
+	:scale: 70
+
+Enter the URL that the HKWHub app says: http://10.0.1.37:8080/, like this:
+
+.. figure:: img/hub/webapp-initial-url.png
+	:scale: 70
+
+If you press **Submit**, then you will see the first screen like below. This is the list of media items available at the HKWHub app. 
+
+.. figure:: img/hub/webapp-afterlogin.png
+	:scale: 70
+	
+The UI of the Web app is exactly the same as HKIoTCloud web app. So, we skip to explain the rest parts of the app.
+
+
+
 
 
 
