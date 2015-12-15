@@ -23,21 +23,21 @@ Use Cases
 HKWHub App 
 ~~~~~~~~~~~~
 
-Web Hub handles all the requests from and response to the sensors or the clouds to control audio play with wireless speakers in the house.
+Web Hub handles all the requests from and response to smart devices, sensors or clouds to control audio playback with wireless speakers in the house.
 
 Features
 ^^^^^^^^^
-- Supports integration with clouds and sensors as well as smartphones
+- Supports integration with cloud-based services, smart devices or sensors
 	- Receives the requests from clouds (web service) outside or sensors in the house
 	- Translates the requests into HKWirelessHD commands and controls the speakers based on the requests.
 	- Sends response with status of speakers to the cloud if necessary 
 - Central Music Playlist manager
-	- Maintain user’s playlist from the iOS local music library and streaming services, like MixRadio, etc.
+	- Maintain user’s media list from iOS local music library or streaming services, like MixRadio, etc.
 	- Maintain a collection of sound files used for IoT use cases, like door bell, etc.
 
 Usage
 ^^^^^^^^
-- User puts an iOS device on the cradle and run WebHub app. Then the app acts as Web Hub. (AppleTV can be a nice iOS device for WebHub.)
+- User may place an iOS device on the cradle and run WebHub app. Then the app acts as Web Hub. (A stationary device in a house lik AppleTV can be a nice iOS device for WebHub.)
 
 
 .. figure:: img/hub/hub-app.png
@@ -45,9 +45,28 @@ Usage
 Overall Architecture
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Web Hub handles all the requests from and response to the sensors or the clouds to control audio play with wireless speakers in the house.
+HKWHub App handles requests from and sends responses to sensors, smart devices or cloud-based services to control audio playback with wireless speakers in the house.
 
 .. figure:: img/hub/architecture.png
+
+
+The latest version of HKWHub app supports the following three modes:
+
+- Cloud mode (HKIoTCloud)
+	- HKWHub app communicates with HKIoTCloud to receive speaker control commands by REST API call from 3rd party services or clients.
+	- In this mode, any 3rd party services or clients in the Internet can reach out to HKWHub app and then control speakers and playback of audio.
+
+- Local Server Mode
+	- HKWHub app lauches a web server internally, and then handles the REST API requests for speaker control and playback from devices, sensors or applications in the same local network. 
+	- HKWHub app opens a HTTP port in the local network, so if devices or services outside of the local network want to reach out to HKWHub (and then speakers) then user needs to configure the route so that a request coming from outside can be routed to HKWHub app accordingly, such as firewall, etc.
+
+- PubNub Cloud mode
+	- HKWHub app uses PubNub API/SDK to connect to PubNub server and communicate with it to receive commands from other PubNub clients, and also sends events to other PubNub client, through a common PubNub channel.
+	- By setting the same PubNub channel, any client devices or services can communicate with the HKWHub app, and then control speakers and playback of audio.
+	
+The following figure shows how HKWHub app handles three modes.
+
+.. figure:: img/hub/HubAppV2.png
 
 ----
 
