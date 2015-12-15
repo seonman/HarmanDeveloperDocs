@@ -690,12 +690,13 @@ Removes a speaker from playback session. Once a speaker is removed, then the spe
 	- Request: 
 	
 	.. code-block:: json
+	
 		http://hkiotcloud.herokuapp.com/api/v1/remove_device_from_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880
 		
 	- Response: 
-.. code-block:: json
+	.. code-block:: json
 
-	{"Result":"true"}
+		{"Result":"true"}
 	
 
 Set party mode
@@ -732,11 +733,11 @@ Returns the list of media items added to the Media List of the app. User can add
 	To be added to the Media List, the music item must be located locally on the device. No streaming from iTunes or Apple Music are supported.
 
 
-- API: GET /v1/media_list?SessionID=<session id>
+- API: GET /api/v1/media_list?SessionToken=<session token>
 - Response
 	- Returns JSON of the list of store media in the HKWHub app.
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/media_list?SessionID=1000``
+	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionID=r:abciKaTbUgdpQFuvYtgMm0F``
 	- Response: 
 
 .. code-block:: json

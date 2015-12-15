@@ -822,16 +822,19 @@
 <dd><ul class="first simple">
 <li>Request:</li>
 </ul>
-<ul class="last simple">
+<div class="highlight-json"><div class="highlight"><pre>http://hkiotcloud.herokuapp.com/api/v1/remove_device_from_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=129321920968880
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="set-party-mode">
 <h4>Set party mode<a class="headerlink" href="#set-party-mode" title="Permalink to this headline">¶</a></h4>
@@ -879,7 +882,7 @@
 <p class="last">To be added to the Media List, the music item must be located locally on the device. No streaming from iTunes or Apple Music are supported.</p>
 </div>
 <ul>
-<li><p class="first">API: GET /v1/media_list?SessionID=&lt;session id&gt;</p>
+<li><p class="first">API: GET /api/v1/media_list?SessionToken=&lt;session token&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -892,7 +895,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/media_list?SessionID=1000</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionID=r:abciKaTbUgdpQFuvYtgMm0F</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
