@@ -137,15 +137,22 @@ In HKIoTCloud demo, 3rd party clients can connect to HKIoTCloud (http://hkiotclo
 .. figure:: img/hub/hubappv2-signin.jpg
 	:scale: 30
 
+Once the HKWHub app successfully signs in to HKIoTCloud, the screen will be switched to Log screen, like shown as below. You can see all the message logs received from or sent to the cloud. Each log shows the JSON data, so you can see what information is being sent and received with the server.
+
+.. figure:: img/hub/hubappv2-signin.jpg
+	:scale: 30
+	
+
 The same username and password are required from the client side. For example, HKIoTCloud also hosts a Web-based client app, at http://hkiotcloud.herokuapp.com/webapp/. The following is a screenshot of the web app.
 
-.. figure:: img/hub/cloudapp-login.png
-	:scale: 70
+.. figure:: img/hub/hubappv2-hkiotcloud.png
+	:scale: 30
 
 	
 .. Note::
 		
 	To use this mode, user needs to sign up to HKIoTCloud with username, email, and password. 
+
 
 
 .. Note::
