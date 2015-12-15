@@ -583,6 +583,9 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <h4>Start Session<a class="headerlink" href="#start-session" title="Permalink to this headline">¶</a></h4>
 <p>Starts a new session.</p>
 <ul>
+<li><dl class="first docutils">
+<dt>HKIoTCloud mode</dt>
+<dd><ul class="first last">
 <li><p class="first">API: <strong>POST</strong> /api/v1/init_session</p>
 </li>
 <li><dl class="first docutils">
@@ -595,11 +598,18 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </dl>
 </li>
 </ul>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For Local Server mode, the REST request should be sent as <strong>GET</strong> request, instead of <strong>POST</strong>. And the request does not need to include <strong>username</strong>, and <strong>password</strong> parameters.</p>
-</div>
-<ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Local Server mode</dt>
+<dd><ul class="first last simple">
+<li>API: <strong>GET</strong> /api/v1/init_session</li>
+<li>Body : none</li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><dl class="first docutils">
 <dt>Response</dt>
 <dd><ul class="first last simple">

@@ -536,16 +536,15 @@ Start Session
 ^^^^^^^^^^^^^^
 Starts a new session.
 
-- API: **POST** /api/v1/init_session
-		
-- Body
-	- username: the username
-	- password: the password 
+- HKIoTCloud mode
+	- API: **POST** /api/v1/init_session		
+	- Body
+		- username: the username
+		- password: the password 
+- Local Server mode	
+	- API: **GET** /api/v1/init_session
+	- Body : none
 	
-.. Note::
-		
-	For Local Server mode, the REST request should be sent as **GET** request, instead of **POST**. And the request does not need to include **username**, and **password** parameters.
-		
 - Response
 	- Returns a unique session token
 	- The session token will be used for upcoming requests.
