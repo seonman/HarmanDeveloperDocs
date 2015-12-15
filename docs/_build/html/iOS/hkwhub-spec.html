@@ -578,7 +578,7 @@
 <h4>Start Session<a class="headerlink" href="#start-session" title="Permalink to this headline">¶</a></h4>
 <p>Starts a new session.</p>
 <ul>
-<li><p class="first">API: GET /api/v1/init_session</p>
+<li><p class="first">API: POST /api/v1/init_session</p>
 </li>
 <li><dl class="first docutils">
 <dt>Body</dt>
@@ -601,14 +601,14 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/init_session?Priority=100</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">-d</span> <span class="pre">&quot;username=seonman&amp;password=xxx&quot;</span> <span class="pre">http://hkiotcloud.herokuapp.com/api/v1/init_session</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;SessionID&quot;</span> <span class="p">:</span> <span class="s2">&quot;1000&quot;</span><span class="p">}</span>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;init_session&quot;</span><span class="p">,</span><span class="nt">&quot;SessionToken&quot;</span><span class="p">:</span><span class="s2">&quot;r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>

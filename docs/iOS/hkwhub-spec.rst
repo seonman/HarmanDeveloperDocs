@@ -530,7 +530,7 @@ Start Session
 ^^^^^^^^^^^^^^
 Starts a new session.
 
-- API: GET /api/v1/init_session
+- API: POST /api/v1/init_session
 - Body
 	- username: the username
 	- password: the password 
@@ -539,12 +539,12 @@ Starts a new session.
 	- Returns a unique session token
 	- The session token will be used for upcoming requests.
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/init_session?Priority=100``
+	- Request: ``curl -X POST -d "username=seonman&password=xxx" http://hkiotcloud.herokuapp.com/api/v1/init_session``
 	- Response: 
 
 .. code-block:: json
 
-	{"SessionID" : "1000"}
+	{"ResponseOf":"init_session","SessionToken":"r:abciKaTbUgdpQFuvYtgMm0FRh"}
 
 ----
 
