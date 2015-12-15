@@ -530,7 +530,7 @@ Start Session
 ^^^^^^^^^^^^^^
 Starts a new session.
 
-- API: POST /api/v1/init_session
+- API: **POST** /api/v1/init_session
 - Body
 	- username: the username
 	- password: the password 
@@ -550,13 +550,13 @@ Starts a new session.
 
 Close Session
 ^^^^^^^^^^^^^^
-Close the session. The SessionID information is removed from the session database.
+Close the session. The SessionToken information is removed from the session table.
 
-- API: GET /v1/close_session?SessionID=<session id>
+- API: GET /api/v1/close_session?SessionToken=<session token>
 - Response
 	- Returns true or false indicating success or failure
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/close_session?SessionID=1000``
+	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/close_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh``
 	- Response: 
 
 .. code-block:: json
@@ -572,11 +572,11 @@ Get the device count
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Returns the number of speakers.
 
-- API: GET /v1/device_count?SessionID=<session id>
+- API: GET /api/v1/device_count?SessionToken=<session token>
 - Response
 	- Returns the number of devices connected to the network
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/device_count?SessionID=1000``
+	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/device_count?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh``
 	- Response: 
 
 .. code-block:: json
@@ -589,11 +589,11 @@ Returns the number of speakers.
 Get the list of devices and their information
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- API: GET /v1/device_list?SessionID=<session id>
+- API: GET /api/v1/device_list?SessionToken=<session token>
 - Response
 	- Returns the list of devices with all the device information
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/device_list?SessionID=1000``
+	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh``
 	- Response: 
 
 .. code-block:: json
@@ -636,11 +636,11 @@ Get the list of devices and their information
 Get the Device Information
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- API: GET /v1/device_info?SessionID=<session id>&DeviceID=<device id>
+- API: GET /api/v1/device_info?SessionToken=<session token>&DeviceID=<device id>
 - Response
 	- Returns the information of the device
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/device_info?SessionID=1000&DeviceID=129321920968880``
+	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/device_info?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880``
 	- Response: 
 
 .. code-block:: json
@@ -666,11 +666,11 @@ Add a Device to Session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Add a speaker to playback session. Once a speaker is added, then the speaker will play the music. There is no impact of this call to other speakers.
 
-- API: GET /v1/add_device_tosession?SessionID=<session id>&DeviceID=<device id>
+- API: GET /api/v1/add_device_tosession?SessionToken=<session token>&DeviceID=<device id>
 - Response
 	- Returns true or false
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/add_device_to_session?SessionID=1000&DeviceID=129321920968880``
+	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880``
 	- Response: 
 
 .. code-block:: json
@@ -683,11 +683,11 @@ Remove a Device from Session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Removes a speaker from playback session. Once a speaker is removed, then the speaker will not play the music. There is no impact of this call to other speakers.
 
-- API: GET /v1/remove_device_from_session?SessionID=<session id>&DeviceID=<device id>
+- API: GET /api/v1/remove_device_from_session?SessionToken=<session token>&DeviceID=<device id>
 - Response
 	- Returns true or false
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/remove_device_from_session?SessionID=1000&DeviceID=129321920968880``
+	- Request: http://hkiotcloud.herokuapp.com/api/v1/remove_device_from_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880
 	- Response: 
 
 .. code-block:: json
@@ -699,7 +699,7 @@ Set party mode
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Addes all speakers to playback session. Once it is done, all speakers will play music.
 
-- API: GET /v1/set_party_mode?SessionID=<session id>
+- API: GET /api/v1/set_party_mode?SessionToken=<session token>
 - Response
 	- Returns true or false
 - Example:

@@ -578,7 +578,7 @@
 <h4>Start Session<a class="headerlink" href="#start-session" title="Permalink to this headline">¶</a></h4>
 <p>Starts a new session.</p>
 <ul>
-<li><p class="first">API: POST /api/v1/init_session</p>
+<li><p class="first">API: <strong>POST</strong> /api/v1/init_session</p>
 </li>
 <li><dl class="first docutils">
 <dt>Body</dt>
@@ -615,9 +615,9 @@
 <hr class="docutils" />
 <div class="section" id="close-session">
 <h4>Close Session<a class="headerlink" href="#close-session" title="Permalink to this headline">¶</a></h4>
-<p>Close the session. The SessionID information is removed from the session database.</p>
+<p>Close the session. The SessionToken information is removed from the session table.</p>
 <ul>
-<li><p class="first">API: GET /v1/close_session?SessionID=&lt;session id&gt;</p>
+<li><p class="first">API: GET /api/v1/close_session?SessionToken=&lt;session token&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -630,7 +630,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/close_session?SessionID=1000</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/close_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -649,7 +649,7 @@
 <h4>Get the device count<a class="headerlink" href="#get-the-device-count" title="Permalink to this headline">¶</a></h4>
 <p>Returns the number of speakers.</p>
 <ul>
-<li><p class="first">API: GET /v1/device_count?SessionID=&lt;session id&gt;</p>
+<li><p class="first">API: GET /api/v1/device_count?SessionToken=&lt;session token&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -662,7 +662,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/device_count?SessionID=1000</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/device_count?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -677,7 +677,7 @@
 <div class="section" id="get-the-list-of-devices-and-their-information">
 <h4>Get the list of devices and their information<a class="headerlink" href="#get-the-list-of-devices-and-their-information" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/device_list?SessionID=&lt;session id&gt;</p>
+<li><p class="first">API: GET /api/v1/device_list?SessionToken=&lt;session token&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -690,7 +690,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/device_list?SessionID=1000</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -736,7 +736,7 @@
 <div class="section" id="get-the-device-information">
 <h4>Get the Device Information<a class="headerlink" href="#get-the-device-information" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">API: GET /v1/device_info?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
+<li><p class="first">API: GET /api/v1/device_info?SessionToken=&lt;session token&gt;&amp;DeviceID=&lt;device id&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -749,7 +749,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/device_info?SessionID=1000&amp;DeviceID=129321920968880</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/device_info?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=129321920968880</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -778,7 +778,7 @@
 <h4>Add a Device to Session<a class="headerlink" href="#add-a-device-to-session" title="Permalink to this headline">¶</a></h4>
 <p>Add a speaker to playback session. Once a speaker is added, then the speaker will play the music. There is no impact of this call to other speakers.</p>
 <ul>
-<li><p class="first">API: GET /v1/add_device_tosession?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
+<li><p class="first">API: GET /api/v1/add_device_tosession?SessionToken=&lt;session token&gt;&amp;DeviceID=&lt;device id&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -791,7 +791,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/add_device_to_session?SessionID=1000&amp;DeviceID=129321920968880</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=129321920968880</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -807,7 +807,7 @@
 <h4>Remove a Device from Session<a class="headerlink" href="#remove-a-device-from-session" title="Permalink to this headline">¶</a></h4>
 <p>Removes a speaker from playback session. Once a speaker is removed, then the speaker will not play the music. There is no impact of this call to other speakers.</p>
 <ul>
-<li><p class="first">API: GET /v1/remove_device_from_session?SessionID=&lt;session id&gt;&amp;DeviceID=&lt;device id&gt;</p>
+<li><p class="first">API: GET /api/v1/remove_device_from_session?SessionToken=&lt;session token&gt;&amp;DeviceID=&lt;device id&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -820,7 +820,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/remove_device_from_session?SessionID=1000&amp;DeviceID=129321920968880</span></code></li>
+<li>Request: <a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/remove_device_from_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=129321920968880">http://hkiotcloud.herokuapp.com/api/v1/remove_device_from_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=129321920968880</a></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -835,7 +835,7 @@
 <h4>Set party mode<a class="headerlink" href="#set-party-mode" title="Permalink to this headline">¶</a></h4>
 <p>Addes all speakers to playback session. Once it is done, all speakers will play music.</p>
 <ul>
-<li><p class="first">API: GET /v1/set_party_mode?SessionID=&lt;session id&gt;</p>
+<li><p class="first">API: GET /api/v1/set_party_mode?SessionToken=&lt;session token&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
