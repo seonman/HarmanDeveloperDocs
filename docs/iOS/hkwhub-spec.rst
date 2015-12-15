@@ -89,6 +89,12 @@ The 'Select Server mode' has three options:
 - Connect to HK IoT Cloud
 	- HKWHub app connects to HKIotCloud, and communicate with it with WebSocket to receive REST API commands from and send back the responses to the Cloud.
 	- HKIoTCloud handles the REST API request from clients in the Internet. The clients can be 3rd party apps or services or devices like smartphone or sensors.
+	- To use this mode, user needs to sign up to HKIoTCloud with username, email address and password. Once sign up is done, user need to sign in to the server. User sign-up and sign-in can be done within the HKWHub app, as shown below.
+	
+	.. figure:: img/hub/hubappv2-signin.jpg
+		:scale: 30
+	
+	- The same username and password are required from the client side. 
 	
 	.. Note::
 		
