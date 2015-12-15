@@ -140,7 +140,7 @@ In HKIoTCloud demo, 3rd party clients can connect to HKIoTCloud (http://hkiotclo
 The same username and password are required from the client side. For example, HKIoTCloud also hosts a Web-based client app, at http://hkiotcloud.herokuapp.com/webapp/. The following is a screenshot of the web app.
 
 .. figure:: img/hub/cloudapp-login.png
-	:scale: 30
+	:scale: 70
 
 	
 .. Note::
