@@ -329,12 +329,22 @@
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/hubappv2-pubnub.jpg"><img alt="../_images/hubappv2-pubnub.jpg" src="../_images/hubappv2-pubnub.jpg" /></a>
 </div>
-<p>Differently from HKIoTCloud or Local Server mode that uses <strong>REST API</strong> for control and playback of speakers, PubNub is using Publish/Subscribe messaging instead. And in order to route the message among clients, we should set <strong>PubNub Channel</strong> so that all the published messages are correctly routed to subscribed clients of the same channel.</p>
+<p>Differently from HKIoTCloud or Local Server mode that relies on <strong>REST API</strong> for control and playback of speakers, PubNub is using Publish/Subscribe messaging instead. And in order to route the message among clients, we should set <strong>PubNub Channel</strong> so that all the published messages are correctly routed to subscribed clients of the same channel.</p>
+<p>So, for HKWHub app successfully connects to PubNub cloud, user needs to set PubNub <strong>Publish Key</strong>, <strong>Subscribe Key</strong>, and <strong>Channel</strong>. As explained already, user can set these keys in the <strong>Settings/Set API Keys</strong> menu in the main screen.</p>
 </div>
 <div class="section" id="sending-rest-requests-to-pubnub-cloud">
 <h4>Sending REST Requests to PubNub Cloud<a class="headerlink" href="#sending-rest-requests-to-pubnub-cloud" title="Permalink to this headline">¶</a></h4>
-<p>Once the HKWHub app is connected to PubNub cloud, a PubNub client can send PubNub message.</p>
-<p>As a sample client app, you can use <strong>WebHubWebApp</strong> that you can download from Harman Developer web site (<a class="reference external" href="http://developer.harman.com">http://developer.harman.com</a>). The Web app is created using Polymer v0.5 (<a class="reference external" href="https://www.polymer-project.org/0.5/">https://www.polymer-project.org/0.5/</a>).</p>
+<p>Once the HKWHub app is connected to PubNub cloud, a PubNub client can send PubNub message. Even though it does not use REST API, but use PubNub&#8217;s Subscribe/Publish messaging instead, the content of the messages are almost the same as the REST APIs, and it is in JSON format.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">One biggest difference between REST API and Publish/Subscribe messaging is that Pub/Sub messaging does not need to do <strong>Polling</strong> for getting information from the server when an event occurs on the server side, because REST API does not support <strong>callback</strong> mechanism to notify an <strong>event</strong> to clients. However, Pub/Sub messaging is bidirectional, the client can get notified immediately from the server. Either client or server can publish a message to the channel being shared to notify an event to subsribers.</p>
+</div>
+<p>In this reason, the messages of request and response for speaker control are a littke different. For a client to send a command to speaker, the client <strong>publish</strong> the command to the channel. Then because HKWHub app is one of the clients, it receives the command, and process the command internally. If the command requires a response, then HKWHub app should send the response back to the client. To to that, HKWHub app also needs to <strong>publish</strong> the response to the channel. And, the client will get the response because it subscribed to the channel.</p>
+<p>If HKWHub app has some event to report to notify to clients, for example, device status changed, or playback time changed, etc., then HKWHub app publish the events to the channel, then all the client listening to the channel will receive the event.</p>
+</div>
+<div class="section" id="sample-web-app">
+<h4>Sample Web App<a class="headerlink" href="#sample-web-app" title="Permalink to this headline">¶</a></h4>
+<p>As a sample client app, you can use <strong>WebHubPubNubApp</strong> that you can download from Harman Developer web site (<a class="reference external" href="http://developer.harman.com">http://developer.harman.com</a>). Likewise, The Web app is created using Polymer v0.5 (<a class="reference external" href="https://www.polymer-project.org/0.5/">https://www.polymer-project.org/0.5/</a>).</p>
 <p>Once you download the app, unzip it. You will see the following sub directories.</p>
 <ul class="simple">
 <li>bower_components: THis is the folder where polymer libraries are located.</li>
@@ -350,13 +360,13 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Your iOS device running HKWHub app and your Desktop PC running web browser should be in the same network.</p>
 </div>
-<p>At the fist screen looking like this:</p>
+<p>At the fist screen looking like below. Note that it looks different from the screen from Local Server mode, which requires only URL of the web server.</p>
 <div class="figure">
-<a class="reference internal image-reference" href="../_images/webapp-initial.png"><img alt="../_images/webapp-initial.png" src="../_images/webapp-initial.png" /></a>
+<a class="reference internal image-reference" href="../_images/pubnubapp-login.png"><img alt="../_images/pubnubapp-login.png" src="../_images/pubnubapp-login.png" /></a>
 </div>
-<p>Enter the URL that the HKWHub app says: <a class="reference external" href="http://10.0.1.37:8080/">http://10.0.1.37:8080/</a>, like this:</p>
+<p>Enter the same PubNub publish key, subscribe key, and channel name that you used for HKWHub app, and click <strong>Submit</strong>, as below.</p>
 <div class="figure">
-<a class="reference internal image-reference" href="../_images/webapp-initial-url.png"><img alt="../_images/webapp-initial-url.png" src="../_images/webapp-initial-url.png" /></a>
+<a class="reference internal image-reference" href="../_images/pubnubapp-login-keys.png"><img alt="../_images/pubnubapp-login-keys.png" src="../_images/pubnubapp-login-keys.png" /></a>
 </div>
 <p>If you press <strong>Submit</strong>, then you will see the first screen like below. This is the list of media items available at the HKWHub app.</p>
 <div class="figure">
@@ -1461,6 +1471,7 @@
 <li><a class="reference internal" href="#pubnub-server-mode">PubNub Server Mode</a><ul>
 <li><a class="reference internal" href="#connect-to-pubnub-server">Connect to PubNub Server</a></li>
 <li><a class="reference internal" href="#sending-rest-requests-to-pubnub-cloud">Sending REST Requests to PubNub Cloud</a></li>
+<li><a class="reference internal" href="#sample-web-app">Sample Web App</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#run-hkwhub-app-on-your-ios-device">Run HKWHub app on your iOS device</a></li>

@@ -249,18 +249,28 @@ With PubNub server mode, any PubNub client can connect to and control Omni speak
 .. figure:: img/hub/hubappv2-pubnub.jpg
 	:scale: 30
 
-Differently from HKIoTCloud or Local Server mode that uses **REST API** for control and playback of speakers, PubNub is using Publish/Subscribe messaging instead. And in order to route the message among clients, we should set **PubNub Channel** so that all the published messages are correctly routed to subscribed clients of the same channel.
+Differently from HKIoTCloud or Local Server mode that relies on **REST API** for control and playback of speakers, PubNub is using Publish/Subscribe messaging instead. And in order to route the message among clients, we should set **PubNub Channel** so that all the published messages are correctly routed to subscribed clients of the same channel.
 
+So, for HKWHub app successfully connects to PubNub cloud, user needs to set PubNub **Publish Key**, **Subscribe Key**, and **Channel**. As explained already, user can set these keys in the **Settings/Set API Keys** menu in the main screen.
 
 
 Sending REST Requests to PubNub Cloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once the HKWHub app is connected to PubNub cloud, a PubNub client can send PubNub message.
+Once the HKWHub app is connected to PubNub cloud, a PubNub client can send PubNub message. Even though it does not use REST API, but use PubNub's Subscribe/Publish messaging instead, the content of the messages are almost the same as the REST APIs, and it is in JSON format.
 
+.. Note::
+		
+	One biggest difference between REST API and Publish/Subscribe messaging is that Pub/Sub messaging does not need to do **Polling** for getting information from the server when an event occurs on the server side, because REST API does not support **callback** mechanism to notify an **event** to clients. However, Pub/Sub messaging is bidirectional, the client can get notified immediately from the server. Either client or server can publish a message to the channel being shared to notify an event to subsribers.
+	
+In this reason, the messages of request and response for speaker control are a littke different. For a client to send a command to speaker, the client **publish** the command to the channel. Then because HKWHub app is one of the clients, it receives the command, and process the command internally. If the command requires a response, then HKWHub app should send the response back to the client. To to that, HKWHub app also needs to **publish** the response to the channel. And, the client will get the response because it subscribed to the channel.
 
+If HKWHub app has some event to report to notify to clients, for example, device status changed, or playback time changed, etc., then HKWHub app publish the events to the channel, then all the client listening to the channel will receive the event.
 
-As a sample client app, you can use **WebHubWebApp** that you can download from Harman Developer web site (http://developer.harman.com). The Web app is created using Polymer v0.5 (https://www.polymer-project.org/0.5/).
+Sample Web App
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As a sample client app, you can use **WebHubPubNubApp** that you can download from Harman Developer web site (http://developer.harman.com). Likewise, The Web app is created using Polymer v0.5 (https://www.polymer-project.org/0.5/).
 
 Once you download the app, unzip it. You will see the following sub directories.
 
@@ -280,14 +290,14 @@ Next, launch your web browser (Chrome, Safari, ...) and go to http://localhost:8
 
 	Your iOS device running HKWHub app and your Desktop PC running web browser should be in the same network.
 
-At the fist screen looking like this:
+At the fist screen looking like below. Note that it looks different from the screen from Local Server mode, which requires only URL of the web server.
 
-.. figure:: img/hub/webapp-initial.png
+.. figure:: img/hub/pubnubapp-login.png
 	:scale: 70
 
-Enter the URL that the HKWHub app says: http://10.0.1.37:8080/, like this:
+Enter the same PubNub publish key, subscribe key, and channel name that you used for HKWHub app, and click **Submit**, as below.
 
-.. figure:: img/hub/webapp-initial-url.png
+.. figure:: img/hub/pubnubapp-login-keys.png
 	:scale: 70
 
 If you press **Submit**, then you will see the first screen like below. This is the list of media items available at the HKWHub app. 
