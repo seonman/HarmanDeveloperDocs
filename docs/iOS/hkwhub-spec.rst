@@ -302,34 +302,11 @@ Enter the same PubNub publish key, subscribe key, and channel name that you used
 
 If you press **Submit**, then you will see the first screen like below. This is the list of media items available at the HKWHub app. 
 
-.. figure:: img/hub/webapp-afterlogin.png
+.. figure:: img/hub/pubnubapp-medialist.png
 	:scale: 70
 	
 The UI of the Web app is exactly the same as HKIoTCloud web app. So, we skip to explain the rest parts of the app.
 
-
-
-
-.. Note::
-
-	Please check out `HKWHub app demo video`_.
-
-.. _`HKWHub app demo video`: https://www.youtube.com/watch?v=_ljpReAvk0g&feature=youtu.be
-
-
-Run HKWHub app on your iOS device
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. figure:: img/hub/hub-first-run.png
-	:scale: 50
-
-
-Copy the URL information (http://192.168.1.192:8080/). This is the HTTP server address. You need to use this URL for your every REST API request.
-
-Go to Setup (via Hamburger icon) menu, and add music items from iOS Music library. 
-
-.. figure:: img/hub/medialist.png
-	:scale: 30
 
 Use ``curl`` command or web browser to send REST requests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
