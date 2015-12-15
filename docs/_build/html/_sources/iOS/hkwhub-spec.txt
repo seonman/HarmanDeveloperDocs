@@ -130,7 +130,7 @@ The **Settings** menu has four sub menus:
 From now on, we will explain a little more detail about each server mode.
 
 HKIoTCloud Mode
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~
 
 In HKIoTCloud demo, 3rd party clients can connect to HKIoTCloud (http://hkiotcloud.herokuapp.com) and send REST requests to control speakers and play audio. In order to use HKIoTCloud mode, user needs to sign up to the cloud with username, emaill address and password. Once sign up is done, user need to sign in to the server. User sign-up and sign-in can be done within the HKWHub app, as shown below.
 	
@@ -139,7 +139,7 @@ In HKIoTCloud demo, 3rd party clients can connect to HKIoTCloud (http://hkiotclo
 
 The same username and password are required from the client side. For example, HKIoTCloud also hosts a Web-based client app, at http://hkiotcloud.herokuapp.com/webapp/. The following is a screenshot of the web app.
 
-.. figure:: img/hub/cloudapp-login
+.. figure:: img/hub/cloudapp-login.png
 	:scale: 30
 
 	
