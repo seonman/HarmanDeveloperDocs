@@ -690,7 +690,7 @@ Removes a speaker from playback session. Once a speaker is removed, then the spe
 	- Request: 
 	
 	.. code-block:: json
-		``http://hkiotcloud.herokuapp.com/api/v1/remove_device_from_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880``
+		http://hkiotcloud.herokuapp.com/api/v1/remove_device_from_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880
 		
 	- Response: 
 .. code-block:: json
@@ -709,7 +709,7 @@ Addes all speakers to playback session. Once it is done, all speakers will play 
 	- Request: 
 	.. code-block:: json
 	
-		``http://192.168.1.10:8080/v1/set_party_mode?SessionID=1000``
+		http://hkiotcloud.herokuapp.com/api/v1/set_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F
 
 	- Response: 
 	.. code-block:: json
