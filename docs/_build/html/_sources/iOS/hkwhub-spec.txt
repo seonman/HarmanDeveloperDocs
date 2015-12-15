@@ -509,6 +509,7 @@ The following diagrams show how HKWHub app handles incoming playback request bas
 Session Timeout
 ~~~~~~~~~~~~~~~~~
 - A session becomes expired and invalid when about 60 minutes is passed since the last command was received.
+- Session timer is extended (renewed) once a playback is executed successfully.
 - All requests with expired session will be denied and "SessionNotFound" error returns.
 
 
@@ -527,12 +528,16 @@ Session Management
 
 Start Session
 ^^^^^^^^^^^^^^
-Starts a new session. A session expires after 60 minutes of the last commands used with the SessionID. That is, the timeout restarts as a new REST command is handled by the HKWHub app. 
+Starts a new session.
 
-- API: GET /v1/init_session?Priority=<priority value>
+- API: GET /api/v1/init_session
+- Body
+	- username: the username
+	- password: the password 
+	
 - Response
-	- Returns a unique session id
-	- The session id will be used for upcoming requests.
+	- Returns a unique session token
+	- The session token will be used for upcoming requests.
 - Example:
 	- Request: ``http://192.168.1.10:8080/v1/init_session?Priority=100``
 	- Response: 

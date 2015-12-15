@@ -562,6 +562,7 @@
 <h3>Session Timeout<a class="headerlink" href="#session-timeout" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>A session becomes expired and invalid when about 60 minutes is passed since the last command was received.</li>
+<li>Session timer is extended (renewed) once a playback is executed successfully.</li>
 <li>All requests with expired session will be denied and &#8220;SessionNotFound&#8221; error returns.</li>
 </ul>
 </div>
@@ -575,15 +576,24 @@
 <h3>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="start-session">
 <h4>Start Session<a class="headerlink" href="#start-session" title="Permalink to this headline">¶</a></h4>
-<p>Starts a new session. A session expires after 60 minutes of the last commands used with the SessionID. That is, the timeout restarts as a new REST command is handled by the HKWHub app.</p>
+<p>Starts a new session.</p>
 <ul>
-<li><p class="first">API: GET /v1/init_session?Priority=&lt;priority value&gt;</p>
+<li><p class="first">API: GET /api/v1/init_session</p>
+</li>
+<li><dl class="first docutils">
+<dt>Body</dt>
+<dd><ul class="first last simple">
+<li>username: the username</li>
+<li>password: the password</li>
+</ul>
+</dd>
+</dl>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
 <dd><ul class="first last simple">
-<li>Returns a unique session id</li>
-<li>The session id will be used for upcoming requests.</li>
+<li>Returns a unique session token</li>
+<li>The session token will be used for upcoming requests.</li>
 </ul>
 </dd>
 </dl>
