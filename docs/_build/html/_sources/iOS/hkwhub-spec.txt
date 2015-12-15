@@ -70,8 +70,17 @@ The following figure shows how HKWHub app handles three modes.
 
 ----
 
-Quick Guide to HKWHub App
--------------------------------
+Quick Getting Started Guide to HKWHub App
+-------------------------------------------
+
+Overview of HKWHubApp 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Main Screen
+^^^^^^^^^^^^^
+
+.. figure:: img/hub/hubappv2-main.jpg
+
 
 .. Note::
 
