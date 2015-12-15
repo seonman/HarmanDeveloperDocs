@@ -665,25 +665,30 @@ Get the Device Information
 - Response
 	- Returns the information of the device
 - Example:
-	- Request: ``http://<server_host>/api/v1/device_info?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880``
+	- Request:
+	
+	.. code-block:: json
+	
+		http://<server_host>/api/v1/device_info?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880
+
 	- Response: 
 
-.. code-block:: json
+	.. code-block:: json
 
-	{"GroupName":"Temp", 
-	"Role":21, 
-	"MacAddress":"b0:38:29:1b:9e:75", 
-	"WifiSignalStrength":-52, 
-	"Port":44055, 
-	"Active":true, 
-	"DeviceName":"Adapt", 
-	"Version":"0.1.6.2", 
-	"ModelName":"Omni Adapt", 
-	"IPAddress":"192.168.1.39", 
-	"GroupID":"1293219209", 
-	"Volume":47, 
-	"IsPlaying":true, 
-	"DeviceID":"129321920968880"}
+		{"GroupName":"Temp", 
+		"Role":21, 
+		"MacAddress":"b0:38:29:1b:9e:75", 
+		"WifiSignalStrength":-52, 
+		"Port":44055, 
+		"Active":true, 
+		"DeviceName":"Adapt", 
+		"Version":"0.1.6.2", 
+		"ModelName":"Omni Adapt", 
+		"IPAddress":"192.168.1.39", 
+		"GroupID":"1293219209", 
+		"Volume":47, 
+		"IsPlaying":true, 
+		"DeviceID":"129321920968880"}
 
 ----
 
