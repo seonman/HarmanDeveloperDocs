@@ -544,12 +544,17 @@ Starts a new session.
 	- Returns a unique session token
 	- The session token will be used for upcoming requests.
 - Example:
-	- Request: ``curl -X POST -d "username=seonman&password=xxx" http://<server_host>/api/v1/init_session``
+	- Request: 
+	
+	.. code-block:: json
+	
+		curl -X POST -d "username=seonman&password=xxx" http://<server_host>/api/v1/init_session
+
 	- Response: 
 
-.. code-block:: json
+	.. code-block:: json
 
-	{"ResponseOf":"init_session","SessionToken":"r:abciKaTbUgdpQFuvYtgMm0FRh"}
+		{"ResponseOf":"init_session","SessionToken":"r:abciKaTbUgdpQFuvYtgMm0FRh"}
 
 ----
 
@@ -561,12 +566,17 @@ Close the session. The SessionToken information is removed from the session tabl
 - Response
 	- Returns true or false indicating success or failure
 - Example:
-	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/close_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh``
+	- Request:
+	
+	.. code-block:: json	
+	
+		http://<server_host>/api/v1/close_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh
+		
 	- Response: 
 
-.. code-block:: json
+	.. code-block:: json
 
-	{"Result" : "true"}
+		{"Result" : "true"}
 
 ----
 
@@ -581,7 +591,7 @@ Returns the number of speakers.
 - Response
 	- Returns the number of devices connected to the network
 - Example:
-	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/device_count?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh``
+	- Request: ``http://<server_host>/api/v1/device_count?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh``
 	- Response: 
 
 .. code-block:: json
@@ -598,7 +608,7 @@ Get the list of devices and their information
 - Response
 	- Returns the list of devices with all the device information
 - Example:
-	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh``
+	- Request: ``http://<server_host>/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh``
 	- Response: 
 
 .. code-block:: json
@@ -645,7 +655,7 @@ Get the Device Information
 - Response
 	- Returns the information of the device
 - Example:
-	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/device_info?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880``
+	- Request: ``http://<server_host>/api/v1/device_info?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880``
 	- Response: 
 
 .. code-block:: json

@@ -605,17 +605,22 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">-d</span> <span class="pre">&quot;username=seonman&amp;password=xxx&quot;</span> <span class="pre">http://&lt;server_host&gt;/api/v1/init_session</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>curl -X POST -d &quot;username=seonman&amp;password=xxx&quot; http://&lt;server_host&gt;/api/v1/init_session
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;init_session&quot;</span><span class="p">,</span><span class="nt">&quot;SessionToken&quot;</span><span class="p">:</span><span class="s2">&quot;r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;init_session&quot;</span><span class="p">,</span><span class="nt">&quot;SessionToken&quot;</span><span class="p">:</span><span class="s2">&quot;r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <hr class="docutils" />
 <div class="section" id="close-session">
@@ -634,17 +639,22 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>Example:</dt>
-<dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/close_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</span></code></li>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/close_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh
+</pre></div>
+</div>
+<ul class="simple">
 <li>Response:</li>
 </ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span> <span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span> <span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -667,7 +677,7 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/device_count?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://&lt;server_host&gt;/api/v1/device_count?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -695,7 +705,7 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://&lt;server_host&gt;/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -754,7 +764,7 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/device_info?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=129321920968880</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://&lt;server_host&gt;/api/v1/device_info?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=129321920968880</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
