@@ -114,6 +114,7 @@
 <dt>Cloud mode (HKIoTCloud)</dt>
 <dd><ul class="first last simple">
 <li>HKWHub app communicates with HKIoTCloud to receive speaker control commands by REST API call from 3rd party services or clients.</li>
+<li>HKIoTCloud handles the REST API request from any clients in the Internet. The clients can be 3rd party apps or services or devices like smartphone or sensors.</li>
 <li>In this mode, any 3rd party services or clients in the Internet can reach out to HKWHub app and then control speakers and playback of audio.</li>
 </ul>
 </dd>
@@ -155,20 +156,57 @@
 <a class="reference internal image-reference" href="../_images/hubappv2-main.jpg"><img alt="../_images/hubappv2-main.jpg" src="../_images/hubappv2-main.jpg" /></a>
 </div>
 <p>The main screen is composed of two parts - <strong>Select Server mode</strong> (amonng HKIoTCloud, Local Server and PubNub Cloud), and <strong>Settings</strong>.</p>
-<p>The &#8216;Select Server mode&#8217; has three options:</p>
+<p>The <strong>Select Server mode</strong> has three options:</p>
 <ul>
 <li><dl class="first docutils">
 <dt>Connect to HK IoT Cloud</dt>
+<dd><ul class="first last simple">
+<li>HKWHub app connects to HKIotCloud, and communicate with it with WebSocket to receive REST API commands from and send the responses back to the Cloud.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Run Local Web Server</dt>
+<dd><ul class="first last simple">
+<li>HKWHub app runs a local web server and processes incoming REST requests to control speakers and playback of audio</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Connect to PubNub Cloud</dt>
+<dd><ul class="first last simple">
+<li>HKWHub app uses PubNub APIs to connect PubNub server and communicate with other PubNub client through a common channel.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Settings</dt>
+<dd><ul class="first">
+<li><dl class="first docutils">
+<dt>Media List</dt>
 <dd><ul class="first simple">
-<li>HKWHub app connects to HKIotCloud, and communicate with it with WebSocket to receive REST API commands from and send back the responses to the Cloud.</li>
-<li>HKIoTCloud handles the REST API request from clients in the Internet. The clients can be 3rd party apps or services or devices like smartphone or sensors.</li>
-<li>To use this mode, user needs to sign up to HKIoTCloud with username, email address and password. Once sign up is done, user need to sign in to the server. User sign-up and sign-in can be done within the HKWHub app, as shown below.</li>
+<li>User can maintain the list of audio files for audio playback.</li>
+<li>User can add audio from iOS Media Library.</li>
+</ul>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that only the media file available offline and not from Apple Musica can be added. The music file that came from Apple Music cannot be added by DRM issue.</p>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">To use this mode, user needs to sign up to HKIoTCloud with username, email address and password. Once sign up is done, user need to sign in to the server. User sign-up and sign-in can be done within the HKWHub app, as shown below.</p>
+</li>
 </ul>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/hubappv2-signin.jpg"><img alt="../_images/hubappv2-signin.jpg" src="../_images/hubappv2-signin.jpg" /></a>
 </div>
 <ul class="simple">
 <li>The same username and password are required from the client side.</li>
+<li>The clinet needs to</li>
 </ul>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>

@@ -54,6 +54,7 @@ The latest version of HKWHub app supports the following three modes:
 
 - Cloud mode (HKIoTCloud)
 	- HKWHub app communicates with HKIoTCloud to receive speaker control commands by REST API call from 3rd party services or clients.
+	- HKIoTCloud handles the REST API request from any clients in the Internet. The clients can be 3rd party apps or services or devices like smartphone or sensors.
 	- In this mode, any 3rd party services or clients in the Internet can reach out to HKWHub app and then control speakers and playback of audio.
 
 - Local Server Mode
@@ -84,17 +85,34 @@ Main Screen
 	
 The main screen is composed of two parts - **Select Server mode** (amonng HKIoTCloud, Local Server and PubNub Cloud), and **Settings**.
 
-The 'Select Server mode' has three options:
+The **Select Server mode** has three options:
 
 - Connect to HK IoT Cloud
-	- HKWHub app connects to HKIotCloud, and communicate with it with WebSocket to receive REST API commands from and send back the responses to the Cloud.
-	- HKIoTCloud handles the REST API request from clients in the Internet. The clients can be 3rd party apps or services or devices like smartphone or sensors.
+	- HKWHub app connects to HKIotCloud, and communicate with it with WebSocket to receive REST API commands from and send the responses back to the Cloud.
+- Run Local Web Server
+	- HKWHub app runs a local web server and processes incoming REST requests to control speakers and playback of audio
+- Connect to PubNub Cloud
+	- HKWHub app uses PubNub APIs to connect PubNub server and communicate with other PubNub client through a common channel.
+	
+- Settings
+	- Media List
+		- User can maintain the list of audio files for audio playback. 
+		- User can add audio from iOS Media Library. 
+		.. Note::
+		
+			Note that only the media file available offline and not from Apple Musica can be added. The music file that came from Apple Music cannot be added by DRM issue.
+
+
+
+
+
 	- To use this mode, user needs to sign up to HKIoTCloud with username, email address and password. Once sign up is done, user need to sign in to the server. User sign-up and sign-in can be done within the HKWHub app, as shown below.
 	
 	.. figure:: img/hub/hubappv2-signin.jpg
 		:scale: 30
 	
 	- The same username and password are required from the client side. 
+	- The clinet needs to 
 	
 	.. Note::
 		
