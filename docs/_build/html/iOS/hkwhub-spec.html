@@ -365,9 +365,7 @@
 <a class="reference internal image-reference" href="../_images/pubnubapp-login.png"><img alt="../_images/pubnubapp-login.png" src="../_images/pubnubapp-login.png" /></a>
 </div>
 <p>Enter the same PubNub publish key, subscribe key, and channel name that you used for HKWHub app, and click <strong>Submit</strong>, as below.</p>
-<div class="figure">
-<a class="reference internal image-reference" href="../_images/pubnubapp-login-keys.png"><img alt="../_images/pubnubapp-login-keys.png" src="../_images/pubnubapp-login-keys.png" /></a>
-</div>
+<p><a class="reference external" href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en">https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en</a></p>
 <p>If you press <strong>Submit</strong>, then you will see the first screen like below. This is the list of media items available at the HKWHub app.</p>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/pubnubapp-medialist.png"><img alt="../_images/pubnubapp-medialist.png" src="../_images/pubnubapp-medialist.png" /></a>
@@ -375,9 +373,18 @@
 <p>The UI of the Web app is exactly the same as HKIoTCloud web app. So, we skip to explain the rest parts of the app.</p>
 </div>
 </div>
-<div class="section" id="use-curl-command-or-web-browser-to-send-rest-requests">
-<h3>Use <code class="docutils literal"><span class="pre">curl</span></code> command or web browser to send REST requests<a class="headerlink" href="#use-curl-command-or-web-browser-to-send-rest-requests" title="Permalink to this headline">¶</a></h3>
-<p>Use <strong>curl</strong> command in your shell, or use your web browser to send  HTTP requests to the server URL. In this example, we will use <strong>curl</strong> commands.</p>
+<div class="section" id="use-curl-command-to-send-rest-requests">
+<h3>Use <code class="docutils literal"><span class="pre">curl</span></code> command to send REST requests<a class="headerlink" href="#use-curl-command-to-send-rest-requests" title="Permalink to this headline">¶</a></h3>
+<p>From now on, we show how to control Omni speakers by sending REST requests to HKIoTCloud. Sending REST requests to Local Server is almost the same.</p>
+<p>We will use <strong>curl</strong> command in your shell. In this example, we will use <strong>curl</strong> commands.</p>
+<p>(If you are a chrome browser user, you can use <strong>Postman</strong> (<a class="reference external" href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en">https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en</a>) chrome extension to send HTTP requests with browser-based UI.)</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/postman.png"><img alt="../_images/postman.png" src="../_images/postman.png" /></a>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Before you do this, do not forget to connect to HKIoTCloud on HKWHub app.</p>
+</div>
 <div class="section" id="a-init-session">
 <h4>a. Init session<a class="headerlink" href="#a-init-session" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">&quot;http://192.168.1.192:8080/v1/init_session&quot;</span></code></p>
@@ -1459,7 +1466,7 @@
 <li><a class="reference internal" href="#sample-web-app">Sample Web App</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#use-curl-command-or-web-browser-to-send-rest-requests">Use <code class="docutils literal"><span class="pre">curl</span></code> command or web browser to send REST requests</a><ul>
+<li><a class="reference internal" href="#use-curl-command-to-send-rest-requests">Use <code class="docutils literal"><span class="pre">curl</span></code> command to send REST requests</a><ul>
 <li><a class="reference internal" href="#a-init-session">a. Init session</a></li>
 <li><a class="reference internal" href="#b-add-alls-speaker-to-session">b. Add alls speaker to session</a></li>
 <li><a class="reference internal" href="#c-add-a-speaker-to-session">c. Add a speaker to session</a></li>

@@ -297,8 +297,7 @@ At the fist screen looking like below. Note that it looks different from the scr
 
 Enter the same PubNub publish key, subscribe key, and channel name that you used for HKWHub app, and click **Submit**, as below.
 
-.. figure:: img/hub/pubnubapp-login-keys.png
-	:scale: 70
+https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en
 
 If you press **Submit**, then you will see the first screen like below. This is the list of media items available at the HKWHub app. 
 
@@ -308,10 +307,22 @@ If you press **Submit**, then you will see the first screen like below. This is 
 The UI of the Web app is exactly the same as HKIoTCloud web app. So, we skip to explain the rest parts of the app.
 
 
-Use ``curl`` command or web browser to send REST requests
+Use ``curl`` command to send REST requests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use **curl** command in your shell, or use your web browser to send  HTTP requests to the server URL. In this example, we will use **curl** commands.
+From now on, we show how to control Omni speakers by sending REST requests to HKIoTCloud. Sending REST requests to Local Server is almost the same. 
+
+We will use **curl** command in your shell. In this example, we will use **curl** commands.
+
+(If you are a chrome browser user, you can use **Postman** (https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en) chrome extension to send HTTP requests with browser-based UI.)
+
+.. figure:: img/hub/postman.png
+	:scale: 70
+	
+.. Note::
+
+	Before you do this, do not forget to connect to HKIoTCloud on HKWHub app.
+	
 
 a. Init session
 ^^^^^^^^^^^^^^^
