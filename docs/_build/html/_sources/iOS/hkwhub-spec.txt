@@ -523,6 +523,11 @@ This specification describes the REST API for controlling HKWHub app remotely to
 
 All the APIS are in REST API protocol.
 
+.. Note::
+	
+	For HKIoTCloud mode, <server_host> should be "hkiotcloud.herokuapp.com".
+	For Local server mode, <server_host> should be the URL (IP address and port number) tat HKWHub app is showing.
+
 Session Management
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -539,7 +544,7 @@ Starts a new session.
 	- Returns a unique session token
 	- The session token will be used for upcoming requests.
 - Example:
-	- Request: ``curl -X POST -d "username=seonman&password=xxx" http://hkiotcloud.herokuapp.com/api/v1/init_session``
+	- Request: ``curl -X POST -d "username=seonman&password=xxx" http://<server_host>/api/v1/init_session``
 	- Response: 
 
 .. code-block:: json
@@ -737,7 +742,7 @@ Returns the list of media items added to the Media List of the app. User can add
 - Response
 	- Returns JSON of the list of store media in the HKWHub app.
 - Example:
-	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionID=r:abciKaTbUgdpQFuvYtgMm0F``
+	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F``
 	- Response: 
 
 .. code-block:: json
@@ -767,11 +772,11 @@ Plays a song in the Media List of the Hub app. Each music item is identified wit
 	``play_hub_media`` does not specify speakers to play. It just uses the current session setting. If there is no speaker in the current session, then the play fails.
 
 
-- API: GET /v1/play_hub_media?SessionID=<session id>&PersistentID=<persistent id>
+- API: GET /api/v1/play_hub_media?SessionToken=<session token>&PersistentID=<persistent id>
 - Response
 	- Play a song stored in the hub, and then return true or false.
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/play_hub_media?SessionID=1000&PersistentID=7387446959931482519``
+	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/play_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519``
 	- Response: 
 
 .. code-block:: json
@@ -784,11 +789,11 @@ Play a song in the Media list as party mode
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Plays a song in the Media List with all speakers available. So, regardless of current session setting, this command play a song to all speakers.
 
-- API: GET /v1/play_hub_media_party_mode?SessionID=<session id>&PersistentID=<persistent id>
+- API: GET /api/v1/play_hub_media_party_mode?SessionToken=<session token>&PersistentID=<persistent id>
 - Response
 	- Play a song in the hub's media list to all speakers, and then return true or false.
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/play_hub_media_party_mode?SessionID=1000&PersistentID=7387446959931482519``
+	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/play_hub_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519``
 	- Response: 
 
 .. code-block:: json
@@ -801,11 +806,11 @@ Play a song in the Media list with selected speakers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Plays a song in the Media List with selected speakers. The selected speakers are represented in ``DeviceIDList`` parameter as a list of ``DeviceID`` separated by ",".
 
-- API: GET /v1/play_hub_media_selected_speakers?SessionID=<session id>&PersistentID=<persistent id>&DeviceIDList=<xxx,xxx,...>
+- API: GET /api/v1/play_hub_media_selected_speakers?SessionToken=<session token>&PersistentID=<persistent id>&DeviceIDList=<xxx,xxx,...>
 - Response
 	- Play a song in the hub's media list to selected speakers, and then return true or false.
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/play_hub_media_selected_speakers?SessionID=1000&PersistentID=7387446959931482519&DeviceIDList=34317244381360,129321920968880``
+	- Request: ``http://hkiotcloud.herokuapp.com/api/v1/play_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519&DeviceIDList=34317244381360,129321920968880``
 	- Response: 
 
 .. code-block:: json
@@ -827,11 +832,11 @@ Plays a song from Web (http:) or rstp (rstp:) or mms (mms:) server. The URL of t
 	``play_web_media`` cannot be resumed. If it is paused by calling ``pause``, then it just stops playing music, and cannot resume.
 	
 	
-- API: GET /v1/play_web_media?SessionID=<session id>&MediaUrl=<URL of the song>
+- API: GET /api/v1/play_web_media?SessionToken=<session token>&MediaUrl=<URL of the song>
 - Response
 	- Play a song from HTTP server, and then return true or false.
 - Example:
-	- Request: ``http://192.168.1.10:8080/v1/play_web_media?SessionID=1000&MediaUrl=http://seonman.github.io/music/hyolyn.mp3``
+	- Request: ``http://<server_host_name>/api/v1/play_web_media?SessionToken=1000&MediaUrl=http://seonman.github.io/music/hyolyn.mp3``
 	- Response: 
 
 .. code-block:: json

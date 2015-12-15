@@ -572,6 +572,11 @@
 <h2>REST API Specification<a class="headerlink" href="#rest-api-specification" title="Permalink to this headline">¶</a></h2>
 <p>This specification describes the REST API for controlling HKWHub app remotely to control HK Omni speakers and stream audio to the speakers.</p>
 <p>All the APIS are in REST API protocol.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For HKIoTCloud mode, &lt;server_host&gt; should be &#8220;hkiotcloud.herokuapp.com&#8221;.
+For Local server mode, &lt;server_host&gt; should be the URL (IP address and port number) tat HKWHub app is showing.</p>
+</div>
 <div class="section" id="session-management">
 <h3>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="start-session">
@@ -601,7 +606,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">-d</span> <span class="pre">&quot;username=seonman&amp;password=xxx&quot;</span> <span class="pre">http://hkiotcloud.herokuapp.com/api/v1/init_session</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">-d</span> <span class="pre">&quot;username=seonman&amp;password=xxx&quot;</span> <span class="pre">http://&lt;server_host&gt;/api/v1/init_session</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -895,7 +900,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionID=r:abciKaTbUgdpQFuvYtgMm0F</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -927,7 +932,7 @@
 <p class="last"><code class="docutils literal"><span class="pre">play_hub_media</span></code> does not specify speakers to play. It just uses the current session setting. If there is no speaker in the current session, then the play fails.</p>
 </div>
 <ul>
-<li><p class="first">API: GET /v1/play_hub_media?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
+<li><p class="first">API: GET /api/v1/play_hub_media?SessionToken=&lt;session token&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -940,7 +945,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/play_hub_media?SessionID=1000&amp;PersistentID=7387446959931482519</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/play_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;PersistentID=7387446959931482519</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -956,7 +961,7 @@
 <h4>Play a song in the Media list as party mode<a class="headerlink" href="#play-a-song-in-the-media-list-as-party-mode" title="Permalink to this headline">¶</a></h4>
 <p>Plays a song in the Media List with all speakers available. So, regardless of current session setting, this command play a song to all speakers.</p>
 <ul>
-<li><p class="first">API: GET /v1/play_hub_media_party_mode?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
+<li><p class="first">API: GET /api/v1/play_hub_media_party_mode?SessionToken=&lt;session token&gt;&amp;PersistentID=&lt;persistent id&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -969,7 +974,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/play_hub_media_party_mode?SessionID=1000&amp;PersistentID=7387446959931482519</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/play_hub_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;PersistentID=7387446959931482519</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -985,7 +990,7 @@
 <h4>Play a song in the Media list with selected speakers<a class="headerlink" href="#play-a-song-in-the-media-list-with-selected-speakers" title="Permalink to this headline">¶</a></h4>
 <p>Plays a song in the Media List with selected speakers. The selected speakers are represented in <code class="docutils literal"><span class="pre">DeviceIDList</span></code> parameter as a list of <code class="docutils literal"><span class="pre">DeviceID</span></code> separated by &#8221;,&#8221;.</p>
 <ul>
-<li><p class="first">API: GET /v1/play_hub_media_selected_speakers?SessionID=&lt;session id&gt;&amp;PersistentID=&lt;persistent id&gt;&amp;DeviceIDList=&lt;xxx,xxx,...&gt;</p>
+<li><p class="first">API: GET /api/v1/play_hub_media_selected_speakers?SessionToken=&lt;session token&gt;&amp;PersistentID=&lt;persistent id&gt;&amp;DeviceIDList=&lt;xxx,xxx,...&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -998,7 +1003,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/play_hub_media_selected_speakers?SessionID=1000&amp;PersistentID=7387446959931482519&amp;DeviceIDList=34317244381360,129321920968880</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://hkiotcloud.herokuapp.com/api/v1/play_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;PersistentID=7387446959931482519&amp;DeviceIDList=34317244381360,129321920968880</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
@@ -1022,7 +1027,7 @@
 <p class="last"><code class="docutils literal"><span class="pre">play_web_media</span></code> cannot be resumed. If it is paused by calling <code class="docutils literal"><span class="pre">pause</span></code>, then it just stops playing music, and cannot resume.</p>
 </div>
 <ul>
-<li><p class="first">API: GET /v1/play_web_media?SessionID=&lt;session id&gt;&amp;MediaUrl=&lt;URL of the song&gt;</p>
+<li><p class="first">API: GET /api/v1/play_web_media?SessionToken=&lt;session token&gt;&amp;MediaUrl=&lt;URL of the song&gt;</p>
 </li>
 <li><dl class="first docutils">
 <dt>Response</dt>
@@ -1035,7 +1040,7 @@
 <li><dl class="first docutils">
 <dt>Example:</dt>
 <dd><ul class="first last simple">
-<li>Request: <code class="docutils literal"><span class="pre">http://192.168.1.10:8080/v1/play_web_media?SessionID=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3</span></code></li>
+<li>Request: <code class="docutils literal"><span class="pre">http://&lt;server_host_name&gt;/api/v1/play_web_media?SessionToken=1000&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3</span></code></li>
 <li>Response:</li>
 </ul>
 </dd>
