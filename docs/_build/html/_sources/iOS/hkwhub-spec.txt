@@ -867,6 +867,7 @@ Plays a song in the Media List with selected speakers. The selected speakers are
 	.. code-block:: json
 	
 		http://<server_host>/api/v1/play_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519&DeviceIDList=34317244381360,129321920968880
+
 	- Response: 
 
 	.. code-block:: json
@@ -981,6 +982,7 @@ Pause the Current Playback
 	.. code-block:: json
 	
 		http://<server_host>/api/v1/pause_play?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F
+
 	- Response: 
 
 	.. code-block:: json
@@ -1022,6 +1024,7 @@ Resume the Current Playback with Hub Media as Party Mode
 	.. code-block:: json
 	
 		http://<server_host>/api/v1/resume_hub_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519
+
 	- Response: 
 
 	.. code-block:: json
@@ -1040,7 +1043,8 @@ Resume the Current Playback with Hub Media with selected speakers
 	- Request:
 	
 	.. code-block:: json
-	 		http://<server_host>/api/v1/resume_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519&DeviceIDList=34317244381360,129321920968880
+	
+		http://<server_host>/api/v1/resume_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519&DeviceIDList=34317244381360,129321920968880
 			
 	- Response: 
 
