@@ -319,6 +319,50 @@
 <a class="reference internal image-reference" href="../_images/webapp-afterlogin.png"><img alt="../_images/webapp-afterlogin.png" src="../_images/webapp-afterlogin.png" /></a>
 </div>
 <p>The UI of the Web app is exactly the same as HKIoTCloud web app. So, we skip to explain the rest parts of the app.</p>
+</div>
+</div>
+<div class="section" id="pubnub-server-mode">
+<h3>PubNub Server Mode<a class="headerlink" href="#pubnub-server-mode" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="connect-to-pubnub-server">
+<h4>Connect to PubNub Server<a class="headerlink" href="#connect-to-pubnub-server" title="Permalink to this headline">¶</a></h4>
+<p>With PubNub server mode, any PubNub client can connect to and control Omni speakes managed by HKWHub app. Just click <strong>Connect to PubNub Cloud</strong> menu in the main screen, then you will see the screen like below. Please check if the logs are saysing something like &#8220;Received: Hello from HKWHubApp&#8221; which is the message sent back from PubNub server after the HKWHub app published the message. This means the app is now connected to PubNub cloud.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hubappv2-pubnub.jpg"><img alt="../_images/hubappv2-pubnub.jpg" src="../_images/hubappv2-pubnub.jpg" /></a>
+</div>
+<p>Differently from HKIoTCloud or Local Server mode that uses <strong>REST API</strong> for control and playback of speakers, PubNub is using Publish/Subscribe messaging instead. And in order to route the message among clients, we should set <strong>PubNub Channel</strong> so that all the published messages are correctly routed to subscribed clients of the same channel.</p>
+</div>
+<div class="section" id="sending-rest-requests-to-pubnub-cloud">
+<h4>Sending REST Requests to PubNub Cloud<a class="headerlink" href="#sending-rest-requests-to-pubnub-cloud" title="Permalink to this headline">¶</a></h4>
+<p>Once the HKWHub app is connected to PubNub cloud, a PubNub client can send PubNub message.</p>
+<p>As a sample client app, you can use <strong>WebHubWebApp</strong> that you can download from Harman Developer web site (<a class="reference external" href="http://developer.harman.com">http://developer.harman.com</a>). The Web app is created using Polymer v0.5 (<a class="reference external" href="https://www.polymer-project.org/0.5/">https://www.polymer-project.org/0.5/</a>).</p>
+<p>Once you download the app, unzip it. You will see the following sub directories.</p>
+<ul class="simple">
+<li>bower_components: THis is the folder where polymer libraries are located.</li>
+<li>hkwhub: this is the folder containing the WebHubApp source code.</li>
+</ul>
+<div class="highlight-shell"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>WebHubWebApp
+<span class="nv">$ </span>python -m SimpleHTTPServer
+</pre></div>
+</div>
+<p>You will get some log messages like &#8220;Serving HTTP on 0.0.0.0 port 8000 ...&#8221;</p>
+<p>Next, launch your web browser (Chrome, Safari, ...) and go to <a class="reference external" href="http://localhost:8000/hkwhub/">http://localhost:8000/hkwhub/</a></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Your iOS device running HKWHub app and your Desktop PC running web browser should be in the same network.</p>
+</div>
+<p>At the fist screen looking like this:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/webapp-initial.png"><img alt="../_images/webapp-initial.png" src="../_images/webapp-initial.png" /></a>
+</div>
+<p>Enter the URL that the HKWHub app says: <a class="reference external" href="http://10.0.1.37:8080/">http://10.0.1.37:8080/</a>, like this:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/webapp-initial-url.png"><img alt="../_images/webapp-initial-url.png" src="../_images/webapp-initial-url.png" /></a>
+</div>
+<p>If you press <strong>Submit</strong>, then you will see the first screen like below. This is the list of media items available at the HKWHub app.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/webapp-afterlogin.png"><img alt="../_images/webapp-afterlogin.png" src="../_images/webapp-afterlogin.png" /></a>
+</div>
+<p>The UI of the Web app is exactly the same as HKIoTCloud web app. So, we skip to explain the rest parts of the app.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Please check out <a class="reference external" href="https://www.youtube.com/watch?v=_ljpReAvk0g&amp;feature=youtu.be">HKWHub app demo video</a>.</p>
@@ -1412,6 +1456,11 @@
 <li><a class="reference internal" href="#local-server-mode">Local Server Mode</a><ul>
 <li><a class="reference internal" href="#running-local-server">Running Local Server</a></li>
 <li><a class="reference internal" href="#sending-rest-requests-to-localserver">Sending REST Requests to LocalServer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pubnub-server-mode">PubNub Server Mode</a><ul>
+<li><a class="reference internal" href="#connect-to-pubnub-server">Connect to PubNub Server</a></li>
+<li><a class="reference internal" href="#sending-rest-requests-to-pubnub-cloud">Sending REST Requests to PubNub Cloud</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#run-hkwhub-app-on-your-ios-device">Run HKWHub app on your iOS device</a></li>
