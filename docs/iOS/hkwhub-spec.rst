@@ -100,6 +100,7 @@ The **Settings** menu has four sub menus:
 - Media List
 	- User can maintain the list of audio files for audio playback. 
 	- User can add audio from iOS Media Library. 
+	
 	.. Note::
 		
 		Note that only the media file available offline and not from Apple Musica can be added. The music file that came from Apple Music cannot be added by DRM issue.
@@ -706,9 +707,10 @@ Add a speaker to playback session. Once a speaker is added, then the speaker wil
 	- Returns true or false
 - Example:
 	- Request:
-	
+
 	.. code-block:: json
-	 		http://<server_host>/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880
+ 		http://<server_host>/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&DeviceID=129321920968880
+
 	- Response: 
 
 	.. code-block:: json
