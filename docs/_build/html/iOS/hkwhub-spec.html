@@ -584,12 +584,6 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <p>Starts a new session.</p>
 <ul>
 <li><p class="first">API: <strong>POST</strong> /api/v1/init_session</p>
-<blockquote>
-<div><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For Local Server mode, the REST request should be sent as <strong>GET</strong> request, instead of <strong>POST</strong>. And the request does not need to include <strong>username</strong>, and <strong>password</strong> parameters.</p>
-</div>
-</div></blockquote>
 </li>
 <li><dl class="first docutils">
 <dt>Body</dt>
@@ -600,6 +594,12 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </dd>
 </dl>
 </li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For Local Server mode, the REST request should be sent as <strong>GET</strong> request, instead of <strong>POST</strong>. And the request does not need to include <strong>username</strong>, and <strong>password</strong> parameters.</p>
+</div>
+<ul>
 <li><dl class="first docutils">
 <dt>Response</dt>
 <dd><ul class="first last simple">
