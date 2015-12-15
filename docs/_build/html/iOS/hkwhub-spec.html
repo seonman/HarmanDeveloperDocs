@@ -240,28 +240,37 @@
 <hr class="docutils" />
 <div class="section" id="hkiotcloud-mode">
 <h3>HKIoTCloud Mode<a class="headerlink" href="#hkiotcloud-mode" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="connecting-to-hkiotcloud">
+<h4>Connecting to HKIoTCloud<a class="headerlink" href="#connecting-to-hkiotcloud" title="Permalink to this headline">¶</a></h4>
 <p>In HKIoTCloud demo, 3rd party clients can connect to HKIoTCloud (<a class="reference external" href="http://hkiotcloud.herokuapp.com">http://hkiotcloud.herokuapp.com</a>) and send REST requests to control speakers and play audio. In order to use HKIoTCloud mode, user needs to sign up to the cloud with username, emaill address and password. Once sign up is done, user need to sign in to the server. User sign-up and sign-in can be done within the HKWHub app, as shown below.</p>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/hubappv2-signin.jpg"><img alt="../_images/hubappv2-signin.jpg" src="../_images/hubappv2-signin.jpg" /></a>
 </div>
 <p>Once the HKWHub app successfully signs in to HKIoTCloud, the screen will be switched to Log screen, like shown as below. You can see all the message logs received from or sent to the cloud. Each log contains a JSON data, so you can see what information is being sent and received between the server.</p>
 <div class="figure">
-<a class="reference internal image-reference" href="../_images/hubappv2-hkiotcloud.jpg"><img alt="../_images/hubappv2-hkiotcloud.jpg" src="../_images/hubappv2-hkiotcloud.jpg" /></a>
+<a class="reference internal image-reference" href="../_images/hubappv2-afterlogin.jpg"><img alt="../_images/hubappv2-afterlogin.jpg" src="../_images/hubappv2-afterlogin.jpg" /></a>
 </div>
 <p>If you want to disconnect the server and return to the main screen, press <strong>Disconnect</strong> button on the top righthand corner.</p>
-<p>Once the HKWHub App is running, you can now connect a client to HKIoTCloud and send REST requests to the server. We will explain all the REST APIs supported in the next section.</p>
-<p>For a client tyring to connect to HKIoTCloud, the same username and password are required from the client side.</p>
+</div>
+<div class="section" id="sending-rest-request-to-hkiotcloud">
+<h4>Sending REST Request to HKIoTCloud<a class="headerlink" href="#sending-rest-request-to-hkiotcloud" title="Permalink to this headline">¶</a></h4>
+<p>Once the HKWHub App is running, you can now connect a client to HKIoTCloud and send REST requests to the server. We will explain all the REST APIs supported with a little more detailed example of <strong>curl</strong> commands in the next section.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a client tyring to connect to HKIoTCloud, the same username and password are required from the client side.</p>
+</div>
 <p>As an example of client, HKIoTCloud hosts a Web-based client app, at <a class="reference external" href="http://hkiotcloud.herokuapp.com/webapp/">http://hkiotcloud.herokuapp.com/webapp/</a>. The following is a screenshot of the web app.</p>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/cloudapp-login.png"><img alt="../_images/cloudapp-login.png" src="../_images/cloudapp-login.png" /></a>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">To use this mode, user needs to sign up to HKIoTCloud with username, email, and password.</p>
+<p>Once user authentication is done successfully, the Web app will switch the screen to</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/cloudapp-medialist.png"><img alt="../_images/cloudapp-medialist.png" src="../_images/cloudapp-medialist.png" /></a>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Please check out <a class="reference external" href="https://www.youtube.com/watch?v=_ljpReAvk0g&amp;feature=youtu.be">HKWHub app demo video</a>.</p>
+</div>
 </div>
 </div>
 <div class="section" id="run-hkwhub-app-on-your-ios-device">
@@ -1343,7 +1352,11 @@
 <li><a class="reference internal" href="#main-screen">Main Screen</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#hkiotcloud-mode">HKIoTCloud Mode</a></li>
+<li><a class="reference internal" href="#hkiotcloud-mode">HKIoTCloud Mode</a><ul>
+<li><a class="reference internal" href="#connecting-to-hkiotcloud">Connecting to HKIoTCloud</a></li>
+<li><a class="reference internal" href="#sending-rest-request-to-hkiotcloud">Sending REST Request to HKIoTCloud</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#run-hkwhub-app-on-your-ios-device">Run HKWHub app on your iOS device</a></li>
 <li><a class="reference internal" href="#use-curl-command-or-web-browser-to-send-rest-requests">Use <code class="docutils literal"><span class="pre">curl</span></code> command or web browser to send REST requests</a><ul>
 <li><a class="reference internal" href="#a-init-session">a. Init session</a></li>
