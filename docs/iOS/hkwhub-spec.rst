@@ -1161,6 +1161,8 @@ Get Volume for a particular device
 - Example:
 	- Request: 
 	
+	.. code-block:: json
+
 		http://<server_host>/api/v1/get_volume_device?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&DeviceID=1234567
 		
 	- Response: 
