@@ -1043,9 +1043,9 @@ Resume the Current Playback with Hub Media with selected speakers
 	- Request:
 	
 	.. code-block:: json
-	
+
 		http://<server_host>/api/v1/resume_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&PersistentID=7387446959931482519&DeviceIDList=34317244381360,129321920968880
-			
+
 	- Response: 
 
 	.. code-block:: json
