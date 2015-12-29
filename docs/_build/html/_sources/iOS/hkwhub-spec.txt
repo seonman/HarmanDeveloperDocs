@@ -277,7 +277,7 @@ If HKWHub app has some event to report to notify to clients, for example, device
 Sample Web App
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As a sample client app, you can use **WebHubPubNubApp** that you can download from Harman Developer web site (http://developer.harman.com). Likewise, The Web app is created using Polymer v0.5 (https://www.polymer-project.org/0.5/).
+As a sample client app, you can use **WebHubPubNubApp** that you can download from Harman Developer web site (http://developer.harman.com) or directly from :download:`here <download/WebHubPubNubApp.zip>`.. Likewise, The Web app is created using Polymer v0.5 (https://www.polymer-project.org/0.5/).
 
 Once you download the app, unzip it. You will see the following sub directories.
 
