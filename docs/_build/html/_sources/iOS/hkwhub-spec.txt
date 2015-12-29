@@ -77,6 +77,12 @@ Quick Getting Started Guide to HKWHub App
 Overview of HKWHubApp 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. Note::
+
+	You can download the HKWHub app from App Store (`click here`_)
+	
+.. _click here: https://itunes.apple.com/us/app/hk-whub-app/id1057062847?ls=1&mt=8
+
 Main Screen
 ^^^^^^^^^^^^^
 
