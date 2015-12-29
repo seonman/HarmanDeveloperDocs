@@ -201,7 +201,7 @@ The RESI APIs are almost the same as the ones of HKIoTCloud mode.
 Sending REST Requests to LocalServer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As a sample client app, you can use **WebHubWebApp** that you can download from Harman Developer web site (http://developer.harman.com). The Web app is created using Polymer v0.5 (https://www.polymer-project.org/0.5/).
+As a sample client app, you can use **WebHubWebApp** that you can download from Harman Developer web site (http://developer.harman.com) or direclty from :download:`here <download/WebHubWebApp.zip>`. The Web app is created using Polymer v0.5 (https://www.polymer-project.org/0.5/).
 
 Once you download the app, unzip it. You will see the following sub directories.
 
