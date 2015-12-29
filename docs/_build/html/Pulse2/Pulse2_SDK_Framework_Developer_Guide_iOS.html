@@ -1,0 +1,504 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JBL Pulse2 iOS Framework Developer’s Guide &mdash; Harman Developer 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" />
+    <link rel="next" title="Demos and 3rd Party Integrations" href="../integration.html" />
+    <link rel="prev" title="Version History" href="../Android/version-history.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../integration.html" title="Demos and 3rd Party Integrations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Android/version-history.html" title="Version History"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jbl-pulse2-ios-framework-developers-guide">
+<h1>JBL Pulse2 iOS Framework Developer’s Guide<a class="headerlink" href="#jbl-pulse2-ios-framework-developers-guide" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="prerequirements">
+<h2>Prerequirements<a class="headerlink" href="#prerequirements" title="Permalink to this headline">¶</a></h2>
+<p>The following steps should be done by Developer before start working with SDK:</p>
+<ul class="simple">
+<li>Add the Pulse2SDK framework to Linked Frameworks and Libraries</li>
+<li>Import API header file “HMNPulse2API.h”</li>
+<li>Import Apple ExternalAccessory.framework to Xcode project</li>
+<li>Add protocol string “com.jbl.connect” in the UISupportedExternalAccessoryProtocols section on the Info.plist</li>
+</ul>
+<p>iPhone should esbablish BT connection with Pulse 2 Device in iPhone-&gt; Settings -&gt; Bluetooth.</p>
+</div>
+</div>
+<div class="section" id="api-description">
+<h1>API Description<a class="headerlink" href="#api-description" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="device-general-api-methods">
+<h2>Device General API methods<a class="headerlink" href="#device-general-api-methods" title="Permalink to this headline">¶</a></h2>
+<p>Application should be first establish BT connection with Device using <strong>connectToMasterDevice</strong>  function  (HMNDeviceGeneral.h).</p>
+<p>The notification EVENT_DEVICE_CONNECTED (HMNCommonDefs.h) will be received if connection established successfully. Other API functions can be used after this step.</p>
+<p>The notification EVENT_DEVICE_CONNECTED includes dictionary with the following keys (defined in HMNDeviceGeneral.h):</p>
+<ul class="simple">
+<li>KEY_IAP_CONNECTION_ID;</li>
+<li>KEY_IAP_MANUFACTURER;</li>
+<li>KEY_IAP_NAME;</li>
+<li>KEY_IAP_SERIAL_NUMBER;</li>
+</ul>
+<p>The notification EVENT_DEVICE_DISCONNECTED (HMNCommonDefs.h) will be received if connection with device lost.</p>
+</div>
+<div class="section" id="device-info-api-methods">
+<h2>Device Info API methods<a class="headerlink" href="#device-info-api-methods" title="Permalink to this headline">¶</a></h2>
+<p>/**</p>
+<p>* &#64;discussion Change device name.</p>
+<p>* &#64;param deviceName An new device name. Nonnull.</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>setDeviceName</strong> :(NSString * _Nonnull)deviceName;</li>
+</ul>
+<p>/**</p>
+<p>* &#64;discussion Request information from Device like name, battery, active channel.</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>requestDeviceInfo</strong>;</li>
+</ul>
+<p>Application will receive notification “EVENT_DEVICE_INFO” with Dictionary included device info. The following keys can present in dictionary (HMNDeviceInfo.h):</p>
+<ul class="simple">
+<li>KEY_DEVICE_INFO_DEVICE_INDEX;</li>
+<li>KEY_DEVICE_INFO_DEVICE_NAME;</li>
+<li>KEY_DEVICE_INFO_PRODUCT_ID;</li>
+<li>KEY_DEVICE_INFO_MODEL_ID;</li>
+<li>KEY_DEVICE_INFO_BATTERY_IS_CHARGING;</li>
+<li>KEY_DEVICE_INFO_BATTERY_VALUE;</li>
+<li>KEY_DEVICE_INFO_LINKED_DEVICE_COUNT;</li>
+<li>KEY_DEVICE_INFO_ACTIVE_CHANNEL_VALUE;</li>
+<li>KEY_DEVICE_INFO_AUDIO_SOURCE_VALUE;</li>
+<li>KEY_DEVICE_INFO_MAC_ADDRESS_VALUE;</li>
+</ul>
+<p>/**</p>
+<p>* &#64;discussion Request information from Device for the specified token</p>
+<p>* &#64;param token. Value from enumeration HMNToken</p>
+<p>* &#64;param index. Device index: 0 - master, 1 - slave.</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>requestDeviceInfoToken</strong> :(HMNToken)token forDeviceIndex:(UInt8)index;</li>
+</ul>
+</div>
+<div class="section" id="dfu-api-methods">
+<h2>DFU API methods<a class="headerlink" href="#dfu-api-methods" title="Permalink to this headline">¶</a></h2>
+<p>/**</p>
+<p>* &#64;discussion Request version from Device.</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>requestVersion</strong>;</li>
+</ul>
+<p>Application will receive notification “EVENT_VERSION” with Dictionary included version info. The following keys can present in dictionary (HMNDFU.h):</p>
+<p>KEY_SW_VERSION;</p>
+<p>KEY_HW_VERSION;</p>
+</div>
+<div class="section" id="led-control-api-methods">
+<h2>Led Control API methods<a class="headerlink" href="#led-control-api-methods" title="Permalink to this headline">¶</a></h2>
+<p>/**</p>
+<p>* &#64;discussion Setup Background Color to Master Device</p>
+<p>* &#64;param color - UIColor object</p>
+<p>* &#64;param propageToSlaveDevice - Need to propagete background color to Slave device</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>setBackgroundColor</strong>:(UIColor * _Nonnull)color propagateToSlaveDevice:(BOOL)applyToSlave;</li>
+</ul>
+<p>/**</p>
+<p>* &#64;discussion Draw 11(columns)x9(rows) color image bitmap on the Master Device</p>
+<p>* &#64;param imageMatrix - Array of 99 UIColor* objects,The color of each pixel is represented color by UIColor.</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>setColorImage</strong>:(NSArray * _Nonnull)imageMatrix;</li>
+</ul>
+<p>/**</p>
+<p>* &#64;discussion Display Char on master and slave device</p>
+<p>* &#64;param charAsciiCode - Char ascii code - in hex; Supported ascii symbols: 0..9 A..Z ? ! $ + - = % * / # &#8221; &amp; &#8216; ( ) , . : ; &lt; &gt; ` { | } ~</p>
+<p>* &#64;param charColor - Color of char;</p>
+<p>* &#64;param backgroundColor - Background color;</p>
+<p>* &#64;param applyToSlave - if need to propagate to slave device</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>setLedChar</strong>:(UInt8)charAsciiCode charColor:(UIColor * _Nonnull)charColor backgroundColor:(UIColor * _Nonnull)backgroundColor applyToSlaveDevice:(BOOL)applyToSlave;</li>
+</ul>
+<p>/**</p>
+<p>* &#64;discussion Propagate Current Led Pattern on master to slave device</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>propagateCurrentLedPattern</strong>;</li>
+</ul>
+<p>/**</p>
+<p>* &#64;discussion Query device led brightness.</p>
+<p>* It will reply with EVENT_BRIGHTNESS notification</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>requestLedBrightness</strong>;</li>
+</ul>
+<p>Application will receive notification “EVENT_BRIGHTNESS” with Dictionary included brightness info. The following keys can present in dictionary (HMNLedControl.h):</p>
+<ul class="simple">
+<li>KEY_LED_BRIGHTNESS</li>
+</ul>
+<p>/**</p>
+<p>* &#64;discussion Set Display Led Brightness on master device</p>
+<p>* &#64;param brightness - 0..255;</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>setLedBrightness</strong>:(UInt8)brightness;</li>
+</ul>
+<p>/**</p>
+<p>* &#64;discussion Set Pattern on master device</p>
+<p>* &#64;param pattern - id of pattern</p>
+<p>* &#64;param patternData - array of 99 unsigned int values wrapped to NSNumbers for Canvas and Firefly:</p>
+<p>* 0 - do not draw point</p>
+<p>* non-0 - draw point on canvas</p>
+<p>* - nil for other pattern types</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>setLedPattern</strong>:(HMNPattern)pattern withData:(NSArray * _Nullable)patternData;</li>
+</ul>
+<p>/**</p>
+<p>* &#64;discussion Query device led pattern information.</p>
+<p>* It will reply with EVENT_PATTERN_INFO notification.</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>requestLedPatternInfo</strong>;</li>
+</ul>
+<p>Application will receive notification “EVENT_PATTERN_INFO” with Dictionary included pattern info. The following keys can present in dictionary (HMNLedPattern.h):</p>
+<p>KEY_LED_PATTERN_ID its id of the pattern enumerated in the HMNCommonDefs.h</p>
+<p>/// Device Patterns</p>
+<p>typedef NS_ENUM(NSInteger, HMNPattern) {</p>
+<p>HMNPattern_Firework = 0,</p>
+<p>HMNPattern_Traffic,</p>
+<p>HMNPattern_Star,</p>
+<p>HMNPattern_Wave,</p>
+<p>HMNPattern_FireFly,</p>
+<p>HMNPattern_Rain,</p>
+<p>HMNPattern_Fire,</p>
+<p>HMNPattern_Canvas,</p>
+<p>HMNPattern_Hourglass,</p>
+<p>HMNPattern_Ripple</p>
+<p>};</p>
+</div>
+<div class="section" id="sensor-control-api-methods">
+<h2>Sensor Control API methods<a class="headerlink" href="#sensor-control-api-methods" title="Permalink to this headline">¶</a></h2>
+<p>/**</p>
+<p>* &#64;discussion Request microphone sound level from Device.</p>
+<p>* It will reply with EVENT_SOUND notification</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>requestMicrophoneSoundLevel</strong>;</li>
+</ul>
+<p>Application will receive notification “EVENT_SOUND” with Dictionary included pattern info. The following key can present in dictionary (HMNSensorControl.h):</p>
+<p>/// The Value has NSNumber value</p>
+<p>KEY_MICROPHONE_LEVEL;</p>
+<p>/**</p>
+<p>* &#64;discussion Request for capturing color by Color Picker from the Device</p>
+<p>* It will reply with EVENT_SENSOR_CAPTURE_COLOR notification</p>
+<p>* &#64;return none.</p>
+<p>*/</p>
+<ul class="simple">
+<li>(void) <strong>requestColorFromColorPicker</strong>;</li>
+</ul>
+<p>When device color sensor capture the color it send notification EVENT_SENSOR_CAPTURE_COLOR.</p>
+<p>Application will receive notification “EVENT_SENSOR_CAPTURE_COLOR” with Dictionary included color info. The following keys can present in dictionary (HMNSensorControl.h):</p>
+<p>KEY_LED_COLOR_R;</p>
+<p>KEY_LED_COLOR_G;</p>
+<p>KEY_LED_COLOR_B;</p>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<p>The device can accept one commad at second. If application required to send several commands it should send them with delay for 1 second for each command.</p>
+</div>
+</div>
+<div class="section" id="sample-usage">
+<h1>Sample Usage<a class="headerlink" href="#sample-usage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="device-connection-example">
+<h2>Device Connection Example<a class="headerlink" href="#device-connection-example" title="Permalink to this headline">¶</a></h2>
+<p>(void) viewDidLoad {</p>
+<blockquote>
+<div><p>[super viewDidLoad];</p>
+<p>[self subscribeForNotification];</p>
+<p>[HMNDeviceGeneral connectToMasterDevice];</p>
+</div></blockquote>
+<p>}</p>
+<p>(void) subscribeForNotification {</p>
+<blockquote>
+<div><p>[[NSNotificationCenter defaultCenter] addObserver:self</p>
+<p>selector:&#64;selector(deviceConnected)</p>
+<p>name:EVENT_DEVICE_CONNECTED</p>
+<p>object:nil];</p>
+</div></blockquote>
+<p>}</p>
+</div>
+<div class="section" id="color-sensor-handler-example">
+<h2>Color Sensor handler example<a class="headerlink" href="#color-sensor-handler-example" title="Permalink to this headline">¶</a></h2>
+<p>(void) sensorCaptureColorReceived:(NSNotification * )notification {</p>
+<blockquote>
+<div><p>NSDictionary *devInfoDict = [notification userInfo];</p>
+<p>NSInteger R = [devInfoDict[KEY_LED_COLOR_R] integerValue];</p>
+<p>NSInteger G = [devInfoDict[KEY_LED_COLOR_G] integerValue];</p>
+<p>NSInteger B = [devInfoDict[KEY_LED_COLOR_B] integerValue];</p>
+<p>NSLog(&#64;&#8221;RGB color: %ld %ld %ld &#8221;, (long)R, (long)G, (long)B);</p>
+</div></blockquote>
+<p>}</p>
+</div>
+<div class="section" id="device-pattern-handler-example">
+<h2>Device pattern handler example<a class="headerlink" href="#device-pattern-handler-example" title="Permalink to this headline">¶</a></h2>
+<p>(void) patternReceived:(NSNotification * )notification {</p>
+<blockquote>
+<div><p>NSDictionary *devInfoDict = [notification userInfo];</p>
+<p>HMNPattern pattern = [devInfoDict[KEY_LED_PATTERN_ID] integerValue];</p>
+<p>NSLog(&#64;&#8221;Pattern ID = %ld &#8221;, (long)pattern);</p>
+</div></blockquote>
+<p>}</p>
+</div>
+<div class="section" id="version-handler-example">
+<h2>Version handler example<a class="headerlink" href="#version-handler-example" title="Permalink to this headline">¶</a></h2>
+<p>(void) versionReceived:(NSNotification * )notification {</p>
+<blockquote>
+<div><p>NSDictionary *devInfoDict = [notification userInfo];</p>
+<p>NSString *swVersion = devInfoDict[KEY_SW_VERSION];</p>
+<p>NSString *hwVersion = devInfoDict[KEY_HW_VERSION];</p>
+<p>NSLog(&#64;&#8221;swVersion %&#64;, hwVersion %&#64;&#8221;, swVersion, hwVersion);</p>
+<p>return;</p>
+</div></blockquote>
+<p>}</p>
+</div>
+<div class="section" id="brightness-handler-example">
+<h2>Brightness handler example<a class="headerlink" href="#brightness-handler-example" title="Permalink to this headline">¶</a></h2>
+<p>(void) brightnessReceived:(NSNotification * )notification {</p>
+<blockquote>
+<div><p>NSDictionary *devInfoDict = [notification userInfo];</p>
+<p>NSUInteger brightness = [devInfoDict[KEY_LED_BRIGHTNESS] unsignedIntegerValue];</p>
+<p>NSLog(&#64;&#8221;brightness %lu&#8221;, (unsigned long)brightness);</p>
+<p>return;</p>
+</div></blockquote>
+<p>}</p>
+</div>
+<div class="section" id="sound-handler-example">
+<h2>Sound handler example<a class="headerlink" href="#sound-handler-example" title="Permalink to this headline">¶</a></h2>
+<p>(void) soundEventReceived:(NSNotification * )notification {</p>
+<blockquote>
+<div><p>NSDictionary *devInfoDict = [notification userInfo];</p>
+<p>NSUInteger microphoneLevel = [devInfoDict[KEY_MICROPHONE_LEVEL]     unsignedIntegerValue];</p>
+<p>NSLog(&#64;&#8221;microphone level %lu&#8221;, (unsigned long)microphoneLevel);</p>
+<p>return;</p>
+</div></blockquote>
+<p>}</p>
+</div>
+<div class="section" id="show-letter-example">
+<h2>Show Letter example<a class="headerlink" href="#show-letter-example" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>(void) showAChar {</dt>
+<dd><p class="first">Byte charCode = 65; // A</p>
+<p>UIColor *charColor = [UIColor redColor];</p>
+<p>UIColor *backgroundColor =[UIColor blueColor];</p>
+<p class="last">[HMNLedControl setLedChar:charCode charColor:charColor backgroundColor:backgroundColor applyToSlaveDevice:NO];</p>
+</dd>
+</dl>
+<p>}</p>
+</div>
+<div class="section" id="show-hourglass-example">
+<h2>Show Hourglass example<a class="headerlink" href="#show-hourglass-example" title="Permalink to this headline">¶</a></h2>
+<p>(void) showHourglassPattern {</p>
+<blockquote>
+<div><p>Byte imageMatrix[] = {</p>
+<blockquote>
+<div><p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0</p>
+<p>};</p>
+<p>NSMutableArray *array = [NSMutableArray arrayWithCapacity:LED_COUNT];</p>
+</div></blockquote>
+<p>for (int i=0; i&lt;LED_COUNT; i++) {</p>
+<blockquote>
+<div>[array addObject:[NSNumber numberWithUnsignedInt:imageMatrix[i]]];</div></blockquote>
+<p>}</p>
+<p>[HMNLedControl setLedPattern:HMNPattern_FireFly withData:array];</p>
+</div></blockquote>
+<p>}</p>
+</div>
+<div class="section" id="show-color-image-example">
+<h2>Show color image example<a class="headerlink" href="#show-color-image-example" title="Permalink to this headline">¶</a></h2>
+<p>(void)setDigit1ColorImage {</p>
+<blockquote>
+<div><blockquote>
+<div><p>Byte imageMatrix[] = {</p>
+<blockquote>
+<div><p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,</p>
+<p>0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0</p>
+</div></blockquote>
+<p>};</p>
+<p>NSMutableArray *colors = [NSMutableArray arrayWithCapacity:LED_COUNT];</p>
+<p>UIColor *redColor = [UIColor redColor];</p>
+<p>UIColor *blueColor = [UIColor blueColor];</p>
+<dl class="docutils">
+<dt>for (int i=0; i&lt;LED_COUNT; i++) {</dt>
+<dd><p class="first">UIColor *color = (imageMatrix[i] == 0)? redColor: blueColor;</p>
+<p class="last">[colors addObject:color];</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>[HMNLedControl setColorImage:colors];</p>
+</div></blockquote>
+<p>}</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/HarmanDeveloperLogo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">JBL Pulse2 iOS Framework Developer’s Guide</a><ul>
+<li><a class="reference internal" href="#prerequirements">Prerequirements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#api-description">API Description</a><ul>
+<li><a class="reference internal" href="#device-general-api-methods">Device General API methods</a></li>
+<li><a class="reference internal" href="#device-info-api-methods">Device Info API methods</a></li>
+<li><a class="reference internal" href="#dfu-api-methods">DFU API methods</a></li>
+<li><a class="reference internal" href="#led-control-api-methods">Led Control API methods</a></li>
+<li><a class="reference internal" href="#sensor-control-api-methods">Sensor Control API methods</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sample-usage">Sample Usage</a><ul>
+<li><a class="reference internal" href="#device-connection-example">Device Connection Example</a></li>
+<li><a class="reference internal" href="#color-sensor-handler-example">Color Sensor handler example</a></li>
+<li><a class="reference internal" href="#device-pattern-handler-example">Device pattern handler example</a></li>
+<li><a class="reference internal" href="#version-handler-example">Version handler example</a></li>
+<li><a class="reference internal" href="#brightness-handler-example">Brightness handler example</a></li>
+<li><a class="reference internal" href="#sound-handler-example">Sound handler example</a></li>
+<li><a class="reference internal" href="#show-letter-example">Show Letter example</a></li>
+<li><a class="reference internal" href="#show-hourglass-example">Show Hourglass example</a></li>
+<li><a class="reference internal" href="#show-color-image-example">Show color image example</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Android/version-history.html"
+                        title="previous chapter">Version History</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../integration.html"
+                        title="next chapter">Demos and 3rd Party Integrations</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Pulse2/Pulse2_SDK_Framework_Developer_Guide_iOS.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../integration.html" title="Demos and 3rd Party Integrations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Android/version-history.html" title="Version History"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Harman International.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

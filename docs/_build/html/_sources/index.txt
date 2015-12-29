@@ -15,8 +15,8 @@ Welcome to Harman Developer documentation!
 
 Welcome to the Harman developer documentation. Here you will find information about creating your app using HKWirelessHD SDK.
 
-Documentations for iOS SDK
----------------------------------
+HDWireless iOS SDK Documentations
+----------------------------------
 
 This documentation is organized into a few different chapters:
 
@@ -46,8 +46,8 @@ This documentation is organized into a few different chapters:
 	
 ----
 
-Documentations for Android SDK
----------------------------------
+HKWirelessHD Android SDK Documentations
+-----------------------------------------------
 
 `SDK Overview (Android)`_
     This chatper is the overview of HKWirelessHD SDK and the SDK apps based on the SDK.
@@ -64,6 +64,13 @@ Documentations for Android SDK
 `Version History (Android)`_
     Version History
 	
+Pulse2 SDK Documentation
+---------------------------------
+
+`Pulse2 API`_
+    This chatper describes the Pulse2 SDK/API.
+
+
 Demos and 3rd Party Integrations
 ---------------------------------
 `Integration`_
@@ -84,6 +91,8 @@ Demos and 3rd Party Integrations
 .. _API Documentation (Android): Android/api-documentation.html
 .. _Programming Guide (Android): Android/programming-guide.html
 .. _Version History (Android): Android/version-history.html
+
+.. _Pulse2 API: Pulse2/Pulse2_SDK_Framework_Developer_Guide_iOS.html
 
 .. _Integration: integration.html
 
@@ -197,6 +206,16 @@ Version History (Android)
 	:maxdepth: 2
 
 	Android/version-history
+
+----
+
+Pulse2 SDK Documentation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. toctree::
+	:maxdepth: 2
+
+	Pulse2/Pulse2_SDK_Framework_Developer_Guide_iOS
 
 ----
 
