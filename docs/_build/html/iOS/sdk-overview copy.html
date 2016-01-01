@@ -23,9 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" />
-    <link rel="next" title="Getting Started Guide (iOS)" href="getting-started-iOS.html" />
-    <link rel="prev" title="Welcome to Harman Developer documentation!" href="../index.html" /> 
+    <link rel="top" title="Harman Developer 1.0 documentation" href="../index.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -34,12 +32,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="getting-started-iOS.html" title="Getting Started Guide (iOS)"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../index.html" title="Welcome to Harman Developer documentation!"
-             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -144,6 +136,26 @@ Xcode 6.3 (supporting iOS8.3) or later is required for building HKWirelessHD ena
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/hkwplayer-app-3.png"><img alt="../_images/hkwplayer-app-3.png" src="../_images/hkwplayer-app-3.png" /></a>
 </div>
+<p>HKWPlayer app also support Apple Watch app. If user installs the HKWPlayer app on the iPhone and enable &#8220;Show App on Apple Watch&#8221; option in Apple Watch app, then the corresponding watch app will appear in the menu screen of Apple Watch.</p>
+<p>The companion watch app is provided as Watch App Extension within a single iOS App package. The Watch app extension communicates with the main iOS app (e.g. HKWPlayer app) for control command and response, and share the playlist and the device status for rendering the menu.</p>
+<p>The implementation note for Watch App support will be available at the developer community web site shortly.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwplayer-watch-1.png"><img alt="../_images/hkwplayer-watch-1.png" src="../_images/hkwplayer-watch-1.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwplayer-watch-2.png"><img alt="../_images/hkwplayer-watch-2.png" src="../_images/hkwplayer-watch-2.png" /></a>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/hkwplayer-watch-3.png"><img alt="../_images/hkwplayer-watch-3.png" src="../_images/hkwplayer-watch-3.png" /></a>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You should replace the bundle id of the HKWPlayer app with yours. Otherwise, Xcode will not build the binary of the app. Just try to search for all the string &#8220;com.harman.dev&#8221; in your Xcode project, and replace them with your bundle ID prefix, for example, &#8220;com.somebody&#8221;. And also, for Apple Watch extension, you need to set App Groups. Please go to TARGETS &gt; HKWPlayer &gt; Capabilities &gt; App Groups, and then set App Groups with your own bundle ID prefix, e.g. &#8220;group.com.somebody.hkwplayer&#8221;. The same thing should be done for HKWPlayer WatchKit Extension target as well.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please check out <a class="reference external" href="https://www.youtube.com/watch?v=M7AtKfPHfXM">Apple Watch demo video</a> as well.</p>
+</div>
 </div>
 <div class="section" id="hkwhub-app-hub-for-iot-integration">
 <h3>HKWHub App (Hub for IoT Integration)<a class="headerlink" href="#hkwhub-app-hub-for-iot-integration" title="Permalink to this headline">¶</a></h3>
@@ -216,16 +228,10 @@ Xcode 6.3 (supporting iOS8.3) or later is required for building HKWirelessHD ena
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../index.html"
-                        title="previous chapter">Welcome to Harman Developer documentation!</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="getting-started-iOS.html"
-                        title="next chapter">Getting Started Guide (iOS)</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/iOS/sdk-overview.txt"
+      <li><a href="../_sources/iOS/sdk-overview copy.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -252,12 +258,6 @@ Xcode 6.3 (supporting iOS8.3) or later is required for building HKWirelessHD ena
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="getting-started-iOS.html" title="Getting Started Guide (iOS)"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../index.html" title="Welcome to Harman Developer documentation!"
-             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Harman Developer 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>

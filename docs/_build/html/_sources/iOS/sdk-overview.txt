@@ -72,7 +72,7 @@ Time (Timer) app is a kind of timer app. Instead of playing a beep sound on your
 .. figure:: img/sdk-overview/time-app-3.png
 	:scale: 40
 	
-HKWPlayer app with Apple Watch support
+HKWPlayer app
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 HKWPlayer is a sample music player app that plays MP3 audio files with Omni speakers wirelessly. You can create and manage a playlist of MP3 titles from iOS Music app library, and play songs over the Omni speakers in the network. The purpose of the app is to demonstrate the key features of the HKWirelessHD SDK.
@@ -84,28 +84,6 @@ HKWPlayer is a sample music player app that plays MP3 audio files with Omni spea
 .. figure:: img/sdk-overview/hkwplayer-app-3.png
 	:scale: 40
 
-HKWPlayer app also support Apple Watch app. If user installs the HKWPlayer app on the iPhone and enable "Show App on Apple Watch" option in Apple Watch app, then the corresponding watch app will appear in the menu screen of Apple Watch.
-
-The companion watch app is provided as Watch App Extension within a single iOS App package. The Watch app extension communicates with the main iOS app (e.g. HKWPlayer app) for control command and response, and share the playlist and the device status for rendering the menu.
-
-The implementation note for Watch App support will be available at the developer community web site shortly.
-
-.. figure:: img/sdk-overview/hkwplayer-watch-1.png
-	:scale: 60
-.. figure:: img/sdk-overview/hkwplayer-watch-2.png
-	:scale: 60
-.. figure:: img/sdk-overview/hkwplayer-watch-3.png
-	:scale: 60
-	
-.. Note::
-
-	You should replace the bundle id of the HKWPlayer app with yours. Otherwise, Xcode will not build the binary of the app. Just try to search for all the string "com.harman.dev" in your Xcode project, and replace them with your bundle ID prefix, for example, "com.somebody". And also, for Apple Watch extension, you need to set App Groups. Please go to TARGETS > HKWPlayer > Capabilities > App Groups, and then set App Groups with your own bundle ID prefix, e.g. "group.com.somebody.hkwplayer". The same thing should be done for HKWPlayer WatchKit Extension target as well.
-
-.. Note::
-
-	Please check out `Apple Watch demo video`_ as well.
-
-.. _`Apple Watch demo video`: https://www.youtube.com/watch?v=M7AtKfPHfXM
 
 HKWHub App (Hub for IoT Integration)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
