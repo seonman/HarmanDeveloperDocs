@@ -9,12 +9,13 @@ There are two versions of SDK
 
 Most of the features are common in the two version. The only difference is that the normal version includes an API for playing web streaming audio, while the lightweight version does not.
 
-The reason we support the SDK as two separate versions is that we know that many developers want APIs for web streaming. To support this feature, we had to include a version of FFMPEG library inside of the SDK library. But, some developers may want to use their own version of MMPEG to handle audio stream for their own particular purpose. We don't want to discourage developers to use any open source libraries along with our SDK.
+The reason we support the SDK as two separate versions is that we know that many developers want APIs for web streaming. To support this feature, we had to link a version of FFMPEG library with the SDK library. But, some developers may not want to link ffmpeg. 
 
 Please see the descriptions of each version below and make a proper choice for your app.
 
 - HKWirelessHD (normal version)
 	- Support web streaming music playback (streaming music from HTTP server, etc.)
+	- need ffmpeg library (SDK contains a prebuilt ffmpeg library)
 	- libz.dylib and libbz2.dylib are required when linking.
 	
 - HKWirelessHDlw (lightweight version)
