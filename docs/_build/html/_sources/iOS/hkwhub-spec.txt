@@ -843,8 +843,6 @@ Gets the device information of a particular device (speaker) identified by Devic
 	
 	.. code-block:: json	
 	
- .. code-block:: json
-
  	   {
 	   HKWHubUUID = "XXX-XXX-XXX-XXX",
 	   SessionToken = "PubNub-1000",
