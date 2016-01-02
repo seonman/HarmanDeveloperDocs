@@ -100,9 +100,9 @@ User can add songs or sound file from iOS Music app to the media list, so that c
 
 The following images are the screen captures of HKWHub app.
 
-.. figure:: img/sdk-overview/hkwhub-1.png
+.. figure:: img/hub/hubappv2-main.jpg
 	:scale: 40
-.. figure:: img/sdk-overview/hkwhub-2.png
+.. figure:: img/hub/hubappv2-hkiotcloud.jpg
 	:scale: 40
 
 We also created a sample HTML5 app working as a client of the HKWHub app. The HTML5 app uses AJAX to send REST API requests to the HKWHub app to control speakers and stream music. The UI of the HTML5 app is based on Google's Polymer v0.5 (https://www.polymer-project.org/0.5/).
