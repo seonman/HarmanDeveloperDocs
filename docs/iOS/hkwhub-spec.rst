@@ -523,8 +523,8 @@ Session Timeout
 
 ----
 
-REST API Specification
------------------------
+REST API Specification (including PubNub JSON format)
+-------------------------------------------------------
 
 This specification describes the REST API for controlling HKWHub app remotely to control HK Omni speakers and stream audio to the speakers.
 
@@ -537,7 +537,7 @@ All the APIS are in REST API protocol.
 
 .. Note::
 
-	PubNub server mode does not use REST API. Instead, PubNub client needs to subscribe to the PubNub channel to get events from HKWHub, and use publish message to send request to HKWHub. The commands and parameters of each command are the same as REST API specification. However, PubNub message needs to include a few additional parameters in the JSON data to specify the HKWHub UUID that are talking to. The response message coming from the HKWHub app will include **ResponseOf** parameters to specify which request the resonse was for.
+	PubNub server mode does not use REST API. Instead, PubNub client needs to subscribe to the PubNub channel to get events from HKWHub, and use publish message to the PubNub channel to send request to HKWHub. The commands and parameters of each command are the same as REST API specification. However, PubNub message needs to include a couple of additional parameters in the JSON data to specify the **HKWHub UUID (HKWHubUUID)** that are talking to. The response message coming from the HKWHub app will include **ResponseOf** parameters to specify which request the resonse was for.
 	
 	So, we will describe PubNub message specification along with REST API specification here.
 
@@ -546,7 +546,7 @@ Session Management
 
 Start Session
 ^^^^^^^^^^^^^^
-Starts a new session.
+This starts a new session. As a response, the client will receive a SessionToken. The SessionToken is required to be sent in any following requests. Note that the REST requests differs depending on the server mode.
 
 - HKIoTCloud mode
 	- API: **POST** /api/v1/init_session		
@@ -582,11 +582,12 @@ Starts a new session.
 		{Command = "init_session"}
 
 	- Message from HKWHub (via Subscribe)
-		- Note that the response of ``init_session`` will contain **HKWHubUUID** to specify the HKWHub app the PubNub client is getting talking to. The subsequent Publish message should include 
+		- Note that the response of ``init_session`` will contain **HKWHubUUID** to identify the HKWHub the PubNub client is getting talking to. The subsequent Publish message should include this HKWHubUUID information as well as SessionToken.
 
 	.. code-block:: json
 
-		{HKWHubUUID = "XXX-XXX-XXX-XXX",
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
 		SessionToken = "PubNub-1000",
 		ResponseOf = "init_session"
 		}

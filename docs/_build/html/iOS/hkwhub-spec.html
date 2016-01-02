@@ -572,8 +572,8 @@
 </div>
 </div>
 <hr class="docutils" />
-<div class="section" id="rest-api-specification">
-<h2>REST API Specification<a class="headerlink" href="#rest-api-specification" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rest-api-specification-including-pubnub-json-format">
+<h2>REST API Specification (including PubNub JSON format)<a class="headerlink" href="#rest-api-specification-including-pubnub-json-format" title="Permalink to this headline">¶</a></h2>
 <p>This specification describes the REST API for controlling HKWHub app remotely to control HK Omni speakers and stream audio to the speakers.</p>
 <p>All the APIS are in REST API protocol.</p>
 <div class="admonition note">
@@ -583,14 +583,14 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>PubNub server mode does not use REST API. Instead, PubNub client needs to subscribe to the PubNub channel to get events from HKWHub, and use publish message to send request to HKWHub. The commands and parameters of each command are the same as REST API specification. However, PubNub message needs to include a few additional parameters in the JSON data to specify the HKWHub UUID that are talking to. The response message coming from the HKWHub app will include <strong>ResponseOf</strong> parameters to specify which request the resonse was for.</p>
+<p>PubNub server mode does not use REST API. Instead, PubNub client needs to subscribe to the PubNub channel to get events from HKWHub, and use publish message to the PubNub channel to send request to HKWHub. The commands and parameters of each command are the same as REST API specification. However, PubNub message needs to include a couple of additional parameters in the JSON data to specify the <strong>HKWHub UUID (HKWHubUUID)</strong> that are talking to. The response message coming from the HKWHub app will include <strong>ResponseOf</strong> parameters to specify which request the resonse was for.</p>
 <p class="last">So, we will describe PubNub message specification along with REST API specification here.</p>
 </div>
 <div class="section" id="session-management">
 <h3>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="start-session">
 <h4>Start Session<a class="headerlink" href="#start-session" title="Permalink to this headline">¶</a></h4>
-<p>Starts a new session.</p>
+<p>This starts a new session. As a response, the client will receive a SessionToken. The SessionToken is required to be sent in any following requests. Note that the REST requests differs depending on the server mode.</p>
 <ul>
 <li><dl class="first docutils">
 <dt>HKIoTCloud mode</dt>
@@ -658,13 +658,14 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <li><dl class="first docutils">
 <dt>Message from HKWHub (via Subscribe)</dt>
 <dd><ul class="first last simple">
-<li>Note that the response of <code class="docutils literal"><span class="pre">init_session</span></code> will contain <strong>HKWHubUUID</strong> to specify the HKWHub app the PubNub client is getting talking to. The subsequent Publish message should include</li>
+<li>Note that the response of <code class="docutils literal"><span class="pre">init_session</span></code> will contain <strong>HKWHubUUID</strong> to identify the HKWHub the PubNub client is getting talking to. The subsequent Publish message should include this HKWHubUUID information as well as SessionToken.</li>
 </ul>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="last highlight-json"><div class="highlight"><pre>{HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
 SessionToken = &quot;PubNub-1000&quot;,
 ResponseOf = &quot;init_session&quot;
 }
@@ -1962,7 +1963,7 @@ SessionToken = &quot;PubNub-1000&quot;
 <li><a class="reference internal" href="#session-timeout">Session Timeout</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#rest-api-specification">REST API Specification</a><ul>
+<li><a class="reference internal" href="#rest-api-specification-including-pubnub-json-format">REST API Specification (including PubNub JSON format)</a><ul>
 <li><a class="reference internal" href="#session-management">Session Management</a><ul>
 <li><a class="reference internal" href="#start-session">Start Session</a></li>
 <li><a class="reference internal" href="#close-session">Close Session</a></li>
