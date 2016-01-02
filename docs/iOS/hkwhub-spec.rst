@@ -535,6 +535,10 @@ All the APIS are in REST API protocol.
 	For HKIoTCloud mode, <server_host> should be "hkiotcloud.herokuapp.com".
 	For Local server mode, <server_host> should be the URL (IP address and port number) tat HKWHub app is showing.
 
+.. Note::
+
+	PubNub server mode does not use REST API. Instead, each client needs to subscribe to the PubNub channel to get events from HKWHub, and use publish message to send request to HKWHub. The commands and parameters of each command are the same as REST API specification. So, we will include PubNub message specification along with REST API specification.
+
 Session Management
 ~~~~~~~~~~~~~~~~~~~~
 
