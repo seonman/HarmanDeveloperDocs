@@ -614,6 +614,28 @@ Close the session. The SessionToken information is removed from the session tabl
 
 		{"Result" : "true"}
 
+- PubNub
+	- Publish Message
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		Command = "close_session"
+		}
+
+	- Message from HKWHub (via Subscribe)
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		ResponseOf = "close_session",
+		Result = true
+		}
+		
 ----
 
 Device Management
@@ -621,7 +643,7 @@ Device Management
 
 Get the device count
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Returns the number of speakers.
+Returns the number of speakers available in the network.
 
 - API: GET /api/v1/device_count?SessionToken=<session token>
 - Response
@@ -639,11 +661,35 @@ Returns the number of speakers.
 
 		{"DeviceCount":"2"}
 
+- PubNub
+	- Publish Message
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		Command = "device_count"
+		}
+
+	- Message from HKWHub (via Subscribe)
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		ResponseOf = "device_count",
+		DeviceCount = 2
+		}
+		
+		
 ----
 
 
 Get the list of devices and their information
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Returns the list of speakers and their information including several status information.
 
 - API: GET /api/v1/device_list?SessionToken=<session token>
 - Response
@@ -751,6 +797,7 @@ Get the list of devices and their information
 
 Get the Device Information
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Gets the device information of a particular device (speaker) identified by DeviceID.
 
 - API: GET /api/v1/device_info?SessionToken=<session token>&DeviceID=<device id>
 - Response
@@ -781,6 +828,43 @@ Get the Device Information
 		"IsPlaying":true, 
 		"DeviceID":"129321920968880"}
 
+- PubNub
+	- Publish message
+	
+	.. code-block:: json	
+	
+		{
+		Command = "device_list",
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000"
+		}
+		
+	- Response message (from Subscribed)
+	
+	.. code-block:: json	
+	
+ .. code-block:: json
+
+ 	   {
+	   HKWHubUUID = "XXX-XXX-XXX-XXX",
+	   SessionToken = "PubNub-1000",
+	   ResponseOf = "device_list",
+	   GroupName: "Temp", 
+	   Role = 21, 
+	   MacAddress = "b0:38:29:1b:9e:75", 
+	   WifiSignalStrength = -52, 
+	   Port = 44055, 
+	   Active = true, 
+	   DeviceName = "Adapt", 
+	   Version = "0.1.6.2", 
+	   ModelName = Omni Adapt", 
+	   IPAddress = "192.168.1.39", 
+	   GroupID = 1293219209", 
+	   Volume = 47, 
+	   IsPlaying = true, 
+	   DeviceID = 129321920968880"
+		}
+	
 ----
 
 Add a Device to Session
@@ -803,6 +887,30 @@ Add a speaker to playback session. Once a speaker is added, then the speaker wil
 
 		{"Result":"true"}
 
+- PubNub
+	- Publish message
+	
+	.. code-block:: json
+	
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		Command = "add_device_to_session",
+		DeviceID = "129321920968880"
+		}
+
+		
+	- Response: 
+	
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		ResponseOf = "add_device_to_session",
+		Result = true
+		}
+	
 ----
 
 Remove a Device from Session

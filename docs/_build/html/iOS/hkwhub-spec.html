@@ -708,6 +708,32 @@ ResponseOf = &quot;init_session&quot;
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+Command = &quot;close_session&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;close_session&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 </div>
@@ -716,7 +742,7 @@ ResponseOf = &quot;init_session&quot;
 <h3>Device Management<a class="headerlink" href="#device-management" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="get-the-device-count">
 <h4>Get the device count<a class="headerlink" href="#get-the-device-count" title="Permalink to this headline">¶</a></h4>
-<p>Returns the number of speakers.</p>
+<p>Returns the number of speakers available in the network.</p>
 <ul>
 <li><p class="first">API: GET /api/v1/device_count?SessionToken=&lt;session token&gt;</p>
 </li>
@@ -745,11 +771,38 @@ ResponseOf = &quot;init_session&quot;
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+Command = &quot;device_count&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;device_count&quot;,
+DeviceCount = 2
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <hr class="docutils" />
 <div class="section" id="get-the-list-of-devices-and-their-information">
 <h4>Get the list of devices and their information<a class="headerlink" href="#get-the-list-of-devices-and-their-information" title="Permalink to this headline">¶</a></h4>
+<p>Returns the list of speakers and their information including several status information.</p>
 <ul>
 <li><p class="first">API: GET /api/v1/device_list?SessionToken=&lt;session token&gt;</p>
 </li>
@@ -879,6 +932,7 @@ DeviceList =
 <hr class="docutils" />
 <div class="section" id="get-the-device-information">
 <h4>Get the Device Information<a class="headerlink" href="#get-the-device-information" title="Permalink to this headline">¶</a></h4>
+<p>Gets the device information of a particular device (speaker) identified by DeviceID.</p>
 <ul>
 <li><p class="first">API: GET /api/v1/device_info?SessionToken=&lt;session token&gt;&amp;DeviceID=&lt;device id&gt;</p>
 </li>
@@ -920,7 +974,51 @@ DeviceList =
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish message</li>
 </ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;device_list&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Response message (from Subscribed)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<blockquote>
+<div><div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;device_list&quot;,
+GroupName: &quot;Temp&quot;,
+Role = 21,
+MacAddress = &quot;b0:38:29:1b:9e:75&quot;,
+WifiSignalStrength = -52,
+Port = 44055,
+Active = true,
+DeviceName = &quot;Adapt&quot;,
+Version = &quot;0.1.6.2&quot;,
+ModelName = Omni Adapt&quot;,
+IPAddress = &quot;192.168.1.39&quot;,
+GroupID = 1293219209&quot;,
+Volume = 47,
+IsPlaying = true,
+DeviceID = 129321920968880&quot;
+     }
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 <hr class="docutils" />
 <div class="section" id="add-a-device-to-session">
@@ -949,6 +1047,33 @@ DeviceList =
 <li>Response:</li>
 </ul>
 <div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+Command = &quot;add_device_to_session&quot;,
+DeviceID = &quot;129321920968880&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Response:</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;add_device_to_session&quot;,
+Result = true
+}
 </pre></div>
 </div>
 </dd>
