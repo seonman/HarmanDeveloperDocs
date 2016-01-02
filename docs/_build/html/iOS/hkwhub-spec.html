@@ -1178,9 +1178,11 @@ Result = true
 <dd><ul class="first simple">
 <li>Publish Message</li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre>{Command = &quot;set_party_mode&quot;,
- HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
- SesssionToken = &quot;PubNub-1000&quot;}
+<div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SesssionToken = &quot;PubNub-1000&quot;,
+Command = &quot;set_party_mode&quot;
+}
 </pre></div>
 </div>
 <ul class="simple">
@@ -1328,10 +1330,12 @@ ResponseOf = &quot;media_list&quot;
 <dd><ul class="first simple">
 <li>Publish Message</li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre>{Command = &quot;play_hub_media&quot;,
- HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
- PersistentID = 7387446959931482519,
- SesssionToken = &quot;PubNub-1000&quot;}
+<div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+Command = &quot;play_hub_media&quot;,
+PersistentID = 7387446959931482519,
+SesssionToken = &quot;PubNub-1000&quot;
+}
 </pre></div>
 </div>
 <ul class="simple">
@@ -1341,7 +1345,7 @@ ResponseOf = &quot;media_list&quot;
 HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
 SessionToken = &quot;PubNub-1000&quot;,
 ResponseOf = &quot;play_hub_media&quot;,
-Result = 10
+Result = true
 }
 </pre></div>
 </div>
@@ -1382,6 +1386,33 @@ Result = 10
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;play_hub_media_party_mode&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+PersistentID = 7387446959931482519,
+SesssionToken = &quot;PubNub-1000&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;play_hub_media_party_mode&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -1411,6 +1442,34 @@ Result = 10
 <li>Response:</li>
 </ul>
 <div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;play_hub_media_selected_speakers&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+PersistentID = 7387446959931482519,
+SesssionToken = &quot;PubNub-1000&quot;,
+DeviceIDList = 34317244381360,129321920968880
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;play_hub_media_selected_speakers&quot;,
+Result = true
+}
 </pre></div>
 </div>
 </dd>
@@ -1463,6 +1522,35 @@ Result = 10
 <p class="first admonition-title">Note</p>
 <p class="last">This API call takes several hundreds millisecond to return the response.</p>
 </div>
+<ul>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;play_web_media&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+MediaUrl = &quot;http://seonman.github.io/music/hyolyn.mp3&quot;
+SesssionToken = &quot;PubNub-1000&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;play_web_media&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 <hr class="docutils" />
 <div class="section" id="play-a-song-from-web-server-as-party-mode">
@@ -1505,6 +1593,35 @@ Result = 10
 <p class="first admonition-title">Note</p>
 <p class="last">This API call takes several hundreds millisecond to return the response.</p>
 </div>
+<ul>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;play_web_media_party_mode&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+MediaUrl = &quot;http://seonman.github.io/music/hyolyn.mp3&quot;
+SesssionToken = &quot;PubNub-1000&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;play_web_media_party_mode&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 <hr class="docutils" />
 <div class="section" id="play-a-song-from-web-server-with-selected-speakers">
@@ -1530,7 +1647,7 @@ Result = 10
 <dd><ul class="first simple">
 <li>Request:</li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/play_web_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3&amp;DeviceIDList=34317244381360,129321920968880&quot;&quot;``
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/play_web_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3&amp;DeviceIDList=34317244381360,129321920968880
 </pre></div>
 </div>
 <ul class="simple">
@@ -1547,10 +1664,41 @@ Result = 10
 <p class="first admonition-title">Note</p>
 <p class="last">This API call takes several hundreds millisecond to return the response.</p>
 </div>
+<ul>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;play_web_media_selected_speakers&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+MediaUrl = &quot;http://seonman.github.io/music/hyolyn.mp3&quot;
+SesssionToken = &quot;PubNub-1000&quot;,
+DeviceIDList = &quot;34317244381360,129321920968880&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;play_web_media_selected_speakers&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 <hr class="docutils" />
 <div class="section" id="pause-the-current-playback">
 <h4>Pause the Current Playback<a class="headerlink" href="#pause-the-current-playback" title="Permalink to this headline">¶</a></h4>
+<p>Pauses the current playback. The client can resue the playback by <code class="docutils literal"><span class="pre">resume_hub_media</span></code>.</p>
 <ul>
 <li><p class="first">API: GET /api/v1/pause_play?SessionToken=&lt;session token&gt;</p>
 </li>
@@ -1585,9 +1733,11 @@ Result = 10
 <dd><ul class="first simple">
 <li>Publish Message</li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre>{Command = &quot;pause_play&quot;,
- HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
- SesssionToken = &quot;PubNub-1000&quot;}
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;pause_play&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SesssionToken = &quot;PubNub-1000&quot;
+}
 </pre></div>
 </div>
 <ul class="simple">
@@ -1637,6 +1787,33 @@ Result = true
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+Command = &quot;resume_hub_media&quot;,
+PersistentID = 7387446959931482519,
+SesssionToken = &quot;PubNub-1000&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;resume_hub_media&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -1665,6 +1842,33 @@ Result = true
 <li>Response:</li>
 </ul>
 <div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+Command = &quot;resume_hub_media_party_mode&quot;,
+PersistentID = 7387446959931482519,
+SesssionToken = &quot;PubNub-1000&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;resume_hub_media_party_mode&quot;,
+Result = true
+}
 </pre></div>
 </div>
 </dd>
@@ -1703,6 +1907,34 @@ Result = true
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+Command = &quot;resume_hub_media_selected_speakers&quot;,
+PersistentID = 7387446959931482519,
+SesssionToken = &quot;PubNub-1000&quot;,
+DeviceIDList = &quot;34317244381360,129321920968880&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;resume_hub_media_selected_speakers&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -1735,6 +1967,32 @@ Result = true
 </pre></div>
 </div>
 </div></blockquote>
+</li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+Command = &quot;stop_play&quot;,
+SesssionToken = &quot;PubNub-1000&quot;,
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;stop_play&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -1797,7 +2055,7 @@ Result = true
 HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
 SessionToken = &quot;PubNub-1000&quot;,
 Envet = PlaybackTimeChanged,
-PlaybackTime = 10
+PlaybackTime = 15
 }
 </pre></div>
 </div>
@@ -1832,6 +2090,32 @@ PlaybackTime = 10
 <li>Response:</li>
 </ul>
 <div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+Command = &quot;is_playing&quot;,
+SesssionToken = &quot;PubNub-1000&quot;,
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;is_playing&quot;,
+Result = true
+}
 </pre></div>
 </div>
 </dd>
@@ -1878,9 +2162,11 @@ PlaybackTime = 10
 <dd><ul class="first simple">
 <li>Publish Message</li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre>{Command = &quot;get_volume&quot;,
- HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
- SesssionToken = &quot;PubNub-1000&quot;}
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;get_volume&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SesssionToken = &quot;PubNub-1000&quot;
+}
 </pre></div>
 </div>
 <ul class="simple">
@@ -1889,6 +2175,7 @@ PlaybackTime = 10
 <div class="last highlight-json"><div class="highlight"><pre>{
 HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
 ResponseOf = &quot;get_volume&quot;,
+SesssionToken = &quot;PubNub-1000&quot;,
 Volume = 10
 }
 </pre></div>
@@ -1930,6 +2217,33 @@ Volume = 10
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;get_volume_device&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SesssionToken = &quot;PubNub-1000&quot;,
+DeviceID=1234567
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+ResponseOf = &quot;get_volume_device&quot;,
+SesssionToken = &quot;PubNub-1000&quot;,
+Volume = 10
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -1958,6 +2272,33 @@ Volume = 10
 <li>Response:</li>
 </ul>
 <div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;set_volume&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SesssionToken = &quot;PubNub-1000&quot;,
+Volume = 10
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+ResponseOf = &quot;set_volume&quot;,
+SesssionToken = &quot;PubNub-1000&quot;,
+Result = true
+}
 </pre></div>
 </div>
 </dd>
@@ -1996,8 +2337,37 @@ Volume = 10
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;set_volume_device&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SesssionToken = &quot;PubNub-1000&quot;,
+DeviceID = 1234567,
+Volume = 10
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+ResponseOf = &quot;set_volume_device&quot;,
+SesssionToken = &quot;PubNub-1000&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
+<hr class="docutils" />
 <div class="section" id="device-status-change-event-only-available-for-pubnub-mode">
 <h4>Device Status Change Event (only available for PubNub mode)<a class="headerlink" href="#device-status-change-event-only-available-for-pubnub-mode" title="Permalink to this headline">¶</a></h4>
 <ul>
