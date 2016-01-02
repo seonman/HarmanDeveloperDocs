@@ -571,6 +571,22 @@ Starts a new session.
 
 		{"ResponseOf":"init_session","SessionToken":"r:abciKaTbUgdpQFuvYtgMm0FRh"}
 
+- PubNub
+	- Publish Message
+
+		.. code-block:: json
+
+			{Command = "init_session"}
+
+	- Message from HKWHub (via Subscribe)
+
+		.. code-block:: json
+
+			{HKWHubUUID = "XXX-XXX-XXX-XXX",
+			SessionToken = "PubNub-1000",
+			ResponseOf = "init_session"
+			}
+			
 ----
 
 Close Session
