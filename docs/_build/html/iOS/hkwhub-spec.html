@@ -2373,9 +2373,24 @@ Result = true
 <ul>
 <li><dl class="first docutils">
 <dt>PubNub</dt>
-<dd><ul class="first simple">
-<li>Whenever a speaker status change occurs, the HKWHub sends DeviceStateUpdated event to subscribers.</li>
-<li>Example:</li>
+<dd><ul class="first">
+<li><p class="first">Whenever a speaker status change occurs, the HKWHub sends DeviceStateUpdated event to subscribers.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Type of Reason</dt>
+<dd><ul class="first last simple">
+<li>NetworkUnavailable : the network became unavailable</li>
+<li>DeviceAvailable : a device became available</li>
+<li>DeviceUnavailable : a device becaome unavailable</li>
+<li>DeviceError : some error occured to a particular speaker</li>
+<li>SpeakerInfoUpdated: some of speaker information has been updated</li>
+<li>WiFiSignalChanged: wifi signal has changed</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Example:</p>
+</li>
 </ul>
 <div class="last highlight-json"><div class="highlight"><pre>{
 Event = DeviceStateUpdated,

@@ -1872,6 +1872,14 @@ Device Status Change Event (only available for PubNub mode)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 - PubNub
 	- Whenever a speaker status change occurs, the HKWHub sends DeviceStateUpdated event to subscribers.
+	- Type of Reason
+		- NetworkUnavailable : the network became unavailable
+		- DeviceAvailable : a device became available
+		- DeviceUnavailable : a device becaome unavailable
+		- DeviceError : some error occured to a particular speaker
+		- SpeakerInfoUpdated: some of speaker information has been updated
+		- WiFiSignalChanged: wifi signal has changed
+		
 	- Example:
 	
 	.. code-block:: json
