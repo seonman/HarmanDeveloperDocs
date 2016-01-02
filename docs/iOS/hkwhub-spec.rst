@@ -537,7 +537,9 @@ All the APIS are in REST API protocol.
 
 .. Note::
 
-	PubNub server mode does not use REST API. Instead, each client needs to subscribe to the PubNub channel to get events from HKWHub, and use publish message to send request to HKWHub. The commands and parameters of each command are the same as REST API specification. So, we will include PubNub message specification along with REST API specification.
+	PubNub server mode does not use REST API. Instead, PubNub client needs to subscribe to the PubNub channel to get events from HKWHub, and use publish message to send request to HKWHub. The commands and parameters of each command are the same as REST API specification. However, PubNub message needs to include a few additional parameters in the JSON data to specify the HKWHub UUID that are talking to. The response message coming from the HKWHub app will include **ResponseOf** parameters to specify which request the resonse was for.
+	
+	So, we will describe PubNub message specification along with REST API specification here.
 
 Session Management
 ~~~~~~~~~~~~~~~~~~~~
@@ -574,18 +576,18 @@ Starts a new session.
 - PubNub
 	- Publish Message
 
-		.. code-block:: json
+	.. code-block:: json
 
-			{Command = "init_session"}
+		{Command = "init_session"}
 
 	- Message from HKWHub (via Subscribe)
 
-		.. code-block:: json
+	.. code-block:: json
 
-			{HKWHubUUID = "XXX-XXX-XXX-XXX",
-			SessionToken = "PubNub-1000",
-			ResponseOf = "init_session"
-			}
+		{HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		ResponseOf = "init_session"
+		}
 			
 ----
 
@@ -785,7 +787,27 @@ Addes all speakers to playback session. Once it is done, all speakers will play 
 	.. code-block:: json
 
 		{"Result":"true"}
-	
+
+			
+- PubNub
+	- Publish Message
+
+	.. code-block:: json
+
+		{Command = "set_party_mode",
+		 HKWHubUUID = "XXX-XXX-XXX-XXX",
+		 SesssionToken = "PubNub-1000"}
+
+	- Message from HKWHub (via Subscribe)
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		ResponseOf = "set_party_mode",
+		Result = true
+		}
+		
 ----
 
 Media Playback Management
@@ -829,6 +851,37 @@ Returns the list of media items added to the Media List of the app. User can add
 			"Duration":257,
 			"AlbumTitle":"Wordplay [SINGLE EP]"}
 			]}
+			
+- PubNub
+	- Publish Message
+
+	.. code-block:: json
+
+		{Command = "media_list",
+		 HKWHubUUID = "XXX-XXX-XXX-XXX",
+		 SesssionToken = "PubNub-1000"}
+
+	- Message from HKWHub (via Subscribe)
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		MediaList = [
+			{"PersistentID":"7387446959931482519",
+			"Title":"I Will Run To You",
+			"Artist":"Hillsong",
+			"Duration":436,
+			"AlbumTitle":"Simply Worship"
+			},
+			{"PersistentID":"5829171347867182746",
+			"Title":"I'm Yours [ORIGINAL DEMO]",
+			"Artist":"Jason Mraz",
+			"Duration":257,
+			"AlbumTitle":"Wordplay [SINGLE EP]"}
+			],
+		ResponseOf = "media_list"
+		}
 	
 ----
 
@@ -856,6 +909,27 @@ Plays a song in the Media List of the Hub app. Each music item is identified wit
 
 		{"Result":"true"}
 
+- PubNub
+	- Publish Message
+
+	.. code-block:: json
+
+		{Command = "play_hub_media",
+		 HKWHubUUID = "XXX-XXX-XXX-XXX",
+		 PersistentID = 7387446959931482519,
+		 SesssionToken = "PubNub-1000"}
+
+	- Message from HKWHub (via Subscribe)
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		ResponseOf = "play_hub_media",
+		Result = 10
+		}
+		
 ----
 
 Play a song in the Media list as party mode
@@ -1014,6 +1088,26 @@ Pause the Current Playback
 	.. code-block:: json
 
 		{"Result":"true"}
+
+- PubNub
+	- Publish Message
+
+	.. code-block:: json
+
+		{Command = "pause_play",
+		 HKWHubUUID = "XXX-XXX-XXX-XXX",
+		 SesssionToken = "PubNub-1000"}
+
+	- Message from HKWHub (via Subscribe)
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		ResponseOf = "pause_play",
+		Result = true
+		}
 	
 ----
 
@@ -1130,6 +1224,20 @@ Get the Playback Status (Current Playback State and Elapsed Time)
 
 		{"PlaybackState":"PlayerStatePlaying",
 		 "TimeElapsed":"15"}
+		 
+- PubNub
+	- PubNub mode does not support playback_status command, because clients subscribing the channel will automatically receive the playback_status event from the HKWHub app when an event is available.
+	- Event from HKWHub app
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		Envet = PlaybackTimeChanged,
+		PlaybackTime = 10
+		}
+	
 
 ----
 
@@ -1175,6 +1283,25 @@ Get Volume for all Devices
 
 		{"Volume":"10"}
 
+- PubNub
+	- Publish Message
+
+	.. code-block:: json
+
+		{Command = "get_volume",
+		 HKWHubUUID = "XXX-XXX-XXX-XXX",
+		 SesssionToken = "PubNub-1000"}
+
+	- Message from HKWHub (via Subscribe)
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		ResponseOf = "get_volume",
+		Volume = 10
+		}
+		
 ----
 
 Get Volume for a particular device
@@ -1238,3 +1365,20 @@ Set Volume for a particular device
 	.. code-block:: json
 
 		{"Result":"true"}
+		
+		
+Device Status Change Event (only available for PubNub mode)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- PubNub
+	- Whenever a speaker status change occurs, the HKWHub sends DeviceStateUpdated event to subscribers.
+	- Example:
+	
+	.. code-block:: json
+
+		{
+		Event = DeviceStateUpdated,
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		Reason = SpeakerInfoUpdated,
+		SessionToken = "PubNub-1000"
+		}
+	

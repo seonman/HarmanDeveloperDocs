@@ -583,7 +583,8 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">PubNub server mode does not use REST API. Instead, each client needs to subscribe to the PubNub channel to get events from HKWHub, and use publish message to send request to HKWHub. The commands and parameters of each command are the same as REST API specification. So, we will include PubNub message specification along with REST API specification.</p>
+<p>PubNub server mode does not use REST API. Instead, PubNub client needs to subscribe to the PubNub channel to get events from HKWHub, and use publish message to send request to HKWHub. The commands and parameters of each command are the same as REST API specification. However, PubNub message needs to include a few additional parameters in the JSON data to specify the HKWHub UUID that are talking to. The response message coming from the HKWHub app will include <strong>ResponseOf</strong> parameters to specify which request the resonse was for.</p>
+<p class="last">So, we will describe PubNub message specification along with REST API specification here.</p>
 </div>
 <div class="section" id="session-management">
 <h3>Session Management<a class="headerlink" href="#session-management" title="Permalink to this headline">¶</a></h3>
@@ -646,25 +647,21 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 </li>
 <li><dl class="first docutils">
 <dt>PubNub</dt>
-<dd><ul class="first last">
-<li><p class="first">Publish Message</p>
-<blockquote>
-<div><div class="highlight-json"><div class="highlight"><pre>{Command = &quot;init_session&quot;}
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{Command = &quot;init_session&quot;}
 </pre></div>
 </div>
-</div></blockquote>
-</li>
-<li><p class="first">Message from HKWHub (via Subscribe)</p>
-<blockquote>
-<div><div class="highlight-json"><div class="highlight"><pre>{HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
 SessionToken = &quot;PubNub-1000&quot;,
 ResponseOf = &quot;init_session&quot;
 }
 </pre></div>
 </div>
-</div></blockquote>
-</li>
-</ul>
 </dd>
 </dl>
 </li>
@@ -952,6 +949,29 @@ ResponseOf = &quot;init_session&quot;
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{Command = &quot;set_party_mode&quot;,
+ HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+ SesssionToken = &quot;PubNub-1000&quot;}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+ResponseOf = &quot;set_party_mode&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 </div>
@@ -1006,6 +1026,41 @@ ResponseOf = &quot;init_session&quot;
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{Command = &quot;media_list&quot;,
+ HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+ SesssionToken = &quot;PubNub-1000&quot;}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+MediaList = [
+        {&quot;PersistentID&quot;:&quot;7387446959931482519&quot;,
+        &quot;Title&quot;:&quot;I Will Run To You&quot;,
+        &quot;Artist&quot;:&quot;Hillsong&quot;,
+        &quot;Duration&quot;:436,
+        &quot;AlbumTitle&quot;:&quot;Simply Worship&quot;
+        },
+        {&quot;PersistentID&quot;:&quot;5829171347867182746&quot;,
+        &quot;Title&quot;:&quot;I&#39;m Yours [ORIGINAL DEMO]&quot;,
+        &quot;Artist&quot;:&quot;Jason Mraz&quot;,
+        &quot;Duration&quot;:257,
+        &quot;AlbumTitle&quot;:&quot;Wordplay [SINGLE EP]&quot;}
+        ],
+ResponseOf = &quot;media_list&quot;
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -1039,6 +1094,31 @@ ResponseOf = &quot;init_session&quot;
 <li>Response:</li>
 </ul>
 <div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{Command = &quot;play_hub_media&quot;,
+ HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+ PersistentID = 7387446959931482519,
+ SesssionToken = &quot;PubNub-1000&quot;}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;play_hub_media&quot;,
+Result = 10
+}
 </pre></div>
 </div>
 </dd>
@@ -1276,6 +1356,30 @@ ResponseOf = &quot;init_session&quot;
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{Command = &quot;pause_play&quot;,
+ HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+ SesssionToken = &quot;PubNub-1000&quot;}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;pause_play&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -1459,6 +1563,23 @@ ResponseOf = &quot;init_session&quot;
 </dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>PubNub mode does not support playback_status command, because clients subscribing the channel will automatically receive the playback_status event from the HKWHub app when an event is available.</li>
+<li>Event from HKWHub app</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+Envet = PlaybackTimeChanged,
+PlaybackTime = 10
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <hr class="docutils" />
@@ -1523,6 +1644,29 @@ ResponseOf = &quot;init_session&quot;
 <li>Response:</li>
 </ul>
 <div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Volume&quot;</span><span class="p">:</span><span class="s2">&quot;10&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{Command = &quot;get_volume&quot;,
+ HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+ SesssionToken = &quot;PubNub-1000&quot;}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+ResponseOf = &quot;get_volume&quot;,
+Volume = 10
+}
 </pre></div>
 </div>
 </dd>
@@ -1623,6 +1767,28 @@ ResponseOf = &quot;init_session&quot;
 <li>Response:</li>
 </ul>
 <div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="device-status-change-event-only-available-for-pubnub-mode">
+<h4>Device Status Change Event (only available for PubNub mode)<a class="headerlink" href="#device-status-change-event-only-available-for-pubnub-mode" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Whenever a speaker status change occurs, the HKWHub sends DeviceStateUpdated event to subscribers.</li>
+<li>Example:</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+Event = DeviceStateUpdated,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+Reason = SpeakerInfoUpdated,
+SessionToken = &quot;PubNub-1000&quot;
+}
 </pre></div>
 </div>
 </dd>
@@ -1735,6 +1901,7 @@ ResponseOf = &quot;init_session&quot;
 <li><a class="reference internal" href="#get-volume-for-a-particular-device">Get Volume for a particular device</a></li>
 <li><a class="reference internal" href="#set-volume-for-all-devices">Set Volume for all devices</a></li>
 <li><a class="reference internal" href="#set-volume-for-a-particular-device">Set Volume for a particular device</a></li>
+<li><a class="reference internal" href="#device-status-change-event-only-available-for-pubnub-mode">Device Status Change Event (only available for PubNub mode)</a></li>
 </ul>
 </li>
 </ul>
