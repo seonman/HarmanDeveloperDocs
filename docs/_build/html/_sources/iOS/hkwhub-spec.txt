@@ -556,6 +556,7 @@ Starts a new session.
 - Local Server mode	
 	- API: **GET** /api/v1/init_session
 	- Body : none
+	- Note that the message is sent as **GET** mode, instead of **POST**.
 	
 - Response
 	- Returns a unique session token
@@ -581,6 +582,7 @@ Starts a new session.
 		{Command = "init_session"}
 
 	- Message from HKWHub (via Subscribe)
+		- Note that the response of ``init_session`` will contain **HKWHubUUID** to specify the HKWHub app the PubNub client is getting talking to. The subsequent Publish message should include 
 
 	.. code-block:: json
 
@@ -688,6 +690,61 @@ Get the list of devices and their information
 			"DeviceID":"129321920968880"
 			}]
 		}
+		
+- PubNub
+	- Publish message
+	
+	.. code-block:: json	
+	
+		{
+		Command = "device_list",
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000"
+		}
+		
+	- Response message (from Subscribed)
+	
+	.. code-block:: json	
+	
+ .. code-block:: json
+
+ 	   {
+	   HKWHubUUID = "XXX-XXX-XXX-XXX",
+	   SessionToken = "PubNub-1000",
+	   ResponseOf = "device_list",
+	   DeviceList = 
+			[{"GroupName":"Bathroom", 
+			"Role":21, 
+			"MacAddress":"b0:38:29:1b:36:1f", 
+			"WifiSignalStrength":-47, 
+			"Port":44055, 
+			"Active":true, 
+			"DeviceName":"Adapt1", 
+			"Version":"0.1.6.2", 
+			"ModelName":"Omni Adapt", 
+			"IPAddress":"192.168.1.40", 
+			"GroupID":"3431724438", 
+			"Volume":47, 
+			"IsPlaying":false, 
+			"DeviceID":"34317244381360"
+			},
+			{"GroupName":"Temp", 
+			"Role":21, 
+			"MacAddress":"b0:38:29:1b:9e:75", 
+			"WifiSignalStrength":-53, 
+			"Port":44055, 
+			"Active":true, 
+			"DeviceName":"Adapt", 
+			"Version":"0.1.6.2", 
+			"ModelName":"Omni Adapt", 
+			"IPAddress":"192.168.1.39", 
+			"GroupID":"1293219209", 
+			"Volume":47, 
+			"IsPlaying":false, 
+			"DeviceID":"129321920968880"
+			}]
+		}
+	
 
 ----
 
@@ -766,6 +823,30 @@ Removes a speaker from playback session. Once a speaker is removed, then the spe
 	.. code-block:: json
 
 		{"Result":"true"}
+		
+- PubNub
+	- Publish message
+	
+	.. code-block:: json
+	
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		Command = "remove_device_from_session",
+		DeviceID = "129321920968880"
+		}
+
+		
+	- Response: 
+	
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		ResponseOf = "remove_device_from_session",
+		Result = true
+		}
 	
 
 Set party mode

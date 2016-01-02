@@ -615,6 +615,7 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <dd><ul class="first last simple">
 <li>API: <strong>GET</strong> /api/v1/init_session</li>
 <li>Body : none</li>
+<li>Note that the message is sent as <strong>GET</strong> mode, instead of <strong>POST</strong>.</li>
 </ul>
 </dd>
 </dl>
@@ -653,8 +654,15 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <div class="highlight-json"><div class="highlight"><pre>{Command = &quot;init_session&quot;}
 </pre></div>
 </div>
-<ul class="simple">
-<li>Message from HKWHub (via Subscribe)</li>
+<ul>
+<li><dl class="first docutils">
+<dt>Message from HKWHub (via Subscribe)</dt>
+<dd><ul class="first last simple">
+<li>Note that the response of <code class="docutils literal"><span class="pre">init_session</span></code> will contain <strong>HKWHubUUID</strong> to specify the HKWHub app the PubNub client is getting talking to. The subsequent Publish message should include</li>
+</ul>
+</dd>
+</dl>
+</li>
 </ul>
 <div class="last highlight-json"><div class="highlight"><pre>{HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
 SessionToken = &quot;PubNub-1000&quot;,
@@ -803,6 +811,69 @@ ResponseOf = &quot;init_session&quot;
 </pre></div>
 </div>
 </div></blockquote>
+<ul>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;device_list&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Response message (from Subscribed)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<blockquote>
+<div><div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;device_list&quot;,
+DeviceList =
+             [{&quot;GroupName&quot;:&quot;Bathroom&quot;,
+             &quot;Role&quot;:21,
+             &quot;MacAddress&quot;:&quot;b0:38:29:1b:36:1f&quot;,
+             &quot;WifiSignalStrength&quot;:-47,
+             &quot;Port&quot;:44055,
+             &quot;Active&quot;:true,
+             &quot;DeviceName&quot;:&quot;Adapt1&quot;,
+             &quot;Version&quot;:&quot;0.1.6.2&quot;,
+             &quot;ModelName&quot;:&quot;Omni Adapt&quot;,
+             &quot;IPAddress&quot;:&quot;192.168.1.40&quot;,
+             &quot;GroupID&quot;:&quot;3431724438&quot;,
+             &quot;Volume&quot;:47,
+             &quot;IsPlaying&quot;:false,
+             &quot;DeviceID&quot;:&quot;34317244381360&quot;
+             },
+             {&quot;GroupName&quot;:&quot;Temp&quot;,
+             &quot;Role&quot;:21,
+             &quot;MacAddress&quot;:&quot;b0:38:29:1b:9e:75&quot;,
+             &quot;WifiSignalStrength&quot;:-53,
+             &quot;Port&quot;:44055,
+             &quot;Active&quot;:true,
+             &quot;DeviceName&quot;:&quot;Adapt&quot;,
+             &quot;Version&quot;:&quot;0.1.6.2&quot;,
+             &quot;ModelName&quot;:&quot;Omni Adapt&quot;,
+             &quot;IPAddress&quot;:&quot;192.168.1.39&quot;,
+             &quot;GroupID&quot;:&quot;1293219209&quot;,
+             &quot;Volume&quot;:47,
+             &quot;IsPlaying&quot;:false,
+             &quot;DeviceID&quot;:&quot;129321920968880&quot;
+             }]
+     }
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 <hr class="docutils" />
 <div class="section" id="get-the-device-information">
@@ -911,6 +982,33 @@ ResponseOf = &quot;init_session&quot;
 <li>Response:</li>
 </ul>
 <div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+Command = &quot;remove_device_from_session&quot;,
+DeviceID = &quot;129321920968880&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Response:</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;remove_device_from_session&quot;,
+Result = true
+}
 </pre></div>
 </div>
 </dd>
