@@ -94,7 +94,7 @@ HKWHub app is an iOS app that uses HKWirelessHD SDK and acts as a Web Hub that h
 
 	Please refer to `HKWHub App`_ section of the documentation page for the REST API specification and other information.
 	
-.. _`HKWHub App`: http://harmandeveloperdocs.readthedocs.org/en/latest/hkwhub-spec.html
+.. _`HKWHub App`: http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html
 
 User can add songs or sound file from iOS Music app to the media list, so that client devices can access the list and play media in the list remotely by sending REST API request to the Hub app. For example, a door open/close sensor can send REST API request to play 'dog-barking' sound in the media list of the HKWHub app.
 
