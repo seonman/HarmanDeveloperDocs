@@ -1378,6 +1378,168 @@ Plays a song from Web server with selected speakers. The URL of the song to play
 	
 ----
 
+
+Play TTS (Text-to-Speech)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Plays a Text-to-Speech audio from VoiceRRS server. The Text to play is specified by ``Text`` parameter.
+
+.. note::
+
+	In order to use APIs for playing TTS (Text-To-Speech), you need to set VoiceRRS Application key on the setting menu of HKWHub App. You can go to the `VoiceRRS`_ web site to get your application key.
+
+.. _`VoiceRRS`: http://www.voicerss.org/
+
+.. note::
+
+	``play_tts`` does not specify speakers to play. It just uses the current session setting. If there is no speaker in the current session, then the play fails.
+	
+.. note::
+
+	``play_tts`` cannot be resumed. If it is paused by calling ``pause``, then it just stops playing music, and cannot resume.
+	
+	
+- API: GET /api/v1/play_tts?SessionToken=<session token>&Text=<Text>
+- Response
+	- Play TTS audio, and then return true or false.
+- Example:
+	- Request:
+	
+	.. code-block:: json
+	
+		http://<server_host_name>/api/v1/play_tts?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&Text="Hello World. How are you today?"
+			
+	- Response: 
+
+	.. code-block:: json
+
+		{"Result":"true"}
+
+.. Note::
+	This API call takes more than several hundreds millisecond to return the response, depending on the network condition.
+
+- PubNub
+	- Publish Message
+
+	.. code-block:: json
+
+		{
+		Command = "play_tts",
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		Text = "Hello World. How are you today?"
+		SesssionToken = "PubNub-1000"
+		}
+
+	- Message from HKWHub (via Subscribe)
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		ResponseOf = "play_tts",
+		Result = true
+		}
+		
+----
+
+Play TTS (Text-to-Speech) as party mode
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Plays a Text-to-Speech audio from VoiceRRS server with all speakers. The Text to play is specified by ``Text`` parameter.	
+
+- API: GET /api/v1/play_tts_party_mode?SessionToken=<session token>&Text=<Text>
+- Response
+	- Play TTS audio to all speakers, and then return true or false.
+- Example:
+	- Request:
+	
+	.. code-block:: json
+	
+		http://<server_host>/api/v1/play_tts_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&Text="Hello World. How are you today?"
+			
+	- Response: 
+
+	.. code-block:: json
+
+		{"Result":"true"}
+
+.. Note::
+	This API call takes several hundreds millisecond to return the response.
+	
+- PubNub
+	- Publish Message
+
+	.. code-block:: json
+
+		{
+		Command = "play_tts_party_mode",
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		Text = "Hello World. How are you today?"
+		SesssionToken = "PubNub-1000"
+		}
+
+	- Message from HKWHub (via Subscribe)
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		ResponseOf = "play_tts_party_mode",
+		Result = true
+		}
+	
+----
+
+Play a Song from Web Server with selected speakers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Plays a Text-to-Speech audio from VoiceRRS server with selected speakers. The Text to play is specified by ``Text`` parameter. The selected speakers are represented in ``DeviceIDList`` parameter as a list of ``DeviceID`` separated by ",".
+
+- API: GET /api/v1/play_tts_selected_speakers?SessionToken=<Session Token>&Text=<Text>&DeviceIDList=<xxx,xxx,...>
+- Response
+	- Play TTS from VoiceRSS server to selected speakers, and then return true or false.
+- Example:
+	- Request:
+	
+	.. code-block:: json
+	
+		http://<server_host>/api/v1/play_tts_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&Text="Hello World. How are you today?"&DeviceIDList=34317244381360,129321920968880
+
+	- Response: 
+
+	.. code-block:: json
+
+		{"Result":"true"}
+
+.. Note::
+	This API call takes several hundreds millisecond to return the response.
+	
+- PubNub
+	- Publish Message
+
+	.. code-block:: json
+
+		{
+		Command = "play_tts_selected_speakers",
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		Text = "Hello World. How are you today?"
+		SesssionToken = "PubNub-1000",
+		DeviceIDList = "34317244381360,129321920968880"
+		}
+
+	- Message from HKWHub (via Subscribe)
+
+	.. code-block:: json
+
+		{
+		HKWHubUUID = "XXX-XXX-XXX-XXX",
+		SessionToken = "PubNub-1000",
+		ResponseOf = "play_tts_selected_speakers",
+		Result = true
+		}
+	
+----
+
+
 Pause the Current Playback
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Pauses the current playback. The client can resue the playback by ``resume_hub_media``.

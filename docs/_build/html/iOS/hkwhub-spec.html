@@ -1691,6 +1691,220 @@ Result = true
 </ul>
 </div>
 <hr class="docutils" />
+<div class="section" id="play-tts-text-to-speech">
+<h4>Play TTS (Text-to-Speech)<a class="headerlink" href="#play-tts-text-to-speech" title="Permalink to this headline">¶</a></h4>
+<p>Plays a Text-to-Speech audio from VoiceRRS server. The Text to play is specified by <code class="docutils literal"><span class="pre">Text</span></code> parameter.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In order to use APIs for playing TTS (Text-To-Speech), you need to set VoiceRRS Application key on the setting menu of HKWHub App. You can go to the <a class="reference external" href="http://www.voicerss.org/">VoiceRRS</a> web site to get your application key.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">play_tts</span></code> does not specify speakers to play. It just uses the current session setting. If there is no speaker in the current session, then the play fails.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">play_tts</span></code> cannot be resumed. If it is paused by calling <code class="docutils literal"><span class="pre">pause</span></code>, then it just stops playing music, and cannot resume.</p>
+</div>
+<ul>
+<li><p class="first">API: GET /api/v1/play_tts?SessionToken=&lt;session token&gt;&amp;Text=&lt;Text&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Play TTS audio, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host_name&gt;/api/v1/play_tts?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;Text=&quot;Hello World. How are you today?&quot;
+</pre></div>
+</div>
+<ul class="simple">
+<li>Response:</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This API call takes more than several hundreds millisecond to return the response, depending on the network condition.</p>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;play_tts&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+Text = &quot;Hello World. How are you today?&quot;
+SesssionToken = &quot;PubNub-1000&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;play_tts&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="play-tts-text-to-speech-as-party-mode">
+<h4>Play TTS (Text-to-Speech) as party mode<a class="headerlink" href="#play-tts-text-to-speech-as-party-mode" title="Permalink to this headline">¶</a></h4>
+<p>Plays a Text-to-Speech audio from VoiceRRS server with all speakers. The Text to play is specified by <code class="docutils literal"><span class="pre">Text</span></code> parameter.</p>
+<ul>
+<li><p class="first">API: GET /api/v1/play_tts_party_mode?SessionToken=&lt;session token&gt;&amp;Text=&lt;Text&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Play TTS audio to all speakers, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/play_tts_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;Text=&quot;Hello World. How are you today?&quot;
+</pre></div>
+</div>
+<ul class="simple">
+<li>Response:</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This API call takes several hundreds millisecond to return the response.</p>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;play_tts_party_mode&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+Text = &quot;Hello World. How are you today?&quot;
+SesssionToken = &quot;PubNub-1000&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;play_tts_party_mode&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h4>Play a Song from Web Server with selected speakers<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>Plays a Text-to-Speech audio from VoiceRRS server with selected speakers. The Text to play is specified by <code class="docutils literal"><span class="pre">Text</span></code> parameter. The selected speakers are represented in <code class="docutils literal"><span class="pre">DeviceIDList</span></code> parameter as a list of <code class="docutils literal"><span class="pre">DeviceID</span></code> separated by &#8221;,&#8221;.</p>
+<ul>
+<li><p class="first">API: GET /api/v1/play_tts_selected_speakers?SessionToken=&lt;Session Token&gt;&amp;Text=&lt;Text&gt;&amp;DeviceIDList=&lt;xxx,xxx,...&gt;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Response</dt>
+<dd><ul class="first last simple">
+<li>Play TTS from VoiceRSS server to selected speakers, and then return true or false.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Example:</dt>
+<dd><ul class="first simple">
+<li>Request:</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>http://&lt;server_host&gt;/api/v1/play_tts_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0F&amp;Text=&quot;Hello World. How are you today?&quot;&amp;DeviceIDList=34317244381360,129321920968880
+</pre></div>
+</div>
+<ul class="simple">
+<li>Response:</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This API call takes several hundreds millisecond to return the response.</p>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>PubNub</dt>
+<dd><ul class="first simple">
+<li>Publish Message</li>
+</ul>
+<div class="highlight-json"><div class="highlight"><pre>{
+Command = &quot;play_tts_selected_speakers&quot;,
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+Text = &quot;Hello World. How are you today?&quot;
+SesssionToken = &quot;PubNub-1000&quot;,
+DeviceIDList = &quot;34317244381360,129321920968880&quot;
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li>Message from HKWHub (via Subscribe)</li>
+</ul>
+<div class="last highlight-json"><div class="highlight"><pre>{
+HKWHubUUID = &quot;XXX-XXX-XXX-XXX&quot;,
+SessionToken = &quot;PubNub-1000&quot;,
+ResponseOf = &quot;play_tts_selected_speakers&quot;,
+Result = true
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
 <div class="section" id="pause-the-current-playback">
 <h4>Pause the Current Playback<a class="headerlink" href="#pause-the-current-playback" title="Permalink to this headline">¶</a></h4>
 <p>Pauses the current playback. The client can resue the playback by <code class="docutils literal"><span class="pre">resume_hub_media</span></code>.</p>
@@ -2491,6 +2705,9 @@ SessionToken = &quot;PubNub-1000&quot;
 <li><a class="reference internal" href="#play-a-song-from-web-server">Play a Song from Web Server</a></li>
 <li><a class="reference internal" href="#play-a-song-from-web-server-as-party-mode">Play a Song from Web Server as party mode</a></li>
 <li><a class="reference internal" href="#play-a-song-from-web-server-with-selected-speakers">Play a Song from Web Server with selected speakers</a></li>
+<li><a class="reference internal" href="#play-tts-text-to-speech">Play TTS (Text-to-Speech)</a></li>
+<li><a class="reference internal" href="#play-tts-text-to-speech-as-party-mode">Play TTS (Text-to-Speech) as party mode</a></li>
+<li><a class="reference internal" href="#id1">Play a Song from Web Server with selected speakers</a></li>
 <li><a class="reference internal" href="#pause-the-current-playback">Pause the Current Playback</a></li>
 <li><a class="reference internal" href="#resume-the-current-playback-with-hub-media">Resume the Current Playback with Hub Media</a></li>
 <li><a class="reference internal" href="#resume-the-current-playback-with-hub-media-as-party-mode">Resume the Current Playback with Hub Media as Party Mode</a></li>
