@@ -869,7 +869,7 @@ Add a Device to Session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Add a speaker to playback session. Once a speaker is added, then the speaker will play the music. There is no impact of this call to other speakers.
 
-- API: GET /api/v1/add_device_tosession?SessionToken=<session token>&DeviceID=<device id>
+- API: GET /api/v1/add_device_to_session?SessionToken=<session token>&DeviceID=<device id>
 - Response
 	- Returns true or false
 - Example:
