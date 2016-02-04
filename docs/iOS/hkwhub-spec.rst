@@ -2064,7 +2064,7 @@ In order to access the HKIoTCloud REST APIs to control Omni speakers, your HKIoT
 
 .. NOTE::
 
-	Please refer Matthias Biehl's `OAuth 2.0 Getting Started in Web-API Security`_ for your reference on OAuth2. This document uses some of the pictures from that book.
+	Please refer Matthias Biehl's `OAuth 2.0 Getting Started in Web-API Security`_ for your reference on OAuth2. This document uses some of illustration drawings from that book.
 	
 .. _OAuth 2.0 Getting Started in Web-API Security: http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1454629444&sr=8-1
 	
@@ -2127,6 +2127,11 @@ The response includes an authorization code.
 .. code-block:: json
 
 	https://your.app.com/oauthCallbackHKIoTCloud?code=0b368d49809048dd7424d6f7fd869a98f2372859
+
+The following illustration explains the procedures of getting authorization code.
+
+.. figure:: img/oauth2/auth_code.png
+	:scale: 70
 
 
 Next, your service leverages the returned authorization code to ask for an access token:
