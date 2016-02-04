@@ -2051,6 +2051,8 @@ Device Status Change Event (only available for PubNub mode)
 		SessionToken = "PubNub-1000"
 		}
 
+----
+
 
 OAuth2 Authorization API Specification
 -------------------------------------------------------
@@ -2102,7 +2104,10 @@ The consent request is constructed as follows:
 
 Send as GET request.
 
-https://hkiotcloud.herokuapp.com/oauth/authorize?response_type=code&client_id=n7HhiTnKYjJd4zmM&redirect_uri=https://your.app.com/oauthCallbackHKIoTCloud
+.. code-block:: json
+
+	https://hkiotcloud.herokuapp.com/oauth/authorize?response_type=code&client_id=n7HhiTnKYjJd4zmM&redirect_uri=https://your.app.com/oauthCallbackHKIoTCloud
+
 
 HKIoTCloud Returns a Response to Your Registration Website
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2113,7 +2118,10 @@ The response includes an authorization code.
 
 **Sample Authorizatino Code Grant Response:**
 
-https://your.app.com/oauthCallbackHKIoTCloud?code=ANdNAVhyhqirUelHGEHA&scope=alexa%3Aall
+.. code-block:: json
+
+	https://your.app.com/oauthCallbackHKIoTCloud?code=0b368d49809048dd7424d6f7fd869a98f2372859
+
 
 Next, your service leverages the returned authorization code to ask for an access token:
 
@@ -2133,21 +2141,27 @@ Next, your service leverages the returned authorization code to ask for an acces
 
 **Sample Request:**
 
-POST /oauth/token HTTP/1.1
-Host: hkiotcloud.herokuapp.com
-Content-Type: application/x-www-form-urlencoded
-Cache-Control: no-cache
+.. code-block:: json
+
+	POST /oauth/token HTTP/1.1
+	Host: hkiotcloud.herokuapp.com
+	Content-Type: application/x-www-form-urlencoded
+	Cache-Control: no-cache
  
-grant_type=authorization_code&code=2b3711911f4f2263e785eeda386046ccc8da6aee&client_id=n7HhiTnKYjJd4zmM&client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY&redirect_uri=https://hkvoicecloud.herokuapp.com/oauthCallbackHKIoTCloud
+	grant_type=authorization_code&code=2b3711911f4f2263e785eeda386046ccc8da6aee&client_id=n7HhiTnKYjJd4zmM&client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY&redirect_uri=https://hkvoicecloud.herokuapp.com/oauthCallbackHKIoTCloud
+
 
 **Sample Response:**
 
-{
-    "access_token": "902da699ed1d5d511bd750366889f3260c2015b4",
-    "expires_in": 3600,
-    "refresh_token": "5defcb0a9a49ac9b2403b8c78600638238d81011",
-    "token_type": "bearer"
-}	
+.. code-block:: json
+
+	{
+    	"access_token": "902da699ed1d5d511bd750366889f3260c2015b4",
+		"expires_in": 3600,
+		"refresh_token": "5defcb0a9a49ac9b2403b8c78600638238d81011",
+		"token_type": "bearer"
+	}	
+
 
 Transfer the access and refresh tokens to the user's product.
 
@@ -2181,22 +2195,27 @@ The access token is valid for one hour. When the access token expires or is abou
 
 **Sample Request:**
 
-POST /oauth/token HTTP/1.1
-Host: hkiotcloud.herukuapp.com
-Content-Type: application/x-www-form-urlencoded
-Cache-Control: no-cache
+.. code-block:: json
+
+	POST /oauth/token HTTP/1.1
+	Host: hkiotcloud.herukuapp.com
+	Content-Type: application/x-www-form-urlencoded
+	Cache-Control: no-cache
  
-grant_type=refresh_token&refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81011&client_id=n7HhiTnKYjJd4zmM&client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY
+	grant_type=refresh_token&refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81011&client_id=n7HhiTnKYjJd4zmM&client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY
+
 
 **Sample Response:**
 
-HTTP/1.1 200 OK
- 
-{
-    "access_token": "90da03bdceb15cf75d99ff99715ce87b29602651",
-    "expires_in": 3600,
-    "refresh_token": "6a762dfce9146dbf149f881c5aa15fc6cfdf1fd0",
-    "token_type": "bearer"
-}
+.. code-block:: json
+
+	HTTP/1.1 200 OK
+	 
+	{
+		"access_token": "90da03bdceb15cf75d99ff99715ce87b29602651",
+		"expires_in": 3600,
+		"refresh_token": "6a762dfce9146dbf149f881c5aa15fc6cfdf1fd0",
+		"token_type": "bearer"
+	}
 
 

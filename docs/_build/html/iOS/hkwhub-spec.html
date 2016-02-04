@@ -2616,6 +2616,7 @@ SessionToken = &quot;PubNub-1000&quot;
 </div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="oauth2-authorization-api-specification">
 <h2>OAuth2 Authorization API Specification<a class="headerlink" href="#oauth2-authorization-api-specification" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="introduction">
@@ -2662,14 +2663,18 @@ SessionToken = &quot;PubNub-1000&quot;
 </ul>
 <p><strong>Sample Request:</strong></p>
 <p>Send as GET request.</p>
-<p><a class="reference external" href="https://hkiotcloud.herokuapp.com/oauth/authorize?response_type=code&amp;client_id=n7HhiTnKYjJd4zmM&amp;redirect_uri=https://your.app.com/oauthCallbackHKIoTCloud">https://hkiotcloud.herokuapp.com/oauth/authorize?response_type=code&amp;client_id=n7HhiTnKYjJd4zmM&amp;redirect_uri=https://your.app.com/oauthCallbackHKIoTCloud</a></p>
+<div class="highlight-json"><div class="highlight"><pre>https://hkiotcloud.herokuapp.com/oauth/authorize?response_type=code&amp;client_id=n7HhiTnKYjJd4zmM&amp;redirect_uri=https://your.app.com/oauthCallbackHKIoTCloud
+</pre></div>
+</div>
 </div>
 <div class="section" id="hkiotcloud-returns-a-response-to-your-registration-website">
 <h3>HKIoTCloud Returns a Response to Your Registration Website<a class="headerlink" href="#hkiotcloud-returns-a-response-to-your-registration-website" title="Permalink to this headline">¶</a></h3>
 <p>After the user is authenticated, the user is redirected to the URI that you provided in the <code class="docutils literal"><span class="pre">redirect_uri</span></code> parameter of the request.</p>
 <p>The response includes an authorization code.</p>
 <p><strong>Sample Authorizatino Code Grant Response:</strong></p>
-<p><a class="reference external" href="https://your.app.com/oauthCallbackHKIoTCloud?code=ANdNAVhyhqirUelHGEHA&amp;scope=alexa%3Aall">https://your.app.com/oauthCallbackHKIoTCloud?code=ANdNAVhyhqirUelHGEHA&amp;scope=alexa%3Aall</a></p>
+<div class="highlight-json"><div class="highlight"><pre>https://your.app.com/oauthCallbackHKIoTCloud?code=0b368d49809048dd7424d6f7fd869a98f2372859
+</pre></div>
+</div>
 <p>Next, your service leverages the returned authorization code to ask for an access token:</p>
 <ul class="simple">
 <li>Send a <strong>POST</strong> request to <a class="reference external" href="https://hkiotcloud.herokuapp.com/oauth/token">https://hkiotcloud.herokuapp.com/oauth/token</a> with the following parameters:</li>
@@ -2687,20 +2692,23 @@ SessionToken = &quot;PubNub-1000&quot;
 <li><code class="docutils literal"><span class="pre">redirect_uri</span></code> : The return URI that you added to your app&#8217;s profile when signing up.</li>
 </ul>
 <p><strong>Sample Request:</strong></p>
-<p>POST /oauth/token HTTP/1.1
+<div class="highlight-json"><div class="highlight"><pre>POST /oauth/token HTTP/1.1
 Host: hkiotcloud.herokuapp.com
 Content-Type: application/x-www-form-urlencoded
-Cache-Control: no-cache</p>
-<p>grant_type=authorization_code&amp;code=2b3711911f4f2263e785eeda386046ccc8da6aee&amp;client_id=n7HhiTnKYjJd4zmM&amp;client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY&amp;redirect_uri=https://hkvoicecloud.herokuapp.com/oauthCallbackHKIoTCloud</p>
+Cache-Control: no-cache
+
+grant_type=authorization_code&amp;code=2b3711911f4f2263e785eeda386046ccc8da6aee&amp;client_id=n7HhiTnKYjJd4zmM&amp;client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY&amp;redirect_uri=https://hkvoicecloud.herokuapp.com/oauthCallbackHKIoTCloud
+</pre></div>
+</div>
 <p><strong>Sample Response:</strong></p>
-<dl class="docutils">
-<dt>{</dt>
-<dd>&#8220;access_token&#8221;: &#8220;902da699ed1d5d511bd750366889f3260c2015b4&#8221;,
-&#8220;expires_in&#8221;: 3600,
-&#8220;refresh_token&#8221;: &#8220;5defcb0a9a49ac9b2403b8c78600638238d81011&#8221;,
-&#8220;token_type&#8221;: &#8220;bearer&#8221;</dd>
-</dl>
-<p>}</p>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+<span class="nt">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;902da699ed1d5d511bd750366889f3260c2015b4&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;expires_in&quot;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
+        <span class="nt">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="s2">&quot;5defcb0a9a49ac9b2403b8c78600638238d81011&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;token_type&quot;</span><span class="p">:</span> <span class="s2">&quot;bearer&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <p>Transfer the access and refresh tokens to the user&#8217;s product.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -2729,21 +2737,25 @@ Cache-Control: no-cache</p>
 <li><code class="docutils literal"><span class="pre">client_secret</span></code> : The application&#8217;s client secret. This information can be found on the HKIoTCloud website.</li>
 </ul>
 <p><strong>Sample Request:</strong></p>
-<p>POST /oauth/token HTTP/1.1
+<div class="highlight-json"><div class="highlight"><pre>POST /oauth/token HTTP/1.1
 Host: hkiotcloud.herukuapp.com
 Content-Type: application/x-www-form-urlencoded
-Cache-Control: no-cache</p>
-<p>grant_type=refresh_token&amp;refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81011&amp;client_id=n7HhiTnKYjJd4zmM&amp;client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY</p>
+Cache-Control: no-cache
+
+grant_type=refresh_token&amp;refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81011&amp;client_id=n7HhiTnKYjJd4zmM&amp;client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY
+</pre></div>
+</div>
 <p><strong>Sample Response:</strong></p>
-<p>HTTP/1.1 200 OK</p>
-<dl class="docutils">
-<dt>{</dt>
-<dd>&#8220;access_token&#8221;: &#8220;90da03bdceb15cf75d99ff99715ce87b29602651&#8221;,
-&#8220;expires_in&#8221;: 3600,
-&#8220;refresh_token&#8221;: &#8220;6a762dfce9146dbf149f881c5aa15fc6cfdf1fd0&#8221;,
-&#8220;token_type&#8221;: &#8220;bearer&#8221;</dd>
-</dl>
-<p>}</p>
+<div class="highlight-json"><div class="highlight"><pre>HTTP/1.1 200 OK
+
+{
+        &quot;access_token&quot;: &quot;90da03bdceb15cf75d99ff99715ce87b29602651&quot;,
+        &quot;expires_in&quot;: 3600,
+        &quot;refresh_token&quot;: &quot;6a762dfce9146dbf149f881c5aa15fc6cfdf1fd0&quot;,
+        &quot;token_type&quot;: &quot;bearer&quot;
+}
+</pre></div>
+</div>
 </div>
 </div>
 </div>
