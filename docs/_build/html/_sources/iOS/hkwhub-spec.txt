@@ -2050,4 +2050,153 @@ Device Status Change Event (only available for PubNub mode)
 		Reason = SpeakerInfoUpdated,
 		SessionToken = "PubNub-1000"
 		}
+
+
+OAuth2 Authorization API Specification
+-------------------------------------------------------
+
+Introduction
+~~~~~~~~~~~~~~~~
+
+In order to access the HKIoTCloud REST APIs to control Omni speakers, your HKIoTCloud-enabled product needs to obtain a HKIoTCloud access token that grans access to the APIs on behalf of the product's user.
+
+The workflow for obtaining and using an access token is as follows:
+
+1. The user visits your product registration website and enters information about their specific instance of your product.
+2. Your website creates a HKIoTCloud consent request using the user-supplied registration information and forwards the user to the HKIoTCloud website.
+3. The user logs in to HKIoTCloud.
+4. The user authorizes their instance of your product to be used with HKIoTCloud on their behalf.
+5. HKIoTCloud returns an access token to your product registration website.
+6. Your product registration website securely transfers the access token to the user's specifi instance of your product.
+7. The user's speific instance of your product uses the access token to make HKIoTCloud API calls.
+
+Types of Authorization
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+HKIoTCloud supports two types of authorization:
+
+
+- Authorization Code Grant - Send a client ID and a client secret to get an access token and a refresh token.
+
+- Password Grant (disabled, and not supported in security reason) - Send username and password along with client ID and client secret to get an access token and refresh token
+
 	
+.. Note::
+
+	You must generate a new access token every hour, that is, expiration is set to 3,600 seconds. You can use refresh token in conjunction with your client ID and client secret to obtain a new access token without your user having to re-authenticate.
+	
+
+Creating a Consent Request
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By creating a consent request, your user will be redirected to the HKIoTCloud website where they can enter their HKIoTCloud credentials in order to authorize their devices of your product to be used with the HKIoTCloud service.
+
+The consent request is constructed as follows:
+
+- Redirect the user to HKIoTCloud at https://hkiotcloud.herokuapp.com/oauth/token with the following URL-encoded query parameters:
+	- ``client_id`` : The client ID of your application. This information can be found on the HKIoTCloud website.
+	- ``response_type``: ``code`` for authorization code grant.
+	- ``redirect_uri`` : Specifies the return URI that you added to your app's  profile when signing up.
+
+**Sample Request:**
+
+Send as GET request.
+
+https://hkiotcloud.herokuapp.com/oauth/authorize?response_type=code&client_id=n7HhiTnKYjJd4zmM&redirect_uri=https://your.app.com/oauthCallbackHKIoTCloud
+
+HKIoTCloud Returns a Response to Your Registration Website
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After the user is authenticated, the user is redirected to the URI that you provided in the ``redirect_uri`` parameter of the request.
+
+The response includes an authorization code.
+
+**Sample Authorizatino Code Grant Response:**
+
+https://your.app.com/oauthCallbackHKIoTCloud?code=ANdNAVhyhqirUelHGEHA&scope=alexa%3Aall
+
+Next, your service leverages the returned authorization code to ask for an access token:
+
+- Send a **POST** request to https://hkiotcloud.herokuapp.com/oauth/token with the following parameters:
+
+**HTTP Header Parameters:**
+
+- ``Content-Type: application/x-www-form-urlencoded``
+
+**HTTP Body Parameters:**
+
+- ``grant_type: authorization_code``
+- ``code`` : The authorization code that was returned in the response.
+- ``client_id`` : Your application's client ID. This information can be found on the HKIoTCloud website.
+- ``client_secret`` : The application's client secret. This information can be found on the HKIoTCloud website.
+- ``redirect_uri`` : The return URI that you added to your app's profile when signing up.
+
+**Sample Request:**
+
+POST /oauth/token HTTP/1.1
+Host: hkiotcloud.herokuapp.com
+Content-Type: application/x-www-form-urlencoded
+Cache-Control: no-cache
+ 
+grant_type=authorization_code&code=2b3711911f4f2263e785eeda386046ccc8da6aee&client_id=n7HhiTnKYjJd4zmM&client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY&redirect_uri=https://hkvoicecloud.herokuapp.com/oauthCallbackHKIoTCloud
+
+**Sample Response:**
+
+{
+    "access_token": "902da699ed1d5d511bd750366889f3260c2015b4",
+    "expires_in": 3600,
+    "refresh_token": "5defcb0a9a49ac9b2403b8c78600638238d81011",
+    "token_type": "bearer"
+}	
+
+Transfer the access and refresh tokens to the user's product.
+
+.. NOTE::
+	
+	Currently, a refresh token is valid for one year, while an access token is valid only an hour and an authorization code is valid only a minute.
+
+
+Using the Access Token to Make HKIoTCloud API Calls
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When you call the HKIoTCloud API calls, pass the value of the access token into the request header. Specifically, create an ``Authorization`` header and give it the value ``Bearer <access token>``.
+
+Getting a New Access Token with Refresh Token
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The access token is valid for one hour. When the access token expires or is about to expire, you can exchange the refresh token for new access and refresh tokens.
+
+- Send a ``POST`` request to ``https://hkiotcloud.herokuapp.com/oauth/token`` with the following parameters:
+
+**HTTP Header Parameters:**
+
+- ``Content-Type: application/x-www-form-urlencoded``
+
+**HTTP Body Parameters:**
+
+- ``grant_type: refresh_token``
+- ``refresh_token`` : The refresh token returned with the last request for a new access token.
+- ``client_id`` : Your application's client ID. This information can be found on the HKIoTCloud website.
+- ``client_secret`` : The application's client secret. This information can be found on the HKIoTCloud website.
+
+**Sample Request:**
+
+POST /oauth/token HTTP/1.1
+Host: hkiotcloud.herukuapp.com
+Content-Type: application/x-www-form-urlencoded
+Cache-Control: no-cache
+ 
+grant_type=refresh_token&refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81011&client_id=n7HhiTnKYjJd4zmM&client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY
+
+**Sample Response:**
+
+HTTP/1.1 200 OK
+ 
+{
+    "access_token": "90da03bdceb15cf75d99ff99715ce87b29602651",
+    "expires_in": 3600,
+    "refresh_token": "6a762dfce9146dbf149f881c5aa15fc6cfdf1fd0",
+    "token_type": "bearer"
+}
+
+

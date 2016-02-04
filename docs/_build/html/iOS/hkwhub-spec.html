@@ -2616,6 +2616,136 @@ SessionToken = &quot;PubNub-1000&quot;
 </div>
 </div>
 </div>
+<div class="section" id="oauth2-authorization-api-specification">
+<h2>OAuth2 Authorization API Specification<a class="headerlink" href="#oauth2-authorization-api-specification" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="introduction">
+<h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<p>In order to access the HKIoTCloud REST APIs to control Omni speakers, your HKIoTCloud-enabled product needs to obtain a HKIoTCloud access token that grans access to the APIs on behalf of the product&#8217;s user.</p>
+<p>The workflow for obtaining and using an access token is as follows:</p>
+<ol class="arabic simple">
+<li>The user visits your product registration website and enters information about their specific instance of your product.</li>
+<li>Your website creates a HKIoTCloud consent request using the user-supplied registration information and forwards the user to the HKIoTCloud website.</li>
+<li>The user logs in to HKIoTCloud.</li>
+<li>The user authorizes their instance of your product to be used with HKIoTCloud on their behalf.</li>
+<li>HKIoTCloud returns an access token to your product registration website.</li>
+<li>Your product registration website securely transfers the access token to the user&#8217;s specifi instance of your product.</li>
+<li>The user&#8217;s speific instance of your product uses the access token to make HKIoTCloud API calls.</li>
+</ol>
+</div>
+<div class="section" id="types-of-authorization">
+<h3>Types of Authorization<a class="headerlink" href="#types-of-authorization" title="Permalink to this headline">¶</a></h3>
+<p>HKIoTCloud supports two types of authorization:</p>
+<ul class="simple">
+<li>Authorization Code Grant - Send a client ID and a client secret to get an access token and a refresh token.</li>
+<li>Password Grant (disabled, and not supported in security reason) - Send username and password along with client ID and client secret to get an access token and refresh token</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You must generate a new access token every hour, that is, expiration is set to 3,600 seconds. You can use refresh token in conjunction with your client ID and client secret to obtain a new access token without your user having to re-authenticate.</p>
+</div>
+</div>
+<div class="section" id="creating-a-consent-request">
+<h3>Creating a Consent Request<a class="headerlink" href="#creating-a-consent-request" title="Permalink to this headline">¶</a></h3>
+<p>By creating a consent request, your user will be redirected to the HKIoTCloud website where they can enter their HKIoTCloud credentials in order to authorize their devices of your product to be used with the HKIoTCloud service.</p>
+<p>The consent request is constructed as follows:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Redirect the user to HKIoTCloud at <a class="reference external" href="https://hkiotcloud.herokuapp.com/oauth/token">https://hkiotcloud.herokuapp.com/oauth/token</a> with the following URL-encoded query parameters:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">client_id</span></code> : The client ID of your application. This information can be found on the HKIoTCloud website.</li>
+<li><code class="docutils literal"><span class="pre">response_type</span></code>: <code class="docutils literal"><span class="pre">code</span></code> for authorization code grant.</li>
+<li><code class="docutils literal"><span class="pre">redirect_uri</span></code> : Specifies the return URI that you added to your app&#8217;s  profile when signing up.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Sample Request:</strong></p>
+<p>Send as GET request.</p>
+<p><a class="reference external" href="https://hkiotcloud.herokuapp.com/oauth/authorize?response_type=code&amp;client_id=n7HhiTnKYjJd4zmM&amp;redirect_uri=https://your.app.com/oauthCallbackHKIoTCloud">https://hkiotcloud.herokuapp.com/oauth/authorize?response_type=code&amp;client_id=n7HhiTnKYjJd4zmM&amp;redirect_uri=https://your.app.com/oauthCallbackHKIoTCloud</a></p>
+</div>
+<div class="section" id="hkiotcloud-returns-a-response-to-your-registration-website">
+<h3>HKIoTCloud Returns a Response to Your Registration Website<a class="headerlink" href="#hkiotcloud-returns-a-response-to-your-registration-website" title="Permalink to this headline">¶</a></h3>
+<p>After the user is authenticated, the user is redirected to the URI that you provided in the <code class="docutils literal"><span class="pre">redirect_uri</span></code> parameter of the request.</p>
+<p>The response includes an authorization code.</p>
+<p><strong>Sample Authorizatino Code Grant Response:</strong></p>
+<p><a class="reference external" href="https://your.app.com/oauthCallbackHKIoTCloud?code=ANdNAVhyhqirUelHGEHA&amp;scope=alexa%3Aall">https://your.app.com/oauthCallbackHKIoTCloud?code=ANdNAVhyhqirUelHGEHA&amp;scope=alexa%3Aall</a></p>
+<p>Next, your service leverages the returned authorization code to ask for an access token:</p>
+<ul class="simple">
+<li>Send a <strong>POST</strong> request to <a class="reference external" href="https://hkiotcloud.herokuapp.com/oauth/token">https://hkiotcloud.herokuapp.com/oauth/token</a> with the following parameters:</li>
+</ul>
+<p><strong>HTTP Header Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Content-Type:</span> <span class="pre">application/x-www-form-urlencoded</span></code></li>
+</ul>
+<p><strong>HTTP Body Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">grant_type:</span> <span class="pre">authorization_code</span></code></li>
+<li><code class="docutils literal"><span class="pre">code</span></code> : The authorization code that was returned in the response.</li>
+<li><code class="docutils literal"><span class="pre">client_id</span></code> : Your application&#8217;s client ID. This information can be found on the HKIoTCloud website.</li>
+<li><code class="docutils literal"><span class="pre">client_secret</span></code> : The application&#8217;s client secret. This information can be found on the HKIoTCloud website.</li>
+<li><code class="docutils literal"><span class="pre">redirect_uri</span></code> : The return URI that you added to your app&#8217;s profile when signing up.</li>
+</ul>
+<p><strong>Sample Request:</strong></p>
+<p>POST /oauth/token HTTP/1.1
+Host: hkiotcloud.herokuapp.com
+Content-Type: application/x-www-form-urlencoded
+Cache-Control: no-cache</p>
+<p>grant_type=authorization_code&amp;code=2b3711911f4f2263e785eeda386046ccc8da6aee&amp;client_id=n7HhiTnKYjJd4zmM&amp;client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY&amp;redirect_uri=https://hkvoicecloud.herokuapp.com/oauthCallbackHKIoTCloud</p>
+<p><strong>Sample Response:</strong></p>
+<dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;access_token&#8221;: &#8220;902da699ed1d5d511bd750366889f3260c2015b4&#8221;,
+&#8220;expires_in&#8221;: 3600,
+&#8220;refresh_token&#8221;: &#8220;5defcb0a9a49ac9b2403b8c78600638238d81011&#8221;,
+&#8220;token_type&#8221;: &#8220;bearer&#8221;</dd>
+</dl>
+<p>}</p>
+<p>Transfer the access and refresh tokens to the user&#8217;s product.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Currently, a refresh token is valid for one year, while an access token is valid only an hour and an authorization code is valid only a minute.</p>
+</div>
+</div>
+<div class="section" id="using-the-access-token-to-make-hkiotcloud-api-calls">
+<h3>Using the Access Token to Make HKIoTCloud API Calls<a class="headerlink" href="#using-the-access-token-to-make-hkiotcloud-api-calls" title="Permalink to this headline">¶</a></h3>
+<p>When you call the HKIoTCloud API calls, pass the value of the access token into the request header. Specifically, create an <code class="docutils literal"><span class="pre">Authorization</span></code> header and give it the value <code class="docutils literal"><span class="pre">Bearer</span> <span class="pre">&lt;access</span> <span class="pre">token&gt;</span></code>.</p>
+</div>
+<div class="section" id="getting-a-new-access-token-with-refresh-token">
+<h3>Getting a New Access Token with Refresh Token<a class="headerlink" href="#getting-a-new-access-token-with-refresh-token" title="Permalink to this headline">¶</a></h3>
+<p>The access token is valid for one hour. When the access token expires or is about to expire, you can exchange the refresh token for new access and refresh tokens.</p>
+<ul class="simple">
+<li>Send a <code class="docutils literal"><span class="pre">POST</span></code> request to <code class="docutils literal"><span class="pre">https://hkiotcloud.herokuapp.com/oauth/token</span></code> with the following parameters:</li>
+</ul>
+<p><strong>HTTP Header Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">Content-Type:</span> <span class="pre">application/x-www-form-urlencoded</span></code></li>
+</ul>
+<p><strong>HTTP Body Parameters:</strong></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">grant_type:</span> <span class="pre">refresh_token</span></code></li>
+<li><code class="docutils literal"><span class="pre">refresh_token</span></code> : The refresh token returned with the last request for a new access token.</li>
+<li><code class="docutils literal"><span class="pre">client_id</span></code> : Your application&#8217;s client ID. This information can be found on the HKIoTCloud website.</li>
+<li><code class="docutils literal"><span class="pre">client_secret</span></code> : The application&#8217;s client secret. This information can be found on the HKIoTCloud website.</li>
+</ul>
+<p><strong>Sample Request:</strong></p>
+<p>POST /oauth/token HTTP/1.1
+Host: hkiotcloud.herukuapp.com
+Content-Type: application/x-www-form-urlencoded
+Cache-Control: no-cache</p>
+<p>grant_type=refresh_token&amp;refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81011&amp;client_id=n7HhiTnKYjJd4zmM&amp;client_secret=ANRfB9z94xtcxFGXrd5XHXEiKg43UY</p>
+<p><strong>Sample Response:</strong></p>
+<p>HTTP/1.1 200 OK</p>
+<dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;access_token&#8221;: &#8220;90da03bdceb15cf75d99ff99715ce87b29602651&#8221;,
+&#8220;expires_in&#8221;: 3600,
+&#8220;refresh_token&#8221;: &#8220;6a762dfce9146dbf149f881c5aa15fc6cfdf1fd0&#8221;,
+&#8220;token_type&#8221;: &#8220;bearer&#8221;</dd>
+</dl>
+<p>}</p>
+</div>
+</div>
 </div>
 
 
@@ -2725,6 +2855,15 @@ SessionToken = &quot;PubNub-1000&quot;
 <li><a class="reference internal" href="#device-status-change-event-only-available-for-pubnub-mode">Device Status Change Event (only available for PubNub mode)</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#oauth2-authorization-api-specification">OAuth2 Authorization API Specification</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#types-of-authorization">Types of Authorization</a></li>
+<li><a class="reference internal" href="#creating-a-consent-request">Creating a Consent Request</a></li>
+<li><a class="reference internal" href="#hkiotcloud-returns-a-response-to-your-registration-website">HKIoTCloud Returns a Response to Your Registration Website</a></li>
+<li><a class="reference internal" href="#using-the-access-token-to-make-hkiotcloud-api-calls">Using the Access Token to Make HKIoTCloud API Calls</a></li>
+<li><a class="reference internal" href="#getting-a-new-access-token-with-refresh-token">Getting a New Access Token with Refresh Token</a></li>
 </ul>
 </li>
 </ul>
