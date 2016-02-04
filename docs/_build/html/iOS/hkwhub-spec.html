@@ -2722,10 +2722,18 @@ grant_type=authorization_code&amp;code=2b3711911f4f2263e785eeda386046ccc8da6aee&
 <p class="first admonition-title">Note</p>
 <p class="last">Currently, a refresh token is valid for one year, while an access token is valid only an hour and an authorization code is valid only a minute.</p>
 </div>
+<p>The following illustration (from <a class="reference external" href="http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&amp;qid=1454629444&amp;sr=8-1">OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl</a> ) explains the procedures of getting access token.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/get_access_token.png"><img alt="../_images/get_access_token.png" src="../_images/get_access_token.png" /></a>
+</div>
 </div>
 <div class="section" id="using-the-access-token-to-make-hkiotcloud-api-calls">
 <h3>Using the Access Token to Make HKIoTCloud API Calls<a class="headerlink" href="#using-the-access-token-to-make-hkiotcloud-api-calls" title="Permalink to this headline">¶</a></h3>
 <p>When you call the HKIoTCloud API calls, pass the value of the access token into the request header. Specifically, create an <code class="docutils literal"><span class="pre">Authorization</span></code> header and give it the value <code class="docutils literal"><span class="pre">Bearer</span> <span class="pre">&lt;access</span> <span class="pre">token&gt;</span></code>.</p>
+<p>The following illustration (from <a class="reference external" href="http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&amp;qid=1454629444&amp;sr=8-1">OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl</a> ) explains how to call the APIs with the access token.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/use_access_token.png"><img alt="../_images/use_access_token.png" src="../_images/use_access_token.png" /></a>
+</div>
 </div>
 <div class="section" id="getting-a-new-access-token-with-refresh-token">
 <h3>Getting a New Access Token with Refresh Token<a class="headerlink" href="#getting-a-new-access-token-with-refresh-token" title="Permalink to this headline">¶</a></h3>
@@ -2763,6 +2771,10 @@ grant_type=refresh_token&amp;refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81
         &quot;token_type&quot;: &quot;bearer&quot;
 }
 </pre></div>
+</div>
+<p>The following illustration (from <a class="reference external" href="http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&amp;qid=1454629444&amp;sr=8-1">OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl</a> ) explains how to renew the access token with the refresh token.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../_images/refresh_token.png"><img alt="../_images/refresh_token.png" src="../_images/refresh_token.png" /></a>
 </div>
 </div>
 </div>

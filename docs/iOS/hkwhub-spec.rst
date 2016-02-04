@@ -2179,11 +2179,21 @@ Transfer the access and refresh tokens to the user's product.
 	
 	Currently, a refresh token is valid for one year, while an access token is valid only an hour and an authorization code is valid only a minute.
 
+The following illustration (from `OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl`_ ) explains the procedures of getting access token.
+
+.. figure:: img/oauth2/get_access_token.png
+	:scale: 70
+
 
 Using the Access Token to Make HKIoTCloud API Calls
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When you call the HKIoTCloud API calls, pass the value of the access token into the request header. Specifically, create an ``Authorization`` header and give it the value ``Bearer <access token>``.
+
+The following illustration (from `OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl`_ ) explains how to call the APIs with the access token.
+
+.. figure:: img/oauth2/use_access_token.png
+	:scale: 70
 
 Getting a New Access Token with Refresh Token
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2228,4 +2238,7 @@ The access token is valid for one hour. When the access token expires or is abou
 		"token_type": "bearer"
 	}
 
+The following illustration (from `OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl`_ ) explains how to renew the access token with the refresh token.
 
+.. figure:: img/oauth2/refresh_token.png
+	:scale: 70
