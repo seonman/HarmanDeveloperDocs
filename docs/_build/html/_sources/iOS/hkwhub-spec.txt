@@ -2062,6 +2062,12 @@ Introduction
 
 In order to access the HKIoTCloud REST APIs to control Omni speakers, your HKIoTCloud-enabled product needs to obtain a HKIoTCloud access token that grans access to the APIs on behalf of the product's user.
 
+.. NOTE::
+
+	Please refer Matthias Biehl's `OAuth 2.0 Getting Started in Web-API Security`_ for your reference on OAuth2. This document uses some of the pictures from that book.
+	
+.. _OAuth 2.0 Getting Started in Web-API Security: http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1454629444&sr=8-1
+	
 The workflow for obtaining and using an access token is as follows:
 
 1. The user visits your product registration website and enters information about their specific instance of your product.
@@ -2156,7 +2162,7 @@ Next, your service leverages the returned authorization code to ask for an acces
 .. code-block:: json
 
 	{
-    	"access_token": "902da699ed1d5d511bd750366889f3260c2015b4",
+		"access_token": "902da699ed1d5d511bd750366889f3260c2015b4",
 		"expires_in": 3600,
 		"refresh_token": "5defcb0a9a49ac9b2403b8c78600638238d81011",
 		"token_type": "bearer"
