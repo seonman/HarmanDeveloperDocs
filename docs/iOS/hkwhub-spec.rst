@@ -2064,7 +2064,7 @@ In order to access the HKIoTCloud REST APIs to control Omni speakers, your HKIoT
 
 .. NOTE::
 
-	Please refer `OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl`_ for your reference on OAuth2. This document uses some of illustration drawings from that book.
+	Please refer `OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl`_ for your more understanding on OAuth2.
 	
 .. _OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl: http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1454629444&sr=8-1
 	
@@ -2128,10 +2128,6 @@ The response includes an authorization code.
 
 	https://your.app.com/oauthCallbackHKIoTCloud?code=0b368d49809048dd7424d6f7fd869a98f2372859
 
-The following illustration (from `OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl`_ ) explains the procedures of getting authorization code.
-
-.. figure:: img/oauth2/auth_code.png
-	:scale: 70
 
 Next, your service leverages the returned authorization code to ask for an access token:
 
@@ -2179,10 +2175,6 @@ Transfer the access and refresh tokens to the user's product.
 	
 	Currently, a refresh token is valid for one year, while an access token is valid only an hour and an authorization code is valid only a minute.
 
-The following illustration (from `OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl`_ ) explains the procedures of getting access token.
-
-.. figure:: img/oauth2/get_access_token.png
-	:scale: 70
 
 
 Using the Access Token to Make HKIoTCloud API Calls
@@ -2190,10 +2182,6 @@ Using the Access Token to Make HKIoTCloud API Calls
 
 When you call the HKIoTCloud API calls, pass the value of the access token into the request header. Specifically, create an ``Authorization`` header and give it the value ``Bearer <access token>``.
 
-The following illustration (from `OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl`_ ) explains how to call the APIs with the access token.
-
-.. figure:: img/oauth2/use_access_token.png
-	:scale: 70
 
 Getting a New Access Token with Refresh Token
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2238,7 +2226,3 @@ The access token is valid for one hour. When the access token expires or is abou
 		"token_type": "bearer"
 	}
 
-The following illustration (from `OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl`_ ) explains how to renew the access token with the refresh token.
-
-.. figure:: img/oauth2/refresh_token.png
-	:scale: 70

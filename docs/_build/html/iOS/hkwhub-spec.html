@@ -2624,7 +2624,7 @@ SessionToken = &quot;PubNub-1000&quot;
 <p>In order to access the HKIoTCloud REST APIs to control Omni speakers, your HKIoTCloud-enabled product needs to obtain a HKIoTCloud access token that grans access to the APIs on behalf of the product&#8217;s user.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Please refer <a class="reference external" href="http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&amp;qid=1454629444&amp;sr=8-1">OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl</a> for your reference on OAuth2. This document uses some of illustration drawings from that book.</p>
+<p class="last">Please refer <a class="reference external" href="http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&amp;qid=1454629444&amp;sr=8-1">OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl</a> for your more understanding on OAuth2.</p>
 </div>
 <p>The workflow for obtaining and using an access token is as follows:</p>
 <ol class="arabic simple">
@@ -2679,10 +2679,6 @@ SessionToken = &quot;PubNub-1000&quot;
 <div class="highlight-json"><div class="highlight"><pre>https://your.app.com/oauthCallbackHKIoTCloud?code=0b368d49809048dd7424d6f7fd869a98f2372859
 </pre></div>
 </div>
-<p>The following illustration (from <a class="reference external" href="http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&amp;qid=1454629444&amp;sr=8-1">OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl</a> ) explains the procedures of getting authorization code.</p>
-<div class="figure">
-<a class="reference internal image-reference" href="../_images/auth_code.png"><img alt="../_images/auth_code.png" src="../_images/auth_code.png" /></a>
-</div>
 <p>Next, your service leverages the returned authorization code to ask for an access token:</p>
 <ul class="simple">
 <li>Send a <strong>POST</strong> request to <a class="reference external" href="https://hkiotcloud.herokuapp.com/oauth/token">https://hkiotcloud.herokuapp.com/oauth/token</a> with the following parameters:</li>
@@ -2722,18 +2718,10 @@ grant_type=authorization_code&amp;code=2b3711911f4f2263e785eeda386046ccc8da6aee&
 <p class="first admonition-title">Note</p>
 <p class="last">Currently, a refresh token is valid for one year, while an access token is valid only an hour and an authorization code is valid only a minute.</p>
 </div>
-<p>The following illustration (from <a class="reference external" href="http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&amp;qid=1454629444&amp;sr=8-1">OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl</a> ) explains the procedures of getting access token.</p>
-<div class="figure">
-<a class="reference internal image-reference" href="../_images/get_access_token.png"><img alt="../_images/get_access_token.png" src="../_images/get_access_token.png" /></a>
-</div>
 </div>
 <div class="section" id="using-the-access-token-to-make-hkiotcloud-api-calls">
 <h3>Using the Access Token to Make HKIoTCloud API Calls<a class="headerlink" href="#using-the-access-token-to-make-hkiotcloud-api-calls" title="Permalink to this headline">¶</a></h3>
 <p>When you call the HKIoTCloud API calls, pass the value of the access token into the request header. Specifically, create an <code class="docutils literal"><span class="pre">Authorization</span></code> header and give it the value <code class="docutils literal"><span class="pre">Bearer</span> <span class="pre">&lt;access</span> <span class="pre">token&gt;</span></code>.</p>
-<p>The following illustration (from <a class="reference external" href="http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&amp;qid=1454629444&amp;sr=8-1">OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl</a> ) explains how to call the APIs with the access token.</p>
-<div class="figure">
-<a class="reference internal image-reference" href="../_images/use_access_token.png"><img alt="../_images/use_access_token.png" src="../_images/use_access_token.png" /></a>
-</div>
 </div>
 <div class="section" id="getting-a-new-access-token-with-refresh-token">
 <h3>Getting a New Access Token with Refresh Token<a class="headerlink" href="#getting-a-new-access-token-with-refresh-token" title="Permalink to this headline">¶</a></h3>
@@ -2771,10 +2759,6 @@ grant_type=refresh_token&amp;refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81
         &quot;token_type&quot;: &quot;bearer&quot;
 }
 </pre></div>
-</div>
-<p>The following illustration (from <a class="reference external" href="http://www.amazon.com/OAuth-2-0-Getting-Security-University/dp/1507800916/ref=tmm_pap_swatch_0?_encoding=UTF8&amp;qid=1454629444&amp;sr=8-1">OAuth 2.0 Getting Started in Web-API Security by Matthias Biehl</a> ) explains how to renew the access token with the refresh token.</p>
-<div class="figure">
-<a class="reference internal image-reference" href="../_images/refresh_token.png"><img alt="../_images/refresh_token.png" src="../_images/refresh_token.png" /></a>
 </div>
 </div>
 </div>
