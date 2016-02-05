@@ -343,6 +343,18 @@ In case of HKIoTCloud more, the client should get an access token from the HKIoT
 
 With **password** grant mode, you can get an access token and a refresh token as shown below:
 
+.. code::
+
+	curl -H "Authorization: Basic bjdIaGlUbktZakpkNHptTTpBTlJmQjl6OTR4dGN4RkdYcmQ1WEhYRWlLZzQzVVk=" -d "grant_type=password&username=yyy&password=xxx" http://hkiotcloud.herokuapp.com/oauth/token
+
+Result:
+
+.. code::
+
+	{"token_type":"bearer",
+	 "access_token":"15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8",
+	 "expires_in":3600,
+	 "refresh_token":"1b470edc539681803de95c919bc3779acdf34e01"}
 
 
 When you call the HKIoTCloud API calls, you should pass the value of the access token into the request header. Specifically, create an ``Authorization`` header and give it the ``value Bearer <access token>``.

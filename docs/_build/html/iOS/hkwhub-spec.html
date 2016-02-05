@@ -396,6 +396,16 @@
 <h4>Get an Access Token and Refresh Token (HKIoTCloud mode only)<a class="headerlink" href="#get-an-access-token-and-refresh-token-hkiotcloud-mode-only" title="Permalink to this headline">¶</a></h4>
 <p>In case of HKIoTCloud more, the client should get an access token from the HKIoTCloud to be able to call the REST APIs. HKIoTCloud supports two authorization modes: <strong>password</strong> and <strong>authorization code</strong>. For mode detailed information, please refer to the section of <a class="reference external" href="http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#oauth2-authorization-api-specification">OAuth2 Authorization API Specification</a>.</p>
 <p>With <strong>password</strong> grant mode, you can get an access token and a refresh token as shown below:</p>
+<div class="code highlight-python"><div class="highlight"><pre>curl -H &quot;Authorization: Basic bjdIaGlUbktZakpkNHptTTpBTlJmQjl6OTR4dGN4RkdYcmQ1WEhYRWlLZzQzVVk=&quot; -d &quot;grant_type=password&amp;username=yyy&amp;password=xxx&quot; http://hkiotcloud.herokuapp.com/oauth/token
+</pre></div>
+</div>
+<p>Result:</p>
+<div class="code highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;token_type&quot;</span><span class="p">:</span><span class="s">&quot;bearer&quot;</span><span class="p">,</span>
+ <span class="s">&quot;access_token&quot;</span><span class="p">:</span><span class="s">&quot;15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span><span class="p">,</span>
+ <span class="s">&quot;expires_in&quot;</span><span class="p">:</span><span class="mi">3600</span><span class="p">,</span>
+ <span class="s">&quot;refresh_token&quot;</span><span class="p">:</span><span class="s">&quot;1b470edc539681803de95c919bc3779acdf34e01&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
 <p>When you call the HKIoTCloud API calls, you should pass the value of the access token into the request header. Specifically, create an <code class="docutils literal"><span class="pre">Authorization</span></code> header and give it the <code class="docutils literal"><span class="pre">value</span> <span class="pre">Bearer</span> <span class="pre">&lt;access</span> <span class="pre">token&gt;</span></code>.</p>
 </div>
 <div class="section" id="a-init-session">
