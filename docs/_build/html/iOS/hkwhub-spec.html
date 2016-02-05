@@ -396,9 +396,9 @@
 <h4>Get an Access Token and Refresh Token (HKIoTCloud mode only)<a class="headerlink" href="#get-an-access-token-and-refresh-token-hkiotcloud-mode-only" title="Permalink to this headline">¶</a></h4>
 <p>In case of HKIoTCloud more, the client should get an access token from the HKIoTCloud to be able to call the REST APIs. HKIoTCloud supports two authorization modes: <strong>password</strong> and <strong>authorization code</strong>. For mode detailed information, please refer to the section of <a class="reference external" href="http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#id2">OAuth2 Authorization API Specification</a>.</p>
 <p>With <strong>password</strong> grant mode, you can get an access token and a refresh token as shown below:</p>
-<div class="code highlight-python"><div class="highlight"><pre>curl -X POST -H &quot;Authorization: Basic bjdIaGlUbktZakpkNHptTTpBTlJmQjl6OTR4dGN4RkdYcmQ1WEhYRWlLZzQzVVk=&quot; -d &quot;grant_type=password&amp;username=yyy&amp;password=xxx&quot; http://hkiotcloud.herokuapp.com/oauth/token
-</pre></div>
-</div>
+<ul class="simple">
+<li>curl -X POST -H &#8220;Authorization: Basic bjdIaGlUbktZakpkNHptTTpBTlJmQjl6OTR4dGN4RkdYcmQ1WEhYRWlLZzQzVVk=&#8221; -d &#8220;grant_type=password&amp;username=yyy&amp;password=xxx&#8221; <a class="reference external" href="http://hkiotcloud.herokuapp.com/oauth/token">http://hkiotcloud.herokuapp.com/oauth/token</a></li>
+</ul>
 <p>Result:</p>
 <div class="code highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;token_type&quot;</span><span class="p">:</span><span class="s">&quot;bearer&quot;</span><span class="p">,</span>
  <span class="s">&quot;access_token&quot;</span><span class="p">:</span><span class="s">&quot;15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span><span class="p">,</span>
@@ -421,9 +421,9 @@
 <div class="section" id="b-add-alls-speaker-to-session">
 <h4>b. Add alls speaker to session<a class="headerlink" href="#b-add-alls-speaker-to-session" title="Permalink to this headline">¶</a></h4>
 <p>After HKWHub app is launched, none of speakers is selected for playback. You need to add one or more speakers to play audio. To add all speakers to playback session, use <code class="docutils literal"><span class="pre">set_party_mode</span></code>. <strong>Party Mode</strong> is the mode where all speakers are playing the same audio together with synchronization. So, by <code class="docutils literal"><span class="pre">set_party_mode</span></code>, you can select all speakers to play.</p>
-<div class="code highlight-python"><div class="highlight"><pre>curl -H &quot;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot; &quot;http://hkiotcloud.herokuapp.com/api/v1/set_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&quot;
-</pre></div>
-</div>
+<ul class="simple">
+<li>curl -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; &#8220;<a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/set_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh">http://hkiotcloud.herokuapp.com/api/v1/set_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</a>&#8220;</li>
+</ul>
 <div class="code json highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;Result&quot;</span><span class="p">:</span><span class="s">&quot;true&quot;</span><span class="p">,</span><span class="s">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s">&quot;set_party_mode&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
@@ -431,7 +431,9 @@
 <div class="section" id="c-get-the-list-of-speakers-available">
 <h4>c. Get the list of speakers available<a class="headerlink" href="#c-get-the-list-of-speakers-available" title="Permalink to this headline">¶</a></h4>
 <p>To control speakers individually, you can get the list of speakers available by using <strong>device_list</strong> command.</p>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-H</span> <span class="pre">&quot;Authorization:</span> <span class="pre">Bearer</span> <span class="pre">15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span></code></p>
+<ul class="simple">
+<li>curl -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; &#8220;<a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh">http://hkiotcloud.herokuapp.com/api/v1/device_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</a>&#8220;</li>
+</ul>
 <div class="code json highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;DeviceList&quot;</span><span class="p">:[</span>
         <span class="p">{</span>
                 <span class="s">&quot;IsPlaying&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span>
@@ -474,14 +476,18 @@
 <div class="section" id="d-add-a-speaker-to-session">
 <h4>d. Add a speaker to session<a class="headerlink" href="#d-add-a-speaker-to-session" title="Permalink to this headline">¶</a></h4>
 <p>If you want to add a speaker to session, use <code class="docutils literal"><span class="pre">add_device_to_session`.</span> <span class="pre">It</span> <span class="pre">requires</span> <span class="pre">``DeviceID</span></code> parameter to identify a speaker to add. This command does not impact other speakers regardless of their status.</p>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-H</span> <span class="pre">&quot;Authorization:</span> <span class="pre">Bearer</span> <span class="pre">15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=4625984469168&quot;</span></code></p>
+<ul class="simple">
+<li>curl -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; &#8220;<a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=4625984469168">http://hkiotcloud.herokuapp.com/api/v1/add_device_to_session?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;DeviceID=4625984469168</a>&#8220;</li>
+</ul>
 <div class="code json highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;Result&quot;</span><span class="p">:</span><span class="s">&quot;true&quot;</span><span class="p">,</span><span class="s">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s">&quot;add_device_to_session&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="e-get-the-media-list">
 <h4>e. Get the media list<a class="headerlink" href="#e-get-the-media-list" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-H</span> <span class="pre">&quot;Authorization:</span> <span class="pre">Bearer</span> <span class="pre">15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span></code></p>
+<ul class="simple">
+<li>curl -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; &#8220;<a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh">http://hkiotcloud.herokuapp.com/api/v1/media_list?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</a>&#8220;</li>
+</ul>
 <p>Here, SessionToken should be the session token you got from <code class="docutils literal"><span class="pre">init_session</span></code>. You will get a list of media in JSON like below</p>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;MediaList&quot;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span><span class="nt">&quot;PersistentID&quot;</span><span class="p">:</span><span class="s2">&quot;7387446959931482519&quot;</span><span class="p">,</span>
@@ -506,7 +512,9 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Note that, before calling <code class="docutils literal"><span class="pre">play_hub_media</span></code>, at least one or more speakers must be selected (added to session) in advance. If not, then the playback will fail.</p>
 </div>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-H</span> <span class="pre">&quot;Authorization:</span> <span class="pre">Bearer</span> <span class="pre">15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/play_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;PersistentID=1062764963669236741&quot;</span></code></p>
+<ul class="simple">
+<li>curl -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; &#8220;<a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/play_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;PersistentID=1062764963669236741">http://hkiotcloud.herokuapp.com/api/v1/play_hub_media?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;PersistentID=1062764963669236741</a>&#8220;</li>
+</ul>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;play_hub_media&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
@@ -514,7 +522,9 @@
 <div class="section" id="f-play-a-media-item-in-the-hkwhub-by-specifying-a-speaker-list-to-play">
 <h4>f. Play a media item in the HKWHub by specifying a speaker list to play<a class="headerlink" href="#f-play-a-media-item-in-the-hkwhub-by-specifying-a-speaker-list-to-play" title="Permalink to this headline">¶</a></h4>
 <p>You can play a media item in the HKWHub app by specifying the list of speakers.</p>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-H</span> <span class="pre">&quot;Authorization:</span> <span class="pre">Bearer</span> <span class="pre">15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/play_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;PersistentID=1062764963669236741&amp;DeviceIDList=34317244381360,129321920968880&quot;</span></code></p>
+<ul class="simple">
+<li>curl -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; &#8220;<a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/play_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;PersistentID=1062764963669236741&amp;DeviceIDList=34317244381360,129321920968880">http://hkiotcloud.herokuapp.com/api/v1/play_hub_media_selected_speakers?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;PersistentID=1062764963669236741&amp;DeviceIDList=34317244381360,129321920968880</a>&#8220;</li>
+</ul>
 <p>The list of speakers are listed by the parameter <code class="docutils literal"><span class="pre">DeviceIDList</span></code> with delimitor &#8221;,&#8221;.</p>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;play_hub_media_selected_speakers&quot;</span><span class="p">}</span>
 </pre></div>
@@ -522,21 +532,27 @@
 </div>
 <div class="section" id="g-play-a-http-streaming-media-as-party-mode">
 <h4>g. Play a HTTP streaming media as party mode<a class="headerlink" href="#g-play-a-http-streaming-media-as-party-mode" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-H</span> <span class="pre">&quot;Authorization:</span> <span class="pre">Bearer</span> <span class="pre">15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/play_web_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3&quot;</span></code></p>
+<ul class="simple">
+<li>curl -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; &#8220;<a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/play_web_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3">http://hkiotcloud.herokuapp.com/api/v1/play_web_media_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;MediaUrl=http://seonman.github.io/music/hyolyn.mp3</a>&#8220;</li>
+</ul>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;play_web_media_party_mode&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="h-stop-playing">
 <h4>h. Stop playing<a class="headerlink" href="#h-stop-playing" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-H</span> <span class="pre">&quot;Authorization:</span> <span class="pre">Bearer</span> <span class="pre">15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/stop_play?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span></code></p>
+<ul class="simple">
+<li>curl -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; &#8220;<a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/stop_play?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh">http://hkiotcloud.herokuapp.com/api/v1/stop_play?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh</a>&#8220;</li>
+</ul>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;stop_play&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="i-set-volume">
 <h4>i. Set Volume<a class="headerlink" href="#i-set-volume" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-H</span> <span class="pre">&quot;Authorization:</span> <span class="pre">Bearer</span> <span class="pre">15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/set_volume?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;Volume=30&quot;</span></code></p>
+<ul class="simple">
+<li>curl -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; &#8220;<a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/set_volume?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;Volume=30">http://hkiotcloud.herokuapp.com/api/v1/set_volume?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&amp;Volume=30</a>&#8220;</li>
+</ul>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span><span class="nt">&quot;Result&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span><span class="nt">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s2">&quot;set_volume&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
