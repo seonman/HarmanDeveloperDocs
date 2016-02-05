@@ -2254,7 +2254,7 @@ When you call the HKIoTCloud API calls, pass the value of the access token into 
 
 **Sample Request using curl:**
 
-- curl -X POST -H "Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8" http://hkiotcloud.herokuapp.com/api/v1/init_session
+- curl -X GET -H "Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8" http://hkiotcloud.herokuapp.com/api/v1/init_session
 
 
 Getting a New Access Token with Refresh Token
