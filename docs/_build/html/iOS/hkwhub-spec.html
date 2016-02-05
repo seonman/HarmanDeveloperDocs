@@ -395,6 +395,8 @@
 <div class="section" id="get-an-access-token-and-refresh-token-hkiotcloud-mode-only">
 <h4>Get an Access Token and Refresh Token (HKIoTCloud mode only)<a class="headerlink" href="#get-an-access-token-and-refresh-token-hkiotcloud-mode-only" title="Permalink to this headline">¶</a></h4>
 <p>In case of HKIoTCloud more, the client should get an access token from the HKIoTCloud to be able to call the REST APIs. HKIoTCloud supports two authorization modes: <strong>password</strong> and <strong>authorization code</strong>. For mode detailed information, please refer to the section of <a class="reference external" href="http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#oauth2-authorization-api-specification">OAuth2 Authorization API Specification</a>.</p>
+<p>With <strong>password</strong> grant mode, you can get an access token and a refresh token as shown below:</p>
+<p>When you call the HKIoTCloud API calls, you should pass the value of the access token into the request header. Specifically, create an <code class="docutils literal"><span class="pre">Authorization</span></code> header and give it the <code class="docutils literal"><span class="pre">value</span> <span class="pre">Bearer</span> <span class="pre">&lt;access</span> <span class="pre">token&gt;</span></code>.</p>
 </div>
 <div class="section" id="a-init-session">
 <h4>a. Init session<a class="headerlink" href="#a-init-session" title="Permalink to this headline">¶</a></h4>
@@ -2649,11 +2651,43 @@ SessionToken = &quot;PubNub-1000&quot;
 <p>HKIoTCloud supports two types of authorization:</p>
 <ul class="simple">
 <li>Authorization Code Grant - Send a client ID and a client secret to get an access token and a refresh token.</li>
-<li>Password Grant (disabled, and not supported in security reason) - Send username and password along with client ID and client secret to get an access token and refresh token</li>
+<li>Password Grant - Send username and password along with client ID and client secret to get an access token and refresh token</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
+<p class="last">If you are able to implement server-side scripting, then using authorization code grant is recommended. If you are not able to implement server-side scripting, then using password grant is your choice.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p class="last">You must generate a new access token every hour, that is, expiration is set to 3,600 seconds. You can use refresh token in conjunction with your client ID and client secret to obtain a new access token without your user having to re-authenticate.</p>
+</div>
+</div>
+<div class="section" id="using-the-password-grant-type">
+<h3>Using the Password Grant Type<a class="headerlink" href="#using-the-password-grant-type" title="Permalink to this headline">¶</a></h3>
+<p>To obtain an access token (and a refresh token) with password grant, you should <strong>POST</strong> to <code class="docutils literal"><span class="pre">/oauth/token</span></code>. You should include your client ID and client secret in the <code class="docutils literal"><span class="pre">Authorization</span></code> header by combining them with a colon &#8221;:&#8221; and then encoding in Base64. That is, <code class="docutils literal"><span class="pre">Base64(client_id:client_secret)</span></code>. And also, you should include <code class="docutils literal"><span class="pre">grant_type:</span> <span class="pre">password</span></code>, username and passworkd in the request body.</p>
+<p><strong>Sample Request:</strong></p>
+<div class="code highlight-python"><div class="highlight"><pre>POST /oauth/token HTTP/1.1
+Host: server.example.com
+Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&amp;username=johndoe&amp;password=A3ddj3w
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal"><span class="pre">czZCaGRSa3F0MzpnWDFmQmF0M2JW</span></code> is the result of Base64 encoding of clientId:clientSecret.</p>
+<p><strong>Sample Response:</strong></p>
+<div class="code highlight-python"><div class="highlight"><pre>HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Cache-Control: no-store
+Pragma: no-cache
+
+{
+   &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,
+   &quot;token_type&quot;:&quot;bearer&quot;,
+   &quot;expires_in&quot;:3600,
+   &quot;refresh_token&quot;:&quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;
+ }
+</pre></div>
 </div>
 </div>
 <div class="section" id="creating-a-consent-request">
@@ -2884,6 +2918,7 @@ grant_type=refresh_token&amp;refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81
 <li><a class="reference internal" href="#id2">OAuth2 Authorization API Specification</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#types-of-authorization">Types of Authorization</a></li>
+<li><a class="reference internal" href="#using-the-password-grant-type">Using the Password Grant Type</a></li>
 <li><a class="reference internal" href="#creating-a-consent-request">Creating a Consent Request</a></li>
 <li><a class="reference internal" href="#hkiotcloud-returns-a-response-to-your-registration-website">HKIoTCloud Returns a Response to Your Registration Website</a></li>
 <li><a class="reference internal" href="#using-the-access-token-to-make-hkiotcloud-api-calls">Using the Access Token to Make HKIoTCloud API Calls</a></li>

@@ -341,6 +341,12 @@ In case of HKIoTCloud more, the client should get an access token from the HKIoT
 
 .. _OAuth2 Authorization API Specification: http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#oauth2-authorization-api-specification
 
+With **password** grant mode, you can get an access token and a refresh token as shown below:
+
+
+
+When you call the HKIoTCloud API calls, you should pass the value of the access token into the request header. Specifically, create an ``Authorization`` header and give it the ``value Bearer <access token>``.
+
 a. Init session
 ^^^^^^^^^^^^^^^
 ``curl -X POST -d "username=seonman&password=xxx" http://hkiotcloud.herokuapp.com/api/v1/init_session``
@@ -2096,13 +2102,52 @@ HKIoTCloud supports two types of authorization:
 
 - Authorization Code Grant - Send a client ID and a client secret to get an access token and a refresh token.
 
-- Password Grant (disabled, and not supported in security reason) - Send username and password along with client ID and client secret to get an access token and refresh token
+- Password Grant - Send username and password along with client ID and client secret to get an access token and refresh token
 
+.. note::
+
+	If you are able to implement server-side scripting, then using authorization code grant is recommended. If you are not able to implement server-side scripting, then using password grant is your choice.
 	
 .. Note::
 
 	You must generate a new access token every hour, that is, expiration is set to 3,600 seconds. You can use refresh token in conjunction with your client ID and client secret to obtain a new access token without your user having to re-authenticate.
 	
+
+Using the Password Grant Type
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To obtain an access token (and a refresh token) with password grant, you should **POST** to ``/oauth/token``. You should include your client ID and client secret in the ``Authorization`` header by combining them with a colon ":" and then encoding in Base64. That is, ``Base64(client_id:client_secret)``. And also, you should include ``grant_type: password``, username and passworkd in the request body.
+
+**Sample Request:**
+
+.. code::
+
+	POST /oauth/token HTTP/1.1
+	Host: server.example.com
+	Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+	Content-Type: application/x-www-form-urlencoded  
+
+	grant_type=password&username=johndoe&password=A3ddj3w 
+
+Here, ``czZCaGRSa3F0MzpnWDFmQmF0M2JW`` is the result of Base64 encoding of clientId:clientSecret.
+
+**Sample Response:**
+
+.. code::
+
+	HTTP/1.1 200 OK
+	Content-Type: application/json;charset=UTF-8
+	Cache-Control: no-store
+	Pragma: no-cache
+ 
+	{
+	   "access_token":"2YotnFZFEjr1zCsicMWpAA",
+	   "token_type":"bearer",
+	   "expires_in":3600,
+	   "refresh_token":"tGzv3JOkF0XG5Qx2TlKWIA"
+	 }
+
+
 
 Creating a Consent Request
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
