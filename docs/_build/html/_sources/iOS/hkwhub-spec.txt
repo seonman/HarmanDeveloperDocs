@@ -56,9 +56,9 @@ The latest version of HKWHub app supports the following three modes:
 	- HKWHub app communicates with HKIoTCloud to receive speaker control commands by REST API call from 3rd party services or clients.
 	- HKIoTCloud handles the REST API request from any clients in the Internet. The clients can be 3rd party apps or services or devices like smartphone or sensors.
 	- In this mode, any 3rd party services or clients in the Internet can reach out to HKWHub app and then control speakers and playback of audio.
-	- All the 3rd party apps or services should be authorized with OAuth2 to get access token. An access token is required when 3rd party apps call the REST APIs. The detailed information about OAuth2 is available at |this link|.
+	- All the 3rd party apps or services should be authorized with OAuth2 to get access token. An access token is required when 3rd party apps call the REST APIs. The detailed information about OAuth2 is available at |this_link|.
 	
-.. |this link| raw:: html
+.. |this_link| raw:: html
  	<a href="http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#oauth2-authorization-api-specification" target="_blank">this link</a>
 
 - Local Server Mode
