@@ -2138,13 +2138,13 @@ To obtain an access token (and a refresh token) with password grant, you should 
 .. code::
 
 	POST /oauth/token HTTP/1.1
-	Host: server.example.com
-	Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+	Host: hkiotcloud.herokuapp.com
+	Authorization: Basic RkZjUE9iS2h4OThvNXhtMzpjcENZQ1BrUjA4NXFSR3hFempDMUlGeEoxQWRhZFQ=
 	Content-Type: application/x-www-form-urlencoded  
 
 	grant_type=password&username=johndoe&password=A3ddj3w 
 
-Here, ``czZCaGRSa3F0MzpnWDFmQmF0M2JW`` is the result of Base64 encoding of clientId:clientSecret.
+Here, ``RkZjUE9iS2h4OThvNXhtMzpjcENZQ1BrUjA4NXFSR3hFempDMUlGeEoxQWRhZFQ=`` is the result of Base64 encoding of clientId:clientSecret.
 
 **Sample Response:**
 
@@ -2156,10 +2156,10 @@ Here, ``czZCaGRSa3F0MzpnWDFmQmF0M2JW`` is the result of Base64 encoding of clien
 	Pragma: no-cache
  
 	{
-	   "access_token":"2YotnFZFEjr1zCsicMWpAA",
+	   "access_token":"62b8c11cfa0840b506230cb8af747230052775e1",
 	   "token_type":"bearer",
 	   "expires_in":3600,
-	   "refresh_token":"tGzv3JOkF0XG5Qx2TlKWIA"
+	   "refresh_token":"7a7687b6b32247573b366d5bf2eeb707ba0a1b4d"
 	 }
 
 

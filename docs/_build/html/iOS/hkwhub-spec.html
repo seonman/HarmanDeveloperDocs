@@ -2675,14 +2675,14 @@ SessionToken = &quot;PubNub-1000&quot;
 <p>To obtain an access token (and a refresh token) with password grant, you should <strong>POST</strong> to <code class="docutils literal"><span class="pre">/oauth/token</span></code>. You should include your client ID and client secret in the <code class="docutils literal"><span class="pre">Authorization</span></code> header by combining them with a colon &#8221;:&#8221; and then encoding in Base64. That is, <code class="docutils literal"><span class="pre">Base64(client_id:client_secret)</span></code>. And also, you should include <code class="docutils literal"><span class="pre">grant_type:</span> <span class="pre">password</span></code>, username and passworkd in the request body.</p>
 <p><strong>Sample Request:</strong></p>
 <div class="code highlight-python"><div class="highlight"><pre>POST /oauth/token HTTP/1.1
-Host: server.example.com
-Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+Host: hkiotcloud.herokuapp.com
+Authorization: Basic RkZjUE9iS2h4OThvNXhtMzpjcENZQ1BrUjA4NXFSR3hFempDMUlGeEoxQWRhZFQ=
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=password&amp;username=johndoe&amp;password=A3ddj3w
 </pre></div>
 </div>
-<p>Here, <code class="docutils literal"><span class="pre">czZCaGRSa3F0MzpnWDFmQmF0M2JW</span></code> is the result of Base64 encoding of clientId:clientSecret.</p>
+<p>Here, <code class="docutils literal"><span class="pre">RkZjUE9iS2h4OThvNXhtMzpjcENZQ1BrUjA4NXFSR3hFempDMUlGeEoxQWRhZFQ=</span></code> is the result of Base64 encoding of clientId:clientSecret.</p>
 <p><strong>Sample Response:</strong></p>
 <div class="code highlight-python"><div class="highlight"><pre>HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -2690,10 +2690,10 @@ Cache-Control: no-store
 Pragma: no-cache
 
 {
-   &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,
+   &quot;access_token&quot;:&quot;62b8c11cfa0840b506230cb8af747230052775e1&quot;,
    &quot;token_type&quot;:&quot;bearer&quot;,
    &quot;expires_in&quot;:3600,
-   &quot;refresh_token&quot;:&quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;
+   &quot;refresh_token&quot;:&quot;7a7687b6b32247573b366d5bf2eeb707ba0a1b4d&quot;
  }
 </pre></div>
 </div>
