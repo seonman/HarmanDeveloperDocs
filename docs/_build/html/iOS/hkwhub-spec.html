@@ -410,7 +410,9 @@
 </div>
 <div class="section" id="a-init-session">
 <h4>a. Init session<a class="headerlink" href="#a-init-session" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-X</span> <span class="pre">POST</span> <span class="pre">-H</span> <span class="pre">&quot;Authorization:</span> <span class="pre">Bearer</span> <span class="pre">15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span> <span class="pre">http://hkiotcloud.herokuapp.com/api/v1/init_session</span></code></p>
+<ul class="simple">
+<li>curl -X POST -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; <a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/init_session">http://hkiotcloud.herokuapp.com/api/v1/init_session</a></li>
+</ul>
 <p>This returns the SessionToken. The returned SessionToken is used by all subsequent REST API request in the body.</p>
 <div class="code json highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s">&quot;init_session&quot;</span><span class="p">,</span><span class="s">&quot;SessionToken&quot;</span><span class="p">:</span><span class="s">&quot;r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span><span class="p">}</span>
 </pre></div>
@@ -419,7 +421,9 @@
 <div class="section" id="b-add-alls-speaker-to-session">
 <h4>b. Add alls speaker to session<a class="headerlink" href="#b-add-alls-speaker-to-session" title="Permalink to this headline">¶</a></h4>
 <p>After HKWHub app is launched, none of speakers is selected for playback. You need to add one or more speakers to play audio. To add all speakers to playback session, use <code class="docutils literal"><span class="pre">set_party_mode</span></code>. <strong>Party Mode</strong> is the mode where all speakers are playing the same audio together with synchronization. So, by <code class="docutils literal"><span class="pre">set_party_mode</span></code>, you can select all speakers to play.</p>
-<p><code class="docutils literal"><span class="pre">curl</span> <span class="pre">-H</span> <span class="pre">&quot;Authorization:</span> <span class="pre">Bearer</span> <span class="pre">15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot;</span> <span class="pre">&quot;http://hkiotcloud.herokuapp.com/api/v1/set_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span></code></p>
+<div class="code highlight-python"><div class="highlight"><pre>curl -H &quot;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot; &quot;http://hkiotcloud.herokuapp.com/api/v1/set_party_mode?SessionToken=r:abciKaTbUgdpQFuvYtgMm0FRh&quot;
+</pre></div>
+</div>
 <div class="code json highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;Result&quot;</span><span class="p">:</span><span class="s">&quot;true&quot;</span><span class="p">,</span><span class="s">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s">&quot;set_party_mode&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
