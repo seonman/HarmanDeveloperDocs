@@ -160,21 +160,21 @@ Once the HKWHub app successfully signs in to HKIoTCloud, the screen will be swit
 	
 If you want to disconnect the server and return to the main screen, press **Disconnect** button on the top righthand corner.
 
-Sending REST Request to HKIoTCloud
+Sending REST Requests to HKIoTCloud
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once the HKWHub App is running, you can now connect a client to HKIoTCloud and send REST requests to the server. We will explain all the REST APIs supported with a little more detailed example of **curl** commands in the next section.
+Once the HKWHub App is running, you can now connect a client to HKIoTCloud and send REST requests to the server. We will explain about the REST APIs supported with a little more detailed example of **curl** commands in the next section.
 
 .. Note::
 		
-	For a client tyring to connect to HKIoTCloud, the same username and password are required from the client side. 
+	For a client to connect to HKIoTCloud, the same username and password are required. 
 
 As an example of client, HKIoTCloud hosts a Web-based client app, at http://hkiotcloud.herokuapp.com/webapp/. The following is a screenshot of the web app.
 
 .. figure:: img/hub/cloudapp-login.png
 	:scale: 70
 
-Once user authentication is done successfully, the Web app will switch the screen to 
+Once user authentication is done successfully, the Web app will switch the screen to the Playlist screen.
 
 .. figure:: img/hub/cloudapp-medialist.png
 	:scale: 70
@@ -320,19 +320,26 @@ The UI of the Web app is exactly the same as HKIoTCloud web app. So, we skip to 
 Use ``curl`` command to send REST requests
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-From now on, we show how to control Omni speakers by sending REST requests to HKIoTCloud. Sending REST requests to Local Server is almost the same. 
+We show how to control Omni speakers by sending REST requests to HKIoTCloud. Sending REST requests to Local Server is almost the same. 
 
-We will use **curl** command in your shell. In this example, we will use **curl** commands.
+You can use **curl** command in your shell to send REST requests.
 
-(If you are a chrome browser user, you can use **Postman** (https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en) chrome extension to send HTTP requests with browser-based UI.)
+If you are a chrome browser user, you can use **Postman** (https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en) chrome extension to send HTTP requests with browser-based UI.
+
 
 .. figure:: img/hub/postman.png
 	:scale: 70
 	
 .. Note::
 
-	Before you do this, do not forget to connect to HKIoTCloud on HKWHub app.
+	Before you do this, do not forget to run HKWHub App and connect to HKIoTCloud.
 	
+Get an Access Token and Refresh Token (HKIoTCloud mode only)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In case of HKIoTCloud more, the client should get an access token from the HKIoTCloud to be able to call the REST APIs. HKIoTCloud supports two authorization modes: **password** and **authorization code**. For mode detailed information, please refer to the section of `OAuth2 Authorization API Specification`_.
+
+.. _OAuth2 Authorization API Specification: http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#oauth2-authorization-api-specification
 
 a. Init session
 ^^^^^^^^^^^^^^^

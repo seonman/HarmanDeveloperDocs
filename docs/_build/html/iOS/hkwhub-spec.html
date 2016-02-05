@@ -259,18 +259,18 @@
 </div>
 <p>If you want to disconnect the server and return to the main screen, press <strong>Disconnect</strong> button on the top righthand corner.</p>
 </div>
-<div class="section" id="sending-rest-request-to-hkiotcloud">
-<h4>Sending REST Request to HKIoTCloud<a class="headerlink" href="#sending-rest-request-to-hkiotcloud" title="Permalink to this headline">¶</a></h4>
-<p>Once the HKWHub App is running, you can now connect a client to HKIoTCloud and send REST requests to the server. We will explain all the REST APIs supported with a little more detailed example of <strong>curl</strong> commands in the next section.</p>
+<div class="section" id="sending-rest-requests-to-hkiotcloud">
+<h4>Sending REST Requests to HKIoTCloud<a class="headerlink" href="#sending-rest-requests-to-hkiotcloud" title="Permalink to this headline">¶</a></h4>
+<p>Once the HKWHub App is running, you can now connect a client to HKIoTCloud and send REST requests to the server. We will explain about the REST APIs supported with a little more detailed example of <strong>curl</strong> commands in the next section.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">For a client tyring to connect to HKIoTCloud, the same username and password are required from the client side.</p>
+<p class="last">For a client to connect to HKIoTCloud, the same username and password are required.</p>
 </div>
 <p>As an example of client, HKIoTCloud hosts a Web-based client app, at <a class="reference external" href="http://hkiotcloud.herokuapp.com/webapp/">http://hkiotcloud.herokuapp.com/webapp/</a>. The following is a screenshot of the web app.</p>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/cloudapp-login.png"><img alt="../_images/cloudapp-login.png" src="../_images/cloudapp-login.png" /></a>
 </div>
-<p>Once user authentication is done successfully, the Web app will switch the screen to</p>
+<p>Once user authentication is done successfully, the Web app will switch the screen to the Playlist screen.</p>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/cloudapp-medialist.png"><img alt="../_images/cloudapp-medialist.png" src="../_images/cloudapp-medialist.png" /></a>
 </div>
@@ -382,15 +382,19 @@
 </div>
 <div class="section" id="use-curl-command-to-send-rest-requests">
 <h3>Use <code class="docutils literal"><span class="pre">curl</span></code> command to send REST requests<a class="headerlink" href="#use-curl-command-to-send-rest-requests" title="Permalink to this headline">¶</a></h3>
-<p>From now on, we show how to control Omni speakers by sending REST requests to HKIoTCloud. Sending REST requests to Local Server is almost the same.</p>
-<p>We will use <strong>curl</strong> command in your shell. In this example, we will use <strong>curl</strong> commands.</p>
-<p>(If you are a chrome browser user, you can use <strong>Postman</strong> (<a class="reference external" href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en">https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en</a>) chrome extension to send HTTP requests with browser-based UI.)</p>
+<p>We show how to control Omni speakers by sending REST requests to HKIoTCloud. Sending REST requests to Local Server is almost the same.</p>
+<p>You can use <strong>curl</strong> command in your shell to send REST requests.</p>
+<p>If you are a chrome browser user, you can use <strong>Postman</strong> (<a class="reference external" href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en">https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related?hl=en</a>) chrome extension to send HTTP requests with browser-based UI.</p>
 <div class="figure">
 <a class="reference internal image-reference" href="../_images/postman.png"><img alt="../_images/postman.png" src="../_images/postman.png" /></a>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Before you do this, do not forget to connect to HKIoTCloud on HKWHub app.</p>
+<p class="last">Before you do this, do not forget to run HKWHub App and connect to HKIoTCloud.</p>
+</div>
+<div class="section" id="get-an-access-token-and-refresh-token-hkiotcloud-mode-only">
+<h4>Get an Access Token and Refresh Token (HKIoTCloud mode only)<a class="headerlink" href="#get-an-access-token-and-refresh-token-hkiotcloud-mode-only" title="Permalink to this headline">¶</a></h4>
+<p>In case of HKIoTCloud more, the client should get an access token from the HKIoTCloud to be able to call the REST APIs. HKIoTCloud supports two authorization modes: <strong>password</strong> and <strong>authorization code</strong>. For mode detailed information, please refer to the section of <a class="reference external" href="http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#oauth2-authorization-api-specification">OAuth2 Authorization API Specification</a>.</p>
 </div>
 <div class="section" id="a-init-session">
 <h4>a. Init session<a class="headerlink" href="#a-init-session" title="Permalink to this headline">¶</a></h4>
@@ -2620,8 +2624,8 @@ SessionToken = &quot;PubNub-1000&quot;
 </div>
 </div>
 <hr class="docutils" />
-<div class="section" id="oauth2-authorization-api-specification">
-<h2>OAuth2 Authorization API Specification<a class="headerlink" href="#oauth2-authorization-api-specification" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>OAuth2 Authorization API Specification<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="introduction">
 <h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
 <p>In order to access the HKIoTCloud REST APIs to control Omni speakers, your HKIoTCloud-enabled product needs to obtain a HKIoTCloud access token that grans access to the APIs on behalf of the product&#8217;s user.</p>
@@ -2796,7 +2800,7 @@ grant_type=refresh_token&amp;refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81
 </li>
 <li><a class="reference internal" href="#hkiotcloud-mode">HKIoTCloud Mode</a><ul>
 <li><a class="reference internal" href="#connecting-to-hkiotcloud">Connecting to HKIoTCloud</a></li>
-<li><a class="reference internal" href="#sending-rest-request-to-hkiotcloud">Sending REST Request to HKIoTCloud</a></li>
+<li><a class="reference internal" href="#sending-rest-requests-to-hkiotcloud">Sending REST Requests to HKIoTCloud</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#local-server-mode">Local Server Mode</a><ul>
@@ -2811,6 +2815,7 @@ grant_type=refresh_token&amp;refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81
 </ul>
 </li>
 <li><a class="reference internal" href="#use-curl-command-to-send-rest-requests">Use <code class="docutils literal"><span class="pre">curl</span></code> command to send REST requests</a><ul>
+<li><a class="reference internal" href="#get-an-access-token-and-refresh-token-hkiotcloud-mode-only">Get an Access Token and Refresh Token (HKIoTCloud mode only)</a></li>
 <li><a class="reference internal" href="#a-init-session">a. Init session</a></li>
 <li><a class="reference internal" href="#b-add-alls-speaker-to-session">b. Add alls speaker to session</a></li>
 <li><a class="reference internal" href="#c-get-the-list-of-speakers-available">c. Get the list of speakers available</a></li>
@@ -2876,7 +2881,7 @@ grant_type=refresh_token&amp;refresh_token=5defcb0a9a49ac9b2403b8c78600638238d81
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#oauth2-authorization-api-specification">OAuth2 Authorization API Specification</a><ul>
+<li><a class="reference internal" href="#id2">OAuth2 Authorization API Specification</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#types-of-authorization">Types of Authorization</a></li>
 <li><a class="reference internal" href="#creating-a-consent-request">Creating a Consent Request</a></li>
