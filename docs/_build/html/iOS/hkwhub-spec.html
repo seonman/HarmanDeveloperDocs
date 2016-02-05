@@ -116,7 +116,7 @@
 <li>HKWHub app communicates with HKIoTCloud to receive speaker control commands by REST API call from 3rd party services or clients.</li>
 <li>HKIoTCloud handles the REST API request from any clients in the Internet. The clients can be 3rd party apps or services or devices like smartphone or sensors.</li>
 <li>In this mode, any 3rd party services or clients in the Internet can reach out to HKWHub app and then control speakers and playback of audio.</li>
-<li>All the 3rd party apps or services should be authorized with OAuth2 to get access token. An access token is required when 3rd party apps call the REST APIs. The detailed information about OAuth2 is available at <a class="reference external" href="http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#oauth2-authorization-api-specification">this link</a>.</li>
+<li>All the 3rd party apps or services should be authorized with OAuth2 to get access token. An access token is required when 3rd party apps call the REST APIs. The detailed information about OAuth2 is available at <a class="reference external" href="http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#id2">this link</a>.</li>
 </ul>
 </dd>
 </dl>
@@ -394,7 +394,7 @@
 </div>
 <div class="section" id="get-an-access-token-and-refresh-token-hkiotcloud-mode-only">
 <h4>Get an Access Token and Refresh Token (HKIoTCloud mode only)<a class="headerlink" href="#get-an-access-token-and-refresh-token-hkiotcloud-mode-only" title="Permalink to this headline">¶</a></h4>
-<p>In case of HKIoTCloud more, the client should get an access token from the HKIoTCloud to be able to call the REST APIs. HKIoTCloud supports two authorization modes: <strong>password</strong> and <strong>authorization code</strong>. For mode detailed information, please refer to the section of <a class="reference external" href="http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#oauth2-authorization-api-specification">OAuth2 Authorization API Specification</a>.</p>
+<p>In case of HKIoTCloud more, the client should get an access token from the HKIoTCloud to be able to call the REST APIs. HKIoTCloud supports two authorization modes: <strong>password</strong> and <strong>authorization code</strong>. For mode detailed information, please refer to the section of <a class="reference external" href="http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#id2">OAuth2 Authorization API Specification</a>.</p>
 <p>With <strong>password</strong> grant mode, you can get an access token and a refresh token as shown below:</p>
 <div class="code highlight-python"><div class="highlight"><pre>curl -X POST -H &quot;Authorization: Basic bjdIaGlUbktZakpkNHptTTpBTlJmQjl6OTR4dGN4RkdYcmQ1WEhYRWlLZzQzVVk=&quot; -d &quot;grant_type=password&amp;username=yyy&amp;password=xxx&quot; http://hkiotcloud.herokuapp.com/oauth/token
 </pre></div>

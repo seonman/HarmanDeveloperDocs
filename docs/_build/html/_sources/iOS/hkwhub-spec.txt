@@ -58,7 +58,7 @@ The latest version of HKWHub app supports the following three modes:
 	- In this mode, any 3rd party services or clients in the Internet can reach out to HKWHub app and then control speakers and playback of audio.
 	- All the 3rd party apps or services should be authorized with OAuth2 to get access token. An access token is required when 3rd party apps call the REST APIs. The detailed information about OAuth2 is available at `this link`_.
 	
-.. _this link: http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#oauth2-authorization-api-specification
+.. _this link: http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#id2
 
 - Local Server Mode
 	- HKWHub app lauches a web server internally, and then handles the REST API requests for speaker control and playback from devices, sensors or applications in the same local network. 
@@ -339,7 +339,7 @@ Get an Access Token and Refresh Token (HKIoTCloud mode only)
 
 In case of HKIoTCloud more, the client should get an access token from the HKIoTCloud to be able to call the REST APIs. HKIoTCloud supports two authorization modes: **password** and **authorization code**. For mode detailed information, please refer to the section of `OAuth2 Authorization API Specification`_.
 
-.. _OAuth2 Authorization API Specification: http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#oauth2-authorization-api-specification
+.. _OAuth2 Authorization API Specification: http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#id2
 
 With **password** grant mode, you can get an access token and a refresh token as shown below:
 
