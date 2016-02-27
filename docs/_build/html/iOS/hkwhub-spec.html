@@ -397,7 +397,7 @@
 <p>In case of HKIoTCloud more, the client should get an access token from the HKIoTCloud to be able to call the REST APIs. HKIoTCloud supports two authorization modes: <strong>password</strong> and <strong>authorization code</strong>. For mode detailed information, please refer to the section of <a class="reference external" href="http://harmandeveloperdocs.readthedocs.org/en/latest/iOS/hkwhub-spec.html#id2">OAuth2 Authorization API Specification</a>.</p>
 <p>With <strong>password</strong> grant mode, you can get an access token and a refresh token as shown below:</p>
 <ul class="simple">
-<li>curl -X POST -H &#8220;Authorization: Basic bjdIaGlUbktZakpkNHptTTpBTlJmQjl6OTR4dGN4RkdYcmQ1WEhYRWlLZzQzVVk=&#8221; -d &#8220;grant_type=password&amp;username=yyy&amp;password=xxx&#8221; <a class="reference external" href="http://hkiotcloud.herokuapp.com/oauth/token">http://hkiotcloud.herokuapp.com/oauth/token</a></li>
+<li>curl -X GET -H &#8220;Authorization: Basic bjdIaGlUbktZakpkNHptTTpBTlJmQjl6OTR4dGN4RkdYcmQ1WEhYRWlLZzQzVVk=&#8221; -d &#8220;grant_type=password&amp;username=yyy&amp;password=xxx&#8221; <a class="reference external" href="http://hkiotcloud.herokuapp.com/oauth/token">http://hkiotcloud.herokuapp.com/oauth/token</a></li>
 </ul>
 <p>Result:</p>
 <div class="code highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;token_type&quot;</span><span class="p">:</span><span class="s">&quot;bearer&quot;</span><span class="p">,</span>

@@ -344,7 +344,7 @@ In case of HKIoTCloud more, the client should get an access token from the HKIoT
 With **password** grant mode, you can get an access token and a refresh token as shown below:
 
 
-- curl -X POST -H "Authorization: Basic bjdIaGlUbktZakpkNHptTTpBTlJmQjl6OTR4dGN4RkdYcmQ1WEhYRWlLZzQzVVk=" -d "grant_type=password&username=yyy&password=xxx" http://hkiotcloud.herokuapp.com/oauth/token
+- curl -X GET -H "Authorization: Basic bjdIaGlUbktZakpkNHptTTpBTlJmQjl6OTR4dGN4RkdYcmQ1WEhYRWlLZzQzVVk=" -d "grant_type=password&username=yyy&password=xxx" http://hkiotcloud.herokuapp.com/oauth/token
 
 Result:
 
