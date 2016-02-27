@@ -411,7 +411,7 @@
 <div class="section" id="a-init-session">
 <h4>a. Init session<a class="headerlink" href="#a-init-session" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>curl -X POST -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; <a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/init_session">http://hkiotcloud.herokuapp.com/api/v1/init_session</a></li>
+<li>curl -H &#8220;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&#8221; <a class="reference external" href="http://hkiotcloud.herokuapp.com/api/v1/init_session">http://hkiotcloud.herokuapp.com/api/v1/init_session</a></li>
 </ul>
 <p>This returns the SessionToken. The returned SessionToken is used by all subsequent REST API request in the body.</p>
 <div class="code json highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;ResponseOf&quot;</span><span class="p">:</span><span class="s">&quot;init_session&quot;</span><span class="p">,</span><span class="s">&quot;SessionToken&quot;</span><span class="p">:</span><span class="s">&quot;r:abciKaTbUgdpQFuvYtgMm0FRh&quot;</span><span class="p">}</span>
@@ -651,7 +651,7 @@ For Local server mode, &lt;server_host&gt; should be the URL (IP address and por
 <dd><ul class="first simple">
 <li>Request:</li>
 </ul>
-<div class="highlight-json"><div class="highlight"><pre>curl -X POST -H &quot;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot; http://&lt;server_host&gt;/api/v1/init_session
+<div class="highlight-json"><div class="highlight"><pre>curl -H &quot;Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8&quot; http://&lt;server_host&gt;/api/v1/init_session
 </pre></div>
 </div>
 <ul class="simple">

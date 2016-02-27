@@ -361,7 +361,7 @@ When you call the HKIoTCloud API calls, you should pass the value of the access 
 a. Init session
 ^^^^^^^^^^^^^^^
 
-- curl -X POST -H "Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8" http://hkiotcloud.herokuapp.com/api/v1/init_session
+- curl -H "Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8" http://hkiotcloud.herokuapp.com/api/v1/init_session
 
 This returns the SessionToken. The returned SessionToken is used by all subsequent REST API request in the body.
 
@@ -597,7 +597,7 @@ This starts a new session. As a response, the client will receive a SessionToken
 	
 	.. code-block:: json
 	
-		curl -X POST -H "Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8" http://<server_host>/api/v1/init_session
+		curl -H "Authorization: Bearer 15c0507f3a550d7a31f7af5dc45e4dd9fd9f4bc8" http://<server_host>/api/v1/init_session
 
 	- Response: 
 
